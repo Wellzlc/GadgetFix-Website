@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://gadgetfixllc.com/sitemap.xml
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+
+# Allow important pages for SEO
+Allow: /
+Allow: /services/
+Allow: /about/
+Allow: /blog/
+Allow: /contact/
+Allow: /service-areas/
+
+# Allow CSS and JS files
+Allow: /assets/css/
+Allow: /assets/js/
+Allow: /assets/images/
