@@ -1,11 +1,937 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout 
+	title="Gadget Fix - Fast Mobile Electronics Repair Dallas-Fort Worth"
+	description="Professional mobile electronics repair in Dallas-Fort Worth. Smartphones, tablets, gadgets - expert technicians, warranty included, on-site service available. Call (972) 555-0123"
+	keywords="mobile phone repair Dallas, smartphone repair Fort Worth, tablet repair, screen repair, battery replacement, water damage repair, electronics repair DFW"
+>
+	<!-- Hero Section -->
+	<section class="hero">
+		<div class="container">
+			<div class="hero-content">
+				<h1 class="hero-title">Mobile Electronics Repair</h1>
+				<p class="hero-subtitle">Expert technicians providing reliable, top-quality repair services throughout the Dallas-Fort Worth Metroplex. Get your devices fixed fast with our mobile service convenience.</p>
+				<div class="hero-cta">
+					<a href="tel:+19725550123" class="btn btn-primary btn-large">CALL NOW FOR SERVICE</a>
+					<a href="/contact" class="btn btn-secondary btn-large">SCHEDULE REPAIR</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Services Grid -->
+	<section class="services" id="services">
+		<div class="container">
+			<h2 class="section-title">Our Repair Services</h2>
+			<p class="section-subtitle">Professional electronics repair with transparent pricing and expert technical care</p>
+			<div class="services-grid">
+				<div class="service-card">
+					<div class="service-icon">
+						<svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+							<line x1="12" y1="18" x2="12.01" y2="18"/>
+						</svg>
+					</div>
+					<h3>SCREEN REPAIR</h3>
+					<p>iPhone, Samsung, and tablet screen replacements with high-quality parts and same-day service.</p>
+				</div>
+				<div class="service-card">
+					<div class="service-icon">
+						<svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<rect x="1" y="6" width="18" height="10" rx="2" ry="2"/>
+							<line x1="22" y1="12" x2="19" y2="12"/>
+						</svg>
+					</div>
+					<h3>BATTERY REPLACEMENT</h3>
+					<p>Mobile battery replacements and charging solutions with genuine parts and warranty protection.</p>
+				</div>
+				<div class="service-card">
+					<div class="service-icon">
+						<svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+						</svg>
+					</div>
+					<h3>WATER DAMAGE</h3>
+					<p>Expert water damage recovery and restoration using advanced drying techniques and professional equipment.</p>
+				</div>
+				<div class="service-card">
+					<div class="service-icon">
+						<svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="m15 2 3 3.3a1 1 0 0 1 0 1.4L15 10"/>
+							<path d="M9 22l-3-3.3a1 1 0 0 1 0-1.4L9 14"/>
+							<path d="M20 14h-2"/>
+							<path d="M20 10h-2"/>
+							<path d="M7 10H4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h3"/>
+						</svg>
+					</div>
+					<h3>CHARGING PORTS</h3>
+					<p>Charging port repairs and cable replacements for all major device brands and charging standards.</p>
+				</div>
+				<div class="service-card">
+					<div class="service-icon">
+						<svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+							<circle cx="12" cy="13" r="4"/>
+						</svg>
+					</div>
+					<h3>CAMERA REPAIR</h3>
+					<p>Front and rear camera repairs and replacements to restore full photo and video functionality.</p>
+				</div>
+				<div class="service-card">
+					<div class="service-icon">
+						<svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<circle cx="12" cy="12" r="3"/>
+							<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+						</svg>
+					</div>
+					<h3>SOFTWARE ISSUES</h3>
+					<p>Diagnostics and software troubleshooting to resolve performance issues and system problems.</p>
+				</div>
+				<div class="service-card">
+					<div class="service-icon">
+						<svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+							<polyline points="14,2 14,8 20,8"/>
+							<line x1="16" y1="13" x2="8" y2="13"/>
+							<line x1="16" y1="17" x2="8" y2="17"/>
+							<polyline points="10,9 9,9 8,9"/>
+						</svg>
+					</div>
+					<h3>DATA RECOVERY</h3>
+					<p>Device setup and data transfer services to recover important files and restore device functionality.</p>
+				</div>
+				<div class="service-card">
+					<div class="service-icon">
+						<svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+							<path d="M12 6v6l4 2"/>
+						</svg>
+					</div>
+					<h3>DEVICE SETUP</h3>
+					<p>New device configuration and app installation to get your device ready for immediate use.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Why Choose Us Section -->
+	<section class="why-choose">
+		<div class="container">
+			<h2 class="section-title">Why Choose Gadget Fix?</h2>
+			<div class="why-grid">
+				<div class="why-item">
+					<div class="why-number">1</div>
+					<h3>EXPERT TECHNICIANS</h3>
+					<p>Certified repairs by experienced electronics specialists with extensive training in the latest mobile device technologies.</p>
+				</div>
+				<div class="why-item">
+					<div class="why-number">2</div>
+					<h3>QUALITY GUARANTEE</h3>
+					<p>Thorough diagnostics and meticulous repair work ensuring your device functions like new with lasting performance.</p>
+				</div>
+				<div class="why-item">
+					<div class="why-number">3</div>
+					<h3>TRANSPARENT PRICING</h3>
+					<p>No hidden fees, just upfront pricing and clear communication about all costs before we begin any repair work.</p>
+				</div>
+				<div class="why-item">
+					<div class="why-number">4</div>
+					<h3>FAST TURNAROUND</h3>
+					<p>Quick repairs to get your devices back in working order with same-day service available for most common issues.</p>
+				</div>
+				<div class="why-item">
+					<div class="why-number">5</div>
+					<h3>MOBILE CONVENIENCE</h3>
+					<p>We come to you, saving time and hassle with on-site repair service throughout the Dallas-Fort Worth area.</p>
+				</div>
+				<div class="why-item">
+					<div class="why-number">6</div>
+					<h3>SATISFACTION GUARANTEED</h3>
+					<p>We stand behind our work with comprehensive warranty coverage on all parts and labor for complete peace of mind.</p>
+				</div>
+			</div>
+			<div class="why-bottom">
+				<h2 class="company-name">GADGET FIX</h2>
+				<p class="company-tagline">IS YOUR TRUSTED MOBILE ELECTRONICS REPAIR</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Service Area Map -->
+	<section class="service-area-map">
+		<div class="container">
+			<h2 class="map-title">SERVICE AREA MAP</h2>
+			<p class="map-subtitle">Mobile Electronics Repair Services Throughout the Dallas-Fort Worth Metroplex</p>
+			
+			<div class="map-content">
+				<div class="map-image">
+					<div class="map-placeholder">
+						<div class="map-overlay">
+							<button class="map-overlay-btn">DFW METROPLEX</button>
+						</div>
+						<div class="map-bg">
+							<svg width="100%" height="300" viewBox="0 0 400 300" fill="none">
+								<rect width="400" height="300" fill="#f3f4f6"/>
+								<path d="M50 150 Q 200 50 350 150 Q 200 250 50 150 Z" fill="#e5e7eb" opacity="0.5"/>
+								<path d="M80 120 L320 120 M80 180 L320 180" stroke="#2563EB" stroke-width="3" opacity="0.7"/>
+								<circle cx="150" cy="150" r="8" fill="#2563EB"/>
+								<circle cx="250" cy="150" r="8" fill="#2563EB"/>
+								<text x="150" y="140" text-anchor="middle" fill="#2563EB" font-size="12" font-weight="bold">Dallas</text>
+								<text x="250" y="140" text-anchor="middle" fill="#2563EB" font-size="12" font-weight="bold">Fort Worth</text>
+							</svg>
+						</div>
+					</div>
+				</div>
+				
+				<div class="cities-list">
+					<div class="cities-region">
+						<a href="/locations/dallas-county" class="county-link"><h4>DALLAS COUNTY</h4></a>
+						<div class="region-cities">
+							<a href="/locations/dallas-county" class="city-btn">Dallas</a>
+							<a href="/locations/dallas-county" class="city-btn">Plano</a>
+							<a href="/locations/dallas-county" class="city-btn">Irving</a>
+							<a href="/locations/dallas-county" class="city-btn">Garland</a>
+							<a href="/locations/dallas-county" class="city-btn">Mesquite</a>
+							<a href="/locations/dallas-county" class="city-btn">Richardson</a>
+							<a href="/locations/dallas-county" class="city-btn">Carrollton</a>
+							<a href="/locations/dallas-county" class="city-btn">Farmers Branch</a>
+							<a href="/locations/dallas-county" class="city-btn">Addison</a>
+							<a href="/locations/dallas-county" class="city-btn">University Park</a>
+							<a href="/locations/dallas-county" class="city-btn">Highland Park</a>
+							<a href="/locations/dallas-county" class="city-btn">DeSoto</a>
+						</div>
+					</div>
+					
+					<div class="cities-region">
+						<a href="/locations/tarrant-county" class="county-link"><h4>TARRANT COUNTY</h4></a>
+						<div class="region-cities">
+							<a href="/locations/tarrant-county" class="city-btn">Fort Worth</a>
+							<a href="/locations/tarrant-county" class="city-btn">Arlington</a>
+							<a href="/locations/tarrant-county" class="city-btn">Grand Prairie</a>
+							<a href="/locations/tarrant-county" class="city-btn">Euless</a>
+							<a href="/locations/tarrant-county" class="city-btn">Bedford</a>
+							<a href="/locations/tarrant-county" class="city-btn">Hurst</a>
+							<a href="/locations/tarrant-county" class="city-btn">Grapevine</a>
+							<a href="/locations/tarrant-county" class="city-btn">Southlake</a>
+							<a href="/locations/tarrant-county" class="city-btn">Colleyville</a>
+							<a href="/locations/tarrant-county" class="city-btn">Keller</a>
+							<a href="/locations/tarrant-county" class="city-btn">North Richland Hills</a>
+							<a href="/locations/tarrant-county" class="city-btn">Mansfield</a>
+						</div>
+					</div>
+					
+					<div class="cities-region">
+						<a href="/locations/collin-county" class="county-link"><h4>COLLIN COUNTY</h4></a>
+						<div class="region-cities">
+							<a href="/locations/collin-county" class="city-btn">McKinney</a>
+							<a href="/locations/collin-county" class="city-btn">Frisco</a>
+							<a href="/locations/collin-county" class="city-btn">Allen</a>
+							<a href="/locations/collin-county" class="city-btn">Wylie</a>
+							<a href="/locations/collin-county" class="city-btn">Murphy</a>
+							<a href="/locations/collin-county" class="city-btn">Lucas</a>
+							<a href="/locations/collin-county" class="city-btn">Fairview</a>
+							<a href="/locations/collin-county" class="city-btn">Prosper</a>
+						</div>
+					</div>
+					
+					<div class="cities-region">
+						<a href="/locations/denton-county" class="county-link"><h4>DENTON COUNTY</h4></a>
+						<div class="region-cities">
+							<a href="/locations/denton-county" class="city-btn">Denton</a>
+							<a href="/locations/denton-county" class="city-btn">Lewisville</a>
+							<a href="/locations/denton-county" class="city-btn">Flower Mound</a>
+							<a href="/locations/denton-county" class="city-btn">Coppell</a>
+							<a href="/locations/denton-county" class="city-btn">The Colony</a>
+							<a href="/locations/denton-county" class="city-btn">Little Elm</a>
+							<a href="/locations/denton-county" class="city-btn">Corinth</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<p class="map-note">Plus surrounding areas within 30 miles of Dallas & Fort Worth</p>
+		</div>
+	</section>
+
+
+
+	<!-- Final Call to Action -->
+	<section class="final-cta">
+		<div class="container">
+			<div class="cta-content">
+				<div class="cta-icon">
+					<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+						<rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+						<line x1="12" y1="18" x2="12.01" y2="18"/>
+						<path d="M10 14l2-2 2 2"/>
+						<path d="M12 12V8"/>
+						<circle cx="18" cy="8" r="3"/>
+						<path d="M18 8l1.5-1.5"/>
+						<path d="M18 8l-1.5-1.5"/>
+					</svg>
+				</div>
+				<h2>READY FOR FAST, RELIABLE DEVICE REPAIR?</h2>
+				<p>Contact Gadget Fix Today!</p>
+				<div class="cta-buttons">
+					<a href="tel:+19725550123" class="btn btn-primary btn-large">CALL NOW FOR SERVICE</a>
+					<a href="/contact" class="btn btn-secondary btn-large">REQUEST ON-SITE SERVICE</a>
+				</div>
+			</div>
+		</div>
+	</section>
 </Layout>
+
+<style>
+	/* Hero Section */
+	.hero {
+		background: #1e3a8a;
+		color: white;
+		padding: 4rem 0 6rem;
+		text-align: center;
+	}
+
+	.hero-title {
+		font-family: var(--font-heading);
+		font-size: 4rem;
+		font-weight: 400;
+		margin-bottom: 1.5rem;
+		line-height: 1.1;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+	}
+
+	.hero-subtitle {
+		font-size: 1.25rem;
+		margin-bottom: 2.5rem;
+		max-width: 600px;
+		margin-left: auto;
+		margin-right: auto;
+		opacity: 0.9;
+		line-height: 1.6;
+	}
+
+	.hero-cta {
+		margin-bottom: 3rem;
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.hero .btn-primary,
+	.hero .btn-secondary {
+		background: #000000;
+		color: white;
+		border: 2px solid #000000;
+	}
+
+	.hero .btn-primary:hover,
+	.hero .btn-secondary:hover {
+		background: #333333;
+		border-color: #333333;
+	}
+
+	.btn-large {
+		padding: 1rem 2rem;
+		font-size: 1.1rem;
+	}
+
+
+	/* Section Styles */
+	.section-title {
+		font-family: var(--font-heading);
+		font-size: 3rem;
+		font-weight: 400;
+		text-align: center;
+		margin-bottom: 1rem;
+		color: var(--color-dark);
+		text-transform: uppercase;
+		letter-spacing: 1.5px;
+		line-height: 1.2;
+	}
+
+	.section-subtitle {
+		text-align: center;
+		font-size: 1.25rem;
+		color: #6b7280;
+		margin-bottom: 3rem;
+		max-width: 600px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	/* Services Section */
+	.services {
+		padding: 6rem 0;
+		background: white;
+	}
+
+	.services-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 30px;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.service-card {
+		background: white;
+		padding: 30px;
+		border-radius: 20px;
+		border: 2px solid var(--color-primary);
+		box-shadow: 0 4px 20px rgba(37, 99, 235, 0.1);
+		text-align: center;
+		transition: all 0.3s ease;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.service-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 8px 30px rgba(37, 99, 235, 0.25);
+	}
+
+	.service-icon {
+		width: 60px;
+		height: 60px;
+		margin-bottom: 20px;
+		color: var(--color-primary);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.service-icon svg {
+		width: 60px;
+		height: 60px;
+	}
+
+	.service-card h3 {
+		font-family: var(--font-heading);
+		font-size: 24px;
+		font-weight: 400;
+		margin-bottom: 15px;
+		color: var(--color-dark);
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		line-height: 1.2;
+	}
+
+	.service-card p {
+		color: #6b7280;
+		line-height: 1.6;
+		font-size: 16px;
+		text-align: center;
+		flex: 1;
+	}
+
+	/* Why Choose Us Section */
+	.why-choose {
+		padding: 6rem 0;
+		background: #f9fafb;
+	}
+
+	.why-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 40px;
+		max-width: 1000px;
+		margin: 0 auto 4rem;
+	}
+
+	.why-item {
+		text-align: center;
+	}
+
+	.why-number {
+		width: 60px;
+		height: 60px;
+		background: var(--color-primary);
+		color: white;
+		border-radius: 50%;
+		display: inline-block;
+		line-height: 60px;
+		font-family: var(--font-heading);
+		font-size: 32px;
+		font-weight: 400;
+		margin-bottom: 20px;
+	}
+
+	.why-item h3 {
+		font-family: var(--font-heading);
+		font-size: 28px;
+		font-weight: 400;
+		margin: 0 0 15px;
+		color: var(--color-dark);
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		line-height: 1.2;
+	}
+
+	.why-item p {
+		color: #6b7280;
+		line-height: 1.6;
+		font-size: 18px;
+	}
+
+	.why-bottom {
+		text-align: center;
+		border-top: 2px solid #e5e7eb;
+		padding-top: 3rem;
+	}
+
+	.company-name {
+		font-family: var(--font-heading);
+		font-size: 3rem;
+		font-weight: 400;
+		color: var(--color-primary);
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		margin-bottom: 1rem;
+		line-height: 1.2;
+	}
+
+	.company-tagline {
+		font-family: var(--font-heading);
+		font-size: 1.5rem;
+		font-weight: 400;
+		color: var(--color-dark);
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		line-height: 1.3;
+	}
+
+	/* Service Area Map Section */
+	.service-area-map {
+		padding: 6rem 0;
+		background: #f9fafb;
+	}
+
+	.map-title {
+		font-family: var(--font-heading);
+		font-size: 48px;
+		font-weight: 400;
+		text-align: center;
+		margin-bottom: 1rem;
+		color: var(--color-dark);
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		line-height: 1.2;
+	}
+
+	.map-subtitle {
+		font-size: 20px;
+		text-align: center;
+		max-width: 800px;
+		margin: 0 auto 4rem;
+		line-height: 1.8;
+		color: #6b7280;
+	}
+
+	.map-content {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 60px;
+		align-items: start;
+	}
+
+	.map-image {
+		position: relative;
+	}
+
+	.map-placeholder {
+		position: relative;
+		background: #e5e7eb;
+		border-radius: 1rem;
+		overflow: hidden;
+		height: 400px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.map-bg {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	.map-overlay {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 10;
+	}
+
+	.map-overlay-btn {
+		background: var(--color-primary);
+		color: white;
+		border: none;
+		padding: 1rem 2rem;
+		border-radius: 100px;
+		font-family: var(--font-heading);
+		font-size: 1.2rem;
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.map-overlay-btn:hover {
+		background: var(--color-secondary);
+		transform: translateY(-2px);
+	}
+
+	.cities-list {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	.county-link {
+		text-decoration: none;
+		transition: all 0.3s ease;
+	}
+
+	.county-link:hover {
+		transform: translateY(-2px);
+	}
+
+	.cities-region h4 {
+		font-family: var(--font-heading);
+		font-size: 24px;
+		font-weight: 400;
+		color: var(--color-primary);
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		margin-bottom: 1rem;
+		line-height: 1.2;
+		transition: all 0.3s ease;
+	}
+
+	.county-link:hover h4 {
+		color: var(--color-secondary);
+	}
+
+	.region-cities {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.city-btn {
+		background: white;
+		color: #6b7280;
+		padding: 8px 16px;
+		border-radius: 100px;
+		font-size: 16px;
+		font-weight: 500;
+		border: 1px solid #e5e7eb;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		display: inline-block;
+		text-decoration: none;
+	}
+
+	.city-btn:hover {
+		background: var(--color-primary);
+		color: white;
+		border-color: var(--color-primary);
+	}
+
+	.map-note {
+		text-align: center;
+		margin-top: 3rem;
+		font-size: 18px;
+		color: #6b7280;
+		font-style: italic;
+	}
+
+
+	/* Responsive Design */
+	@media (max-width: 768px) {
+		.hero-title {
+			font-size: 2.8rem;
+		}
+
+		.hero-subtitle {
+			font-size: 1.1rem;
+		}
+
+		.section-title {
+			font-size: 2.2rem;
+		}
+
+		.section-subtitle {
+			font-size: 1.1rem;
+		}
+
+		.hero-cta {
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.services-grid {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 20px;
+		}
+
+		.service-card {
+			padding: 20px;
+		}
+
+		.service-card h3 {
+			font-size: 20px;
+		}
+
+		.service-card p {
+			font-size: 14px;
+		}
+
+		.why-grid {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 30px;
+		}
+
+		.why-item h3 {
+			font-size: 24px;
+		}
+
+		.why-item p {
+			font-size: 16px;
+		}
+
+		.company-name {
+			font-size: 2.5rem;
+		}
+
+		.company-tagline {
+			font-size: 1.2rem;
+		}
+
+
+		.map-title {
+			font-size: 36px;
+		}
+
+		.map-content {
+			grid-template-columns: 1fr;
+			gap: 40px;
+		}
+
+		.map-placeholder {
+			height: 300px;
+		}
+
+		.cities-region h4 {
+			font-size: 20px;
+		}
+
+		.city-btn {
+			font-size: 14px;
+			padding: 6px 12px;
+		}
+
+	}
+
+	@media (max-width: 480px) {
+		.hero {
+			padding: 3rem 0 4rem;
+		}
+
+		.hero-title {
+			font-size: 2.2rem;
+		}
+
+		.services-grid {
+			grid-template-columns: 1fr;
+			gap: 15px;
+		}
+
+		.service-card {
+			padding: 20px;
+		}
+
+		.service-card h3 {
+			font-size: 18px;
+		}
+
+		.service-card p {
+			font-size: 14px;
+		}
+
+		.why-grid {
+			grid-template-columns: 1fr;
+			gap: 25px;
+		}
+
+		.why-item h3 {
+			font-size: 20px;
+		}
+
+		.why-item p {
+			font-size: 16px;
+		}
+
+		.why-number {
+			width: 50px;
+			height: 50px;
+			font-size: 28px;
+			line-height: 50px;
+		}
+
+		.company-name {
+			font-size: 2rem;
+		}
+
+		.company-tagline {
+			font-size: 1rem;
+		}
+
+
+		.cities-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	/* Final Call to Action */
+	.final-cta {
+		padding: 80px 0;
+		background: #f8fafc;
+		text-align: center;
+	}
+
+	.final-cta .cta-content {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.cta-icon {
+		margin-bottom: 2rem;
+	}
+
+	.cta-icon svg {
+		color: #2563EB;
+		margin: 0 auto;
+	}
+
+	.final-cta h2 {
+		font-family: var(--font-heading);
+		font-size: 48px;
+		font-weight: 400;
+		color: var(--color-dark);
+		margin-bottom: 1rem;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		line-height: 1.2;
+	}
+
+	.final-cta p {
+		font-size: 20px;
+		color: #6b7280;
+		margin-bottom: 3rem;
+		line-height: 1.5;
+	}
+
+	.final-cta .cta-buttons {
+		display: flex;
+		gap: 20px;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.final-cta .btn {
+		border-radius: 100px;
+		padding: 16px 32px;
+		font-size: 16px;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		transition: all 0.3s ease;
+		text-decoration: none;
+		display: inline-block;
+		min-width: 220px;
+	}
+
+	.final-cta .btn:hover {
+		transform: translateY(-2px);
+	}
+
+	.final-cta .btn-primary {
+		background: #2563EB;
+		color: white;
+		border: 2px solid #2563EB;
+	}
+
+	.final-cta .btn-primary:hover {
+		background: #1E40AF;
+		border-color: #1E40AF;
+	}
+
+	.final-cta .btn-secondary {
+		background: white;
+		color: #2563EB;
+		border: 2px solid #2563EB;
+	}
+
+	.final-cta .btn-secondary:hover {
+		background: #2563EB;
+		color: white;
+	}
+
+	/* Final CTA Responsive Design */
+	@media (max-width: 768px) {
+		.final-cta {
+			padding: 60px 0;
+		}
+
+		.final-cta h2 {
+			font-size: 36px;
+		}
+
+		.final-cta p {
+			font-size: 18px;
+		}
+
+		.final-cta .cta-buttons {
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.final-cta .btn {
+			width: 100%;
+			max-width: 280px;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.final-cta {
+			padding: 40px 0;
+		}
+
+		.final-cta h2 {
+			font-size: 28px;
+		}
+
+		.final-cta p {
+			font-size: 16px;
+		}
+
+		.final-cta .btn {
+			padding: 14px 24px;
+			font-size: 14px;
+		}
+
+		.cta-icon svg {
+			width: 60px;
+			height: 60px;
+		}
+	}
+</style>

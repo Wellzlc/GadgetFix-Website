@@ -1,22 +1,627 @@
+---
+export interface Props {
+	title?: string;
+	description?: string;
+	keywords?: string;
+}
+
+const { 
+	title = "Gadget Fix - Mobile Electronics Repair Dallas-Fort Worth", 
+	description = "Fast, reliable mobile electronics repair in Dallas-Fort Worth. Smartphones, tablets, gadgets - expert repair services with warranty. On-site service available.",
+	keywords = "mobile phone repair Dallas, smartphone repair, tablet repair, Dallas Fort Worth, electronics repair, screen repair, battery replacement"
+} = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="keywords" content={keywords} />
+		
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+		
+		<!-- Local Business Schema -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "LocalBusiness",
+				"name": "Gadget Fix",
+				"description": "Fast, reliable mobile electronics repair services",
+				"url": "https://gadgetfixllc.com",
+				"telephone": "+1-972-555-0123",
+				"address": {
+					"@type": "PostalAddress",
+					"addressLocality": "Dallas",
+					"addressRegion": "TX",
+					"addressCountry": "US"
+				},
+				"areaServed": "Dallas-Fort Worth Metroplex",
+				"serviceType": "Electronics Repair",
+				"priceRange": "$"
+			}
+		</script>
 	</head>
 	<body>
-		<slot />
+		<header class="header">
+			<div class="container">
+				<div class="header-content">
+					<div class="logo">
+						<a href="/">
+							<span class="logo-text">Gadget Fix</span>
+						</a>
+					</div>
+					<nav class="nav">
+						<ul class="nav-links">
+							<li><a href="/services">Services</a></li>
+							<li><a href="/locations">Locations</a></li>
+							<li><a href="/about">About</a></li>
+							<li><a href="/blog">Blog</a></li>
+							<li><a href="/contact">Contact</a></li>
+						</ul>
+					</nav>
+					<button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</div>
+		</header>
+
+		<main>
+			<slot />
+		</main>
+
+		<footer class="footer">
+			<div class="container">
+				<div class="footer-grid">
+					<!-- Company Info Column -->
+					<div class="footer-brand">
+						<h2 class="footer-logo">Gadget Fix</h2>
+						<p class="footer-tagline">Mobile Service Available</p>
+						<a href="tel:+19725550123" class="footer-phone">(972) 555-0123</a>
+						<p class="footer-availability">Available Throughout DFW</p>
+					</div>
+					
+					<!-- Services Column -->
+					<div class="footer-column">
+						<h3 class="footer-heading">SERVICES</h3>
+						<ul class="footer-links">
+							<li><a href="/services#screen-repair">Screen Repair</a></li>
+							<li><a href="/services#battery">Battery Replacement</a></li>
+							<li><a href="/services#water-damage">Water Damage Recovery</a></li>
+							<li><a href="/services#charging-port">Charging Port Repair</a></li>
+							<li><a href="/services#camera">Camera Repair</a></li>
+							<li><a href="/services#software">Software Issues</a></li>
+							<li><a href="/services" class="footer-link-all">All Services →</a></li>
+						</ul>
+					</div>
+					
+					<!-- Service Areas Column -->
+					<div class="footer-column">
+						<h3 class="footer-heading">SERVICE AREAS</h3>
+						<ul class="footer-links">
+							<li><a href="/contact">Dallas, TX</a></li>
+							<li><a href="/contact">Fort Worth, TX</a></li>
+							<li><a href="/contact">Plano, TX</a></li>
+							<li><a href="/contact">Irving, TX</a></li>
+							<li><a href="/contact">Arlington, TX</a></li>
+							<li><a href="/contact" class="footer-link-all">All Locations →</a></li>
+						</ul>
+					</div>
+					
+					<!-- Company Column -->
+					<div class="footer-column">
+						<h3 class="footer-heading">COMPANY</h3>
+						<ul class="footer-links">
+							<li><a href="/about">About Us</a></li>
+							<li><a href="/about#experts">Electronics Expert</a></li>
+							<li><a href="/blog">Blog & Tips</a></li>
+							<li><a href="/contact">Contact Us</a></li>
+							<li><a href="/services#mobile">Mobile Service</a></li>
+						</ul>
+					</div>
+					
+					<!-- Resources Column -->
+					<div class="footer-column">
+						<h3 class="footer-heading">RESOURCES</h3>
+						<ul class="footer-links">
+							<li><a href="/blog#device-care">Device Care Guide</a></li>
+							<li><a href="/blog#common-issues">Common Issues</a></li>
+							<li><a href="/terms">Terms of Service</a></li>
+							<li><a href="/privacy">Privacy Policy</a></li>
+						</ul>
+					</div>
+				</div>
+				
+				<!-- Footer Bottom -->
+				<div class="footer-bottom">
+					<p class="footer-copyright">© 2025 Gadget Fix. All rights reserved.</p>
+					<div class="footer-social">
+						<a href="#" aria-label="Facebook" class="social-link">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+								<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+							</svg>
+						</a>
+						<a href="#" aria-label="Instagram" class="social-link">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+								<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/>
+							</svg>
+						</a>
+						<a href="#" aria-label="YouTube" class="social-link">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+								<path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+							</svg>
+						</a>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<script>
+			// Mobile menu toggle
+			const mobileToggle = document.querySelector('.mobile-menu-toggle');
+			const nav = document.querySelector('.nav');
+			
+			if (mobileToggle && nav) {
+				mobileToggle.addEventListener('click', () => {
+					nav.classList.toggle('nav-open');
+					mobileToggle.classList.toggle('active');
+				});
+			}
+		</script>
 	</body>
 </html>
 
 <style>
-	html,
-	body {
+	/* CSS Reset and Base Styles */
+	*, *::before, *::after {
+		box-sizing: border-box;
 		margin: 0;
-		width: 100%;
-		height: 100%;
+		padding: 0;
+	}
+
+	:root {
+		--font-heading: 'Bebas Neue', sans-serif;
+		--font-body: 'Inter', system-ui, sans-serif;
+		--color-primary: #2563EB;
+		--color-secondary: #1E40AF;
+		--color-dark: #1f2937;
+		--color-light: #ffffff;
+	}
+
+	html {
+		font-family: var(--font-body);
+		line-height: 1.6;
+	}
+
+	body {
+		background-color: var(--color-light);
+		color: var(--color-dark);
+		font-weight: 400;
+	}
+
+	/* Container */
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
+
+	/* Header */
+	.header {
+		background: #ffffff;
+		box-shadow: 0 2px 10px rgba(37, 99, 235, 0.1);
+		position: sticky;
+		top: 0;
+		z-index: 100;
+	}
+
+	.header-content {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 1rem 0;
+		position: relative;
+	}
+
+	/* Logo */
+	.logo {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.logo-text {
+		font-family: var(--font-heading);
+		font-size: 1.8rem;
+		font-weight: 400;
+		color: var(--color-primary);
+		text-decoration: none;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+
+	.logo a {
+		text-decoration: none;
+	}
+
+	/* Navigation */
+	.nav {
+		margin-left: auto;
+	}
+
+	.nav-links {
+		display: flex;
+		list-style: none;
+		gap: 2rem;
+	}
+
+	.nav-links a {
+		text-decoration: none;
+		color: var(--color-dark);
+		font-weight: 600;
+		font-size: 0.95rem;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		transition: color 0.3s ease;
+	}
+
+	.nav-links a:hover {
+		color: var(--color-primary);
+	}
+
+	/* Buttons */
+	.btn {
+		display: inline-block;
+		padding: 16px 32px;
+		border-radius: 100px;
+		text-decoration: none;
+		font-family: var(--font-body);
+		font-weight: 700;
+		font-size: 0.9rem;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		transition: all 0.3s ease;
+		border: 2px solid transparent;
+		cursor: pointer;
+		text-align: center;
+	}
+
+	.btn-primary {
+		background: var(--color-primary);
+		color: var(--color-light);
+		border-color: var(--color-primary);
+	}
+
+	.btn-primary:hover {
+		background: transparent;
+		color: var(--color-primary);
+		border-color: var(--color-primary);
+		transform: translateY(-2px);
+	}
+
+	.btn-secondary {
+		background: transparent;
+		color: var(--color-primary);
+		border-color: var(--color-primary);
+	}
+
+	.btn-secondary:hover {
+		background: var(--color-primary);
+		color: var(--color-light);
+		transform: translateY(-2px);
+	}
+
+	/* Mobile Menu Toggle */
+	.mobile-menu-toggle {
+		display: none;
+		flex-direction: column;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0.5rem;
+	}
+
+	.mobile-menu-toggle span {
+		width: 25px;
+		height: 3px;
+		background: #2563EB;
+		margin: 3px 0;
+		transition: 0.3s;
+	}
+
+	.mobile-menu-toggle.active span:nth-child(1) {
+		transform: rotate(45deg) translate(5px, 5px);
+	}
+
+	.mobile-menu-toggle.active span:nth-child(2) {
+		opacity: 0;
+	}
+
+	.mobile-menu-toggle.active span:nth-child(3) {
+		transform: rotate(-45deg) translate(7px, -6px);
+	}
+
+	/* Footer */
+	.footer {
+		background: #111827;
+		color: white;
+		margin-top: 0;
+		padding: 4rem 0 2rem;
+	}
+
+	.footer-grid {
+		display: grid;
+		grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+		gap: 3rem;
+		padding-bottom: 3rem;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	/* Footer Brand Column */
+	.footer-brand {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.footer-logo {
+		font-family: var(--font-heading);
+		font-size: 2rem;
+		font-weight: 400;
+		color: white;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		margin: 0;
+		line-height: 1.2;
+	}
+
+	.footer-tagline {
+		color: rgba(255, 255, 255, 0.7);
+		font-size: 1rem;
+		margin: 0;
+	}
+
+	.footer-phone {
+		color: #2563EB;
+		font-size: 1.5rem;
+		font-weight: 700;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+
+	.footer-phone:hover {
+		color: #3b82f6;
+	}
+
+	.footer-availability {
+		color: rgba(255, 255, 255, 0.6);
+		font-size: 0.9rem;
+		margin: 0;
+	}
+
+	/* Footer Columns */
+	.footer-column {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.footer-heading {
+		font-family: var(--font-heading);
+		font-size: 1rem;
+		font-weight: 400;
+		color: #2563EB;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		margin: 0 0 1.5rem 0;
+		line-height: 1.2;
+	}
+
+	.footer-links {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.footer-links li {
+		margin: 0;
+	}
+
+	.footer-links a {
+		color: rgba(255, 255, 255, 0.7);
+		text-decoration: none;
+		font-size: 0.95rem;
+		transition: all 0.3s ease;
+		display: inline-block;
+	}
+
+	.footer-links a:hover {
+		color: white;
+		transform: translateX(3px);
+	}
+
+	.footer-link-all {
+		color: #2563EB !important;
+		font-weight: 600;
+		margin-top: 0.5rem;
+	}
+
+	.footer-link-all:hover {
+		color: #3b82f6 !important;
+	}
+
+	/* Footer Bottom */
+	.footer-bottom {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 2rem 0 0;
+	}
+
+	.footer-copyright {
+		color: rgba(255, 255, 255, 0.5);
+		font-size: 0.9rem;
+		margin: 0;
+	}
+
+	.footer-social {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.social-link {
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.1);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: white;
+		transition: all 0.3s ease;
+		text-decoration: none;
+	}
+
+	.social-link:hover {
+		background: #2563EB;
+		transform: translateY(-3px);
+	}
+
+	.social-link svg {
+		width: 20px;
+		height: 20px;
+	}
+
+	/* Footer Responsive Design */
+	@media (max-width: 1024px) {
+		.footer-grid {
+			grid-template-columns: 1.5fr 1fr 1fr 1fr;
+		}
+
+		.footer-column:last-child {
+			display: none;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.footer {
+			padding: 3rem 0 1.5rem;
+		}
+
+		.footer-grid {
+			grid-template-columns: 1fr;
+			gap: 2.5rem;
+			text-align: center;
+		}
+
+		.footer-brand {
+			align-items: center;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+			padding-bottom: 2rem;
+		}
+
+		.footer-column {
+			align-items: center;
+		}
+
+		.footer-links a:hover {
+			transform: none;
+		}
+
+		.footer-bottom {
+			flex-direction: column;
+			gap: 1.5rem;
+			text-align: center;
+		}
+
+		.footer-column:last-child {
+			display: flex;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.footer-logo {
+			font-size: 1.75rem;
+		}
+
+		.footer-phone {
+			font-size: 1.25rem;
+		}
+
+		.footer-heading {
+			font-size: 0.9rem;
+		}
+
+		.footer-links a {
+			font-size: 0.9rem;
+		}
+
+		.social-link {
+			width: 36px;
+			height: 36px;
+		}
+
+		.social-link svg {
+			width: 18px;
+			height: 18px;
+		}
+	}
+
+	/* Responsive Design */
+	@media (max-width: 768px) {
+		.mobile-menu-toggle {
+			display: flex;
+			position: absolute;
+			right: 0;
+		}
+
+		.nav {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			background: white;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			transform: translateY(-100%);
+			opacity: 0;
+			visibility: hidden;
+			transition: all 0.3s ease;
+			margin-left: 0;
+		}
+
+		.nav.nav-open {
+			transform: translateY(0);
+			opacity: 1;
+			visibility: visible;
+		}
+
+		.nav-links {
+			flex-direction: column;
+			padding: 1rem;
+			gap: 1rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.container {
+			padding: 0 0.5rem;
+		}
+
+		.btn {
+			padding: 0.5rem 1rem;
+			font-size: 0.9rem;
+		}
 	}
 </style>

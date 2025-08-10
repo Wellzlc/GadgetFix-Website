@@ -1,0 +1,273 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+	title="Mobile Electronics Repair Service Areas - Dallas Fort Worth | Gadget Fix"
+	description="Gadget Fix provides comprehensive mobile electronics repair services throughout the Dallas-Fort Worth Metroplex. Our strategically positioned mobile units ensure rapid response times for on-site device repairs."
+	keywords="mobile electronics repair Dallas Fort Worth, DFW device repair service areas, on-site phone repair Dallas, mobile tablet repair Fort Worth, electronics repair service areas"
+>
+	<!-- Hero Section -->
+	<section class="locations-hero">
+		<div class="container">
+			<div class="hero-content">
+				<h1>Service Locations</h1>
+				<p class="hero-subtitle">Mobile Electronics Repair Services in the Dallas-Fort Worth Metro Areas</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Locations Grid -->
+	<section class="locations-section">
+		<div class="container">
+			<h2 class="section-title">Counties We Serve</h2>
+			<p class="section-subtitle">Click on any county below to see specific cities and service details</p>
+			
+			<div class="locations-grid">
+				<div class="location-card">
+					<div class="card-content">
+						<h3>Dallas County</h3>
+						<p>Serving Dallas, Plano, Irving, Garland, Mesquite, Richardson, Carrollton and surrounding communities</p>
+						<div class="city-count">12+ Cities</div>
+					</div>
+					<a href="/locations/dallas-county" class="card-link">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<polyline points="9,18 15,12 9,6"></polyline>
+						</svg>
+					</a>
+				</div>
+
+				<div class="location-card">
+					<div class="card-content">
+						<h3>Tarrant County</h3>
+						<p>Serving Fort Worth, Arlington, Grand Prairie, Euless, Bedford, Hurst, Grapevine and more</p>
+						<div class="city-count">12+ Cities</div>
+					</div>
+					<a href="/locations/tarrant-county" class="card-link">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<polyline points="9,18 15,12 9,6"></polyline>
+						</svg>
+					</a>
+				</div>
+
+				<div class="location-card">
+					<div class="card-content">
+						<h3>Collin County</h3>
+						<p>Serving McKinney, Frisco, Allen, Wylie, Murphy, Lucas, Fairview and surrounding areas</p>
+						<div class="city-count">8+ Cities</div>
+					</div>
+					<a href="/locations/collin-county" class="card-link">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<polyline points="9,18 15,12 9,6"></polyline>
+						</svg>
+					</a>
+				</div>
+
+				<div class="location-card">
+					<div class="card-content">
+						<h3>Denton County</h3>
+						<p>Serving Denton, Lewisville, Flower Mound, Coppell, The Colony, Little Elm and more</p>
+						<div class="city-count">7+ Cities</div>
+					</div>
+					<a href="/locations/denton-county" class="card-link">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<polyline points="9,18 15,12 9,6"></polyline>
+						</svg>
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</Layout>
+
+<style>
+	/* Locations Hero */
+	.locations-hero {
+		background: #1e3a8a;
+		color: white;
+		padding: 4rem 0;
+		text-align: center;
+	}
+
+	.locations-hero h1 {
+		font-family: var(--font-heading);
+		font-size: 3.5rem;
+		font-weight: 400;
+		margin-bottom: 1rem;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		line-height: 1.2;
+	}
+
+	.hero-subtitle {
+		font-size: 1.25rem;
+		opacity: 0.9;
+		max-width: 600px;
+		margin: 0 auto;
+		line-height: 1.6;
+	}
+
+	/* Locations Section */
+	.locations-section {
+		padding: 6rem 0;
+	}
+
+	.locations-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		gap: 2rem;
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+
+	.location-card {
+		background: white;
+		border: 2px solid #e5e7eb;
+		border-radius: 1rem;
+		padding: 2rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		transition: all 0.3s ease;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.location-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15);
+		border-color: #2563EB;
+	}
+
+	.card-content {
+		flex: 1;
+	}
+
+	.location-card h3 {
+		font-family: var(--font-heading);
+		font-size: 2rem;
+		font-weight: 400;
+		color: var(--color-dark);
+		margin-bottom: 1rem;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		line-height: 1.3;
+	}
+
+	.location-card p {
+		color: #6b7280;
+		line-height: 1.6;
+		margin-bottom: 1rem;
+	}
+
+	.city-count {
+		background: #eff6ff;
+		color: #2563EB;
+		padding: 0.5rem 1rem;
+		border-radius: 100px;
+		font-size: 0.9rem;
+		font-weight: 600;
+		display: inline-block;
+	}
+
+	.card-link {
+		color: #2563EB;
+		transition: all 0.3s ease;
+		padding: 1rem;
+		border-radius: 50%;
+		background: #f8fafc;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-decoration: none;
+		flex-shrink: 0;
+		margin-left: 1rem;
+	}
+
+	.card-link:hover {
+		background: #2563EB;
+		color: white;
+		transform: translateX(4px);
+	}
+
+	/* Shared Styles */
+	.section-title {
+		font-family: var(--font-heading);
+		font-size: 3rem;
+		font-weight: 400;
+		text-align: center;
+		margin-bottom: 1rem;
+		color: var(--color-dark);
+		text-transform: uppercase;
+		letter-spacing: 1.5px;
+		line-height: 1.2;
+	}
+
+	.section-subtitle {
+		text-align: center;
+		font-size: 1.25rem;
+		color: #6b7280;
+		margin-bottom: 3rem;
+		max-width: 600px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.btn-large {
+		padding: 1rem 2rem;
+		font-size: 1.1rem;
+	}
+
+	/* Responsive Design */
+	@media (max-width: 768px) {
+		.locations-hero h1 {
+			font-size: 2.8rem;
+		}
+
+		.hero-subtitle {
+			font-size: 1.1rem;
+		}
+
+		.locations-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.location-card {
+			flex-direction: column;
+			text-align: center;
+		}
+
+		.card-link {
+			margin-left: 0;
+			margin-top: 1rem;
+		}
+
+		.section-title {
+			font-size: 2.2rem;
+		}
+
+		.section-subtitle {
+			font-size: 1.1rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.locations-hero {
+			padding: 3rem 0;
+		}
+
+		.locations-hero h1 {
+			font-size: 2.2rem;
+		}
+
+		.locations-section {
+			padding: 4rem 0;
+		}
+
+		.location-card {
+			padding: 1.5rem;
+		}
+
+	}
+</style>
