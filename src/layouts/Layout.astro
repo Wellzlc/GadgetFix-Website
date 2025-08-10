@@ -266,12 +266,12 @@ const {
 					<div class="footer-column">
 						<h3 class="footer-heading">SERVICE AREAS</h3>
 						<ul class="footer-links">
-							<li><a href="/contact">Dallas, TX</a></li>
-							<li><a href="/contact">Fort Worth, TX</a></li>
-							<li><a href="/contact">Plano, TX</a></li>
-							<li><a href="/contact">Irving, TX</a></li>
-							<li><a href="/contact">Arlington, TX</a></li>
-							<li><a href="/contact" class="footer-link-all">All Locations →</a></li>
+							<li><a href="/locations/dallas-county/dallas">Dallas, TX</a></li>
+							<li><a href="/locations/tarrant-county/fort-worth">Fort Worth, TX</a></li>
+							<li><a href="/locations/dallas-county/plano">Plano, TX</a></li>
+							<li><a href="/locations/dallas-county/irving">Irving, TX</a></li>
+							<li><a href="/locations/tarrant-county/arlington">Arlington, TX</a></li>
+							<li><a href="/locations" class="footer-link-all">All Locations →</a></li>
 						</ul>
 					</div>
 					
@@ -323,102 +323,6 @@ const {
 			</div>
 		</footer>
 
-		<!-- Additional SEO Footer Navigation -->
-		<footer class="site-footer">
-			<div class="container">
-				<div class="footer-grid">
-					<div class="footer-column">
-						<h4>Quick Repairs</h4>
-						<ul>
-							<li><a href="/emergency-phone-repair">Emergency Repair</a></li>
-							<li><a href="/iphone-repair-dallas">iPhone Repair Dallas</a></li>
-							<li><a href="/samsung-repair-fort-worth">Samsung Repair Fort Worth</a></li>
-							<li><a href="/screen-replacement">Screen Replacement</a></li>
-						</ul>
-					</div>
-					<div class="footer-column">
-						<h4>Service Areas</h4>
-						<ul>
-							<li><a href="/locations/dallas-county/dallas">Dallas</a></li>
-							<li><a href="/locations/tarrant-county/fort-worth">Fort Worth</a></li>
-							<li><a href="/locations/dallas-county/plano">Plano</a></li>
-							<li><a href="/locations/collin-county/frisco">Frisco</a></li>
-							<li><a href="/locations/dallas-county/irving">Irving</a></li>
-							<li><a href="/locations/tarrant-county/arlington">Arlington</a></li>
-						</ul>
-					</div>
-					<div class="footer-column">
-						<h4>About GadgetFix</h4>
-						<ul>
-							<li><a href="/about">About Us</a></li>
-							<li><a href="/services">All Services</a></li>
-							<li><a href="/blog">Repair Tips</a></li>
-							<li><a href="/contact">Contact</a></li>
-						</ul>
-					</div>
-					<div class="footer-column">
-						<h4>Call Now</h4>
-						<a href="tel:4024166942" class="footer-phone">📞 (402) 416-6942</a>
-						<p>7 Days • 8AM-6PM</p>
-						<p>Mobile Service</p>
-					</div>
-				</div>
-				<div class="footer-bottom">
-					<p>&copy; 2025 GadgetFix LLC - Mobile Device Repair Dallas Fort Worth</p>
-				</div>
-			</div>
-		</footer>
-
-		<style>
-		.site-footer {
-			background: #004499;
-			color: white;
-			padding: 3rem 0 1rem;
-			margin-top: 4rem;
-		}
-		.site-footer .footer-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-			gap: 2rem;
-			margin-bottom: 2rem;
-		}
-		.site-footer .footer-column h4 {
-			color: white;
-			margin-bottom: 1rem;
-		}
-		.site-footer .footer-column ul {
-			list-style: none;
-			padding: 0;
-		}
-		.site-footer .footer-column li {
-			margin-bottom: 0.5rem;
-		}
-		.site-footer .footer-column a {
-			color: #b3d4ff;
-			text-decoration: none;
-		}
-		.site-footer .footer-column a:hover {
-			color: white;
-			text-decoration: underline;
-		}
-		.site-footer .footer-phone {
-			display: inline-block;
-			background: white;
-			color: #004499;
-			padding: 0.5rem 1rem;
-			border-radius: 25px;
-			text-decoration: none;
-			font-weight: bold;
-			font-size: 1.2rem;
-			margin: 0.5rem 0;
-		}
-		.site-footer .footer-bottom {
-			text-align: center;
-			padding-top: 2rem;
-			border-top: 1px solid rgba(255,255,255,0.2);
-			color: #b3d4ff;
-		}
-		</style>
 
 		<script>
 			// Mobile menu toggle
@@ -539,8 +443,14 @@ const {
 	:root {
 		--font-heading: 'Bebas Neue', sans-serif;
 		--font-body: 'Inter', system-ui, sans-serif;
-		--color-primary: #2563EB;
-		--color-secondary: #1E40AF;
+		/* EXACT HOMEPAGE COLORS - Apply these everywhere */
+		--homepage-hero-bg: #1e3a8a;
+		--homepage-button-bg: #000000;
+		--homepage-button-hover: #333333;
+		--homepage-primary-blue: #2563EB;
+		--homepage-secondary-blue: #1E40AF;
+		--color-primary: #1e3a8a;
+		--color-secondary: #000000;
 		--color-dark: #1f2937;
 		--color-light: #ffffff;
 	}
@@ -626,46 +536,52 @@ const {
 		color: var(--color-primary);
 	}
 
-	/* Buttons */
+	/* EXACT HOMEPAGE BUTTON STYLES - Apply these everywhere */
 	.btn {
 		display: inline-block;
-		padding: 16px 32px;
 		border-radius: 100px;
-		text-decoration: none;
-		font-family: var(--font-body);
+		padding: 1rem 2rem;
+		font-size: 1.1rem;
 		font-weight: 700;
-		font-size: 0.9rem;
 		text-transform: uppercase;
 		letter-spacing: 1px;
 		transition: all 0.3s ease;
-		border: 2px solid transparent;
+		text-decoration: none;
 		cursor: pointer;
 		text-align: center;
+		font-family: var(--font-body);
 	}
 
 	.btn-primary {
-		background: var(--color-primary);
-		color: var(--color-light);
-		border-color: var(--color-primary);
+		background: var(--homepage-button-bg);
+		color: white;
+		border: 2px solid var(--homepage-button-bg);
 	}
 
 	.btn-primary:hover {
-		background: transparent;
-		color: var(--color-primary);
-		border-color: var(--color-primary);
+		background: var(--homepage-button-hover);
+		border-color: var(--homepage-button-hover);
+		color: white;
 		transform: translateY(-2px);
 	}
 
 	.btn-secondary {
-		background: transparent;
-		color: var(--color-primary);
-		border-color: var(--color-primary);
+		background: var(--homepage-button-bg);
+		color: white;
+		border: 2px solid var(--homepage-button-bg);
 	}
 
 	.btn-secondary:hover {
-		background: var(--color-primary);
-		color: var(--color-light);
+		background: var(--homepage-button-hover);
+		border-color: var(--homepage-button-hover);
+		color: white;
 		transform: translateY(-2px);
+	}
+
+	.btn-large {
+		padding: 1rem 2rem;
+		font-size: 1.1rem;
+		min-width: 220px;
 	}
 
 	/* Mobile Menu Toggle */

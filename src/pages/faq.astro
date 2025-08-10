@@ -19,7 +19,14 @@ import Layout from '../layouts/Layout.astro';
       <div class="faq-grid">
         <!-- Service FAQs -->
         <section class="faq-section">
-          <h2>🔧 Service & Repair Questions</h2>
+          <div class="section-header">
+            <div class="section-icon">
+              <svg role="img" aria-label="Service and repair icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+              </svg>
+            </div>
+            <h2>Service & Repair Questions</h2>
+          </div>
           
           <div class="faq-item">
             <h3>How long does screen replacement take?</h3>
@@ -58,7 +65,15 @@ import Layout from '../layouts/Layout.astro';
         
         <!-- Warranty FAQs -->
         <section class="faq-section">
-          <h2>✅ Warranty & Quality Questions</h2>
+          <div class="section-header">
+            <div class="section-icon">
+              <svg role="img" aria-label="Warranty and quality icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="m9 12 2 2 4-4"/>
+              </svg>
+            </div>
+            <h2>Warranty & Quality Questions</h2>
+          </div>
           
           <div class="faq-item">
             <h3>What warranty do you offer?</h3>
@@ -91,7 +106,15 @@ import Layout from '../layouts/Layout.astro';
         
         <!-- Device-Specific FAQs -->
         <section class="faq-section">
-          <h2>📱 Device-Specific Questions</h2>
+          <div class="section-header">
+            <div class="section-icon">
+              <svg role="img" aria-label="Device specific icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                <line x1="12" y1="18" x2="12.01" y2="18"/>
+              </svg>
+            </div>
+            <h2>Device-Specific Questions</h2>
+          </div>
           
           <div class="faq-item">
             <h3>Can you fix Face ID after screen replacement?</h3>
@@ -124,7 +147,17 @@ import Layout from '../layouts/Layout.astro';
         
         <!-- Booking FAQs -->
         <section class="faq-section">
-          <h2>📅 Booking & Scheduling Questions</h2>
+          <div class="section-header">
+            <div class="section-icon">
+              <svg role="img" aria-label="Booking and scheduling icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </div>
+            <h2>Booking & Scheduling Questions</h2>
+          </div>
           
           <div class="faq-item">
             <h3>Are you open on weekends?</h3>
@@ -156,7 +189,17 @@ import Layout from '../layouts/Layout.astro';
         
         <!-- Process FAQs -->
         <section class="faq-section">
-          <h2>🛠️ Repair Process Questions</h2>
+          <div class="section-header">
+            <div class="section-icon">
+              <svg role="img" aria-label="Repair process icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="m12 19 7-7 3 3-7 7-3-3z"/>
+                <path d="m18 13 3-3-3-3-3 3 3 3z"/>
+                <path d="m2 6 3-3 3 3-3 3-3-3z"/>
+                <path d="M9 10h1l6-6-1-1-6 6v1z"/>
+              </svg>
+            </div>
+            <h2>Repair Process Questions</h2>
+          </div>
           
           <div class="faq-item">
             <h3>What happens during a mobile repair?</h3>
@@ -190,7 +233,12 @@ import Layout from '../layouts/Layout.astro';
       <div class="cta-section">
         <h2>Still Have Questions?</h2>
         <p>We're here to help! Call us for immediate answers or to schedule your repair.</p>
-        <a href="tel:4024166942" class="cta-button">📞 Call Now: (402) 416-6942</a>
+        <a href="tel:4024166942" class="cta-button">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          Call Now: (402) 416-6942
+        </a>
         <p class="service-note">Mobile Repair Service • 7 Days a Week • 8AM-6PM</p>
         <p class="additional-info">Learn more about <a href="/services" style="color: #0066cc;">our services</a> or <a href="/about" style="color: #0066cc;">about our company</a>.</p>
       </div>
@@ -233,14 +281,27 @@ h1 {
   margin-bottom: 3rem;
 }
 
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e6f2ff;
+}
+
+.section-icon svg {
+  color: #0066cc;
+}
+
 .faq-section h2 {
   color: #004499;
-  border-bottom: 2px solid #e6f2ff;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
+  margin: 0;
   font-family: var(--font-heading);
   text-transform: uppercase;
   letter-spacing: 1px;
+  font-size: 1.5rem;
+  font-weight: 400;
 }
 
 .faq-item {

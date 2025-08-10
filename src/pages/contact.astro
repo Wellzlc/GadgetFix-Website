@@ -82,8 +82,8 @@ import Layout from '../layouts/Layout.astro';
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: linear-gradient(135deg, rgba(17, 24, 39, 0.8) 0%, rgba(30, 58, 138, 0.6) 100%), 
-					url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="circuit" patternUnits="userSpaceOnUse" width="50" height="50"><rect fill="%23111827" width="50" height="50"/><circle fill="%232563EB" opacity="0.1" cx="25" cy="25" r="2"/><line stroke="%232563EB" opacity="0.2" x1="0" y1="25" x2="50" y2="25" stroke-width="0.5"/><line stroke="%232563EB" opacity="0.2" x1="25" y1="0" x2="25" y2="50" stroke-width="0.5"/></pattern></defs><rect fill="url(%23circuit)" width="1000" height="1000"/></svg>') center/cover;
+		background: linear-gradient(135deg, rgba(17, 24, 39, 0.8) 0%, rgba(0, 102, 204, 0.6) 100%), 
+					url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="circuit" patternUnits="userSpaceOnUse" width="50" height="50"><rect fill="%23111827" width="50" height="50"/><circle fill="%230066cc" opacity="0.1" cx="25" cy="25" r="2"/><line stroke="%230066cc" opacity="0.2" x1="0" y1="25" x2="50" y2="25" stroke-width="0.5"/><line stroke="%230066cc" opacity="0.2" x1="25" y1="0" x2="25" y2="50" stroke-width="0.5"/></pattern></defs><rect fill="url(%23circuit)" width="1000" height="1000"/></svg>') center/cover;
 		z-index: 1;
 	}
 
@@ -132,7 +132,7 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.phone-number {
-		color: #2563EB;
+		color: #0066cc;
 		text-decoration: none;
 		font-weight: 700;
 		font-size: 1.6rem;
@@ -140,7 +140,7 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.phone-number:hover {
-		color: #3b82f6;
+		color: #004499;
 		text-decoration: underline;
 	}
 
@@ -237,9 +237,9 @@ import Layout from '../layouts/Layout.astro';
 	.form-field input:focus,
 	.form-field textarea:focus {
 		outline: none;
-		border-color: #2563EB;
+		border-color: #0066cc;
 		background: white;
-		box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+		box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
 	}
 
 	.form-field input::placeholder,
@@ -274,7 +274,7 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.send-button:hover {
-		background: #2563EB;
+		background: #0066cc;
 		transform: translateY(-2px);
 		box-shadow: 0 10px 25px rgba(17, 24, 39, 0.2);
 	}

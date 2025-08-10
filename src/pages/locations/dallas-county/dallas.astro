@@ -1,636 +1,288 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+
+// Define city-specific data
+const cityName = "Dallas";
+const countyName = "Dallas County";
+const population = "1.3 million";
+const neighborhoods = "Downtown, Uptown, Deep Ellum, Highland Park, Oak Cliff, Bishop Arts District, Victory Park, Design District, Lake Highlands, Preston Hollow";
+const landmarks = "AT&T Stadium, American Airlines Center, Dallas Museum of Art, Reunion Tower";
 ---
 
 <Layout 
-	title="Mobile Electronics Repair Dallas TX | iPhone Samsung Screen Repair Dallas"
-	description="Professional mobile electronics repair in Dallas Texas. iPhone screen repair, Samsung repair, tablet repair. We come to you in Dallas - downtown, Deep Ellum, Uptown, Oak Cliff & all Dallas neighborhoods."
-	keywords="mobile phone repair Dallas TX, iPhone repair Dallas, Samsung screen repair Dallas, tablet repair Dallas, electronics repair downtown Dallas, phone repair Deep Ellum, device repair Uptown Dallas"
+  title={`Phone Repair ${cityName}, TX | Mobile Service | GadgetFix LLC`}
+  description={`Professional phone repair in ${cityName}, Texas. iPhone, Samsung, tablet repairs. We come to you! Same-day service, 90-day warranty. Call (402) 416-6942`}
+  keywords={`phone repair ${cityName.toLowerCase()}, iphone repair ${cityName.toLowerCase()} tx, samsung repair ${cityName.toLowerCase()}, mobile repair ${cityName.toLowerCase()}`}
 >
-	<!-- Hero Section -->
-	<section class="city-hero">
-		<div class="container">
-			<div class="hero-content">
-				<h1>Mobile Electronics Repair Dallas TX | iPhone Samsung Screen Repair</h1>
-				<p class="hero-subtitle">Professional mobile device repair services throughout Dallas - from downtown's business district to Deep Ellum's vibrant arts scene</p>
-				<div class="hero-cta">
-					<a href="tel:+14024166942" class="btn btn-primary btn-large">Call (402) 416-6942</a>
-					<a href="/contact" class="btn btn-secondary btn-large">Schedule Service</a>
-				</div>
-			</div>
-		</div>
-	</section>
+  <main>
+    <!-- Hero Section -->
+    <section class="city-hero">
+      <div class="container">
+        <h1>Phone Repair in {cityName}, Texas</h1>
+        <p class="hero-subtitle">Professional Mobile Device Repair Service - We Come to You</p>
+        <div class="hero-buttons">
+          <a href="tel:4024166942" class="btn-primary">CALL NOW: (402) 416-6942</a>
+          <a href="/contact" class="btn-secondary">SCHEDULE SERVICE</a>
+        </div>
+        <p class="service-note">Serving {cityName} and surrounding areas • 7 days a week</p>
+      </div>
+    </section>
 
-	<!-- Dallas Areas Served -->
-	<section class="areas-served">
-		<div class="container">
-			<h2 class="section-title">Dallas Areas We Serve</h2>
-			<p class="section-subtitle">Mobile electronics repair throughout all Dallas neighborhoods and districts</p>
-			
-			<div class="areas-grid">
-				<div class="area-card">
-					<h3>Downtown Dallas</h3>
-					<p>Financial District, Main Street District, Arts District, and all downtown Dallas business areas</p>
-				</div>
-				<div class="area-card">
-					<h3>Deep Ellum</h3>
-					<p>Live music venues, art galleries, restaurants, and all Deep Ellum entertainment areas</p>
-				</div>
-				<div class="area-card">
-					<h3>Uptown Dallas</h3>
-					<p>Victory Park, West Village, Turtle Creek, and all upscale Uptown neighborhoods</p>
-				</div>
-				<div class="area-card">
-					<h3>Oak Cliff</h3>
-					<p>Bishop Arts District, Kessler Park, and all Oak Cliff residential communities</p>
-				</div>
-				<div class="area-card">
-					<h3>Lake Highlands</h3>
-					<p>White Rock Lake area, Northwood Hills, and all Lake Highlands neighborhoods</p>
-				</div>
-				<div class="area-card">
-					<h3>Far North Dallas</h3>
-					<p>Addison border areas, Galleria, and northern Dallas residential districts</p>
-				</div>
-			</div>
-		</div>
-	</section>
+    <!-- Local Service Info -->
+    <section class="local-info">
+      <div class="container">
+        <h2>Mobile Repair Service in {cityName}</h2>
+        <p>GadgetFix LLC provides professional mobile device repair throughout {cityName}, {countyName}. 
+        With a population of {population}, {cityName} residents rely on their devices daily. When your 
+        phone breaks, we bring the repair shop to you - whether you're at home, work, or your favorite 
+        coffee shop.</p>
+        <p>We serve all {cityName} neighborhoods including {neighborhoods}.</p>
+      </div>
+    </section>
 
-	<!-- Services in Dallas -->
-	<section class="dallas-services">
-		<div class="container">
-			<h2 class="section-title">Our Dallas Mobile Repair Services</h2>
-			<div class="services-grid">
-				<div class="service-item">
-					<div class="service-icon">📱</div>
-					<h3>iPhone Repair Dallas</h3>
-					<p>Professional iPhone screen replacement, battery replacement, and camera repair throughout Dallas neighborhoods.</p>
-				</div>
-				<div class="service-item">
-					<div class="service-icon">📲</div>
-					<h3>Samsung Galaxy Repair</h3>
-					<p>Expert Samsung device repairs including Galaxy series screen, charging port, and water damage recovery in Dallas.</p>
-				</div>
-				<div class="service-item">
-					<div class="service-icon">📋</div>
-					<h3>Tablet Screen Repair</h3>
-					<p>iPad and Android tablet screen replacements with same-day service available throughout Dallas.</p>
-				</div>
-				<div class="service-item">
-					<div class="service-icon">💧</div>
-					<h3>Water Damage Recovery</h3>
-					<p>Emergency water damage repair using advanced techniques for Dallas residents and businesses.</p>
-				</div>
-			</div>
-		</div>
-	</section>
+    <!-- Services Grid -->
+    <section class="services-section">
+      <div class="container">
+        <h2>Our {cityName} Repair Services</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <h3>Screen Replacement</h3>
+            <p>Cracked screen repair for all devices. 30-minute service at your {cityName} location.</p>
+            <a href="/screen-replacement" class="service-link">Learn More</a>
+          </div>
+          <div class="service-card">
+            <h3>iPhone Repair</h3>
+            <p>Expert iPhone repair for all models. Fast service in {cityName}.</p>
+            <a href="/iphone-repair-dallas" class="service-link">Learn More</a>
+          </div>
+          <div class="service-card">
+            <h3>Samsung Repair</h3>
+            <p>Samsung Galaxy repair specialist serving {cityName} area.</p>
+            <a href="/samsung-repair-fort-worth" class="service-link">Learn More</a>
+          </div>
+          <div class="service-card">
+            <h3>Emergency Service</h3>
+            <p>Same-day emergency repair available in {cityName}.</p>
+            <a href="/emergency-phone-repair" class="service-link">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-	<!-- Why Choose Us in Dallas -->
-	<section class="why-dallas">
-		<div class="container">
-			<h2 class="section-title">Why Dallas Chooses Gadget Fix</h2>
-			<div class="reasons-grid">
-				<div class="reason-item">
-					<div class="reason-icon">🏢</div>
-					<h3>Downtown Dallas Business Service</h3>
-					<p>Corporate device repair programs for Dallas businesses, law firms, and financial institutions in the downtown core.</p>
-				</div>
-				<div class="reason-item">
-					<div class="reason-icon">🎭</div>
-					<h3>Arts District & Deep Ellum Specialist</h3>
-					<p>Convenient service for Dallas cultural venues, music spaces, and entertainment districts throughout the city.</p>
-				</div>
-				<div class="reason-item">
-					<div class="reason-icon">🏠</div>
-					<h3>All Dallas Neighborhoods</h3>
-					<p>From Uptown high-rises to Oak Cliff homes, we serve every Dallas neighborhood with equal expertise.</p>
-				</div>
-				<div class="reason-item">
-					<div class="reason-icon">⚡</div>
-					<h3>Fast Dallas Response Times</h3>
-					<p>Strategic positioning throughout Dallas ensures 30-minute average response times citywide.</p>
-				</div>
-			</div>
-		</div>
-	</section>
+    <!-- Why Choose Section -->
+    <section class="why-choose">
+      <div class="container">
+        <h2>Why {cityName} Chooses GadgetFix</h2>
+        <div class="features-grid">
+          <div class="feature">
+            <h3>We Come to You</h3>
+            <p>Mobile service anywhere in {cityName} - home, office, or public location</p>
+          </div>
+          <div class="feature">
+            <h3>Fast Response</h3>
+            <p>30-minute average arrival time in {cityName}</p>
+          </div>
+          <div class="feature">
+            <h3>90-Day Warranty</h3>
+            <p>All repairs backed by comprehensive parts and labor warranty</p>
+          </div>
+          <div class="feature">
+            <h3>Fair Pricing</h3>
+            <p>Competitive rates with no hidden fees for {cityName} residents</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-	<!-- Dallas Local Content -->
-	<section class="dallas-content">
-		<div class="container">
-			<h2 class="section-title">Dallas Mobile Electronics Repair Experts</h2>
-			<div class="content-grid">
-				<div class="content-text">
-					<h3>Serving Dallas Since Day One</h3>
-					<p>As Dallas's premier mobile electronics repair service, Gadget Fix understands the unique needs of the Big D. From busy downtown professionals needing quick iPhone repairs between meetings to Deep Ellum artists requiring tablet screen replacements, we provide personalized service that matches Dallas's dynamic energy.</p>
-					
-					<p>Our Dallas service network covers every neighborhood, from the glass towers of downtown to the tree-lined streets of Lake Highlands. We know Dallas traffic patterns, the best routes through the city, and how to get to you quickly whether you're in a Uptown condo or an Oak Cliff craftsman home.</p>
+    <!-- Service Areas -->
+    <section class="service-areas">
+      <div class="container">
+        <h2>Areas We Serve in {cityName}</h2>
+        <p>Our mobile technicians cover all of {cityName} including:</p>
+        <div class="areas-list">
+          <p>{neighborhoods}</p>
+        </div>
+        <p>We also serve nearby cities in {countyName}. No matter where you are in the {cityName} area, 
+        we can reach you quickly with professional repair service.</p>
+      </div>
+    </section>
 
-					<h4>Dallas Service Guarantees</h4>
-					<ul>
-						<li>✓ Same-day service available throughout Dallas</li>
-						<li>✓ Corporate programs for downtown Dallas businesses</li>
-						<li>✓ Evening service for Dallas entertainment districts</li>
-						<li>✓ Weekend appointments in all Dallas neighborhoods</li>
-						<li>✓ Warranty on all repairs with local Dallas support</li>
-					</ul>
-				</div>
-				<div class="content-stats">
-					<div class="stat-box">
-						<div class="stat-number">100+</div>
-						<div class="stat-label">Dallas Neighborhoods</div>
-					</div>
-					<div class="stat-box">
-						<div class="stat-number">500+</div>
-						<div class="stat-label">Happy Dallas Customers</div>
-					</div>
-					<div class="stat-box">
-						<div class="stat-number">25min</div>
-						<div class="stat-label">Average Dallas Response</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Dallas Landmarks -->
-	<section class="dallas-landmarks">
-		<div class="container">
-			<h2 class="section-title">Service Near Dallas Landmarks</h2>
-			<div class="landmarks-grid">
-				<div class="landmark-card">
-					<h3>🏢 Downtown Dallas Core</h3>
-					<p>Reunion Tower, Dallas City Hall, Thanksgiving Square - we serve all downtown Dallas business and tourist areas.</p>
-				</div>
-				<div class="landmark-card">
-					<h3>🎨 Arts District</h3>
-					<p>Dallas Museum of Art, AT&T Performing Arts Center, Nasher Sculpture Center - cultural venue device support.</p>
-				</div>
-				<div class="landmark-card">
-					<h3>🏈 Fair Park</h3>
-					<p>State Fair of Texas grounds, Cotton Bowl Stadium, and all Fair Park event venues and museums.</p>
-				</div>
-				<div class="landmark-card">
-					<h3>🌊 White Rock Lake</h3>
-					<p>Lake activities, Dallas Arboretum area, and all White Rock Lake recreational zones.</p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Call to Action -->
-	<section class="dallas-cta">
-		<div class="container">
-			<div class="cta-content">
-				<h2>Ready for Dallas's Best Mobile Repair Service?</h2>
-				<p>Get professional electronics repair anywhere in Dallas today</p>
-				<div class="cta-buttons">
-					<a href="tel:+14024166942" class="btn btn-primary btn-large">Call (402) 416-6942</a>
-					<a href="/contact" class="btn btn-secondary btn-large">Schedule Dallas Service</a>
-				</div>
-			</div>
-		</div>
-	</section>
+    <!-- CTA Section -->
+    <section class="city-cta">
+      <div class="container">
+        <h2>Get Your Device Fixed Today in {cityName}</h2>
+        <p>Don't let a broken phone disrupt your day. Professional mobile repair at your location.</p>
+        <div class="cta-buttons">
+          <a href="tel:4024166942" class="btn-primary">CALL NOW: (402) 416-6942</a>
+        </div>
+        <p class="hours">Open 7 Days • Monday-Sunday 8:00 AM - 6:00 PM</p>
+      </div>
+    </section>
+  </main>
 </Layout>
 
 <style>
-	/* City Hero */
-	.city-hero {
-		background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-		color: white;
-		padding: 5rem 0;
-		text-align: center;
-	}
+/* Clean, professional style matching homepage */
+.city-hero {
+  background: linear-gradient(135deg, #0066cc 0%, #4d94ff 100%);
+  color: white;
+  padding: 4rem 0;
+  text-align: center;
+}
 
-	.city-hero h1 {
-		font-family: var(--font-heading);
-		font-size: 3.2rem;
-		font-weight: 400;
-		margin-bottom: 1.5rem;
-		text-transform: uppercase;
-		letter-spacing: 1.5px;
-		line-height: 1.1;
-	}
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin: 1rem 0 2rem;
+  opacity: 0.95;
+}
 
-	.hero-subtitle {
-		font-size: 1.3rem;
-		margin-bottom: 2.5rem;
-		max-width: 750px;
-		margin-left: auto;
-		margin-right: auto;
-		opacity: 0.95;
-		line-height: 1.6;
-	}
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
 
-	.hero-cta {
-		display: flex;
-		gap: 1rem;
-		justify-content: center;
-		flex-wrap: wrap;
-	}
+.service-note {
+  opacity: 0.9;
+  margin-top: 1rem;
+}
 
-	/* Areas Served */
-	.areas-served {
-		padding: 6rem 0;
-		background: #f9fafb;
-	}
+.btn-primary, .btn-secondary {
+  padding: 1rem 2rem;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  text-transform: uppercase;
+  transition: transform 0.3s;
+}
 
-	.areas-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-		gap: 1.5rem;
-		max-width: 1200px;
-		margin: 0 auto;
-	}
+.btn-primary {
+  background: white;
+  color: #0066cc;
+}
 
-	.area-card {
-		background: white;
-		padding: 2rem;
-		border-radius: 1rem;
-		border-left: 4px solid #2563EB;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-		transition: all 0.3s ease;
-	}
+.btn-secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
 
-	.area-card:hover {
-		transform: translateY(-3px);
-		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-	}
+.btn-primary:hover, .btn-secondary:hover {
+  transform: scale(1.05);
+}
 
-	.area-card h3 {
-		font-family: var(--font-heading);
-		font-size: 1.6rem;
-		font-weight: 400;
-		color: var(--color-dark);
-		margin-bottom: 1rem;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		line-height: 1.3;
-	}
+section {
+  padding: 3rem 0;
+}
 
-	.area-card p {
-		color: #6b7280;
-		line-height: 1.6;
-	}
+section:nth-child(even) {
+  background: #f8f9fa;
+}
 
-	/* Dallas Services */
-	.dallas-services {
-		padding: 6rem 0;
-	}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
 
-	.services-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-		gap: 2rem;
-		max-width: 1000px;
-		margin: 0 auto;
-	}
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
 
-	.service-item {
-		text-align: center;
-		padding: 2rem 1.5rem;
-		background: #f9fafb;
-		border-radius: 1rem;
-		transition: all 0.3s ease;
-	}
+h2 {
+  color: #004499;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
 
-	.service-item:hover {
-		transform: translateY(-3px);
-		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-	}
+h3 {
+  color: #0066cc;
+  margin-bottom: 1rem;
+}
 
-	.service-icon {
-		font-size: 3rem;
-		margin-bottom: 1.5rem;
-	}
+.local-info p {
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-	.service-item h3 {
-		font-family: var(--font-heading);
-		font-size: 1.5rem;
-		font-weight: 400;
-		color: var(--color-dark);
-		margin-bottom: 1rem;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		line-height: 1.3;
-	}
+.services-grid, .features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
 
-	.service-item p {
-		color: #6b7280;
-		line-height: 1.6;
-	}
+.service-card, .feature {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  text-align: center;
+  transition: transform 0.3s;
+}
 
-	/* Why Dallas */
-	.why-dallas {
-		padding: 6rem 0;
-		background: #f9fafb;
-	}
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
 
-	.reasons-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-		gap: 2rem;
-		max-width: 1000px;
-		margin: 0 auto;
-	}
+.service-link {
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 1rem;
+  display: inline-block;
+}
 
-	.reason-item {
-		background: white;
-		padding: 2rem;
-		border-radius: 1rem;
-		text-align: center;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-		transition: all 0.3s ease;
-	}
+.service-link:hover {
+  text-decoration: underline;
+}
 
-	.reason-item:hover {
-		transform: translateY(-4px);
-		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-	}
+.areas-list {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+}
 
-	.reason-icon {
-		font-size: 3rem;
-		margin-bottom: 1.5rem;
-	}
+.city-cta {
+  background: linear-gradient(135deg, #0066cc 0%, #4d94ff 100%);
+  color: white;
+  text-align: center;
+}
 
-	.reason-item h3 {
-		font-family: var(--font-heading);
-		font-size: 1.4rem;
-		font-weight: 400;
-		color: var(--color-dark);
-		margin-bottom: 1rem;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		line-height: 1.3;
-	}
+.city-cta h2 {
+  color: white;
+}
 
-	.reason-item p {
-		color: #6b7280;
-		line-height: 1.6;
-	}
+.cta-buttons {
+  margin: 2rem 0;
+}
 
-	/* Dallas Content */
-	.dallas-content {
-		padding: 6rem 0;
-	}
+.hours {
+  opacity: 0.95;
+}
 
-	.content-grid {
-		display: grid;
-		grid-template-columns: 2fr 1fr;
-		gap: 4rem;
-		align-items: start;
-	}
-
-	.content-text h3 {
-		font-family: var(--font-heading);
-		font-size: 2rem;
-		font-weight: 400;
-		color: var(--color-dark);
-		margin-bottom: 1.5rem;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		line-height: 1.3;
-	}
-
-	.content-text h4 {
-		font-family: var(--font-heading);
-		font-size: 1.5rem;
-		font-weight: 400;
-		color: var(--color-dark);
-		margin: 2rem 0 1rem;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		line-height: 1.3;
-	}
-
-	.content-text p {
-		color: #6b7280;
-		line-height: 1.7;
-		margin-bottom: 1.5rem;
-		font-size: 1.05rem;
-	}
-
-	.content-text ul {
-		list-style: none;
-		padding: 0;
-	}
-
-	.content-text li {
-		color: #6b7280;
-		line-height: 1.7;
-		margin-bottom: 0.5rem;
-		font-size: 1.05rem;
-	}
-
-	.content-stats {
-		display: flex;
-		flex-direction: column;
-		gap: 1.5rem;
-	}
-
-	.stat-box {
-		background: linear-gradient(135deg, #2563EB 0%, #1E40AF 100%);
-		color: white;
-		padding: 2rem;
-		border-radius: 1rem;
-		text-align: center;
-	}
-
-	.stat-number {
-		font-family: var(--font-heading);
-		font-size: 2.5rem;
-		font-weight: 400;
-		margin-bottom: 0.5rem;
-		line-height: 1;
-	}
-
-	.stat-label {
-		font-size: 0.95rem;
-		opacity: 0.9;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-	}
-
-	/* Dallas Landmarks */
-	.dallas-landmarks {
-		padding: 6rem 0;
-		background: #f9fafb;
-	}
-
-	.landmarks-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-		gap: 2rem;
-		max-width: 1000px;
-		margin: 0 auto;
-	}
-
-	.landmark-card {
-		background: white;
-		padding: 2rem;
-		border-radius: 1rem;
-		border-left: 4px solid #2563EB;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-		transition: all 0.3s ease;
-	}
-
-	.landmark-card:hover {
-		transform: translateY(-3px);
-		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-	}
-
-	.landmark-card h3 {
-		font-family: var(--font-heading);
-		font-size: 1.4rem;
-		font-weight: 400;
-		color: var(--color-dark);
-		margin-bottom: 1rem;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		line-height: 1.3;
-	}
-
-	.landmark-card p {
-		color: #6b7280;
-		line-height: 1.6;
-	}
-
-	/* Dallas CTA */
-	.dallas-cta {
-		padding: 6rem 0;
-		background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-		color: white;
-		text-align: center;
-	}
-
-	.cta-content h2 {
-		font-family: var(--font-heading);
-		font-size: 3rem;
-		font-weight: 400;
-		margin-bottom: 1rem;
-		text-transform: uppercase;
-		letter-spacing: 1.5px;
-		line-height: 1.2;
-	}
-
-	.cta-content p {
-		font-size: 1.25rem;
-		margin-bottom: 2.5rem;
-		opacity: 0.9;
-	}
-
-	.cta-buttons {
-		display: flex;
-		gap: 1rem;
-		justify-content: center;
-		flex-wrap: wrap;
-	}
-
-	/* Shared Styles */
-	.section-title {
-		font-family: var(--font-heading);
-		font-size: 2.8rem;
-		font-weight: 400;
-		text-align: center;
-		margin-bottom: 1rem;
-		color: var(--color-dark);
-		text-transform: uppercase;
-		letter-spacing: 1.5px;
-		line-height: 1.2;
-	}
-
-	.section-subtitle {
-		text-align: center;
-		font-size: 1.25rem;
-		color: #6b7280;
-		margin-bottom: 3rem;
-		max-width: 600px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.btn-large {
-		padding: 1rem 2rem;
-		font-size: 1.1rem;
-	}
-
-	/* Responsive Design */
-	@media (max-width: 768px) {
-		.city-hero h1 {
-			font-size: 2.2rem;
-		}
-
-		.hero-subtitle {
-			font-size: 1.1rem;
-		}
-
-		.hero-cta {
-			flex-direction: column;
-			align-items: center;
-		}
-
-		.areas-grid,
-		.services-grid,
-		.reasons-grid,
-		.landmarks-grid {
-			grid-template-columns: 1fr;
-		}
-
-		.content-grid {
-			grid-template-columns: 1fr;
-			gap: 2rem;
-		}
-
-		.content-stats {
-			flex-direction: row;
-			justify-content: space-around;
-		}
-
-		.cta-buttons {
-			flex-direction: column;
-			align-items: center;
-		}
-
-		.section-title {
-			font-size: 2.2rem;
-		}
-
-		.section-subtitle {
-			font-size: 1.1rem;
-		}
-	}
-
-	@media (max-width: 480px) {
-		.city-hero {
-			padding: 4rem 0;
-		}
-
-		.city-hero h1 {
-			font-size: 1.8rem;
-		}
-
-		.areas-served,
-		.dallas-services,
-		.why-dallas,
-		.dallas-content,
-		.dallas-landmarks,
-		.dallas-cta {
-			padding: 4rem 0;
-		}
-
-		.area-card,
-		.service-item,
-		.reason-item,
-		.stat-box,
-		.landmark-card {
-			padding: 1.5rem;
-		}
-
-		.content-stats {
-			flex-direction: column;
-		}
-
-		.cta-content h2 {
-			font-size: 2.2rem;
-		}
-	}
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    max-width: 300px;
+  }
+}
 </style>
