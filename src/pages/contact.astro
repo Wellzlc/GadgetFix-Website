@@ -3,9 +3,9 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout 
-	title="Contact Gadget Fix - Mobile Electronics Repair Dallas"
-	description="Contact Gadget Fix for mobile electronics repair throughout Dallas-Fort Worth. Call (402) 416-6942 or fill out our mobile device contact form."
-	keywords="contact Gadget Fix, mobile phone repair Dallas, electronics repair Fort Worth, mobile contact form, Dallas Metroplex repair"
+	title="Contact GadgetFix | Phone Repair Dallas Fort Worth | Call (402) 416-6942"
+	description="Contact GadgetFix for mobile phone repair in Dallas Fort Worth. Call (402) 416-6942 for same-day service. We come to you! 7 days a week."
+	keywords="contact gadgetfix, phone repair dallas contact, mobile repair fort worth, device repair near me"
 >
 	<!-- Full-Screen Split Contact Section -->
 	<section class="split-contact">
@@ -64,6 +64,33 @@ import Layout from '../layouts/Layout.astro';
 			</div>
 		</div>
 	</section>
+
+	<!-- Schema Markup for ContactPage -->
+	<script type="application/ld+json">
+	{
+	  "@context": "https://schema.org",
+	  "@type": "ContactPage",
+	  "mainEntity": {
+	    "@type": "MobilePhoneStore",
+	    "name": "GadgetFix",
+	    "telephone": "+14024166942",
+	    "areaServed": ["Dallas", "Fort Worth", "Plano", "Frisco", "Irving", "Arlington"],
+	    "openingHoursSpecification": {
+	      "@type": "OpeningHoursSpecification",
+	      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+	      "opens": "08:00",
+	      "closes": "20:00"
+	    },
+	    "contactPoint": {
+	      "@type": "ContactPoint",
+	      "telephone": "+14024166942",
+	      "contactType": "customer service",
+	      "areaServed": ["Dallas", "Fort Worth", "Plano", "Frisco", "Irving", "Arlington"],
+	      "availableLanguage": "English"
+	    }
+	  }
+	}
+	</script>
 </Layout>
 
 <style>

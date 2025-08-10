@@ -3,16 +3,16 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout 
-	title="Mobile Electronics Repair Blog - Tips & Insights | Gadget Fix LLC Dallas"
-	description="Expert tips, device care guides, and electronics repair insights from Dallas-Fort Worth's trusted mobile repair specialists. Learn how to protect and maintain your devices."
-	keywords="mobile electronics repair tips, smartphone care, device maintenance, repair guides, electronics troubleshooting, Dallas Fort Worth tech blog"
+	title="Phone Repair Blog & Tips | Dallas Fort Worth | GadgetFix"
+	description="Expert tips for device care, repair guides, and technology news for Dallas Fort Worth residents. Learn when to repair vs replace your devices."
+	keywords="phone repair tips dallas, device care fort worth, iphone repair guide, samsung troubleshooting"
 >
 	<!-- Hero Section -->
-	<section class="blog-hero">
+	<section class="hero">
 		<div class="container">
 			<div class="hero-content">
-				<h1>Electronics Repair Blog</h1>
-				<p>Expert tips, device care guides, and insights from Dallas-Fort Worth's trusted mobile repair specialists</p>
+				<h1 class="hero-title">Electronics Repair Blog</h1>
+				<p class="hero-subtitle">Expert tips, device care guides, and insights from Dallas-Fort Worth's trusted mobile repair specialists</p>
 			</div>
 		</div>
 	</section>
@@ -119,7 +119,7 @@ import Layout from '../layouts/Layout.astro';
 					<div class="article-content">
 						<span class="article-category">Troubleshooting</span>
 						<h3>What to Do When Your Phone Gets Water Damage</h3>
-						<p>Quick steps to take immediately after water damage to maximize your chances of device recovery. Learn what works and what myths to avoid.</p>
+						<p>Quick steps to take immediately after water damage to maximize your chances of device recovery. Learn what works and what myths to avoid. Need professional help? Contact <a href="/emergency-phone-repair" style="color: #0066cc; text-decoration: none;">emergency repair services</a> in Dallas Fort Worth.</p>
 						<div class="article-meta">
 							<span class="publish-date">March 10, 2024</span>
 							<span class="read-time">• 6 min read</span>
@@ -141,7 +141,7 @@ import Layout from '../layouts/Layout.astro';
 					<div class="article-content">
 						<span class="article-category">Device Protection</span>
 						<h3>Signs Your Phone Battery Needs Replacement</h3>
-						<p>Learn to recognize the warning signs of a failing battery and understand when it's time for a professional replacement service.</p>
+						<p>Learn to recognize the warning signs of a failing battery and understand when it's time for a professional replacement service. Get <a href="/iphone-repair-dallas" style="color: #0066cc; text-decoration: none;">iPhone</a> or <a href="/samsung-repair-fort-worth" style="color: #0066cc; text-decoration: none;">Samsung</a> battery replacement in DFW.</p>
 						<div class="article-meta">
 							<span class="publish-date">March 8, 2024</span>
 							<span class="read-time">• 5 min read</span>
@@ -166,7 +166,7 @@ import Layout from '../layouts/Layout.astro';
 					<div class="article-content">
 						<span class="article-category">Repair Tips</span>
 						<h3>Charging Port Not Working? Here's What to Check First</h3>
-						<p>Before seeking repair services, try these simple troubleshooting steps to fix common charging port issues at home.</p>
+						<p>Before seeking repair services, try these simple troubleshooting steps to fix common charging port issues at home. Need professional help? Contact our <a href="/services" style="color: #0066cc; text-decoration: none;">repair services</a> in Dallas Fort Worth.</p>
 						<div class="article-meta">
 							<span class="publish-date">March 5, 2024</span>
 							<span class="read-time">• 4 min read</span>
@@ -210,7 +210,7 @@ import Layout from '../layouts/Layout.astro';
 					<div class="article-content">
 						<span class="article-category">Device Protection</span>
 						<h3>Best Screen Protectors for Dallas Weather Conditions</h3>
-						<p>How Dallas-Fort Worth's climate affects screen protector performance and which types offer the best protection for local conditions.</p>
+						<p>How Dallas-Fort Worth's climate affects screen protector performance and which types offer the best protection for local conditions. Get professional <a href="/screen-replacement" style="color: #0066cc; text-decoration: none;">screen replacement</a> services in DFW.</p>
 						<div class="article-meta">
 							<span class="publish-date">February 28, 2024</span>
 							<span class="read-time">• 6 min read</span>
@@ -324,32 +324,49 @@ import Layout from '../layouts/Layout.astro';
 			</div>
 		</div>
 	</section>
+
+	<!-- Schema Markup for Blog -->
+	<script type="application/ld+json">
+	{
+	  "@context": "https://schema.org",
+	  "@type": "Blog",
+	  "name": "GadgetFix Repair Blog",
+	  "description": "Device repair tips and guides for Dallas Fort Worth",
+	  "publisher": {
+	    "@type": "Organization",
+	    "name": "GadgetFix",
+	    "telephone": "+14024166942"
+	  }
+	}
+	</script>
 </Layout>
 
 <style>
-	/* Blog Hero */
-	.blog-hero {
-		background: #0066cc;
+	/* Hero */
+	.hero {
+		background: #1e3a8a;
 		color: white;
-		padding: 4rem 0;
+		padding: 4rem 0 6rem;
 		text-align: center;
 	}
 
-	.blog-hero h1 {
+	.hero-title {
 		font-family: var(--font-heading);
-		font-size: 3.5rem;
+		font-size: 4rem;
 		font-weight: 400;
-		margin-bottom: 1rem;
+		margin-bottom: 1.5rem;
 		text-transform: uppercase;
 		letter-spacing: 2px;
-		line-height: 1.2;
+		line-height: 1.1;
 	}
 
-	.blog-hero p {
+	.hero-subtitle {
 		font-size: 1.25rem;
-		opacity: 0.9;
+		margin-bottom: 2.5rem;
 		max-width: 600px;
-		margin: 0 auto;
+		margin-left: auto;
+		margin-right: auto;
+		opacity: 0.9;
 		line-height: 1.6;
 	}
 
@@ -745,11 +762,15 @@ import Layout from '../layouts/Layout.astro';
 
 	/* Responsive Design */
 	@media (max-width: 768px) {
-		.blog-hero h1 {
-			font-size: 2.8rem;
+		.hero {
+			padding: 3rem 0 4rem;
 		}
 
-		.blog-hero p {
+		.hero-title {
+			font-size: 2.2rem;
+		}
+
+		.hero-subtitle {
 			font-size: 1.1rem;
 		}
 
@@ -789,11 +810,11 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	@media (max-width: 480px) {
-		.blog-hero {
+		.hero {
 			padding: 3rem 0;
 		}
 
-		.blog-hero h1 {
+		.hero-title {
 			font-size: 2.2rem;
 		}
 

@@ -1,5 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../../layouts/Layout.astro';
 ---
 
 <Layout 
@@ -8,11 +8,15 @@ import Layout from '../layouts/Layout.astro';
 	keywords="mobile electronics repair Dallas Fort Worth, DFW device repair service areas, on-site phone repair Dallas, mobile tablet repair Fort Worth, electronics repair service areas"
 >
 	<!-- Hero Section -->
-	<section class="locations-hero">
+	<section class="hero">
 		<div class="container">
 			<div class="hero-content">
-				<h1>Service Locations</h1>
+				<h1 class="hero-title">Service Locations</h1>
 				<p class="hero-subtitle">Mobile Electronics Repair Services in the Dallas-Fort Worth Metro Areas</p>
+				<div class="hero-cta">
+					<a href="tel:+14024166942" class="btn btn-primary btn-large" aria-label="Call now for mobile phone repair service">CALL NOW FOR SERVICE</a>
+					<a href="/contact" class="btn btn-secondary btn-large" aria-label="Schedule on-site device repair">SCHEDULE REPAIR</a>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -82,30 +86,55 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <style>
-	/* Locations Hero */
-	.locations-hero {
-		background: #0066cc;
+	/* Hero */
+	.hero {
+		background: #1e3a8a;
 		color: white;
-		padding: 4rem 0;
+		padding: 4rem 0 6rem;
 		text-align: center;
 	}
 
-	.locations-hero h1 {
+	.hero-title {
 		font-family: var(--font-heading);
-		font-size: 3.5rem;
+		font-size: 4rem;
 		font-weight: 400;
-		margin-bottom: 1rem;
+		margin-bottom: 1.5rem;
+		line-height: 1.1;
 		text-transform: uppercase;
 		letter-spacing: 2px;
-		line-height: 1.2;
 	}
 
 	.hero-subtitle {
 		font-size: 1.25rem;
-		opacity: 0.9;
+		margin-bottom: 2.5rem;
 		max-width: 600px;
-		margin: 0 auto;
+		margin-left: auto;
+		margin-right: auto;
+		opacity: 0.9;
 		line-height: 1.6;
+	}
+
+	.hero-cta {
+		margin-bottom: 3rem;
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.hero .btn-primary,
+	.hero .btn-secondary {
+		background: #000000;
+		color: white;
+		border: 2px solid #000000;
+		border-radius: 100px;
+		text-decoration: none;
+	}
+
+	.hero .btn-primary:hover,
+	.hero .btn-secondary:hover {
+		background: #333333;
+		border-color: #333333;
 	}
 
 	/* Locations Section */
@@ -221,12 +250,21 @@ import Layout from '../layouts/Layout.astro';
 
 	/* Responsive Design */
 	@media (max-width: 768px) {
-		.locations-hero h1 {
-			font-size: 2.8rem;
+		.hero {
+			padding: 3rem 0 4rem;
+		}
+
+		.hero-title {
+			font-size: 2.2rem;
 		}
 
 		.hero-subtitle {
 			font-size: 1.1rem;
+		}
+
+		.hero-cta {
+			flex-direction: column;
+			align-items: center;
 		}
 
 		.locations-grid {
@@ -253,11 +291,11 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	@media (max-width: 480px) {
-		.locations-hero {
+		.hero {
 			padding: 3rem 0;
 		}
 
-		.locations-hero h1 {
+		.hero-title {
 			font-size: 2.2rem;
 		}
 

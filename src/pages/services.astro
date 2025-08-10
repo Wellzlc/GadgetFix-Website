@@ -3,9 +3,9 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout 
-	title="Mobile Phone Repair Services Dallas Fort Worth | All Devices | GadgetFix"
+	title="Phone Repair Services Dallas Fort Worth | All Devices | GadgetFix"
 	description="Complete mobile device repair services in DFW. iPhone, Samsung, tablet repairs. Screen replacement, battery, charging ports, water damage. We come to you!"
-	keywords="phone repair services dallas, mobile device repair fort worth, iphone samsung tablet repair"
+	keywords="phone repair services dallas, mobile device repair fort worth, iphone samsung tablet repair, screen replacement, battery repair"
 >
 	<!-- Hero Section -->
 	<section class="services-hero">
@@ -61,7 +61,7 @@ import Layout from '../layouts/Layout.astro';
 					</div>
 					<div class="service-detail">
 						<h4>Battery & Performance</h4>
-						<p>iPhone battery replacements to restore full-day battery life and optimal performance. Stop unexpected shutdowns.</p>
+						<p><a href="/iphone-repair-dallas" style="color: #2563EB; text-decoration: none;">iPhone</a> battery replacements to restore full-day battery life and optimal performance throughout Dallas Fort Worth. Mobile service with 90-day warranty.</p>
 						<div class="service-features">
 							<span class="feature">✓ High-capacity batteries</span>
 							<span class="feature">✓ Performance restored</span>
@@ -97,7 +97,7 @@ import Layout from '../layouts/Layout.astro';
 				<div class="services-grid">
 					<div class="service-detail">
 						<h4>Galaxy S Series Repair</h4>
-						<p>Complete repair services for Galaxy S24, S23, S22, S21, S20 and older S series models. Screen, battery, and component repairs.</p>
+						<p>Complete <a href="/samsung-repair-fort-worth" style="color: #2563EB; text-decoration: none;">Samsung</a> repair services for Galaxy S24, S23, S22, S21, S20 and older S series models in DFW. Mobile service with 90-day warranty.</p>
 						<div class="service-features">
 							<span class="feature">✓ S24 Ultra to Galaxy S6</span>
 							<span class="feature">✓ AMOLED display repairs</span>
@@ -154,7 +154,7 @@ import Layout from '../layouts/Layout.astro';
 				<div class="services-grid">
 					<div class="service-detail">
 						<h4>30-Minute Response</h4>
-						<p>Emergency on-site repairs with 30-minute response time throughout Dallas-Fort Worth. We come to your location.</p>
+						<p><a href="/emergency-phone-repair" style="color: #2563EB; text-decoration: none;">Emergency</a> on-site repairs with 30-minute response time throughout Dallas-Fort Worth. Mobile service with 90-day warranty.</p>
 						<div class="service-features">
 							<span class="feature">✓ 30-minute response time</span>
 							<span class="feature">✓ On-site service available</span>
@@ -181,7 +181,7 @@ import Layout from '../layouts/Layout.astro';
 					</div>
 					<div class="service-detail">
 						<h4>Same-Day Screen Repair</h4>
-						<p>Emergency same-day screen repairs when you can't wait. Mobile service brings repair expertise directly to you.</p>
+						<p><a href="/emergency-phone-repair" style="color: #2563EB; text-decoration: none;">Emergency same-day</a> <a href="/screen-replacement" style="color: #2563EB; text-decoration: none;">screen</a> repairs throughout Dallas Fort Worth. Mobile service brings repair expertise directly to you with 90-day warranty.</p>
 						<div class="service-features">
 							<span class="feature">✓ Same-day completion</span>
 							<span class="feature">✓ Mobile repair service</span>
@@ -208,7 +208,7 @@ import Layout from '../layouts/Layout.astro';
 				<div class="services-grid">
 					<div class="service-detail">
 						<h4>Screen Repairs</h4>
-						<p>Cracked, shattered, or unresponsive screens repaired with high-quality replacement parts. Same-day service available.</p>
+						<p>Cracked, shattered, or unresponsive <a href="/screen-replacement" style="color: #2563EB; text-decoration: none;">screens</a> repaired with high-quality replacement parts throughout Dallas Fort Worth. Mobile service with 90-day warranty.</p>
 						<div class="service-features">
 							<span class="feature">✓ All brands supported</span>
 							<span class="feature">✓ High-quality screens</span>
@@ -217,7 +217,7 @@ import Layout from '../layouts/Layout.astro';
 					</div>
 					<div class="service-detail">
 						<h4>Battery Replacement</h4>
-						<p>Restore your phone's battery life with genuine replacement batteries. Quick installation with warranty protection.</p>
+						<p>Restore your phone's battery life with genuine replacement batteries in DFW. Mobile service installation with 90-day warranty protection.</p>
 						<div class="service-features">
 							<span class="feature">✓ Genuine batteries</span>
 							<span class="feature">✓ Warranty included</span>
@@ -318,7 +318,7 @@ import Layout from '../layouts/Layout.astro';
 				<div class="services-grid">
 					<div class="service-detail">
 						<h4>Water Damage Recovery</h4>
-						<p>Emergency water damage repair using advanced drying techniques and component restoration.</p>
+						<p><a href="/emergency-phone-repair" style="color: #2563EB; text-decoration: none;">Emergency</a> water damage repair using advanced drying techniques throughout DFW. Mobile service with 90-day warranty.</p>
 						<div class="service-features">
 							<span class="feature">✓ Emergency service</span>
 							<span class="feature">✓ Data recovery</span>
@@ -458,6 +458,32 @@ import Layout from '../layouts/Layout.astro';
 			</div>
 		</div>
 	</section>
+
+	<!-- Schema Markup for Services -->
+	<script type="application/ld+json">
+	{
+	  "@context": "https://schema.org",
+	  "@type": "Service",
+	  "serviceType": "Mobile Device Repair",
+	  "provider": {
+	    "@type": "MobilePhoneStore",
+	    "name": "GadgetFix",
+	    "telephone": "+14024166942"
+	  },
+	  "areaServed": "Dallas-Fort Worth Metroplex",
+	  "hasOfferCatalog": {
+	    "@type": "OfferCatalog",
+	    "name": "Repair Services",
+	    "itemListElement": [
+	      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "iPhone Repair"}},
+	      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Samsung Repair"}},
+	      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Screen Replacement"}},
+	      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Battery Replacement"}},
+	      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Water Damage Repair"}}
+	    ]
+	  }
+	}
+	</script>
 </Layout>
 
 <style>
