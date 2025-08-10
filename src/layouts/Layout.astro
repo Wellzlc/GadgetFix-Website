@@ -6,9 +6,9 @@ export interface Props {
 }
 
 const { 
-	title = "Gadget Fix - Mobile Electronics Repair Dallas-Fort Worth", 
-	description = "Fast, reliable mobile electronics repair in Dallas-Fort Worth. Smartphones, tablets, gadgets - expert repair services with warranty. On-site service available.",
-	keywords = "mobile phone repair Dallas, smartphone repair, tablet repair, Dallas Fort Worth, electronics repair, screen repair, battery replacement"
+	title = "Phone Repair Dallas Fort Worth TX | iPhone Samsung Screen Fix | GadgetFix LLC", 
+	description = "Same-day phone repair in Dallas Fort Worth. iPhone screen repair from $79. Samsung, iPad & computer fix. ⚡ 30-min repairs ✓ 90-day warranty 📞 Walk-ins welcome!",
+	keywords = "phone repair dallas, iphone repair fort worth, samsung repair dfw, screen replacement near me, gadget fix dallas, emergency phone repair, same day repair dallas fort worth"
 } = Astro.props;
 ---
 
@@ -23,30 +23,134 @@ const {
 		<meta name="description" content={description} />
 		<meta name="keywords" content={keywords} />
 		
+		<!-- Local SEO Meta Tags -->
+		<meta name="geo.region" content="US-TX">
+		<meta name="geo.placename" content="Dallas Fort Worth">
+		<meta name="geo.position" content="32.7767;-96.7970">
+		<meta name="ICBM" content="32.7767, -96.7970">
+		
+		<!-- Open Graph Tags -->
+		<meta property="og:title" content="GadgetFix LLC - Phone Repair Dallas Fort Worth">
+		<meta property="og:description" content="Fast, affordable phone repair in DFW. iPhone, Samsung, iPad repairs. Same-day service!">
+		<meta property="og:type" content="business.business">
+		<meta property="og:url" content="https://gadgetfixllc.com">
+		<meta property="og:image" content="https://gadgetfixllc.com/images/gadgetfix-logo.jpg">
+		
+		<!-- Google Search Console Verification -->
+		<meta name="google-site-verification" content="pending-verification-code" />
+		<!-- Replace 'pending-verification-code' with actual code from Google Search Console -->
+		
 		<!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 		
-		<!-- Local Business Schema -->
+		<!-- Enhanced Local Business Schema -->
 		<script type="application/ld+json">
-			{
-				"@context": "https://schema.org",
-				"@type": "LocalBusiness",
-				"name": "Gadget Fix",
-				"description": "Fast, reliable mobile electronics repair services",
-				"url": "https://gadgetfixllc.com",
-				"telephone": "+1-402-416-6942",
-				"address": {
-					"@type": "PostalAddress",
-					"addressLocality": "Dallas",
-					"addressRegion": "TX",
-					"addressCountry": "US"
-				},
-				"areaServed": "Dallas-Fort Worth Metroplex",
-				"serviceType": "Electronics Repair",
-				"priceRange": "$"
-			}
+		{
+		  "@context": "https://schema.org",
+		  "@type": "MobilePhoneStore",
+		  "@id": "https://gadgetfixllc.com/#business",
+		  "name": "GadgetFix LLC",
+		  "alternateName": "Gadget Fix",
+		  "description": "Same-day phone repair in Dallas Fort Worth. iPhone screen repair from $79. Samsung, iPad & computer fix.",
+		  "image": "https://gadgetfixllc.com/images/gadgetfix-logo.jpg",
+		  "logo": "https://gadgetfixllc.com/images/gadgetfix-logo.jpg",
+		  "telephone": "+1-402-416-6942",
+		  "url": "https://gadgetfixllc.com",
+		  "address": {
+		    "@type": "PostalAddress",
+		    "addressLocality": "Dallas",
+		    "addressRegion": "TX",
+		    "postalCode": "75001",
+		    "addressCountry": "US"
+		  },
+		  "geo": {
+		    "@type": "GeoCoordinates",
+		    "latitude": 32.7767,
+		    "longitude": -96.7970
+		  },
+		  "openingHoursSpecification": [
+		    {
+		      "@type": "OpeningHoursSpecification",
+		      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+		      "opens": "09:00",
+		      "closes": "18:00"
+		    },
+		    {
+		      "@type": "OpeningHoursSpecification",
+		      "dayOfWeek": "Saturday",
+		      "opens": "10:00",
+		      "closes": "16:00"
+		    }
+		  ],
+		  "priceRange": "$",
+		  "serviceType": ["iPhone Repair", "Samsung Repair", "Screen Replacement", "Battery Replacement"],
+		  "areaServed": [
+		    {
+		      "@type": "City",
+		      "name": "Dallas"
+		    },
+		    {
+		      "@type": "City",
+		      "name": "Fort Worth"
+		    },
+		    {
+		      "@type": "City",
+		      "name": "Plano"
+		    },
+		    {
+		      "@type": "City",
+		      "name": "Frisco"
+		    },
+		    {
+		      "@type": "City",
+		      "name": "Irving"
+		    },
+		    {
+		      "@type": "City",
+		      "name": "Arlington"
+		    }
+		  ],
+		  "hasOfferCatalog": {
+		    "@type": "OfferCatalog",
+		    "name": "Phone Repair Services",
+		    "itemListElement": [
+		      {
+		        "@type": "Offer",
+		        "itemOffered": {
+		          "@type": "Service",
+		          "name": "iPhone Screen Repair",
+		          "description": "Same-day iPhone screen replacement for all models"
+		        }
+		      },
+		      {
+		        "@type": "Offer",
+		        "itemOffered": {
+		          "@type": "Service",
+		          "name": "Samsung Galaxy Repair",
+		          "description": "Expert Samsung phone repair services"
+		        }
+		      },
+		      {
+		        "@type": "Offer",
+		        "itemOffered": {
+		          "@type": "Service",
+		          "name": "Battery Replacement",
+		          "description": "Professional battery replacement with warranty"
+		        }
+		      },
+		      {
+		        "@type": "Offer",
+		        "itemOffered": {
+		          "@type": "Service",
+		          "name": "Water Damage Recovery",
+		          "description": "Expert water damage recovery and restoration"
+		        }
+		      }
+		    ]
+		  }
+		}
 		</script>
 	</head>
 	<body>

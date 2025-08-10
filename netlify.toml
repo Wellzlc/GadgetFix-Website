@@ -1,0 +1,70 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml"
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Content-Type = "text/plain"
+    Cache-Control = "public, max-age=3600"
+
+# Redirect old service-areas URLs to new locations structure (from existing sitemap)
+[[redirects]]
+  from = "/service-areas/dallas/*"
+  to = "/locations/dallas-county/dallas/"
+  status = 301
+
+[[redirects]]
+  from = "/service-areas/fort-worth/*"
+  to = "/locations/tarrant-county/fort-worth/"
+  status = 301
+
+[[redirects]]
+  from = "/service-areas/arlington/*"
+  to = "/locations/tarrant-county/arlington/"
+  status = 301
+
+[[redirects]]
+  from = "/service-areas/plano/*"
+  to = "/locations/dallas-county/plano/"
+  status = 301
+
+[[redirects]]
+  from = "/service-areas/irving/*"
+  to = "/locations/dallas-county/irving/"
+  status = 301
+
+# Redirect future SEO-optimized pages (to be created)
+[[redirects]]
+  from = "/iphone-repair-dallas"
+  to = "/services#iphone-repair"
+  status = 302
+
+[[redirects]]
+  from = "/samsung-repair-fort-worth"
+  to = "/services#samsung-repair"  
+  status = 302
+
+[[redirects]]
+  from = "/emergency-phone-repair"
+  to = "/services#emergency-repair"
+  status = 302
+
+[[redirects]]
+  from = "/screen-replacement"
+  to = "/services#screen-repair"
+  status = 302
