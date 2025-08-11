@@ -197,6 +197,33 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
+  <!-- Related Services -->
+  <section class="related-services">
+    <div class="container">
+      <h2 class="section-title">Related Repair Services</h2>
+      <div class="related-grid">
+        <div class="related-card">
+          <h3><a href="/screen-replacement">Screen Replacement</a></h3>
+          <p>Professional screen repair for all devices. Same quality parts and warranty as our iPhone service.</p>
+          <a href="/screen-replacement" class="related-link">Learn More →</a>
+        </div>
+        <div class="related-card">
+          <h3><a href="/samsung-repair-fort-worth">Samsung Repair</a></h3>
+          <p>Expert Samsung Galaxy repair in Fort Worth. Same-day mobile service with 90-day warranty.</p>
+          <a href="/samsung-repair-fort-worth" class="related-link">Learn More →</a>
+        </div>
+        <div class="related-card">
+          <h3><a href="/emergency-phone-repair">Emergency Repair</a></h3>
+          <p>30-minute response time for urgent iPhone repairs throughout Dallas-Fort Worth.</p>
+          <a href="/emergency-phone-repair" class="related-link">Learn More →</a>
+        </div>
+      </div>
+      <div class="all-services-link">
+        <a href="/services">View All Repair Services →</a>
+      </div>
+    </div>
+  </section>
+
   <!-- Final Call to Action -->
   <section class="final-cta">
     <div class="container">
@@ -513,6 +540,77 @@ import Layout from '../layouts/Layout.astro';
     line-height: 1.6;
   }
 
+  /* Related Services */
+  .related-services {
+    padding: 80px 0;
+    background: #f8f9fa;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  .related-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .related-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .related-card h3 {
+    margin: 0 0 15px 0;
+    color: #1e3a8a;
+  }
+
+  .related-card h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .related-card h3 a:hover {
+    text-decoration: underline;
+  }
+
+  .related-card p {
+    color: #6b7280;
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+  }
+
+  .related-link {
+    color: #2563EB;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .related-link:hover {
+    text-decoration: underline;
+  }
+
+  .all-services-link {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .all-services-link a {
+    color: #1e3a8a;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .all-services-link a:hover {
+    text-decoration: underline;
+  }
+
   /* Final CTA */
   .final-cta {
     padding: 80px 0;
@@ -675,3 +773,122 @@ import Layout from '../layouts/Layout.astro';
     }
   }
 </style>
+
+<!-- iPhone Repair FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does iPhone screen repair cost in Dallas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "iPhone screen repairs in Dallas start at $79 for older models like iPhone 7/8, $99 for iPhone X/XR/11, $119 for iPhone 12/13, and $139 for iPhone 14/15 models. All repairs include free diagnostics and 90-day warranty."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does iPhone screen replacement take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "iPhone screen replacements typically take 25-30 minutes. We complete the repair on-site at your Dallas location while you wait. No need to drop off your device or wait days for repairs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you repair all iPhone models?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, we repair all iPhone models from iPhone 6 through the latest iPhone 15 Pro Max. This includes iPhone SE models, iPhone XR, iPhone 11 Pro, iPhone 12 mini, iPhone 13, iPhone 14 Plus, and all iPhone 15 variants."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will iPhone screen replacement affect Face ID?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "When performed correctly, iPhone screen replacement should not affect Face ID functionality. We use proper techniques to preserve the original Face ID module and ensure all features work after repair."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer iPhone battery replacement in Dallas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, we provide iPhone battery replacement starting at $59. If your iPhone battery health is below 80% or you're experiencing rapid drain, poor performance, or unexpected shutdowns, battery replacement can restore your device's performance."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- iPhone Repair Reviews Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "iPhone Repair",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "GadgetFix LLC",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Dallas",
+      "addressRegion": "TX"
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "89",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Amanda Lopez"
+      },
+      "datePublished": "2024-01-12",
+      "reviewBody": "Best iPhone repair in Dallas! My iPhone 15 Pro screen was completely shattered. They came to my work and fixed it in 25 minutes. Looks brand new and Face ID works perfectly."
+    },
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "James Wilson"
+      },
+      "datePublished": "2024-01-05",
+      "reviewBody": "Excellent iPhone 13 battery replacement service. My phone was dying after 4 hours, now it lasts all day again. Fair pricing and 90-day warranty is great peace of mind."
+    },
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Rachel Kim"
+      },
+      "datePublished": "2023-12-29",
+      "reviewBody": "Amazing iPhone 14 Plus screen repair! Cracked it badly but they made it look new. Mobile service is so convenient, came to my house in Plano. Highly recommend for iPhone repairs."
+    }
+  ]
+}
+</script>

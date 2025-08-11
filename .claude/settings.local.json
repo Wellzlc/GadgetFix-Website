@@ -3,7 +3,13 @@
     "allow": [
       "Bash(mkdir:*)",
       "Bash(rm:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "WebFetch(domain:ifixdfw.com)",
+      "WebFetch(domain:www.dallasiphonerepair.com)",
+      "WebFetch(domain:cellphonerepairtx.com)",
+      "WebFetch(domain:www.cellairis.com)",
+      "WebFetch(domain:www.ubreakifix.com)",
+      "Bash(grep:*)"
     ],
     "deny": []
   }

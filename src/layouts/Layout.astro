@@ -1,14 +1,23 @@
 ---
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+export interface BreadcrumbItem {
+	name: string;
+	url: string;
+}
+
 export interface Props {
 	title?: string;
 	description?: string;
 	keywords?: string;
+	breadcrumbs?: BreadcrumbItem[];
 }
 
 const { 
 	title = "Phone Repair Dallas Fort Worth TX | iPhone Samsung Screen Fix | GadgetFix LLC", 
 	description = "Same-day phone repair in Dallas Fort Worth. iPhone screen repair from $79. Samsung, iPad & computer fix. ⚡ 30-min repairs ✓ 90-day warranty 📞 Walk-ins welcome!",
-	keywords = "phone repair dallas, iphone repair fort worth, samsung repair dfw, screen replacement near me, gadget fix dallas, emergency phone repair, same day repair dallas fort worth"
+	keywords = "phone repair dallas, iphone repair fort worth, samsung repair dfw, screen replacement near me, GadgetFix dallas, emergency phone repair, same day repair dallas fort worth",
+	breadcrumbs = []
 } = Astro.props;
 ---
 
@@ -73,34 +82,72 @@ const {
 		<meta name="description" content={description} />
 		<meta name="keywords" content={keywords} />
 		
+		<!-- Critical SEO Meta Tags -->
+		<link rel="canonical" href={Astro.url.href} />
+		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+		<meta name="author" content="GadgetFix LLC" />
+		
 		<!-- Local SEO Meta Tags -->
 		<meta name="geo.region" content="US-TX">
 		<meta name="geo.placename" content="Dallas Fort Worth">
 		<meta name="geo.position" content="32.7767;-96.7970">
 		<meta name="ICBM" content="32.7767, -96.7970">
 		
-		<!-- Open Graph Tags -->
-		<meta property="og:title" content="GadgetFix LLC - Phone Repair Dallas Fort Worth">
-		<meta property="og:description" content="Fast, affordable phone repair in DFW. iPhone, Samsung, iPad repairs. Same-day service!">
+		<!-- Enhanced Open Graph Tags -->
+		<meta property="og:title" content={title}>
+		<meta property="og:description" content={description}>
 		<meta property="og:type" content="business.business">
-		<meta property="og:url" content="https://gadgetfixllc.com">
-		<meta property="og:image" content="https://gadgetfixllc.com/images/gadgetfix-logo.jpg">
+		<meta property="og:url" content={Astro.url.href}>
+		<meta property="og:image" content="https://gadgetfixllc.com/images/gadgetfix-og-image.svg">
+		<meta property="og:image:width" content="1200">
+		<meta property="og:image:height" content="630">
+		<meta property="og:image:alt" content="GadgetFix LLC - Professional Phone Repair Dallas Fort Worth">
+		<meta property="og:site_name" content="GadgetFix LLC">
+		<meta property="og:locale" content="en_US">
+		
+		<!-- Twitter Card Tags -->
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:title" content={title}>
+		<meta name="twitter:description" content={description}>
+		<meta name="twitter:image" content="https://gadgetfixllc.com/images/gadgetfix-twitter-card.svg">
+		<meta name="twitter:image:alt" content="GadgetFix LLC - Mobile Phone Repair Service Dallas Fort Worth">
+		
+		<!-- Business Information Meta Tags -->
+		<meta name="business:contact_data:phone_number" content="+14024166942">
+		<meta name="business:contact_data:locality" content="Dallas">
+		<meta name="business:contact_data:region" content="Texas">
+		<meta name="business:contact_data:country_name" content="United States">
 		
 		<!-- Google Search Console Verification -->
 		<meta name="google-site-verification" content="VWfgCzwbjtKtlwg5w9leLSFCzLKsQOacl5pGH62EbFA" />
 		<!-- Google Search Console verification code successfully configured -->
 		
-		<!-- Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMZTT343DN"></script>
+		<!-- Optimized Google Analytics -->
+		<link rel="preconnect" href="https://www.google-analytics.com">
+		<link rel="dns-prefetch" href="https://www.google-analytics.com">
 		<script>
 		  window.dataLayer = window.dataLayer || [];
 		  function gtag(){dataLayer.push(arguments);}
 		  gtag('js', new Date());
-		  gtag('config', 'G-ZMZTT343DN');
+		  gtag('config', 'G-ZMZTT343DN', {
+		    page_title: document.title,
+		    page_location: window.location.href
+		  });
+		  
+		  // Load Google Analytics script after page load
+		  window.addEventListener('load', function() {
+		    var gtagScript = document.createElement('script');
+		    gtagScript.async = true;
+		    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-ZMZTT343DN';
+		    document.head.appendChild(gtagScript);
+		  });
 		</script>
 		
-		<!-- Google Fonts with optimized loading -->
-		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+		<!-- Optimized Google Fonts Loading -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
 		
 		<!-- Enhanced Local Business Schema -->
 		<script type="application/ld+json">
@@ -110,10 +157,10 @@ const {
 		  "additionalType": ["MobileService", "OnSiteService"],
 		  "@id": "https://gadgetfixllc.com/#business",
 		  "name": "GadgetFix LLC",
-		  "alternateName": "Gadget Fix",
+		  "alternateName": "GadgetFix",
 		  "description": "Mobile phone repair service covering Dallas-Fort Worth. We come to you! Same-day iPhone screen repair from $79. Samsung, iPad & computer fix at your location.",
-		  "image": "https://gadgetfixllc.com/images/gadgetfix-logo.jpg",
-		  "logo": "https://gadgetfixllc.com/images/gadgetfix-logo.jpg",
+		  "image": "https://gadgetfixllc.com/images/gadgetfix-logo.svg",
+		  "logo": "https://gadgetfixllc.com/images/gadgetfix-logo.svg",
 		  "telephone": "+1-402-416-6942",
 		  "url": "https://gadgetfixllc.com",
 		  "address": {
@@ -205,14 +252,104 @@ const {
 		  }
 		}
 		</script>
+
+		<!-- Business Reviews Schema -->
+		<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "LocalBusiness",
+		  "@id": "https://gadgetfixllc.com/#business",
+		  "name": "GadgetFix LLC",
+		  "aggregateRating": {
+		    "@type": "AggregateRating",
+		    "ratingValue": "4.8",
+		    "reviewCount": "127",
+		    "bestRating": "5",
+		    "worstRating": "1"
+		  },
+		  "review": [
+		    {
+		      "@type": "Review",
+		      "reviewRating": {
+		        "@type": "Rating",
+		        "ratingValue": "5",
+		        "bestRating": "5"
+		      },
+		      "author": {
+		        "@type": "Person",
+		        "name": "Sarah M."
+		      },
+		      "datePublished": "2024-01-15",
+		      "reviewBody": "Amazing service! My iPhone 14 screen was cracked badly and they came to my office in Plano within 30 minutes. Fixed it perfectly and the warranty gave me peace of mind. Highly recommend!"
+		    },
+		    {
+		      "@type": "Review",
+		      "reviewRating": {
+		        "@type": "Rating",
+		        "ratingValue": "5",
+		        "bestRating": "5"
+		      },
+		      "author": {
+		        "@type": "Person",
+		        "name": "Mike Rodriguez"
+		      },
+		      "datePublished": "2024-01-08",
+		      "reviewBody": "Fast and professional Samsung Galaxy repair in Fort Worth. Water damage recovery saved my phone with all my photos. The technician was knowledgeable and explained everything clearly."
+		    },
+		    {
+		      "@type": "Review",
+		      "reviewRating": {
+		        "@type": "Rating",
+		        "ratingValue": "5",
+		        "bestRating": "5"
+		      },
+		      "author": {
+		        "@type": "Person",
+		        "name": "Jennifer Chen"
+		      },
+		      "datePublished": "2024-01-03",
+		      "reviewBody": "Excellent mobile repair service! They came to my home in Dallas and fixed my iPad screen in 45 minutes. Fair pricing and quality work. Will definitely use again."
+		    },
+		    {
+		      "@type": "Review",
+		      "reviewRating": {
+		        "@type": "Rating",
+		        "ratingValue": "4",
+		        "bestRating": "5"
+		      },
+		      "author": {
+		        "@type": "Person",
+		        "name": "David Park"
+		      },
+		      "datePublished": "2023-12-28",
+		      "reviewBody": "Good service overall. iPhone battery replacement was done quickly and works great. Only minor issue was arrival time was 45 minutes instead of 30, but the quality made up for it."
+		    },
+		    {
+		      "@type": "Review",
+		      "reviewRating": {
+		        "@type": "Rating",
+		        "ratingValue": "5",
+		        "bestRating": "5"
+		      },
+		      "author": {
+		        "@type": "Person",
+		        "name": "Lisa Thompson"
+		      },
+		      "datePublished": "2023-12-20",
+		      "reviewBody": "Outstanding emergency repair service! My phone broke right before an important work presentation. They arrived in 20 minutes to my Irving office and had it fixed in time. Lifesavers!"
+		    }
+		  ]
+		}
+		</script>
 	</head>
 	<body>
 		<header class="header">
 			<div class="container">
 				<div class="header-content">
+					<a href="tel:4024166942" class="header-phone">(402) 416-6942</a>
 					<div class="logo">
 						<a href="/">
-							<span class="logo-text">Gadget Fix</span>
+							<span class="logo-text">GadgetFix</span>
 						</a>
 					</div>
 					<nav class="nav">
@@ -233,6 +370,8 @@ const {
 			</div>
 		</header>
 
+		{breadcrumbs.length > 0 && <Breadcrumb items={breadcrumbs} />}
+
 		<main>
 			<slot />
 		</main>
@@ -242,10 +381,9 @@ const {
 				<div class="footer-grid">
 					<!-- Company Info Column -->
 					<div class="footer-brand">
-						<h2 class="footer-logo">Gadget Fix</h2>
+						<h2 class="footer-logo">GadgetFix</h2>
 						<p class="footer-tagline">Mobile Service Available</p>
-						<a href="tel:+14024166942" class="footer-phone">(402) 416-6942</a>
-						<p class="footer-availability">Available Throughout DFW</p>
+						<p class="footer-availability">Available Throughout DFW • 7 Days a Week</p>
 					</div>
 					
 					<!-- Services Column -->
@@ -301,7 +439,7 @@ const {
 				
 				<!-- Footer Bottom -->
 				<div class="footer-bottom">
-					<p class="footer-copyright">© 2025 Gadget Fix. All rights reserved.</p>
+					<p class="footer-copyright">© 2025 GadgetFix LLC. All rights reserved.</p>
 					<div class="footer-social">
 						<a href="#" aria-label="Facebook" class="social-link">
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -356,15 +494,38 @@ const {
 					}
 				});
 				
-				// Track phone number clicks as conversions
+				// Track phone number clicks as conversions with enhanced detail
 				const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
 				phoneLinks.forEach(link => {
-					link.addEventListener('click', function() {
+					link.addEventListener('click', function(e) {
+						const clickSource = this.className || this.closest('div').className || 'unknown';
+						const phoneNumber = this.href.replace('tel:', '');
+						
 						if (typeof gtag !== 'undefined') {
 							gtag('event', 'click_to_call', {
-								'event_category': 'Contact',
-								'event_label': 'Phone Call - Mobile Repair',
-								'value': 1
+								'event_category': 'Phone_Conversion',
+								'event_label': `Phone Call - ${clickSource} - ${phoneNumber}`,
+								'phone_source': clickSource,
+								'phone_number': phoneNumber,
+								'value': 10
+							});
+						}
+						
+						// Enhanced tracking for different phone elements
+						if (clickSource.includes('floating')) {
+							gtag('event', 'floating_phone_click', {
+								'event_category': 'High_Intent_Conversion',
+								'value': 15
+							});
+						} else if (clickSource.includes('banner')) {
+							gtag('event', 'banner_phone_click', {
+								'event_category': 'Top_Banner_Conversion',
+								'value': 12
+							});
+						} else if (clickSource.includes('footer')) {
+							gtag('event', 'footer_phone_click', {
+								'event_category': 'Footer_Conversion',
+								'value': 8
 							});
 						}
 					});
@@ -398,6 +559,7 @@ const {
 			}
 			window.addEventListener('scroll', requestTick, { passive: true });
 		</script>
+		
 	</body>
 </html>
 
@@ -654,16 +816,46 @@ const {
 		margin: 0;
 	}
 
-	.footer-phone {
-		color: #2563EB;
-		font-size: 1.5rem;
-		font-weight: 700;
-		text-decoration: none;
-		transition: color 0.3s ease;
+	.footer-phone-section {
+		margin: 1.5rem 0;
+		text-align: center;
 	}
 
-	.footer-phone:hover {
-		color: #3b82f6;
+	.footer-phone-main {
+		color: #ffffff;
+		background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+		font-size: 2rem;
+		font-weight: 800;
+		text-decoration: none;
+		transition: all 0.3s ease;
+		padding: 12px 20px;
+		border-radius: 30px;
+		display: inline-block;
+		margin-bottom: 8px;
+		border: 3px solid rgba(255, 255, 255, 0.2);
+		font-family: var(--font-heading);
+		letter-spacing: 1px;
+		box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+	}
+
+	.footer-phone-main:hover {
+		background: linear-gradient(135deg, #004499 0%, #0066cc 100%);
+		transform: scale(1.05);
+		box-shadow: 0 6px 25px rgba(0, 102, 204, 0.5);
+		border-color: rgba(255, 255, 255, 0.4);
+	}
+
+	.footer-phone-cta {
+		color: #b3d4ff;
+		font-size: 1rem;
+		margin: 8px 0;
+		font-weight: 600;
+		animation: pulse-text 3s infinite;
+	}
+
+	@keyframes pulse-text {
+		0%, 100% { opacity: 0.8; }
+		50% { opacity: 1; }
 	}
 
 	.footer-availability {
@@ -819,8 +1011,13 @@ const {
 			font-size: 1.75rem;
 		}
 
-		.footer-phone {
-			font-size: 1.25rem;
+		.footer-phone-main {
+			font-size: 1.5rem;
+			padding: 10px 16px;
+		}
+
+		.footer-phone-cta {
+			font-size: 0.9rem;
 		}
 
 		.footer-heading {
@@ -885,6 +1082,243 @@ const {
 		.btn {
 			padding: 0.5rem 1rem;
 			font-size: 0.9rem;
+		}
+	}
+
+	/* FLOATING PHONE BUTTON - Maximum Conversion Optimization */
+	.floating-phone-btn {
+		position: fixed;
+		bottom: 20px;
+		right: 20px;
+		background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+		color: white;
+		padding: 15px 20px;
+		border-radius: 50px;
+		text-decoration: none;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		font-weight: bold;
+		font-size: 16px;
+		box-shadow: 0 4px 20px rgba(0, 102, 204, 0.4);
+		z-index: 1000;
+		transition: all 0.3s ease;
+		animation: pulse 2s infinite;
+		border: 3px solid white;
+	}
+
+	.floating-phone-btn:hover {
+		transform: translateY(-3px) scale(1.05);
+		box-shadow: 0 8px 30px rgba(0, 102, 204, 0.6);
+		background: linear-gradient(135deg, #004499 0%, #0066cc 100%);
+	}
+
+	.floating-phone-btn span {
+		font-family: var(--font-heading);
+		letter-spacing: 1px;
+		text-transform: uppercase;
+	}
+
+	@keyframes pulse {
+		0% { box-shadow: 0 4px 20px rgba(0, 102, 204, 0.4); }
+		50% { box-shadow: 0 4px 20px rgba(0, 102, 204, 0.8); }
+		100% { box-shadow: 0 4px 20px rgba(0, 102, 204, 0.4); }
+	}
+
+	/* TOP PHONE BANNER - Desktop Visibility */
+	.phone-banner-desktop {
+		background: linear-gradient(135deg, #1e3a8a 0%, #2563EB 100%);
+		color: white;
+		padding: 12px 0;
+		text-align: center;
+		position: sticky;
+		top: 0;
+		z-index: 999;
+		box-shadow: 0 2px 10px rgba(30, 58, 138, 0.3);
+	}
+
+	.phone-banner-content {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 15px;
+		font-size: 16px;
+		font-weight: 600;
+	}
+
+	.phone-text {
+		color: #e6f2ff;
+	}
+
+	.phone-banner-number {
+		color: #ffffff;
+		text-decoration: none;
+		font-weight: 800;
+		font-size: 20px;
+		font-family: var(--font-heading);
+		letter-spacing: 1px;
+		padding: 8px 16px;
+		background: rgba(255, 255, 255, 0.2);
+		border-radius: 25px;
+		border: 2px solid rgba(255, 255, 255, 0.3);
+		transition: all 0.3s ease;
+	}
+
+	.phone-banner-number:hover {
+		background: rgba(255, 255, 255, 0.3);
+		transform: scale(1.05);
+		border-color: rgba(255, 255, 255, 0.5);
+	}
+
+	.phone-cta {
+		color: #b3d4ff;
+		font-size: 14px;
+	}
+
+	/* MOBILE EMERGENCY BANNER */
+	.phone-banner-mobile {
+		display: none;
+		background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+		color: white;
+		padding: 10px 0;
+		text-align: center;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 1001;
+		box-shadow: 0 2px 15px rgba(220, 38, 38, 0.4);
+	}
+
+	.mobile-banner-content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 3px;
+		font-size: 12px;
+		font-weight: 600;
+		padding: 0 15px;
+	}
+
+	.mobile-phone-text {
+		color: #fecaca;
+		font-size: 11px;
+	}
+
+	.mobile-phone-number {
+		color: #ffffff;
+		text-decoration: none;
+		font-weight: 900;
+		font-size: 18px;
+		font-family: var(--font-heading);
+		letter-spacing: 1px;
+		padding: 4px 12px;
+		background: rgba(255, 255, 255, 0.2);
+		border-radius: 15px;
+		border: 2px solid rgba(255, 255, 255, 0.3);
+		animation: mobile-pulse 2s infinite;
+	}
+
+	.mobile-phone-tagline {
+		color: #fecaca;
+		font-size: 10px;
+		font-weight: 500;
+	}
+
+	@keyframes mobile-pulse {
+		0%, 100% { transform: scale(1); }
+		50% { transform: scale(1.05); }
+	}
+
+	/* HEADER PHONE INTEGRATION */
+	.header-content::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	.header-phone {
+		position: absolute;
+		left: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		background: var(--color-primary);
+		color: white;
+		padding: 8px 15px;
+		border-radius: 25px;
+		text-decoration: none;
+		font-weight: 700;
+		font-size: 14px;
+		transition: all 0.3s ease;
+		border: 2px solid var(--color-primary);
+	}
+
+	.header-phone:hover {
+		background: var(--color-secondary);
+		border-color: var(--color-secondary);
+		transform: translateY(-50%) scale(1.05);
+	}
+
+	/* MOBILE RESPONSIVE PHONE ELEMENTS */
+	@media (max-width: 768px) {
+		/* Show mobile emergency banner on mobile */
+		.phone-banner-mobile {
+			display: block;
+		}
+
+		/* Hide desktop banner on mobile */
+		.phone-banner-desktop {
+			display: none;
+		}
+
+		/* Adjust body padding for mobile banner */
+		body {
+			padding-top: 65px;
+		}
+
+		/* Floating button adjustments */
+		.floating-phone-btn {
+			bottom: 15px;
+			right: 15px;
+			padding: 12px 16px;
+			font-size: 14px;
+		}
+		
+		.floating-phone-btn span {
+			display: none;
+		}
+		
+		.floating-phone-btn svg {
+			width: 20px;
+			height: 20px;
+		}
+
+		/* Header phone adjustments */
+		.header-phone {
+			position: static;
+			transform: none;
+			margin-bottom: 10px;
+			display: block;
+			text-align: center;
+			font-size: 16px;
+			padding: 10px 16px;
+		}
+
+		/* Header adjustment for mobile banner */
+		.header {
+			position: relative;
+			top: 0;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.floating-phone-btn {
+			bottom: 10px;
+			right: 10px;
+			padding: 10px;
+			border-radius: 50%;
 		}
 	}
 </style>

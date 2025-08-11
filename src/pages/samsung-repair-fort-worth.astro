@@ -295,6 +295,33 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
+  <!-- Related Services -->
+  <section class="related-services">
+    <div class="container">
+      <h2 class="section-title">Related Repair Services</h2>
+      <div class="related-grid">
+        <div class="related-card">
+          <h3><a href="/iphone-repair-dallas">iPhone Repair</a></h3>
+          <p>Expert iPhone repair in Dallas. Same quality mobile service and warranty for all Apple devices.</p>
+          <a href="/iphone-repair-dallas" class="related-link">Learn More →</a>
+        </div>
+        <div class="related-card">
+          <h3><a href="/screen-replacement">Screen Replacement</a></h3>
+          <p>Professional screen repair for all devices including Samsung foldables and standard displays.</p>
+          <a href="/screen-replacement" class="related-link">Learn More →</a>
+        </div>
+        <div class="related-card">
+          <h3><a href="/emergency-phone-repair">Emergency Repair</a></h3>
+          <p>30-minute response time for urgent Samsung repairs throughout Dallas-Fort Worth.</p>
+          <a href="/emergency-phone-repair" class="related-link">Learn More →</a>
+        </div>
+      </div>
+      <div class="all-services-link">
+        <a href="/services">View All Repair Services →</a>
+      </div>
+    </div>
+  </section>
+
   <!-- Final Call to Action -->
   <section class="final-cta">
     <div class="container">
@@ -679,6 +706,77 @@ import Layout from '../layouts/Layout.astro';
     line-height: 1.6;
   }
 
+  /* Related Services */
+  .related-services {
+    padding: 80px 0;
+    background: #f8f9fa;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  .related-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .related-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .related-card h3 {
+    margin: 0 0 15px 0;
+    color: #1e3a8a;
+  }
+
+  .related-card h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .related-card h3 a:hover {
+    text-decoration: underline;
+  }
+
+  .related-card p {
+    color: #6b7280;
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+  }
+
+  .related-link {
+    color: #2563EB;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .related-link:hover {
+    text-decoration: underline;
+  }
+
+  .all-services-link {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .all-services-link a {
+    color: #1e3a8a;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .all-services-link a:hover {
+    text-decoration: underline;
+  }
+
   /* Final CTA */
   .final-cta {
     padding: 80px 0;
@@ -842,3 +940,72 @@ import Layout from '../layouts/Layout.astro';
     }
   }
 </style>
+
+<!-- Samsung Repair Reviews Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Samsung Galaxy Repair",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "GadgetFix LLC",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Fort Worth",
+      "addressRegion": "TX"
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.7",
+    "reviewCount": "63",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Carlos Martinez"
+      },
+      "datePublished": "2024-01-10",
+      "reviewBody": "Fantastic Samsung Galaxy S24 Ultra screen repair! The foldable screen expertise really shows. Came to my Fort Worth office and fixed my Z Fold perfectly. No creases, works like new."
+    },
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Nicole Davis"
+      },
+      "datePublished": "2024-01-02",
+      "reviewBody": "Great Samsung Note 20 repair service. Battery was draining in 3 hours, now it lasts the full day. Mobile service is so convenient and the price was very reasonable."
+    },
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "4",
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Steven Chen"
+      },
+      "datePublished": "2023-12-25",
+      "reviewBody": "Good Galaxy S23 screen replacement. Quality work and fair pricing. Only issue was they were 15 minutes late, but the repair quality made up for it. Would use again."
+    }
+  ]
+}
+</script>

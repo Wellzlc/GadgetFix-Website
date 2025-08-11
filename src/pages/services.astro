@@ -450,7 +450,7 @@ import Layout from '../layouts/Layout.astro';
 					</svg>
 				</div>
 				<h2>READY FOR FAST, RELIABLE DEVICE REPAIR?</h2>
-				<p>Contact Gadget Fix Today!</p>
+				<p>Contact GadgetFix LLC Today!</p>
 				<div class="cta-buttons">
 					<a href="tel:+14024166942" class="btn btn-primary btn-large">CALL NOW FOR SERVICE</a>
 					<a href="/contact" class="btn btn-secondary btn-large">REQUEST ON-SITE SERVICE</a>
@@ -467,7 +467,7 @@ import Layout from '../layouts/Layout.astro';
 	  "serviceType": "Mobile Device Repair",
 	  "provider": {
 	    "@type": "MobilePhoneStore",
-	    "name": "GadgetFix",
+	    "name": "GadgetFix LLC",
 	    "telephone": "+14024166942"
 	  },
 	  "areaServed": "Dallas-Fort Worth Metroplex",
@@ -482,6 +482,56 @@ import Layout from '../layouts/Layout.astro';
 	      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Water Damage Repair"}}
 	    ]
 	  }
+	}
+	</script>
+
+	<!-- FAQ Schema for Services -->
+	<script type="application/ld+json">
+	{
+	  "@context": "https://schema.org",
+	  "@type": "FAQPage",
+	  "mainEntity": [
+	    {
+	      "@type": "Question",
+	      "name": "What devices do you repair?",
+	      "acceptedAnswer": {
+	        "@type": "Answer",
+	        "text": "We repair all major smartphone brands including iPhone (all models), Samsung Galaxy, Google Pixel, OnePlus, LG, and more. We also repair tablets, iPads, and offer computer repair services throughout Dallas-Fort Worth."
+	      }
+	    },
+	    {
+	      "@type": "Question",
+	      "name": "How much does phone repair cost?",
+	      "acceptedAnswer": {
+	        "@type": "Answer",
+	        "text": "iPhone screen repairs start at $79, Samsung Galaxy screen repairs start at $89, and battery replacements start at $59. We provide free estimates and transparent pricing with no hidden fees. Final cost depends on device model and type of repair needed."
+	      }
+	    },
+	    {
+	      "@type": "Question",
+	      "name": "Do you offer same-day repair service?",
+	      "acceptedAnswer": {
+	        "@type": "Answer",
+	        "text": "Yes! Most repairs are completed in 30-60 minutes on-site. We offer same-day service throughout Dallas-Fort Worth with typical arrival times of 30 minutes. Emergency repairs available 7 days a week."
+	      }
+	    },
+	    {
+	      "@type": "Question",
+	      "name": "What parts do you use for repairs?",
+	      "acceptedAnswer": {
+	        "@type": "Answer",
+	        "text": "We use high-quality OEM and OEM-equivalent parts for all repairs. All parts come with our 90-day warranty. We source from certified suppliers to ensure compatibility and longevity of your device."
+	      }
+	    },
+	    {
+	      "@type": "Question",
+	      "name": "Can you repair water damaged phones?",
+	      "acceptedAnswer": {
+	        "@type": "Answer",
+	        "text": "Yes, we specialize in water damage recovery with a 70% success rate. We use professional cleaning techniques and genuine replacement parts. Time is critical - contact us immediately if your device gets wet for best recovery chances."
+	      }
+	    }
+	  ]
 	}
 	</script>
 </Layout>
