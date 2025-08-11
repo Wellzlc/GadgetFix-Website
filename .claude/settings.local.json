@@ -11,7 +11,8 @@
       "WebFetch(domain:www.ubreakifix.com)",
       "Bash(grep:*)",
       "Bash(curl:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(npm install)"
     ],
     "deny": []
   }

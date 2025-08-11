@@ -1,0 +1,47 @@
+{
+  "general": {
+    "timeout": 60000,
+    "retries": 3,
+    "delay_between_requests": 1000,
+    "user_agent": "SEO-Audit-Bot/1.0 (Ultimate SEO Audit System)",
+    "concurrent_requests": 5
+  },
+  "performance": {
+    "core_web_vitals": {
+      "lcp_threshold": 2.5,
+      "inp_threshold": 200,
+      "cls_threshold": 0.1
+    },
+    "page_speed": {
+      "mobile_threshold": 85,
+      "desktop_threshold": 90
+    }
+  },
+  "seo": {
+    "title_length": {
+      "min": 30,
+      "max": 60
+    },
+    "meta_description_length": {
+      "min": 150,
+      "max": 160
+    },
+    "h1_count": 1,
+    "content_length": {
+      "min": 300,
+      "recommended": 1000
+    }
+  },
+  "accessibility": {
+    "wcag_level": "AA",
+    "color_contrast_threshold": 4.5,
+    "touch_target_size": 48
+  },
+  "technical": {
+    "check_ssl": true,
+    "check_robots": true,
+    "check_sitemap": true,
+    "check_schema": true,
+    "check_canonical": true
+  }
+}

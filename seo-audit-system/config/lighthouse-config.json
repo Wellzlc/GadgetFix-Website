@@ -1,0 +1,54 @@
+{
+  "extends": "lighthouse:default",
+  "settings": {
+    "formFactor": "mobile",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638,
+      "cpuSlowdownMultiplier": 4
+    },
+    "screenEmulation": {
+      "mobile": true,
+      "width": 412,
+      "height": 823,
+      "deviceScaleFactor": 1.75
+    },
+    "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Mobile Safari/537.36",
+    "maxWaitForLoad": 45000,
+    "maxWaitForFcp": 15000,
+    "pauseAfterLoadMs": 1000,
+    "networkQuietThresholdMs": 1000,
+    "cpuQuietThresholdMs": 1000
+  },
+  "audits": [
+    "first-contentful-paint",
+    "largest-contentful-paint",
+    "first-meaningful-paint",
+    "speed-index",
+    "screenshot-thumbnails",
+    "final-screenshot",
+    "cumulative-layout-shift",
+    "total-blocking-time",
+    "max-potential-fid",
+    "server-response-time",
+    "interactive",
+    "user-timings",
+    "critical-request-chains",
+    "redirects",
+    "installable-manifest",
+    "apple-touch-icon",
+    "splashscreen",
+    "themed-omnibox",
+    "maskable-icon",
+    "content-width",
+    "image-aspect-ratio",
+    "image-size-responsive",
+    "preload-fonts",
+    "robots-txt",
+    "tap-targets",
+    "hreflang",
+    "plugins",
+    "canonical",
+    "structured-data"
+  ]
+}

@@ -1,0 +1,30 @@
+# Target Keywords for SEO Audit
+# Add your primary and secondary keywords here (one per line)
+# Lines starting with # are comments and will be ignored
+
+# Primary Keywords
+seo audit
+website optimization
+technical seo
+search engine optimization
+
+# Secondary Keywords  
+page speed optimization
+core web vitals
+mobile seo
+content optimization
+keyword analysis
+competitor analysis
+
+# Long-tail Keywords
+how to improve seo
+website performance audit
+seo best practices
+search visibility
+organic traffic
+
+# Brand Keywords
+# Add your brand-specific keywords here
+
+# Local SEO Keywords (if applicable)
+# Add location-based keywords here

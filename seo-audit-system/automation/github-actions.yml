@@ -1,0 +1,393 @@
+# SEO Audit System - GitHub Actions Workflow
+# Automated SEO audits on code changes and scheduled intervals
+
+name: SEO Audit CI/CD
+
+on:
+  # Trigger on pushes to main branch
+  push:
+    branches: [ main, master ]
+    paths:
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.js'
+      - '**/sitemap.xml'
+      - '**/robots.txt'
+      - '.github/workflows/seo-audit.yml'
+  
+  # Trigger on pull requests
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.js'
+      - '**/sitemap.xml'
+      - '**/robots.txt'
+  
+  # Scheduled audits
+  schedule:
+    # Daily at 2 AM UTC
+    - cron: '0 2 * * *'
+    # Weekly comprehensive audit on Sundays at 3 AM UTC
+    - cron: '0 3 * * 0'
+  
+  # Manual trigger
+  workflow_dispatch:
+    inputs:
+      audit_type:
+        description: 'Type of audit to run'
+        required: true
+        default: 'comprehensive'
+        type: choice
+        options:
+          - quick
+          - comprehensive
+          - technical
+          - performance
+          - content
+          - competitive
+      website_url:
+        description: 'Website URL to audit'
+        required: true
+        default: 'https://your-website.com'
+        type: string
+      competitors:
+        description: 'Competitor URLs (comma-separated)'
+        required: false
+        type: string
+
+env:
+  WEBSITE_URL: ${{ github.event.inputs.website_url || 'https://your-website.com' }}
+  AUDIT_TYPE: ${{ github.event.inputs.audit_type || 'comprehensive' }}
+  COMPETITORS: ${{ github.event.inputs.competitors || '' }}
+
+jobs:
+  seo-audit:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        cache: 'pip'
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y chromium-browser fonts-liberation
+        
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests beautifulsoup4 pandas numpy matplotlib seaborn
+        pip install lxml selenium webdriver-manager advertools textstat
+        pip install nltk scikit-learn plotly dash jinja2 weasyprint
+    
+    - name: Install Node.js dependencies
+      run: |
+        npm install -g lighthouse @lhci/cli puppeteer
+        
+    - name: Download NLTK data
+      run: |
+        python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords')"
+    
+    - name: Create required directories
+      run: |
+        mkdir -p reports data logs config
+        
+    - name: Setup configuration files
+      run: |
+        # Create basic audit settings
+        cat > config/audit-settings.json << 'EOF'
+        {
+          "general": {
+            "timeout": 60000,
+            "retries": 3,
+            "user_agent": "SEO-Audit-Bot/1.0 (GitHub Actions)"
+          },
+          "performance": {
+            "core_web_vitals": {
+              "lcp_threshold": 2.5,
+              "inp_threshold": 200,
+              "cls_threshold": 0.1
+            }
+          },
+          "seo": {
+            "title_length": {"min": 30, "max": 60},
+            "meta_description_length": {"min": 150, "max": 160}
+          }
+        }
+        EOF
+        
+        # Create keywords file
+        cat > config/keywords.txt << 'EOF'
+        # Add your target keywords here
+        seo audit
+        website optimization
+        technical seo
+        page speed
+        core web vitals
+        EOF
+        
+        # Create API config template
+        cat > config/api-config.json << 'EOF'
+        {
+          "google_pagespeed": {
+            "api_key": "${{ secrets.GOOGLE_PAGESPEED_API_KEY || 'not_configured' }}"
+          }
+        }
+        EOF
+    
+    - name: Determine audit type based on trigger
+      id: audit-config
+      run: |
+        if [ "${{ github.event_name }}" = "schedule" ]; then
+          if [ "${{ github.event.schedule }}" = "0 2 * * *" ]; then
+            echo "audit_type=quick" >> $GITHUB_OUTPUT
+            echo "description=Daily quick audit" >> $GITHUB_OUTPUT
+          else
+            echo "audit_type=comprehensive" >> $GITHUB_OUTPUT
+            echo "description=Weekly comprehensive audit" >> $GITHUB_OUTPUT
+          fi
+        elif [ "${{ github.event_name }}" = "push" ] || [ "${{ github.event_name }}" = "pull_request" ]; then
+          echo "audit_type=quick" >> $GITHUB_OUTPUT
+          echo "description=CI/CD triggered audit" >> $GITHUB_OUTPUT
+        else
+          echo "audit_type=${{ env.AUDIT_TYPE }}" >> $GITHUB_OUTPUT
+          echo "description=Manual audit" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Run SEO Audit
+      id: run-audit
+      run: |
+        echo "Running ${{ steps.audit-config.outputs.description }}..."
+        
+        # Set website URL (use from input or default)
+        if [ -z "$WEBSITE_URL" ] || [ "$WEBSITE_URL" = "https://your-website.com" ]; then
+          # Try to determine from repository
+          if [ -f "package.json" ]; then
+            WEBSITE_URL=$(cat package.json | grep -o '"homepage"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 || echo "")
+          fi
+          
+          # Fallback to GitHub Pages URL
+          if [ -z "$WEBSITE_URL" ]; then
+            REPO_NAME=$(echo "$GITHUB_REPOSITORY" | cut -d'/' -f2)
+            WEBSITE_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${REPO_NAME}"
+          fi
+        fi
+        
+        echo "Website URL: $WEBSITE_URL"
+        echo "website_url=$WEBSITE_URL" >> $GITHUB_OUTPUT
+        
+        # Run audit based on type
+        case "${{ steps.audit-config.outputs.audit_type }}" in
+          "quick")
+            echo "Running technical and performance audits..."
+            python scripts/technical-audit.py "$WEBSITE_URL" || echo "Technical audit failed"
+            python scripts/performance-audit.py "$WEBSITE_URL" || echo "Performance audit failed"
+            ;;
+          "comprehensive")
+            echo "Running all audit modules..."
+            python scripts/technical-audit.py "$WEBSITE_URL" || echo "Technical audit failed"
+            python scripts/performance-audit.py "$WEBSITE_URL" || echo "Performance audit failed"
+            python scripts/content-audit.py "$WEBSITE_URL" || echo "Content audit failed"
+            if [ -n "${{ env.COMPETITORS }}" ]; then
+              python scripts/competitive-audit.py "$WEBSITE_URL" "${{ env.COMPETITORS }}" || echo "Competitive audit failed"
+            fi
+            ;;
+          "technical")
+            python scripts/technical-audit.py "$WEBSITE_URL"
+            ;;
+          "performance")
+            python scripts/performance-audit.py "$WEBSITE_URL"
+            ;;
+          "content")
+            python scripts/content-audit.py "$WEBSITE_URL"
+            ;;
+          "competitive")
+            if [ -n "${{ env.COMPETITORS }}" ]; then
+              python scripts/competitive-audit.py "$WEBSITE_URL" "${{ env.COMPETITORS }}"
+            else
+              echo "Competitors not specified for competitive audit"
+              exit 1
+            fi
+            ;;
+        esac
+    
+    - name: Generate Report
+      run: |
+        echo "Generating SEO audit report..."
+        python scripts/generate-report.py --latest || echo "Report generation failed"
+        
+        # List generated files
+        echo "Generated files:"
+        ls -la reports/
+    
+    - name: Extract Key Metrics
+      id: metrics
+      run: |
+        # Extract key metrics from the latest reports for GitHub summary
+        if [ -f reports/executive_summary_*.txt ]; then
+          SUMMARY_FILE=$(ls -t reports/executive_summary_*.txt | head -1)
+          
+          # Extract overall score
+          OVERALL_SCORE=$(grep -o 'Overall SEO Health Score: [0-9.]*' "$SUMMARY_FILE" | grep -o '[0-9.]*' || echo "N/A")
+          echo "overall_score=$OVERALL_SCORE" >> $GITHUB_OUTPUT
+          
+          # Extract critical issues count
+          CRITICAL_ISSUES=$(grep -A 10 "CRITICAL ISSUES" "$SUMMARY_FILE" | grep -c "^[0-9]" || echo "0")
+          echo "critical_issues=$CRITICAL_ISSUES" >> $GITHUB_OUTPUT
+          
+          # Extract quick wins count
+          QUICK_WINS=$(grep -A 10 "QUICK WINS" "$SUMMARY_FILE" | grep -c "^[0-9]" || echo "0")
+          echo "quick_wins=$QUICK_WINS" >> $GITHUB_OUTPUT
+          
+          echo "summary_file=$SUMMARY_FILE" >> $GITHUB_OUTPUT
+        else
+          echo "overall_score=N/A" >> $GITHUB_OUTPUT
+          echo "critical_issues=0" >> $GITHUB_OUTPUT
+          echo "quick_wins=0" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Create GitHub Summary
+      run: |
+        echo "# SEO Audit Results 🔍" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Website:** ${{ steps.run-audit.outputs.website_url }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Audit Type:** ${{ steps.audit-config.outputs.audit_type }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Triggered by:** ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Timestamp:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        echo "## 📊 Key Metrics" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+        echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+        echo "| Overall SEO Score | ${{ steps.metrics.outputs.overall_score }}/100 |" >> $GITHUB_STEP_SUMMARY
+        echo "| Critical Issues | ${{ steps.metrics.outputs.critical_issues }} |" >> $GITHUB_STEP_SUMMARY
+        echo "| Quick Wins | ${{ steps.metrics.outputs.quick_wins }} |" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        # Add score badge
+        if [ "${{ steps.metrics.outputs.overall_score }}" != "N/A" ]; then
+          SCORE="${{ steps.metrics.outputs.overall_score }}"
+          if [ "$(echo "$SCORE >= 80" | bc -l)" = "1" ]; then
+            echo "🟢 **Excellent SEO Health** (Score ≥ 80)" >> $GITHUB_STEP_SUMMARY
+          elif [ "$(echo "$SCORE >= 60" | bc -l)" = "1" ]; then
+            echo "🟡 **Good SEO Health** (Score 60-79)" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "🔴 **Needs Improvement** (Score < 60)" >> $GITHUB_STEP_SUMMARY
+          fi
+        fi
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        # Add executive summary if available
+        if [ -f "${{ steps.metrics.outputs.summary_file }}" ]; then
+          echo "## 📋 Executive Summary" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          head -30 "${{ steps.metrics.outputs.summary_file }}" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+        fi
+    
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: seo-audit-results-${{ github.run_id }}
+        path: |
+          reports/
+          logs/
+        retention-days: 30
+    
+    - name: Comment on PR
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          
+          let comment = `## 🔍 SEO Audit Results\n\n`;
+          comment += `**Overall Score:** ${{ steps.metrics.outputs.overall_score }}/100\n`;
+          comment += `**Critical Issues:** ${{ steps.metrics.outputs.critical_issues }}\n`;
+          comment += `**Quick Wins:** ${{ steps.metrics.outputs.quick_wins }}\n\n`;
+          
+          const score = parseFloat('${{ steps.metrics.outputs.overall_score }}');
+          if (!isNaN(score)) {
+            if (score >= 80) {
+              comment += `🟢 Excellent SEO health! Your changes maintain high SEO standards.\n`;
+            } else if (score >= 60) {
+              comment += `🟡 Good SEO health with room for improvement.\n`;
+            } else {
+              comment += `🔴 SEO issues detected. Please review the audit results.\n`;
+            }
+          }
+          
+          comment += `\n📊 [Download detailed report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})\n`;
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: comment
+          });
+    
+    - name: Slack Notification
+      if: always() && github.event_name == 'schedule'
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        channel: '#seo-alerts'
+        webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+        fields: repo,message,commit,author,action,eventName,ref,workflow
+        custom_payload: |
+          {
+            "text": "SEO Audit Completed",
+            "blocks": [
+              {
+                "type": "header",
+                "text": {
+                  "type": "plain_text",
+                  "text": "🔍 SEO Audit Results"
+                }
+              },
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "*Website:* ${{ steps.run-audit.outputs.website_url }}\n*Overall Score:* ${{ steps.metrics.outputs.overall_score }}/100\n*Critical Issues:* ${{ steps.metrics.outputs.critical_issues }}\n*Status:* ${{ job.status }}"
+                }
+              }
+            ]
+          }
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+      if: env.SLACK_WEBHOOK_URL != ''
+    
+    - name: Performance Budget Check
+      if: github.event_name == 'pull_request'
+      run: |
+        # Check if performance score meets budget (example threshold: 70)
+        if [ -f reports/performance_audit_*.json ]; then
+          PERF_FILE=$(ls -t reports/performance_audit_*.json | head -1)
+          PERF_SCORE=$(cat "$PERF_FILE" | grep -o '"overall_score":[[:space:]]*[0-9.]*' | grep -o '[0-9.]*' || echo "0")
+          
+          if [ "$(echo "$PERF_SCORE < 70" | bc -l)" = "1" ]; then
+            echo "❌ Performance budget not met: $PERF_SCORE/100 (minimum: 70)"
+            echo "performance_budget_met=false" >> $GITHUB_ENV
+            # Don't fail the build, just warn
+          else
+            echo "✅ Performance budget met: $PERF_SCORE/100"
+            echo "performance_budget_met=true" >> $GITHUB_ENV
+          fi
+        fi

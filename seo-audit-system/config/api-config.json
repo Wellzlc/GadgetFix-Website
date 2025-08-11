@@ -1,0 +1,27 @@
+{
+  "google_pagespeed": {
+    "api_key": "YOUR_GOOGLE_PAGESPEED_API_KEY",
+    "endpoint": "https://www.googleapis.com/pagespeedonline/v5/runPagespeed",
+    "note": "Get API key from: https://developers.google.com/speed/docs/insights/v5/get-started"
+  },
+  "google_search_console": {
+    "client_id": "YOUR_GSC_CLIENT_ID",
+    "client_secret": "YOUR_GSC_CLIENT_SECRET",
+    "note": "Setup OAuth2 credentials in Google Cloud Console"
+  },
+  "screaming_frog": {
+    "api_key": "YOUR_SCREAMING_FROG_API_KEY",
+    "endpoint": "https://api.screamingfrog.co.uk/seo-spider/",
+    "note": "Get API key from Screaming Frog SEO Spider"
+  },
+  "semrush": {
+    "api_key": "YOUR_SEMRUSH_API_KEY",
+    "endpoint": "https://api.semrush.com/",
+    "note": "Get API key from SEMrush dashboard"
+  },
+  "ahrefs": {
+    "api_key": "YOUR_AHREFS_API_KEY",
+    "endpoint": "https://apiv2.ahrefs.com/",
+    "note": "Get API key from Ahrefs dashboard"
+  }
+}
