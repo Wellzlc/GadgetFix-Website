@@ -13,35 +13,10 @@ cryptography>=41.0.0
 # WHOIS domain information
 python-whois>=0.8.0
 
-# Command line interface
-argparse
-
-# Data handling
-json
-sqlite3
-
-# System operations
-subprocess
-pathlib
-os
-sys
-time
-datetime
-threading
-queue
-concurrent.futures
-
-# Logging and debugging
-logging
-traceback
-
-# Email alerts
-smtplib
-email
-
-# Type hints (Python 3.5+)
-typing
-dataclasses
+# Note: The following are Python standard library modules and don't need to be installed:
+# argparse, json, sqlite3, subprocess, pathlib, os, sys, time, datetime,
+# threading, queue, concurrent.futures, logging, traceback, smtplib, email,
+# typing, dataclasses
 
 # Optional: Enhanced functionality
 # certifi>=2023.5.7  # For SSL certificate validation
