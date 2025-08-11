@@ -824,20 +824,74 @@ import Layout from '../layouts/Layout.astro';
 }
 </script>
 
-<!-- iPhone Repair Reviews Schema -->
+<!-- Local Business Schema with Reviews -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Service",
-  "serviceType": "iPhone Repair",
-  "provider": {
-    "@type": "LocalBusiness",
-    "name": "GadgetFix LLC",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Dallas",
-      "addressRegion": "TX"
+  "@type": "LocalBusiness",
+  "@id": "https://gadgetfixllc.com/#iphonerepair",
+  "name": "GadgetFix LLC - iPhone Repair Dallas",
+  "alternateName": "GadgetFix iPhone Repair Service",
+  "description": "Professional iPhone repair service in Dallas, TX. Screen replacement, battery replacement, and all iPhone repairs with 90-day warranty. Mobile service available.",
+  "url": "https://gadgetfixllc.com/iphone-repair-dallas",
+  "telephone": "+1-402-416-6942",
+  "priceRange": "$$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Mobile Service",
+    "addressLocality": "Dallas",
+    "addressRegion": "TX",
+    "postalCode": "75201",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 32.7767,
+    "longitude": -96.7970
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "08:00",
+      "closes": "18:00"
     }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "iPhone Repair Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "iPhone Screen Repair",
+          "description": "Professional iPhone screen replacement for all models from iPhone 6 to iPhone 15 Pro Max"
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "price": "79.00",
+          "minPrice": "79.00",
+          "maxPrice": "199.00"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "iPhone Battery Replacement",
+          "description": "iPhone battery replacement service with genuine capacity cells"
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "price": "59.00",
+          "minPrice": "59.00",
+          "maxPrice": "99.00"
+        }
+      }
+    ]
   },
   "aggregateRating": {
     "@type": "AggregateRating",
@@ -849,45 +903,108 @@ import Layout from '../layouts/Layout.astro';
   "review": [
     {
       "@type": "Review",
+      "itemReviewed": {
+        "@type": "LocalBusiness",
+        "name": "GadgetFix LLC - iPhone Repair Dallas"
+      },
       "reviewRating": {
         "@type": "Rating",
         "ratingValue": "5",
-        "bestRating": "5"
+        "bestRating": "5",
+        "worstRating": "1"
       },
       "author": {
         "@type": "Person",
         "name": "Amanda Lopez"
       },
       "datePublished": "2024-01-12",
-      "reviewBody": "Best iPhone repair in Dallas! My iPhone 15 Pro screen was completely shattered. They came to my work and fixed it in 25 minutes. Looks brand new and Face ID works perfectly."
+      "reviewBody": "Best iPhone repair in Dallas! My iPhone 15 Pro screen was completely shattered. They came to my work and fixed it in 25 minutes. Looks brand new and Face ID works perfectly.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "GadgetFix LLC"
+      }
     },
     {
       "@type": "Review",
+      "itemReviewed": {
+        "@type": "LocalBusiness",
+        "name": "GadgetFix LLC - iPhone Repair Dallas"
+      },
       "reviewRating": {
         "@type": "Rating",
         "ratingValue": "5",
-        "bestRating": "5"
+        "bestRating": "5",
+        "worstRating": "1"
       },
       "author": {
         "@type": "Person",
         "name": "James Wilson"
       },
       "datePublished": "2024-01-05",
-      "reviewBody": "Excellent iPhone 13 battery replacement service. My phone was dying after 4 hours, now it lasts all day again. Fair pricing and 90-day warranty is great peace of mind."
+      "reviewBody": "Excellent iPhone 13 battery replacement service. My phone was dying after 4 hours, now it lasts all day again. Fair pricing and 90-day warranty is great peace of mind.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "GadgetFix LLC"
+      }
     },
     {
       "@type": "Review",
+      "itemReviewed": {
+        "@type": "LocalBusiness",
+        "name": "GadgetFix LLC - iPhone Repair Dallas"
+      },
       "reviewRating": {
         "@type": "Rating",
         "ratingValue": "5",
-        "bestRating": "5"
+        "bestRating": "5",
+        "worstRating": "1"
       },
       "author": {
         "@type": "Person",
         "name": "Rachel Kim"
       },
       "datePublished": "2023-12-29",
-      "reviewBody": "Amazing iPhone 14 Plus screen repair! Cracked it badly but they made it look new. Mobile service is so convenient, came to my house in Plano. Highly recommend for iPhone repairs."
+      "reviewBody": "Amazing iPhone 14 Plus screen repair! Cracked it badly but they made it look new. Mobile service is so convenient, came to my house in Plano. Highly recommend for iPhone repairs.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "GadgetFix LLC"
+      }
+    }
+  ],
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Dallas"
+    },
+    {
+      "@type": "City",
+      "name": "Plano"
+    },
+    {
+      "@type": "City",
+      "name": "Richardson"
+    },
+    {
+      "@type": "City",
+      "name": "Irving"
+    },
+    {
+      "@type": "City",
+      "name": "Addison"
+    }
+  ],
+  "makesOffer": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Mobile iPhone Repair Service",
+        "serviceType": "On-site repair",
+        "provider": {
+          "@type": "LocalBusiness",
+          "name": "GadgetFix LLC"
+        }
+      }
     }
   ]
 }

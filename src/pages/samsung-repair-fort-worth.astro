@@ -941,20 +941,74 @@ import Layout from '../layouts/Layout.astro';
   }
 </style>
 
-<!-- Samsung Repair Reviews Schema -->
+<!-- Local Business Schema with Reviews for Samsung Repair -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Service",
-  "serviceType": "Samsung Galaxy Repair",
-  "provider": {
-    "@type": "LocalBusiness",
-    "name": "GadgetFix LLC",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Fort Worth",
-      "addressRegion": "TX"
+  "@type": "LocalBusiness",
+  "@id": "https://gadgetfixllc.com/#samsungrepair",
+  "name": "GadgetFix LLC - Samsung Repair Fort Worth",
+  "alternateName": "GadgetFix Samsung Galaxy Repair Service",
+  "description": "Professional Samsung Galaxy repair service in Fort Worth, TX. Screen replacement, battery replacement, and all Samsung repairs with 90-day warranty. Mobile service available.",
+  "url": "https://gadgetfixllc.com/samsung-repair-fort-worth",
+  "telephone": "+1-402-416-6942",
+  "priceRange": "$$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Mobile Service",
+    "addressLocality": "Fort Worth",
+    "addressRegion": "TX",
+    "postalCode": "76102",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 32.7555,
+    "longitude": -97.3308
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "08:00",
+      "closes": "18:00"
     }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Samsung Galaxy Repair Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Samsung Screen Repair",
+          "description": "Professional Samsung Galaxy screen replacement for all models including S24, S23, Z Fold, Z Flip series"
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "price": "99.00",
+          "minPrice": "99.00",
+          "maxPrice": "299.00"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Samsung Battery Replacement",
+          "description": "Samsung Galaxy battery replacement service with genuine capacity cells"
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "price": "69.00",
+          "minPrice": "69.00",
+          "maxPrice": "119.00"
+        }
+      }
+    ]
   },
   "aggregateRating": {
     "@type": "AggregateRating",
@@ -966,45 +1020,108 @@ import Layout from '../layouts/Layout.astro';
   "review": [
     {
       "@type": "Review",
+      "itemReviewed": {
+        "@type": "LocalBusiness",
+        "name": "GadgetFix LLC - Samsung Repair Fort Worth"
+      },
       "reviewRating": {
         "@type": "Rating",
         "ratingValue": "5",
-        "bestRating": "5"
+        "bestRating": "5",
+        "worstRating": "1"
       },
       "author": {
         "@type": "Person",
         "name": "Carlos Martinez"
       },
       "datePublished": "2024-01-10",
-      "reviewBody": "Fantastic Samsung Galaxy S24 Ultra screen repair! The foldable screen expertise really shows. Came to my Fort Worth office and fixed my Z Fold perfectly. No creases, works like new."
+      "reviewBody": "Fantastic Samsung Galaxy S24 Ultra screen repair! The foldable screen expertise really shows. Came to my Fort Worth office and fixed my Z Fold perfectly. No creases, works like new.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "GadgetFix LLC"
+      }
     },
     {
       "@type": "Review",
+      "itemReviewed": {
+        "@type": "LocalBusiness",
+        "name": "GadgetFix LLC - Samsung Repair Fort Worth"
+      },
       "reviewRating": {
         "@type": "Rating",
         "ratingValue": "5",
-        "bestRating": "5"
+        "bestRating": "5",
+        "worstRating": "1"
       },
       "author": {
         "@type": "Person",
         "name": "Nicole Davis"
       },
       "datePublished": "2024-01-02",
-      "reviewBody": "Great Samsung Note 20 repair service. Battery was draining in 3 hours, now it lasts the full day. Mobile service is so convenient and the price was very reasonable."
+      "reviewBody": "Great Samsung Note 20 repair service. Battery was draining in 3 hours, now it lasts the full day. Mobile service is so convenient and the price was very reasonable.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "GadgetFix LLC"
+      }
     },
     {
       "@type": "Review",
+      "itemReviewed": {
+        "@type": "LocalBusiness",
+        "name": "GadgetFix LLC - Samsung Repair Fort Worth"
+      },
       "reviewRating": {
         "@type": "Rating",
         "ratingValue": "4",
-        "bestRating": "5"
+        "bestRating": "5",
+        "worstRating": "1"
       },
       "author": {
         "@type": "Person",
         "name": "Steven Chen"
       },
       "datePublished": "2023-12-25",
-      "reviewBody": "Good Galaxy S23 screen replacement. Quality work and fair pricing. Only issue was they were 15 minutes late, but the repair quality made up for it. Would use again."
+      "reviewBody": "Good Galaxy S23 screen replacement. Quality work and fair pricing. Only issue was they were 15 minutes late, but the repair quality made up for it. Would use again.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "GadgetFix LLC"
+      }
+    }
+  ],
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Fort Worth"
+    },
+    {
+      "@type": "City",
+      "name": "Arlington"
+    },
+    {
+      "@type": "City",
+      "name": "Grand Prairie"
+    },
+    {
+      "@type": "City",
+      "name": "Mansfield"
+    },
+    {
+      "@type": "City",
+      "name": "Euless"
+    }
+  ],
+  "makesOffer": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Mobile Samsung Repair Service",
+        "serviceType": "On-site repair",
+        "provider": {
+          "@type": "LocalBusiness",
+          "name": "GadgetFix LLC"
+        }
+      }
     }
   ]
 }

@@ -346,7 +346,6 @@ const {
 		<header class="header">
 			<div class="container">
 				<div class="header-content">
-					<a href="tel:4024166942" class="header-phone">(402) 416-6942</a>
 					<div class="logo">
 						<a href="/">
 							<span class="logo-text">GadgetFix</span>
@@ -1230,36 +1229,6 @@ const {
 		50% { transform: scale(1.05); }
 	}
 
-	/* HEADER PHONE INTEGRATION */
-	.header-content::before {
-		content: '';
-		position: absolute;
-		left: 0;
-		top: 50%;
-		transform: translateY(-50%);
-	}
-
-	.header-phone {
-		position: absolute;
-		left: 0;
-		top: 50%;
-		transform: translateY(-50%);
-		background: var(--color-primary);
-		color: white;
-		padding: 8px 15px;
-		border-radius: 25px;
-		text-decoration: none;
-		font-weight: 700;
-		font-size: 14px;
-		transition: all 0.3s ease;
-		border: 2px solid var(--color-primary);
-	}
-
-	.header-phone:hover {
-		background: var(--color-secondary);
-		border-color: var(--color-secondary);
-		transform: translateY(-50%) scale(1.05);
-	}
 
 	/* MOBILE RESPONSIVE PHONE ELEMENTS */
 	@media (max-width: 768px) {
@@ -1295,16 +1264,6 @@ const {
 			height: 20px;
 		}
 
-		/* Header phone adjustments */
-		.header-phone {
-			position: static;
-			transform: none;
-			margin-bottom: 10px;
-			display: block;
-			text-align: center;
-			font-size: 16px;
-			padding: 10px 16px;
-		}
 
 		/* Header adjustment for mobile banner */
 		.header {

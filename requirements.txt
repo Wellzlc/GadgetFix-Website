@@ -1,0 +1,49 @@
+# Website Accessibility Diagnostic and Recovery Tools
+# Python package requirements
+
+# DNS and networking
+dnspython>=2.3.0
+requests>=2.31.0
+urllib3>=1.26.0
+
+# SSL/TLS certificate handling
+pyOpenSSL>=23.0.0
+cryptography>=41.0.0
+
+# WHOIS domain information
+python-whois>=0.8.0
+
+# Command line interface
+argparse
+
+# Data handling
+json
+sqlite3
+
+# System operations
+subprocess
+pathlib
+os
+sys
+time
+datetime
+threading
+queue
+concurrent.futures
+
+# Logging and debugging
+logging
+traceback
+
+# Email alerts
+smtplib
+email
+
+# Type hints (Python 3.5+)
+typing
+dataclasses
+
+# Optional: Enhanced functionality
+# certifi>=2023.5.7  # For SSL certificate validation
+# idna>=3.4         # For internationalized domain names
+# chardet>=5.1.0    # For character encoding detection

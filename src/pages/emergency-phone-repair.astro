@@ -189,6 +189,131 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </div>
   </section>
+<!-- Local Business Schema for Emergency Phone Repair Service -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://gadgetfixllc.com/#emergencyrepair",
+  "name": "GadgetFix LLC - Emergency Phone Repair",
+  "alternateName": "GadgetFix 24/7 Emergency Repair Service",
+  "description": "Emergency phone repair service in Dallas-Fort Worth. 30-minute response time, same-day fixes for iPhone, Samsung, and all devices. Available 7 days a week.",
+  "url": "https://gadgetfixllc.com/emergency-phone-repair",
+  "telephone": "+1-402-416-6942",
+  "priceRange": "$$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Mobile Service",
+    "addressLocality": "Dallas",
+    "addressRegion": "TX",
+    "postalCode": "75201",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 32.7767,
+    "longitude": -96.7970
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "08:00",
+      "closes": "18:00"
+    }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Emergency Repair Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Emergency Screen Repair",
+          "description": "Urgent screen replacement with 30-minute response time"
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "price": "99.00",
+          "minPrice": "99.00",
+          "maxPrice": "249.00"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Water Damage Recovery",
+          "description": "Emergency water damage repair and data recovery"
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "price": "149.00",
+          "minPrice": "149.00",
+          "maxPrice": "299.00"
+        }
+      }
+    ]
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "98",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "itemReviewed": {
+        "@type": "LocalBusiness",
+        "name": "GadgetFix LLC - Emergency Phone Repair"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Emergency Customer"
+      },
+      "datePublished": "2024-01-18",
+      "reviewBody": "Lifesaver! My phone broke right before an important meeting. They arrived in 25 minutes and fixed it on the spot. Incredible emergency service!",
+      "publisher": {
+        "@type": "Organization",
+        "name": "GadgetFix LLC"
+      }
+    }
+  ],
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Dallas"
+    },
+    {
+      "@type": "City",
+      "name": "Fort Worth"
+    },
+    {
+      "@type": "City",
+      "name": "Plano"
+    },
+    {
+      "@type": "City",
+      "name": "Irving"
+    },
+    {
+      "@type": "City",
+      "name": "Arlington"
+    }
+  ]
+}
+</script>
 </Layout>
 
 <style>

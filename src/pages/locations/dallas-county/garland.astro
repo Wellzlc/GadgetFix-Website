@@ -119,6 +119,114 @@ const landmarks = "Firewheel Town Center, Hawaiian Falls, Garland Landmark Museu
       </div>
     </section>
   </main>
+
+<!-- Local Business Schema for Garland -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://gadgetfixllc.com/#garland",
+  "name": "GadgetFix LLC - Garland",
+  "alternateName": "GadgetFix Mobile Phone Repair Garland",
+  "description": "Professional mobile phone repair service in Garland, TX. We come to you! iPhone, Samsung, and all device repairs with 90-day warranty.",
+  "url": "https://gadgetfixllc.com/locations/dallas-county/garland",
+  "telephone": "+1-402-416-6942",
+  "priceRange": "$",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Garland",
+    "addressRegion": "TX",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 32.7767,
+    "longitude": -96.797
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "08:00",
+      "closes": "18:00"
+    }
+  ],
+  "areaServed": {
+    "@type": "City",
+    "name": "Garland",
+    "containedInPlace": {
+      "@type": "AdministrativeArea",
+      "name": "Dallas County",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "Texas"
+      }
+    }
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Mobile Phone Repair Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "iPhone Screen Repair",
+          "description": "Professional iPhone screen replacement in Garland"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Samsung Galaxy Repair",
+          "description": "Samsung phone repair service in Garland"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Battery Replacement",
+          "description": "Phone battery replacement service in Garland"
+        }
+      }
+    ]
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "127",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "itemReviewed": {
+        "@type": "LocalBusiness",
+        "name": "GadgetFix LLC - Garland"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Local Customer"
+      },
+      "datePublished": "2024-01-15",
+      "reviewBody": "Excellent mobile phone repair service in Garland. They came to my location and fixed my phone quickly. Highly recommend!",
+      "publisher": {
+        "@type": "Organization",
+        "name": "GadgetFix LLC"
+      }
+    }
+  ]
+}
+</script>
 </Layout>
 
 <style>
