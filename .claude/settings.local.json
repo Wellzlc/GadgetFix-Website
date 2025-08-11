@@ -9,7 +9,9 @@
       "WebFetch(domain:cellphonerepairtx.com)",
       "WebFetch(domain:www.cellairis.com)",
       "WebFetch(domain:www.ubreakifix.com)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(curl:*)",
+      "Bash(python:*)"
     ],
     "deny": []
   }
