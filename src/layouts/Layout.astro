@@ -15,8 +15,8 @@ export interface Props {
 }
 
 const { 
-	title = "Phone Repair Dallas Fort Worth TX | iPhone Samsung Screen Fix | GadgetFix LLC", 
-	description = "Same-day phone repair in Dallas Fort Worth. iPhone screen repair from $79. Samsung, iPad & computer fix. ⚡ 30-min repairs ✓ 90-day warranty 📞 Walk-ins welcome!",
+	title = "Same-Day Phone Repair Dallas Fort Worth | We Come to You | GadgetFix", 
+	description = "Get same-day phone repair at your location in Dallas Fort Worth. iPhone, Samsung & iPad fix with 90-day warranty. Call (402) 416-6942 now for mobile service!",
 	keywords = "phone repair dallas, iphone repair fort worth, samsung repair dfw, screen replacement near me, GadgetFix dallas, emergency phone repair, same day repair dallas fort worth",
 	breadcrumbs = []
 } = Astro.props;
@@ -79,9 +79,6 @@ const {
 				html { font-size: 16px; }
 			}
 		</style>
-		<!-- Cloudflare Turnstile -->
-		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-		
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<meta name="keywords" content={keywords} />
@@ -126,38 +123,48 @@ const {
 		<meta name="google-site-verification" content="VWfgCzwbjtKtlwg5w9leLSFCzLKsQOacl5pGH62EbFA" />
 		<!-- Google Search Console verification code successfully configured -->
 		
-		<!-- Optimized Google Analytics -->
-		<link rel="preconnect" href="https://www.google-analytics.com">
-		<link rel="dns-prefetch" href="https://www.google-analytics.com">
+		<!-- Optimized Google Analytics - Delay loading for better performance -->
 		<script>
+		  // Initialize dataLayer but delay gtag loading
 		  window.dataLayer = window.dataLayer || [];
 		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
-		  gtag('config', 'G-ZMZTT343DN', {
-		    page_title: document.title,
-		    page_location: window.location.href
-		  });
 		  
-		  // Load Google Analytics script after page load
-		  window.addEventListener('load', function() {
+		  // Load analytics after user interaction or 3 seconds
+		  let analyticsLoaded = false;
+		  function loadAnalytics() {
+		    if (analyticsLoaded) return;
+		    analyticsLoaded = true;
+		    
+		    gtag('js', new Date());
+		    gtag('config', 'G-ZMZTT343DN', {
+		      page_title: document.title,
+		      page_location: window.location.href
+		    });
+		    
 		    var gtagScript = document.createElement('script');
 		    gtagScript.async = true;
 		    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-ZMZTT343DN';
 		    document.head.appendChild(gtagScript);
+		  }
+		  
+		  // Load on user interaction
+		  ['scroll', 'click', 'touchstart'].forEach(event => {
+		    window.addEventListener(event, loadAnalytics, {once: true, passive: true});
 		  });
+		  
+		  // Or load after 3 seconds as fallback
+		  setTimeout(loadAnalytics, 3000);
 		</script>
 		
-		<!-- Google Ads (AdWords) Conversion Tracking -->
+		<!-- Google Ads (AdWords) Conversion Tracking - Delayed -->
 		<script>
-		  // Configure Google Ads tracking
-		  window.addEventListener('load', function() {
-		    // Load Google Ads script
+		  // Delay Google Ads loading for better performance
+		  function loadGoogleAds() {
 		    var googleAdsScript = document.createElement('script');
 		    googleAdsScript.async = true;
 		    googleAdsScript.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17217204638';
 		    document.head.appendChild(googleAdsScript);
 		    
-		    // Configure tracking after script loads
 		    googleAdsScript.onload = function() {
 		      if (typeof gtag !== 'undefined') {
 		        try {
@@ -167,7 +174,10 @@ const {
 		        }
 		      }
 		    };
-		  });
+		  }
+		  
+		  // Load after analytics (which loads after interaction)
+		  setTimeout(loadGoogleAds, 4000);
 		</script>
 		
 		<!-- Optimized Google Fonts Loading -->
@@ -744,6 +754,11 @@ const {
 			}
 			window.addEventListener('scroll', requestTick, { passive: true });
 		</script>
+		
+		<!-- Load Turnstile only on contact pages -->
+		{(Astro.url.pathname.includes('/contact') || Astro.url.pathname.includes('/computer')) && (
+			<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+		)}
 		
 	</body>
 </html>

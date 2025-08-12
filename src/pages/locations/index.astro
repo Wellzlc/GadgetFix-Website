@@ -79,6 +79,45 @@ import Layout from '../../layouts/Layout.astro';
 						</svg>
 					</a>
 				</div>
+
+				<div class="location-card">
+					<div class="card-content">
+						<h3>Rockwall County</h3>
+						<p>Serving Rockwall, Heath, Fate, Royse City, McLendon-Chisholm and surrounding areas</p>
+						<div class="city-count">5+ Cities</div>
+					</div>
+					<a href="/locations/rockwall-county" class="card-link">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<polyline points="9,18 15,12 9,6"></polyline>
+						</svg>
+					</a>
+				</div>
+
+				<div class="location-card">
+					<div class="card-content">
+						<h3>Kaufman County</h3>
+						<p>Serving Terrell, Forney and surrounding communities in Kaufman County</p>
+						<div class="city-count">2+ Cities</div>
+					</div>
+					<a href="/locations/kaufman-county" class="card-link">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<polyline points="9,18 15,12 9,6"></polyline>
+						</svg>
+					</a>
+				</div>
+
+				<div class="location-card">
+					<div class="card-content">
+						<h3>Ellis County</h3>
+						<p>Serving Waxahachie, Red Oak, Midlothian and surrounding Ellis County areas</p>
+						<div class="city-count">3+ Cities</div>
+					</div>
+					<a href="/locations/ellis-county" class="card-link">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<polyline points="9,18 15,12 9,6"></polyline>
+						</svg>
+					</a>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -147,6 +186,13 @@ import Layout from '../../layouts/Layout.astro';
 		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 		gap: 2rem;
 		max-width: 1000px;
+		margin: 0 auto;
+	}
+
+	/* Center the last card if it's alone in its row */
+	.location-card:last-child:nth-child(odd) {
+		grid-column: 1 / -1;
+		max-width: 500px;
 		margin: 0 auto;
 	}
 
