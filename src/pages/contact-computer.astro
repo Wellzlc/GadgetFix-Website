@@ -510,32 +510,6 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 							console.error('FormSubmit error:', emailResult);
 							throw new Error('Email sending failed');
 						}
-					} else if (result.action === 'quarantine') {
-						formMessage.textContent = result.message || 'Your submission has been received and is pending review.';
-						formMessage.className = 'form-message success';
-						formMessage.style.display = 'block';
-						
-						// Reset the form
-						form.reset();
-						
-						// Reset Cloudflare Turnstile if available
-						if (typeof turnstile !== 'undefined') {
-							const turnstileWidget = form.querySelector('.cf-turnstile');
-							if (turnstileWidget) {
-								turnstile.reset();
-							}
-						}
-						
-						setTimeout(() => {
-							formMessage.style.display = 'none';
-						}, 7000);
-					} else if (result.action === 'block') {
-						formMessage.textContent = result.message || 'Your submission has been blocked. Please contact us directly at (402) 416-6942.';
-						formMessage.className = 'form-message error';
-						formMessage.style.display = 'block';
-					} else {
-						throw new Error('Validation failed');
-					}
 				} catch (error) {
 					console.error('Form submission error:', error);
 					console.error('Error details:', error.message, error.stack);
