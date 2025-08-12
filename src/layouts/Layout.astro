@@ -1,6 +1,6 @@
 ---
 import Breadcrumb from '../components/Breadcrumb.astro';
-import BotProtection from '../components/BotProtection.astro';
+// import BotProtection from '../components/BotProtection.astro'; // TEMPORARILY DISABLED
 
 export interface BreadcrumbItem {
 	name: string;
@@ -156,7 +156,13 @@ const {
 		    
 		    // Configure tracking after script loads
 		    googleAdsScript.onload = function() {
-		      gtag('config', 'AW-17217204638');
+		      if (typeof gtag !== 'undefined') {
+		        try {
+		          gtag('config', 'AW-17217204638');
+		        } catch (e) {
+		          console.debug('Google Ads config unavailable');
+		        }
+		      }
 		    };
 		  });
 		</script>
@@ -493,7 +499,7 @@ const {
 		</script>
 		
 		<!-- Bot Protection System -->
-		<BotProtection />
+		<!-- <BotProtection /> TEMPORARILY DISABLED -->
 		
 		<!-- Performance optimized JavaScript -->
 		<script>
@@ -523,8 +529,9 @@ const {
 						const pageLocation = window.location.pathname;
 						
 						if (typeof gtag !== 'undefined') {
-							// Primary phone call conversion event (GA4)
-							gtag('event', 'click_to_call', {
+							try {
+								// Primary phone call conversion event (GA4)
+								gtag('event', 'click_to_call', {
 								'event_category': 'Phone_Conversion',
 								'event_label': `Phone Call - ${clickSource} - ${phoneNumber}`,
 								'phone_source': clickSource,
@@ -534,32 +541,41 @@ const {
 							});
 							
 							// Google Ads conversion tracking
-							gtag('event', 'conversion', {
-								'send_to': 'AW-17217204638/phone_call_conversion',
-								'value': 25.0,
-								'currency': 'USD'
-							});
+								gtag('event', 'conversion', {
+									'send_to': 'AW-17217204638/phone_call_conversion',
+									'value': 25.0,
+									'currency': 'USD'
+								});
+							} catch (e) {
+								console.debug('Analytics tracking unavailable');
+							}
 						}
 						
 						// Enhanced tracking for different phone elements
-						if (clickSource.includes('floating')) {
-							gtag('event', 'floating_phone_click', {
-								'event_category': 'High_Intent_Conversion',
-								'event_label': 'Floating Button',
-								'value': 15
-							});
-						} else if (clickSource.includes('banner')) {
-							gtag('event', 'banner_phone_click', {
-								'event_category': 'Top_Banner_Conversion',
-								'event_label': 'Top Banner',
-								'value': 12
-							});
-						} else if (clickSource.includes('footer')) {
-							gtag('event', 'footer_phone_click', {
-								'event_category': 'Footer_Conversion',
-								'event_label': 'Footer Link',
-								'value': 8
-							});
+						if (typeof gtag !== 'undefined') {
+							try {
+								if (clickSource.includes('floating')) {
+									gtag('event', 'floating_phone_click', {
+										'event_category': 'High_Intent_Conversion',
+										'event_label': 'Floating Button',
+										'value': 15
+									});
+								} else if (clickSource.includes('banner')) {
+									gtag('event', 'banner_phone_click', {
+										'event_category': 'Top_Banner_Conversion',
+										'event_label': 'Top Banner',
+										'value': 12
+									});
+								} else if (clickSource.includes('footer')) {
+									gtag('event', 'footer_phone_click', {
+										'event_category': 'Footer_Conversion',
+										'event_label': 'Footer Link',
+										'value': 8
+									});
+								}
+							} catch (e) {
+								console.debug('Enhanced phone tracking unavailable');
+							}
 						}
 					});
 				});
@@ -577,11 +593,17 @@ const {
 						Object.keys(scrollDepths).forEach(depth => {
 							if (scrollPercent >= depth && !scrollDepths[depth]) {
 								scrollDepths[depth] = true;
-								gtag('event', 'scroll', {
-									'event_category': 'Engagement',
-									'event_label': `${depth}%`,
-									'value': depth
-								});
+								if (typeof gtag !== 'undefined') {
+									try {
+										gtag('event', 'scroll', {
+											'event_category': 'Engagement',
+											'event_label': `${depth}%`,
+											'value': depth
+										});
+									} catch (e) {
+										console.debug('Scroll tracking unavailable');
+									}
+								}
 							}
 						});
 					}
@@ -606,12 +628,18 @@ const {
 						
 						// Send engagement time every 30 seconds
 						if (totalEngagedTime > 0 && totalEngagedTime % 30000 < 1000) {
-							gtag('event', 'page_engagement', {
-								'event_category': 'Engagement',
-								'event_label': 'Time on Page',
-								'value': Math.round(totalEngagedTime / 1000),
-								'engagement_time_seconds': Math.round(totalEngagedTime / 1000)
-							});
+							if (typeof gtag !== 'undefined') {
+								try {
+									gtag('event', 'page_engagement', {
+										'event_category': 'Engagement',
+										'event_label': 'Time on Page',
+										'value': Math.round(totalEngagedTime / 1000),
+										'engagement_time_seconds': Math.round(totalEngagedTime / 1000)
+									});
+								} catch (e) {
+									console.debug('Engagement tracking unavailable');
+								}
+							}
 						}
 					}
 					startTime = Date.now();
@@ -639,23 +667,29 @@ const {
 						const buttonText = button.textContent.trim();
 						const buttonClass = button.className;
 						
-						gtag('event', 'cta_click', {
-							'event_category': 'Engagement',
-							'event_label': buttonText,
-							'button_class': buttonClass,
-							'page_location': window.location.pathname
-						});
-						
-						// Track high-intent CTAs for Google Ads
-						if (buttonText.toLowerCase().includes('call') || 
-							buttonText.toLowerCase().includes('contact') ||
-							buttonText.toLowerCase().includes('book') ||
-							buttonText.toLowerCase().includes('schedule')) {
-							gtag('event', 'conversion', {
-								'send_to': 'AW-17217204638/cta_high_intent',
-								'value': 5.0,
-								'currency': 'USD'
-							});
+						if (typeof gtag !== 'undefined') {
+							try {
+								gtag('event', 'cta_click', {
+									'event_category': 'Engagement',
+									'event_label': buttonText,
+									'button_class': buttonClass,
+									'page_location': window.location.pathname
+								});
+								
+								// Track high-intent CTAs for Google Ads
+								if (buttonText.toLowerCase().includes('call') || 
+									buttonText.toLowerCase().includes('contact') ||
+									buttonText.toLowerCase().includes('book') ||
+									buttonText.toLowerCase().includes('schedule')) {
+									gtag('event', 'conversion', {
+										'send_to': 'AW-17217204638/cta_high_intent',
+										'value': 5.0,
+										'currency': 'USD'
+									});
+								}
+							} catch (e) {
+								console.debug('CTA tracking unavailable');
+							}
 						}
 					}
 				});
@@ -665,11 +699,17 @@ const {
 					const link = e.target.closest('a');
 					if (link && link.hostname !== window.location.hostname && 
 						!link.href.startsWith('tel:') && !link.href.startsWith('mailto:')) {
-						gtag('event', 'click', {
-							'event_category': 'Outbound Link',
-							'event_label': link.href,
-							'transport_type': 'beacon'
-						});
+						if (typeof gtag !== 'undefined') {
+							try {
+								gtag('event', 'click', {
+									'event_category': 'Outbound Link',
+									'event_label': link.href,
+									'transport_type': 'beacon'
+								});
+							} catch (e) {
+								console.debug('Outbound link tracking unavailable');
+							}
+						}
 					}
 				});
 				

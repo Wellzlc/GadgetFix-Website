@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Test Form">
+	<div style="padding: 50px; max-width: 600px; margin: 0 auto;">
+		<h1>TEST FORM</h1>
+		<p>This is a minimal test form to check if basic form submission works.</p>
+		
+		<form action="/api/form-test" method="POST" target="_blank" style="background: #f0f0f0; padding: 20px; border-radius: 10px;">
+			<div style="margin-bottom: 15px;">
+				<label>Name:</label><br>
+				<input type="text" name="name" value="Test User" style="width: 100%; padding: 10px; font-size: 16px;">
+			</div>
+			
+			<div style="margin-bottom: 15px;">
+				<label>Email:</label><br>
+				<input type="email" name="email" value="test@example.com" style="width: 100%; padding: 10px; font-size: 16px;">
+			</div>
+			
+			<div style="margin-bottom: 15px;">
+				<label>Message:</label><br>
+				<textarea name="message" style="width: 100%; padding: 10px; font-size: 16px; height: 100px;">This is a test message.</textarea>
+			</div>
+			
+			<button type="submit" style="background: #007cba; color: white; padding: 15px 30px; font-size: 18px; border: none; border-radius: 5px; cursor: pointer;">
+				SUBMIT TEST FORM
+			</button>
+		</form>
+		
+		<div style="margin-top: 30px; padding: 20px; background: #e8f4fd; border-radius: 10px;">
+			<h3>Instructions:</h3>
+			<ol>
+				<li>Click the "SUBMIT TEST FORM" button</li>
+				<li>It should open a new tab showing JSON data from httpbin.org</li>
+				<li>If you see JSON data with your form fields, the form works</li>
+				<li>If nothing happens, there's a browser or network issue</li>
+			</ol>
+		</div>
+		
+		<p><a href="/contact" style="color: #007cba;">← Back to Contact Page</a></p>
+	</div>
+</Layout>

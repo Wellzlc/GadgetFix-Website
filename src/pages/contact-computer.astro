@@ -1,7 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import BotProtection from '../components/BotProtection.astro';
-import spamProtectionScript from '../scripts/spam-protection.js?raw';
 ---
 
 <Layout 
@@ -9,7 +7,6 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 	description="Contact GadgetFix for computer troubleshooting in Dallas Fort Worth. Windows & Mac repair. Call (402) 416-6942 for same-day service. We come to you!"
 	keywords="computer repair dallas contact, windows troubleshooting fort worth, mac repair contact, software repair near me"
 >
-	<BotProtection />
 	<!-- Full-Screen Split Contact Section -->
 	<section class="split-contact">
 		<div class="contact-background"></div>
@@ -87,13 +84,6 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 							<textarea id="message" name="message" placeholder="DESCRIBE YOUR COMPUTER ISSUE" rows="4" required></textarea>
 						</div>
 						
-						<!-- Cloudflare Turnstile Widget -->
-						<div class="cf-turnstile" 
-							data-sitekey="0x4AAAAAABqyCtFg77TeYErI"
-							data-theme="light"
-							data-size="normal"
-							style="margin: 15px 0;">
-						</div>
 						
 						<button type="submit" class="send-button">SEND REQUEST</button>
 					</form>
@@ -415,142 +405,4 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 	}
 </style>
 
-<script define:vars={{ spamProtectionScript }}>
-	// Add spam protection script
-	eval(spamProtectionScript);
-</script>
 
-<script>
-	document.addEventListener('DOMContentLoaded', function() {
-		const form = document.getElementById('contactForm') as HTMLFormElement;
-		const formMessage = document.getElementById('formMessage');
-		
-		// Initialize spam protection tracking
-		let spamProtection;
-		if (form) {
-			spamProtection = new SpamProtection(form);
-			
-			form.addEventListener('submit', async function(e) {
-				e.preventDefault();
-				
-				const submitButton = form.querySelector('.send-button') as HTMLButtonElement;
-				const originalText = submitButton.textContent;
-				submitButton.textContent = 'SENDING...';
-				submitButton.disabled = true;
-				
-				// Collect form data with spam protection metadata
-				const formData = new FormData(form);
-				const data = {
-					name: formData.get('name'),
-					email: formData.get('email'),
-					phone: formData.get('phone'),
-					message: formData.get('message'),
-					computer_type: formData.get('computer_type'),
-					issue_type: formData.get('issue_type'),
-					website: formData.get('website'), // honeypot
-					formType: 'computer-support',
-					...spamProtection.getMetadata()
-				};
-				
-				try {
-					// Skip spam validation for now and go straight to email sending
-					console.log('Sending form directly to FormSubmit for stability');
-					
-					// Basic honeypot check only
-					if (data.website && data.website.trim() !== '') {
-						console.log('[SPAM BLOCKED] Honeypot triggered');
-						formMessage.textContent = 'Your submission has been blocked. Please contact us directly at (402) 416-6942.';
-						formMessage.className = 'form-message error';
-						formMessage.style.display = 'block';
-						return;
-					}
-					
-					// Send directly to FormSubmit
-					const emailData = new FormData();
-						emailData.append('name', formData.get('name'));
-						emailData.append('email', formData.get('email'));
-						emailData.append('phone', formData.get('phone'));
-						emailData.append('message', formData.get('message'));
-						emailData.append('computer_type', formData.get('computer_type'));
-						emailData.append('issue_type', formData.get('issue_type'));
-						emailData.append('_subject', 'New Computer Service Request from GadgetFix');
-						emailData.append('_captcha', 'false');
-						emailData.append('_template', 'table');
-						
-						const emailResponse = await fetch('https://formsubmit.co/ajax/wellz.levi@gmail.com', {
-							method: 'POST',
-							headers: {
-								'Accept': 'application/json'
-							},
-							body: emailData
-						});
-						
-						const emailResult = await emailResponse.json();
-						
-						if (emailResponse.ok && emailResult.success === 'true') {
-							formMessage.textContent = 'Service request sent successfully! We will contact you soon.';
-							formMessage.className = 'form-message success';
-							formMessage.style.display = 'block';
-							
-							// Reset the form
-							form.reset();
-							
-							// Reset Cloudflare Turnstile if available
-							if (typeof turnstile !== 'undefined') {
-								const turnstileWidget = form.querySelector('.cf-turnstile');
-								if (turnstileWidget) {
-									turnstile.reset();
-								}
-							}
-							
-							setTimeout(() => {
-								formMessage.style.display = 'none';
-							}, 5000);
-						} else {
-							console.error('FormSubmit error:', emailResult);
-							throw new Error('Email sending failed');
-						}
-				} catch (error) {
-					console.error('Form submission error:', error);
-					console.error('Error details:', error.message, error.stack);
-					console.error('Error type:', typeof error, error.constructor.name);
-					
-					// Check if it's a network timeout error or other likely successful scenarios
-					if (error.message && (
-						error.message.includes('timeout') || 
-						error.message.includes('fetch') ||
-						error.message.includes('NetworkError') ||
-						error.message.includes('Failed to fetch')
-					)) {
-						// Likely a network/timeout issue, but email was probably sent
-						formMessage.textContent = 'Service request sent successfully! We will contact you soon.';
-						formMessage.className = 'form-message success';
-						formMessage.style.display = 'block';
-						
-						// Reset the form since message was likely sent
-						form.reset();
-						
-						// Reset Cloudflare Turnstile if available
-						if (typeof turnstile !== 'undefined') {
-							const turnstileWidget = form.querySelector('.cf-turnstile');
-							if (turnstileWidget) {
-								turnstile.reset();
-							}
-						}
-					} else {
-						formMessage.textContent = 'Error sending request. Please try again or call us at (402) 416-6942.';
-						formMessage.className = 'form-message error';
-					}
-					formMessage.style.display = 'block';
-					
-					setTimeout(() => {
-						formMessage.style.display = 'none';
-					}, 7000);
-				} finally {
-					submitButton.textContent = originalText;
-					submitButton.disabled = false;
-				}
-			});
-		}
-	});
-</script>
