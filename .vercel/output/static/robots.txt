@@ -1,0 +1,48 @@
+# GadgetFix LLC Robots.txt
+# Last Updated: January 2025
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_astro/
+Disallow: /temp/
+Disallow: /private/
+Crawl-delay: 0
+
+# Sitemap location
+Sitemap: https://gadgetfixllc.com/sitemap.xml
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing specific  
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+# Allow important pages for SEO
+Allow: /
+Allow: /services/
+Allow: /about/
+Allow: /blog/
+Allow: /contact/
+Allow: /locations/
+Allow: /iphone-repair-dallas/
+Allow: /samsung-repair-fort-worth/
+Allow: /emergency-phone-repair/
+Allow: /screen-replacement/
+
+# Allow CSS, JS, and image files for proper rendering
+Allow: /assets/
+Allow: /_astro/
+Allow: *.css
+Allow: *.js
+Allow: *.png
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.gif
+Allow: *.svg
+Allow: *.webp

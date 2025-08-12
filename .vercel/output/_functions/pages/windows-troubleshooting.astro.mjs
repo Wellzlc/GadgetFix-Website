@@ -1,0 +1,70 @@
+import { e as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_BEFgHyqX.mjs';
+import 'kleur/colors';
+import { $ as $$Layout } from '../chunks/Layout_d87RFhlu.mjs';
+export { renderers } from '../renderers.mjs';
+
+var __freeze = Object.freeze;
+var __defProp = Object.defineProperty;
+var __template = (cooked, raw) => __freeze(__defProp(cooked, "raw", { value: __freeze(cooked.slice()) }));
+var _a;
+const $$WindowsTroubleshooting = createComponent(($$result, $$props, $$slots) => {
+  const title = "Windows Computer Repair Services in Lewisville TX | Password Reset & Troubleshooting";
+  const description = "Professional Windows computer repair in Lewisville, Texas. Password reset, BitLocker recovery, virus removal & troubleshooting. Same-day service. Call (402) 416-6942!";
+  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": title, "description": description }, { "default": ($$result2) => renderTemplate(_a || (_a = __template(["  ", `<section class="hero"> <div class="container"> <div class="hero-content"> <h1 class="hero-title">Windows Computer Repair Services</h1> <p class="hero-subtitle">Expert Windows troubleshooting and repair services throughout Lewisville and North Dallas. Professional password reset, virus removal, and system recovery with same-day mobile service.</p> <div class="hero-cta"> <a href="tel:4024166942" class="btn btn-primary btn-large">CALL FOR SERVICE</a> <a href="#contact" class="btn btn-secondary btn-large">SCHEDULE REPAIR</a> </div> </div> </div> </section>  <section class="services"> <div class="container"> <h2 class="section-title">Windows Repair Services</h2> <p class="section-subtitle">Professional computer troubleshooting with certified technicians and reliable service</p> <div class="services-grid"> <div class="service-card"> <div class="service-icon"> <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"> <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path> </svg> </div> <h3>PASSWORD RESET</h3> <p>Locked out of Windows? Professional password reset service without data loss. We recover access to local accounts, Microsoft accounts, and administrator profiles.</p> </div> <div class="service-card"> <div class="service-icon"> <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"> <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path> </svg> </div> <h3>BITLOCKER RECOVERY</h3> <p>Lost your BitLocker recovery key? Expert recovery service for encrypted drives using professional tools and techniques to restore access to your data.</p> </div> <div class="service-card"> <div class="service-icon"> <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"> <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path> </svg> </div> <h3>BLUE SCREEN FIX</h3> <p>Blue screen of death errors? We diagnose and repair driver conflicts, hardware failures, and system file corruption to get Windows running smoothly.</p> </div> <div class="service-card"> <div class="service-icon"> <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"> <path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path> </svg> </div> <h3>STARTUP REPAIR</h3> <p>Windows won't start? Professional boot failure diagnosis and repair including startup repair, system restore, and boot configuration fixes.</p> </div> <div class="service-card"> <div class="service-icon"> <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"> <path d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path> </svg> </div> <h3>VIRUS REMOVAL</h3> <p>Complete malware and virus removal service. We clean infected systems, remove ransomware, and install protection to prevent future infections.</p> </div> <div class="service-card"> <div class="service-icon"> <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"> <path d="M13 10V3L4 14h7v7l9-11h-7z"></path> </svg> </div> <h3>SPEED OPTIMIZATION</h3> <p>Slow computer? Professional optimization service including registry cleaning, startup optimization, disk cleanup, and performance tuning.</p> </div> <div class="service-card"> <div class="service-icon"> <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"> <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path> <polyline points="14,2 14,8 20,8"></polyline> </svg> </div> <h3>DATA RECOVERY</h3> <p>Professional data recovery from corrupted Windows installations, failed hard drives, and accidental deletions. We recover your important files safely.</p> </div> <div class="service-card"> <div class="service-icon"> <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"> <circle cx="12" cy="12" r="3"></circle> <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path> </svg> </div> <h3>SYSTEM REPAIR</h3> <p>Comprehensive Windows system repair including driver updates, Windows updates troubleshooting, and system file restoration.</p> </div> </div> </div> </section>  <section class="why-choose"> <div class="container"> <h2 class="section-title">Why Choose GadgetFix for Windows Repair?</h2> <div class="why-grid"> <div class="why-item"> <div class="why-number">1</div> <h3>CERTIFIED TECHNICIANS</h3> <p>Expert Windows specialists with extensive experience in all versions of Windows and professional troubleshooting techniques.</p> </div> <div class="why-item"> <div class="why-number">2</div> <h3>SAME-DAY SERVICE</h3> <p>Fast response times with same-day service available throughout Lewisville and surrounding North Dallas areas.</p> </div> <div class="why-item"> <div class="why-number">3</div> <h3>DATA PROTECTION</h3> <p>Your data is safe with us. We ensure complete data preservation during all repair and recovery procedures.</p> </div> <div class="why-item"> <div class="why-number">4</div> <h3>MOBILE SERVICE</h3> <p>We come to your home or office in Lewisville, Flower Mound, Highland Village, and surrounding areas.</p> </div> <div class="why-item"> <div class="why-number">5</div> <h3>WARRANTY PROTECTION</h3> <p>All repairs backed by our 90-day warranty for your peace of mind and service satisfaction.</p> </div> <div class="why-item"> <div class="why-number">6</div> <h3>FREE DIAGNOSTICS</h3> <p>Complimentary system diagnostics to identify issues before any repair work begins.</p> </div> </div> </div> </section>  <section class="coverage-areas"> <div class="container"> <h2 class="section-title">Service Areas - We Come to You!</h2> <div class="areas-grid"> <div class="area-group"> <h3>Primary Areas</h3> <ul> <li>Lewisville - 15 min</li> <li>Flower Mound - 20 min</li> <li>Highland Village - 20 min</li> <li>The Colony - 25 min</li> </ul> </div> <div class="area-group"> <h3>North Dallas</h3> <ul> <li>Carrollton - 25 min</li> <li>Frisco - 30 min</li> <li>Plano - 30 min</li> <li>Richardson - 35 min</li> </ul> </div> <div class="area-group"> <h3>Mid-Cities</h3> <ul> <li>Irving - 30 min</li> <li>Coppell - 25 min</li> <li>Grapevine - 30 min</li> <li>Southlake - 35 min</li> </ul> </div> </div> </div> </section>  <section class="final-cta" id="contact"> <div class="container"> <div class="cta-content"> <h2>Need Windows Computer Help?</h2> <p>Professional Windows repair service is just a phone call away. We're ready to help!</p> <div class="cta-buttons"> <a href="tel:4024166942" class="btn btn-primary btn-large">
+CALL NOW: (402) 416-6942
+</a> </div> <p class="hours">Open 7 Days: Monday-Sunday 8:00 AM - 6:00 PM</p> </div> </div> </section>  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "GadgetFix - Windows Computer Repair",
+    "description": "Professional Windows computer repair services in Lewisville, Texas. Password reset, virus removal, and troubleshooting.",
+    "telephone": "(402) 416-6942",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Lewisville",
+      "addressRegion": "TX",
+      "postalCode": "75056"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 33.046233,
+      "longitude": -96.994174
+    },
+    "url": "https://gadgetfix.com/windows-troubleshooting",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      }
+    ],
+    "areaServed": [
+      "Lewisville",
+      "Flower Mound",
+      "Highland Village",
+      "Carrollton",
+      "The Colony",
+      "Frisco",
+      "Plano",
+      "Irving",
+      "Coppell",
+      "Grapevine"
+    ]
+  }
+  <\/script> `])), maybeRenderHead()) })}`;
+}, "C:/Users/gadge/GadgetFix-Website/src/pages/windows-troubleshooting.astro", void 0);
+
+const $$file = "C:/Users/gadge/GadgetFix-Website/src/pages/windows-troubleshooting.astro";
+const $$url = "/windows-troubleshooting";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  default: $$WindowsTroubleshooting,
+  file: $$file,
+  url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };
