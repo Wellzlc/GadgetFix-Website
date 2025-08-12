@@ -428,23 +428,27 @@ import Layout from '../layouts/Layout.astro';
 					});
 					
 					if (response.ok) {
-						formMessage.textContent = 'Service request sent successfully!';
+						formMessage.textContent = 'Service request sent successfully! We will contact you soon.';
 						formMessage.className = 'form-message success';
+						formMessage.style.display = 'block';
 						form.reset();
 						
 						setTimeout(() => {
 							formMessage.style.display = 'none';
 						}, 5000);
 					} else {
+						console.error('Form submission failed with status:', response.status);
 						throw new Error('Form submission failed');
 					}
 				} catch (error) {
-					formMessage.textContent = 'Error sending request. Please try again.';
+					console.error('Form submission error:', error);
+					formMessage.textContent = 'Error sending request. Please try again or call us at (402) 416-6942.';
 					formMessage.className = 'form-message error';
+					formMessage.style.display = 'block';
 					
 					setTimeout(() => {
 						formMessage.style.display = 'none';
-					}, 5000);
+					}, 7000);
 				} finally {
 					submitButton.textContent = originalText;
 					submitButton.disabled = false;

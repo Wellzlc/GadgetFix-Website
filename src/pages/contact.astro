@@ -458,7 +458,7 @@ import Layout from '../layouts/Layout.astro';
 				e.preventDefault();
 				
 				// Bot protection check
-				if (window.BotProtection && window.BotProtection.isBot()) {
+				if (window.BotProtection && typeof window.BotProtection.isBot === 'function' && window.BotProtection.isBot()) {
 					// Fake success for bots
 					formMessage.textContent = 'Message sent successfully!';
 					formMessage.className = 'form-message success';
@@ -472,7 +472,7 @@ import Layout from '../layouts/Layout.astro';
 						gtag('event', 'bot_form_submission_blocked', {
 							'event_category': 'Security',
 							'event_label': 'Contact Form',
-							'value': window.BotProtection.getScore()
+							'value': window.BotProtection.getScore ? window.BotProtection.getScore() : 0
 						});
 					}
 					return false;
@@ -486,9 +486,15 @@ import Layout from '../layouts/Layout.astro';
 				// Add bot detection data to form
 				const formData = new FormData(form);
 				if (window.BotProtection) {
-					formData.append('_bot_score', window.BotProtection.getScore());
-					formData.append('_fingerprint', window.BotProtection.getFingerprint());
-					formData.append('_session_id', window.botDetection.sessionId);
+					if (typeof window.BotProtection.getScore === 'function') {
+						formData.append('_bot_score', window.BotProtection.getScore());
+					}
+					if (typeof window.BotProtection.getFingerprint === 'function') {
+						formData.append('_fingerprint', window.BotProtection.getFingerprint());
+					}
+					if (window.botDetection && window.botDetection.sessionId) {
+						formData.append('_session_id', window.botDetection.sessionId);
+					}
 				}
 				
 				try {
@@ -501,23 +507,27 @@ import Layout from '../layouts/Layout.astro';
 					});
 					
 					if (response.ok) {
-						formMessage.textContent = 'Message sent successfully!';
+						formMessage.textContent = 'Message sent successfully! We will contact you soon.';
 						formMessage.className = 'form-message success';
+						formMessage.style.display = 'block';
 						form.reset();
 						
 						setTimeout(() => {
 							formMessage.style.display = 'none';
 						}, 5000);
 					} else {
+						console.error('Form submission failed with status:', response.status);
 						throw new Error('Form submission failed');
 					}
 				} catch (error) {
-					formMessage.textContent = 'Error sending message. Please try again.';
+					console.error('Form submission error:', error);
+					formMessage.textContent = 'Error sending message. Please try again or call us at (402) 416-6942.';
 					formMessage.className = 'form-message error';
+					formMessage.style.display = 'block';
 					
 					setTimeout(() => {
 						formMessage.style.display = 'none';
-					}, 5000);
+					}, 7000);
 				} finally {
 					submitButton.textContent = originalText;
 					submitButton.disabled = false;
