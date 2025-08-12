@@ -86,6 +86,14 @@ import BotProtection from '../components/BotProtection.astro';
 							<textarea id="message" name="message" placeholder="DESCRIBE YOUR COMPUTER ISSUE" rows="4" required></textarea>
 						</div>
 						
+						<!-- Cloudflare Turnstile Widget -->
+						<div class="cf-turnstile" 
+							data-sitekey="0x4AAAAAABqyCtFg77TeYErI"
+							data-theme="light"
+							data-size="normal"
+							style="margin: 15px 0;">
+						</div>
+						
 						<button type="submit" class="send-button">SEND REQUEST</button>
 					</form>
 					<div id="formMessage" class="form-message"></div>
