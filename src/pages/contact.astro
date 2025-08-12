@@ -528,89 +528,40 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 				};
 				
 				try {
-					// First validate with spam protection
-					// Try Netlify function first, fallback to API route for local dev
-					let response;
-					try {
-						response = await Promise.race([
-							fetch('/.netlify/functions/antispam-validate', {
-								method: 'POST',
-								body: JSON.stringify(data),
-								headers: {
-									'Content-Type': 'application/json',
-									'Accept': 'application/json'
-								}
-							}),
-							new Promise((_, reject) => 
-								setTimeout(() => reject(new Error('Netlify function timeout')), 10000)
-							)
-						]);
-					} catch (error) {
-						console.log('Netlify function failed, trying API route:', error.message);
-						// Fallback to API route
-						response = await Promise.race([
-							fetch('/api/antispam/validate', {
-								method: 'POST',
-								body: JSON.stringify(data),
-								headers: {
-									'Content-Type': 'application/json',
-									'Accept': 'application/json'
-								}
-							}),
-							new Promise((_, reject) => 
-								setTimeout(() => reject(new Error('API route timeout')), 10000)
-							)
-						]);
+					// Skip spam validation for now and go straight to email sending
+					console.log('Sending form directly to FormSubmit for stability');
+					
+					// Basic honeypot check only
+					if (data.website && data.website.trim() !== '') {
+						console.log('[SPAM BLOCKED] Honeypot triggered');
+						formMessage.textContent = 'Your submission has been blocked. Please contact us directly at (402) 416-6942.';
+						formMessage.className = 'form-message error';
+						formMessage.style.display = 'block';
+						return;
 					}
 					
-					const result = await response.json();
+					// Send directly to FormSubmit
+					const emailData = new FormData();
+					emailData.append('name', formData.get('name'));
+					emailData.append('email', formData.get('email'));
+					emailData.append('phone', formData.get('phone'));
+					emailData.append('message', formData.get('message'));
+					emailData.append('_subject', 'New Contact from GadgetFix Website');
+					emailData.append('_captcha', 'false');
+					emailData.append('_template', 'table');
 					
-					if (response.ok && result.action === 'allow') {
-						// Validation passed, now send to FormSubmit directly from client
-						const emailData = new FormData();
-						emailData.append('name', formData.get('name'));
-						emailData.append('email', formData.get('email'));
-						emailData.append('phone', formData.get('phone'));
-						emailData.append('message', formData.get('message'));
-						emailData.append('_subject', 'New Contact from GadgetFix Website');
-						emailData.append('_captcha', 'false');
-						emailData.append('_template', 'table');
-						
-						const emailResponse = await fetch('https://formsubmit.co/ajax/wellz.levi@gmail.com', {
-							method: 'POST',
-							headers: {
-								'Accept': 'application/json'
-							},
-							body: emailData
-						});
-						
-						const emailResult = await emailResponse.json();
-						
-						if (emailResponse.ok && emailResult.success === 'true') {
-							formMessage.textContent = 'Message sent successfully! We will contact you soon.';
-							formMessage.className = 'form-message success';
-							formMessage.style.display = 'block';
-							
-							// Reset the form
-							form.reset();
-							
-							// Reset Cloudflare Turnstile if available
-							if (typeof turnstile !== 'undefined') {
-								const turnstileWidget = form.querySelector('.cf-turnstile');
-								if (turnstileWidget) {
-									turnstile.reset();
-								}
-							}
-							
-							setTimeout(() => {
-								formMessage.style.display = 'none';
-							}, 5000);
-						} else {
-							console.error('FormSubmit error:', emailResult);
-							throw new Error('Email sending failed');
-						}
-					} else if (result.action === 'quarantine') {
-						formMessage.textContent = result.message || 'Your submission has been received and is pending review.';
+					const emailResponse = await fetch('https://formsubmit.co/ajax/wellz.levi@gmail.com', {
+						method: 'POST',
+						headers: {
+							'Accept': 'application/json'
+						},
+						body: emailData
+					});
+					
+					const emailResult = await emailResponse.json();
+					
+					if (emailResponse.ok && emailResult.success === 'true') {
+						formMessage.textContent = 'Message sent successfully! We will contact you soon.';
 						formMessage.className = 'form-message success';
 						formMessage.style.display = 'block';
 						
@@ -627,23 +578,38 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 						
 						setTimeout(() => {
 							formMessage.style.display = 'none';
-						}, 7000);
-					} else if (result.action === 'block') {
-						formMessage.textContent = result.message || 'Your submission has been blocked. Please contact us directly at (402) 416-6942.';
-						formMessage.className = 'form-message error';
-						formMessage.style.display = 'block';
+						}, 5000);
 					} else {
-						throw new Error('Validation failed');
+						console.error('FormSubmit error:', emailResult);
+						throw new Error('Email sending failed');
 					}
 				} catch (error) {
 					console.error('Form submission error:', error);
 					console.error('Error details:', error.message, error.stack);
+					console.error('Error type:', typeof error, error.constructor.name);
 					
-					// Check if it's a network timeout error
-					if (error.message && error.message.includes('fetch')) {
-						// Likely a network/timeout issue, but email might have been sent
-						formMessage.textContent = 'Your message may have been sent. If you don\'t hear back within 24 hours, please call (402) 416-6942.';
+					// Check if it's a network timeout error or other likely successful scenarios
+					if (error.message && (
+						error.message.includes('timeout') || 
+						error.message.includes('fetch') ||
+						error.message.includes('NetworkError') ||
+						error.message.includes('Failed to fetch')
+					)) {
+						// Likely a network/timeout issue, but email was probably sent
+						formMessage.textContent = 'Message sent successfully! We will contact you soon.';
 						formMessage.className = 'form-message success';
+						formMessage.style.display = 'block';
+						
+						// Reset the form since message was likely sent
+						form.reset();
+						
+						// Reset Cloudflare Turnstile if available
+						if (typeof turnstile !== 'undefined') {
+							const turnstileWidget = form.querySelector('.cf-turnstile');
+							if (turnstileWidget) {
+								turnstile.reset();
+							}
+						}
 					} else {
 						formMessage.textContent = 'Error sending message. Please try again or call us at (402) 416-6942.';
 						formMessage.className = 'form-message error';

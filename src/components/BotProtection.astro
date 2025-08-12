@@ -210,9 +210,9 @@
 		const canvas = document.createElement('canvas');
 		const ctx = canvas.getContext('2d');
 		
-		const detected = [];
+		const detectedFonts = [];
 		for (const font of testFonts) {
-			let detected = false;
+			let fontDetected = false;
 			for (const baseFont of baseFonts) {
 				ctx.font = `${testSize} ${baseFont}`;
 				const baseWidth = ctx.measureText(testString).width;
@@ -221,14 +221,14 @@
 				const testWidth = ctx.measureText(testString).width;
 				
 				if (baseWidth !== testWidth) {
-					detected = true;
+					fontDetected = true;
 					break;
 				}
 			}
-			if (detected) detected.push(font);
+			if (fontDetected) detectedFonts.push(font);
 		}
 		
-		return detected.length;
+		return detectedFonts.length;
 	}
 	
 	// 3. BEHAVIORAL ANALYSIS
@@ -590,15 +590,20 @@
 	// 7. LOGGING AND ANALYTICS
 	
 	function logBotAttempt() {
-		// Send to analytics
-		if (typeof gtag !== 'undefined') {
-			gtag('event', 'bot_blocked', {
-				'event_category': 'Security',
-				'event_label': window.botDetection.blockedReasons.join(', '),
-				'value': window.botDetection.suspicionScore,
-				'session_id': window.botDetection.sessionId,
-				'fingerprint': window.botDetection.fingerprint
-			});
+		// Send to analytics - safely check for gtag
+		if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+			try {
+				window.gtag('event', 'bot_blocked', {
+					'event_category': 'Security',
+					'event_label': window.botDetection.blockedReasons.join(', '),
+					'value': window.botDetection.suspicionScore,
+					'session_id': window.botDetection.sessionId,
+					'fingerprint': window.botDetection.fingerprint
+				});
+			} catch (e) {
+				// Ignore gtag errors
+				console.debug('Analytics tracking unavailable');
+			}
 		}
 		
 		// Console warning for debugging
@@ -737,32 +742,3 @@
 
 <!-- Cloudflare Turnstile Integration -->
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-<script>
-	// Add Turnstile to forms when ready
-	window.addEventListener('load', function() {
-		const forms = document.querySelectorAll('form');
-		forms.forEach(form => {
-			// Skip if already has turnstile
-			if (form.querySelector('.cf-turnstile')) return;
-			
-			// Create container
-			const turnstileDiv = document.createElement('div');
-			turnstileDiv.className = 'cf-turnstile';
-			turnstileDiv.setAttribute('data-sitekey', '0x4AAAAAABqyCtFg77TeYErI');
-			turnstileDiv.setAttribute('data-theme', 'light');
-			turnstileDiv.setAttribute('data-size', 'normal');
-			turnstileDiv.setAttribute('data-appearance', 'interaction-only'); // Invisible unless suspicious
-			turnstileDiv.setAttribute('data-retry', 'auto');
-			turnstileDiv.setAttribute('data-retry-interval', '8000');
-			
-			// Add margin for spacing
-			turnstileDiv.style.margin = '15px 0';
-			
-			// Insert before submit button
-			const submitBtn = form.querySelector('[type="submit"]');
-			if (submitBtn) {
-				submitBtn.parentNode.insertBefore(turnstileDiv, submitBtn);
-			}
-		});
-	});
-</script>
