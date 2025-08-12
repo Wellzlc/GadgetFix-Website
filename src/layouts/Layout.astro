@@ -1,5 +1,6 @@
 ---
 import Breadcrumb from '../components/Breadcrumb.astro';
+import BotProtection from '../components/BotProtection.astro';
 
 export interface BreadcrumbItem {
 	name: string;
@@ -140,6 +141,23 @@ const {
 		    gtagScript.async = true;
 		    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-ZMZTT343DN';
 		    document.head.appendChild(gtagScript);
+		  });
+		</script>
+		
+		<!-- Google Ads (AdWords) Conversion Tracking -->
+		<script>
+		  // Configure Google Ads tracking
+		  window.addEventListener('load', function() {
+		    // Load Google Ads script
+		    var googleAdsScript = document.createElement('script');
+		    googleAdsScript.async = true;
+		    googleAdsScript.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17217204638';
+		    document.head.appendChild(googleAdsScript);
+		    
+		    // Configure tracking after script loads
+		    googleAdsScript.onload = function() {
+		      gtag('config', 'AW-17217204638');
+		    };
 		  });
 		</script>
 		
@@ -474,6 +492,9 @@ const {
 			}
 		</script>
 		
+		<!-- Bot Protection System -->
+		<BotProtection />
+		
 		<!-- Performance optimized JavaScript -->
 		<script>
 			// Defer non-critical JavaScript
@@ -493,20 +514,30 @@ const {
 					}
 				});
 				
-				// Track phone number clicks as conversions with enhanced detail
+				// Enhanced Phone Call Conversion Tracking
 				const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
 				phoneLinks.forEach(link => {
 					link.addEventListener('click', function(e) {
 						const clickSource = this.className || this.closest('div').className || 'unknown';
 						const phoneNumber = this.href.replace('tel:', '');
+						const pageLocation = window.location.pathname;
 						
 						if (typeof gtag !== 'undefined') {
+							// Primary phone call conversion event (GA4)
 							gtag('event', 'click_to_call', {
 								'event_category': 'Phone_Conversion',
 								'event_label': `Phone Call - ${clickSource} - ${phoneNumber}`,
 								'phone_source': clickSource,
 								'phone_number': phoneNumber,
+								'page_location': pageLocation,
 								'value': 10
+							});
+							
+							// Google Ads conversion tracking
+							gtag('event', 'conversion', {
+								'send_to': 'AW-17217204638/phone_call_conversion',
+								'value': 25.0,
+								'currency': 'USD'
 							});
 						}
 						
@@ -514,20 +545,132 @@ const {
 						if (clickSource.includes('floating')) {
 							gtag('event', 'floating_phone_click', {
 								'event_category': 'High_Intent_Conversion',
+								'event_label': 'Floating Button',
 								'value': 15
 							});
 						} else if (clickSource.includes('banner')) {
 							gtag('event', 'banner_phone_click', {
 								'event_category': 'Top_Banner_Conversion',
+								'event_label': 'Top Banner',
 								'value': 12
 							});
 						} else if (clickSource.includes('footer')) {
 							gtag('event', 'footer_phone_click', {
 								'event_category': 'Footer_Conversion',
+								'event_label': 'Footer Link',
 								'value': 8
 							});
 						}
 					});
+				});
+				
+				// Scroll Depth Tracking
+				let scrollDepths = {25: false, 50: false, 75: false, 100: false};
+				let maxScroll = 0;
+				
+				function trackScrollDepth() {
+					const scrollPercent = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
+					
+					if (scrollPercent > maxScroll) {
+						maxScroll = scrollPercent;
+						
+						Object.keys(scrollDepths).forEach(depth => {
+							if (scrollPercent >= depth && !scrollDepths[depth]) {
+								scrollDepths[depth] = true;
+								gtag('event', 'scroll', {
+									'event_category': 'Engagement',
+									'event_label': `${depth}%`,
+									'value': depth
+								});
+							}
+						});
+					}
+				}
+				
+				// Debounced scroll tracking
+				let scrollTimer;
+				window.addEventListener('scroll', () => {
+					clearTimeout(scrollTimer);
+					scrollTimer = setTimeout(trackScrollDepth, 100);
+				}, { passive: true });
+				
+				// Page Engagement Time Tracking
+				let startTime = Date.now();
+				let totalEngagedTime = 0;
+				let isEngaged = true;
+				let engagementTimer;
+				
+				function trackEngagement() {
+					if (isEngaged) {
+						totalEngagedTime += Date.now() - startTime;
+						
+						// Send engagement time every 30 seconds
+						if (totalEngagedTime > 0 && totalEngagedTime % 30000 < 1000) {
+							gtag('event', 'page_engagement', {
+								'event_category': 'Engagement',
+								'event_label': 'Time on Page',
+								'value': Math.round(totalEngagedTime / 1000),
+								'engagement_time_seconds': Math.round(totalEngagedTime / 1000)
+							});
+						}
+					}
+					startTime = Date.now();
+				}
+				
+				// Track when user is engaged/disengaged
+				document.addEventListener('visibilitychange', () => {
+					isEngaged = !document.hidden;
+					if (isEngaged) {
+						startTime = Date.now();
+						engagementTimer = setInterval(trackEngagement, 1000);
+					} else {
+						clearInterval(engagementTimer);
+						trackEngagement();
+					}
+				});
+				
+				// Start engagement tracking
+				engagementTimer = setInterval(trackEngagement, 1000);
+				
+				// Track CTA Button Clicks
+				document.addEventListener('click', function(e) {
+					const button = e.target.closest('.btn, .cta-button, button[type="submit"]');
+					if (button) {
+						const buttonText = button.textContent.trim();
+						const buttonClass = button.className;
+						
+						gtag('event', 'cta_click', {
+							'event_category': 'Engagement',
+							'event_label': buttonText,
+							'button_class': buttonClass,
+							'page_location': window.location.pathname
+						});
+						
+						// Track high-intent CTAs for Google Ads
+						if (buttonText.toLowerCase().includes('call') || 
+							buttonText.toLowerCase().includes('contact') ||
+							buttonText.toLowerCase().includes('book') ||
+							buttonText.toLowerCase().includes('schedule')) {
+							gtag('event', 'conversion', {
+								'send_to': 'AW-17217204638/cta_high_intent',
+								'value': 5.0,
+								'currency': 'USD'
+							});
+						}
+					}
+				});
+				
+				// Track Outbound Links
+				document.addEventListener('click', function(e) {
+					const link = e.target.closest('a');
+					if (link && link.hostname !== window.location.hostname && 
+						!link.href.startsWith('tel:') && !link.href.startsWith('mailto:')) {
+						gtag('event', 'click', {
+							'event_category': 'Outbound Link',
+							'event_label': link.href,
+							'transport_type': 'beacon'
+						});
+					}
 				});
 				
 				// Lazy load image fade-in
