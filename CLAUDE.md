@@ -41,6 +41,24 @@
    - One feature at a time
    - Test on localhost before deploying
 
+7. **SEO & Content Guidelines** (Updated 2025-08-12):
+   - NO pricing mentions anywhere on site (no dollar amounts, no "free")
+   - Use value/urgency focused language instead
+   - All service cards should be clickable for user funneling
+   - Keep consistent internal linking between service pages
+   
+8. **Schema Markup Rules**:
+   - Only ONE aggregateRating per page (not in Layout.astro)
+   - Reviews should not have nested LocalBusiness in itemReviewed
+   - Each service page can have its own unique rating
+   
+9. **Recent Site Structure Changes** (2025-08-12):
+   - Homepage: Service cards are clickable, split Windows/Mac cards
+   - Service Area Map: Full-width image with 2-column county grid below
+   - Locations page: Now includes all 7 counties (added Rockwall, Kaufman, Ellis)
+   - Computer services link to `/contact-computer` landing page
+   - About page: 8 track record stats, removed redundant service highlights
+
 ### Project Structure
 - Forms: `/src/pages/contact.astro`, `/src/pages/contact-computer.astro`
 - Layout: `/src/layouts/Layout.astro`
