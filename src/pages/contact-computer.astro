@@ -408,18 +408,47 @@ import Layout from '../layouts/Layout.astro';
 	document.addEventListener('DOMContentLoaded', function() {
 		const form = document.getElementById('contactForm') as HTMLFormElement;
 		const formMessage = document.getElementById('formMessage');
-
+		
 		if (form) {
-			form.addEventListener('submit', function(e) {
-				// Show loading state
-				const button = form.querySelector('.send-button') as HTMLButtonElement;
-				if (button) {
-					button.textContent = 'SENDING...';
-					button.disabled = true;
+			form.addEventListener('submit', async function(e) {
+				e.preventDefault();
+				
+				const submitButton = form.querySelector('.send-button') as HTMLButtonElement;
+				const originalText = submitButton.textContent;
+				submitButton.textContent = 'SENDING...';
+				submitButton.disabled = true;
+				
+				try {
+					const response = await fetch(form.action, {
+						method: 'POST',
+						body: new FormData(form),
+						headers: {
+							'Accept': 'application/json'
+						}
+					});
+					
+					if (response.ok) {
+						formMessage.textContent = 'Service request sent successfully!';
+						formMessage.className = 'form-message success';
+						form.reset();
+						
+						setTimeout(() => {
+							formMessage.style.display = 'none';
+						}, 5000);
+					} else {
+						throw new Error('Form submission failed');
+					}
+				} catch (error) {
+					formMessage.textContent = 'Error sending request. Please try again.';
+					formMessage.className = 'form-message error';
+					
+					setTimeout(() => {
+						formMessage.style.display = 'none';
+					}, 5000);
+				} finally {
+					submitButton.textContent = originalText;
+					submitButton.disabled = false;
 				}
-
-				// Form will submit normally to FormSubmit
-				// Success message will be handled on redirect
 			});
 		}
 	});
