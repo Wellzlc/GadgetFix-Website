@@ -15,7 +15,7 @@ interface Props {
 const { 
   formId = 'contact-form',
   formType = 'contact',
-  endpoint = '/api/antispam/validate',
+  endpoint = '/.netlify/functions/antispam-validate',
   includeComputerFields = false,
   buttonText = 'SEND'
 } = Astro.props;

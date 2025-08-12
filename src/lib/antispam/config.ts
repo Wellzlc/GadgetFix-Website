@@ -149,35 +149,39 @@ export const DEFAULT_CONFIG: SpamConfig = {
 export function getConfig(): SpamConfig {
   const config = { ...DEFAULT_CONFIG };
   
+  // Get environment variables safely
+  const isDev = typeof process !== 'undefined' && process.env.NODE_ENV === 'development';
+  const isProd = typeof process !== 'undefined' && process.env.NODE_ENV === 'production';
+  
   // Development mode adjustments
-  if (import.meta.env.DEV) {
+  if (isDev) {
     config.learningMode = true;  // Don't block in dev
     config.blockThreshold = 0.99; // Higher threshold in dev
     config.notifications.enabled = false;
   }
   
   // Production mode adjustments
-  if (import.meta.env.PROD) {
+  if (isProd) {
     config.strictMode = true;     // More aggressive in production
     config.modules.threatIntelligence = true; // Use threat feeds
   }
   
   // Load from environment variables if available
-  if (import.meta.env.SPAM_BLOCK_THRESHOLD) {
-    config.blockThreshold = parseFloat(import.meta.env.SPAM_BLOCK_THRESHOLD);
+  if (typeof process !== 'undefined' && process.env.SPAM_BLOCK_THRESHOLD) {
+    config.blockThreshold = parseFloat(process.env.SPAM_BLOCK_THRESHOLD);
   }
   
-  if (import.meta.env.SPAM_QUARANTINE_THRESHOLD) {
-    config.quarantineThreshold = parseFloat(import.meta.env.SPAM_QUARANTINE_THRESHOLD);
+  if (typeof process !== 'undefined' && process.env.SPAM_QUARANTINE_THRESHOLD) {
+    config.quarantineThreshold = parseFloat(process.env.SPAM_QUARANTINE_THRESHOLD);
   }
   
-  if (import.meta.env.SPAM_NOTIFICATION_EMAIL) {
-    config.notifications.email = import.meta.env.SPAM_NOTIFICATION_EMAIL;
+  if (typeof process !== 'undefined' && process.env.SPAM_NOTIFICATION_EMAIL) {
+    config.notifications.email = process.env.SPAM_NOTIFICATION_EMAIL;
     config.notifications.enabled = true;
   }
   
-  if (import.meta.env.SPAM_SLACK_WEBHOOK) {
-    config.notifications.slackWebhook = import.meta.env.SPAM_SLACK_WEBHOOK;
+  if (typeof process !== 'undefined' && process.env.SPAM_SLACK_WEBHOOK) {
+    config.notifications.slackWebhook = process.env.SPAM_SLACK_WEBHOOK;
     config.notifications.enabled = true;
   }
   

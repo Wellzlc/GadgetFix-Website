@@ -454,7 +454,7 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 				
 				try {
 					// First validate with spam protection
-					const response = await fetch('/api/antispam/validate', {
+					const response = await fetch('/.netlify/functions/antispam-validate', {
 						method: 'POST',
 						body: JSON.stringify(data),
 						headers: {
