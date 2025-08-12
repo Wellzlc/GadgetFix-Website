@@ -21,7 +21,7 @@ import Layout from '../layouts/Layout.astro';
 					<a href="tel:+14024166942" class="phone-number">(402) 416-6942</a>
 				</p>
 				<p class="or-text">OR FILL OUT OUR SERVICE REQUEST FORM.</p>
-				<p class="support-text">Professional network installation and cabling services for businesses throughout Dallas-Fort Worth. Cat6, WiFi, and complete network solutions!</p>
+				<p class="support-text">Professional network installation and cabling services for homes and businesses throughout Dallas-Fort Worth. Cat6, WiFi, and complete network solutions!</p>
 			</div>
 		</div>
 		
@@ -47,7 +47,7 @@ import Layout from '../layouts/Layout.astro';
 						</div>
 						
 						<div class="form-field">
-							<input type="text" id="businessName" name="business_name" placeholder="BUSINESS NAME" required>
+							<input type="text" id="businessName" name="business_name" placeholder="BUSINESS/HOME NAME">
 						</div>
 						
 						<div class="form-field">
@@ -61,8 +61,10 @@ import Layout from '../layouts/Layout.astro';
 						<div class="form-field">
 							<select id="serviceType" name="network_service_type" required>
 								<option value="">SELECT SERVICE TYPE</option>
+								<option value="Home WiFi Setup">Home WiFi Setup</option>
+								<option value="Home Network Wiring">Home Network Wiring</option>
 								<option value="Cat6 Installation">Cat6 Cable Installation</option>
-								<option value="WiFi Setup">WiFi Network Setup</option>
+								<option value="WiFi Setup">Business WiFi Setup</option>
 								<option value="Network Troubleshooting">Network Troubleshooting</option>
 								<option value="Office Network Design">Office Network Design</option>
 								<option value="Structured Cabling">Structured Cabling</option>
@@ -74,7 +76,8 @@ import Layout from '../layouts/Layout.astro';
 						
 						<div class="form-field">
 							<select id="businessSize" name="business_size" required>
-								<option value="">BUSINESS SIZE</option>
+								<option value="">SELECT SIZE</option>
+								<option value="Residential/Home">Residential/Home</option>
 								<option value="1-10 employees">1-10 Employees</option>
 								<option value="11-25 employees">11-25 Employees</option>
 								<option value="26-50 employees">26-50 Employees</option>
