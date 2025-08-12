@@ -1,6 +1,6 @@
 ---
 import Breadcrumb from '../components/Breadcrumb.astro';
-// import BotProtection from '../components/BotProtection.astro'; // TEMPORARILY DISABLED
+// import BotProtection from '../components/BotProtection.astro'; // Too many false positives
 
 export interface BreadcrumbItem {
 	name: string;
@@ -79,6 +79,9 @@ const {
 				html { font-size: 16px; }
 			}
 		</style>
+		<!-- Cloudflare Turnstile -->
+		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+		
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<meta name="keywords" content={keywords} />
@@ -499,7 +502,7 @@ const {
 		</script>
 		
 		<!-- Bot Protection System -->
-		<!-- <BotProtection /> TEMPORARILY DISABLED -->
+		<!-- <BotProtection /> Disabled: Too many false positives -->
 		
 		<!-- Performance optimized JavaScript -->
 		<script>
