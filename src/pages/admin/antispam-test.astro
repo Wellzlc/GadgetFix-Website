@@ -1,0 +1,150 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Anti-Spam Dashboard | GadgetFix Admin">
+  <div class="admin-container">
+    <h1>SpamGuard Dashboard</h1>
+    <div id="auth-status">Checking authentication...</div>
+    <div id="dashboard-content" style="display: none;">
+      <h2>Dashboard Content</h2>
+      <p>You are logged in!</p>
+      <button id="logout-btn">Logout</button>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .admin-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .auth-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  
+  .auth-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    min-width: 300px;
+  }
+  
+  .auth-box h2 {
+    margin-top: 0;
+  }
+  
+  .auth-box input {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 1rem 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .auth-box button {
+    width: 100%;
+    padding: 0.75rem;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .auth-box button:hover {
+    background: #0056b3;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 0.5rem;
+  }
+</style>
+
+<script>
+  // Simple authentication check
+  const PASSWORD = 'Lc9401765@#$';
+  
+  function checkAuth() {
+    const token = localStorage.getItem('admin_token');
+    const authStatus = document.getElementById('auth-status');
+    const dashboardContent = document.getElementById('dashboard-content');
+    
+    if (token === 'authenticated') {
+      // User is logged in
+      authStatus.style.display = 'none';
+      dashboardContent.style.display = 'block';
+    } else {
+      // Show login modal
+      showLoginModal();
+    }
+  }
+  
+  function showLoginModal() {
+    const authStatus = document.getElementById('auth-status');
+    authStatus.innerHTML = '';
+    
+    const modal = document.createElement('div');
+    modal.className = 'auth-modal';
+    modal.innerHTML = `
+      <div class="auth-box">
+        <h2>Authentication Required</h2>
+        <input type="password" id="password-input" placeholder="Enter admin password" />
+        <button id="login-btn">Login</button>
+        <div id="error-msg" class="error"></div>
+      </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Add event listeners
+    document.getElementById('login-btn').addEventListener('click', handleLogin);
+    document.getElementById('password-input').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') handleLogin();
+    });
+    
+    // Focus password input
+    document.getElementById('password-input').focus();
+  }
+  
+  function handleLogin() {
+    const passwordInput = document.getElementById('password-input');
+    const errorMsg = document.getElementById('error-msg');
+    
+    if (passwordInput.value === PASSWORD) {
+      // Correct password
+      localStorage.setItem('admin_token', 'authenticated');
+      location.reload();
+    } else {
+      // Wrong password
+      errorMsg.textContent = 'Invalid password';
+      passwordInput.value = '';
+      passwordInput.focus();
+    }
+  }
+  
+  // Logout function
+  document.addEventListener('DOMContentLoaded', () => {
+    checkAuth();
+    
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('admin_token');
+        location.reload();
+      });
+    }
+  });
+</script>

@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import BotProtection from '../components/BotProtection.astro';
+import spamProtectionScript from '../scripts/spam-protection.js?raw';
 ---
 
 <Layout 
@@ -414,12 +415,21 @@ import BotProtection from '../components/BotProtection.astro';
 	}
 </style>
 
+<script define:vars={{ spamProtectionScript }}>
+	// Add spam protection script
+	eval(spamProtectionScript);
+</script>
+
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
 		const form = document.getElementById('contactForm') as HTMLFormElement;
 		const formMessage = document.getElementById('formMessage');
 		
+		// Initialize spam protection tracking
+		let spamProtection;
 		if (form) {
+			spamProtection = new SpamProtection(form);
+			
 			form.addEventListener('submit', async function(e) {
 				e.preventDefault();
 				
@@ -428,27 +438,84 @@ import BotProtection from '../components/BotProtection.astro';
 				submitButton.textContent = 'SENDING...';
 				submitButton.disabled = true;
 				
+				// Collect form data with spam protection metadata
+				const formData = new FormData(form);
+				const data = {
+					name: formData.get('name'),
+					email: formData.get('email'),
+					phone: formData.get('phone'),
+					message: formData.get('message'),
+					computer_type: formData.get('computer_type'),
+					issue_type: formData.get('issue_type'),
+					website: formData.get('website'), // honeypot
+					formType: 'computer-support',
+					...spamProtection.getMetadata()
+				};
+				
 				try {
-					const response = await fetch(form.action, {
+					// First validate with spam protection
+					const response = await fetch('/api/antispam/validate', {
 						method: 'POST',
-						body: new FormData(form),
+						body: JSON.stringify(data),
 						headers: {
+							'Content-Type': 'application/json',
 							'Accept': 'application/json'
 						}
 					});
 					
-					if (response.ok) {
-						formMessage.textContent = 'Service request sent successfully! We will contact you soon.';
+					const result = await response.json();
+					
+					if (response.ok && result.action === 'allow') {
+						// Validation passed, now send to FormSubmit directly from client
+						const emailData = new FormData();
+						emailData.append('name', formData.get('name'));
+						emailData.append('email', formData.get('email'));
+						emailData.append('phone', formData.get('phone'));
+						emailData.append('message', formData.get('message'));
+						emailData.append('computer_type', formData.get('computer_type'));
+						emailData.append('issue_type', formData.get('issue_type'));
+						emailData.append('_subject', 'New Computer Service Request from GadgetFix');
+						emailData.append('_captcha', 'false');
+						emailData.append('_template', 'table');
+						
+						const emailResponse = await fetch('https://formsubmit.co/ajax/wellz.levi@gmail.com', {
+							method: 'POST',
+							headers: {
+								'Accept': 'application/json'
+							},
+							body: emailData
+						});
+						
+						const emailResult = await emailResponse.json();
+						
+						if (emailResponse.ok && emailResult.success === 'true') {
+							formMessage.textContent = 'Service request sent successfully! We will contact you soon.';
+							formMessage.className = 'form-message success';
+							formMessage.style.display = 'block';
+							form.reset();
+							
+							setTimeout(() => {
+								formMessage.style.display = 'none';
+							}, 5000);
+						} else {
+							console.error('FormSubmit error:', emailResult);
+							throw new Error('Email sending failed');
+						}
+					} else if (result.action === 'quarantine') {
+						formMessage.textContent = result.message || 'Your submission has been received and is pending review.';
 						formMessage.className = 'form-message success';
 						formMessage.style.display = 'block';
 						form.reset();
 						
 						setTimeout(() => {
 							formMessage.style.display = 'none';
-						}, 5000);
+						}, 7000);
+					} else if (result.action === 'block') {
+						formMessage.textContent = result.message || 'Your submission has been blocked. Please contact us directly at (402) 416-6942.';
+						formMessage.className = 'form-message error';
+						formMessage.style.display = 'block';
 					} else {
-						console.error('Form submission failed with status:', response.status);
-						throw new Error('Form submission failed');
+						throw new Error('Validation failed');
 					}
 				} catch (error) {
 					console.error('Form submission error:', error);

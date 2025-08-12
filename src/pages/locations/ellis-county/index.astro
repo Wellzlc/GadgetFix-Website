@@ -2,8 +2,8 @@
 import Layout from '../../../layouts/Layout.astro';
 
 // Define county-specific data
-const countyName = "Collin County";
-const cities = ["McKinney", "Frisco", "Allen", "Wylie", "Murphy", "Lucas", "Fairview", "Prosper", "Princeton", "Melissa", "Anna", "Celina", "Parker"];
+const countyName = "Ellis County";
+const cities = ["Waxahachie", "Red Oak", "Midlothian"];
 ---
 
 <Layout 
@@ -32,7 +32,7 @@ const cities = ["McKinney", "Frisco", "Allen", "Wylie", "Murphy", "Lucas", "Fair
 				
 				<div class="cities-grid">
 					{cities.map(city => (
-						<a href={`/locations/collin-county/${city.toLowerCase().replace(' ', '-')}`} class="city-card">
+						<a href={`/locations/ellis-county/${city.toLowerCase().replace(' ', '-')}`} class="city-card">
 							<h3>{city}</h3>
 							<p>Mobile repair service</p>
 						</a>

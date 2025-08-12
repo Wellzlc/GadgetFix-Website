@@ -1,0 +1,293 @@
+---
+/**
+ * Spam-protected form component with client-side tracking
+ * Collects behavioral data for anti-spam analysis
+ */
+
+interface Props {
+  formId?: string;
+  formType?: string;
+  endpoint?: string;
+  includeComputerFields?: boolean;
+  buttonText?: string;
+}
+
+const { 
+  formId = 'contact-form',
+  formType = 'contact',
+  endpoint = '/api/antispam/validate',
+  includeComputerFields = false,
+  buttonText = 'SEND'
+} = Astro.props;
+---
+
+<form id={formId} class="spam-protected-form mobile-form" data-endpoint={endpoint} data-form-type={formType}>
+  <div class="form-field">
+    <input type="text" id="name" name="name" placeholder="FULL NAME" required />
+  </div>
+  
+  <div class="form-field">
+    <input type="email" id="email" name="email" placeholder="EMAIL ADDRESS" required />
+  </div>
+  
+  <div class="form-field">
+    <input type="tel" id="phone" name="phone" placeholder="PHONE NUMBER" required />
+  </div>
+  
+  {includeComputerFields && (
+    <>
+      <div class="form-field">
+        <select id="computerType" name="computer_type" required>
+          <option value="">SELECT COMPUTER TYPE</option>
+          <option value="Windows Desktop">Windows Desktop</option>
+          <option value="Windows Laptop">Windows Laptop</option>
+          <option value="MacBook Pro">MacBook Pro</option>
+          <option value="MacBook Air">MacBook Air</option>
+          <option value="iMac">iMac</option>
+          <option value="Mac mini">Mac mini</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      
+      <div class="form-field">
+        <select id="issueType" name="issue_type" required>
+          <option value="">SELECT ISSUE TYPE</option>
+          <option value="Password Reset">Password Reset</option>
+          <option value="Virus/Malware">Virus/Malware</option>
+          <option value="Slow Performance">Slow Performance</option>
+          <option value="Won't Start">Won't Start</option>
+          <option value="Blue Screen">Blue Screen</option>
+          <option value="Data Recovery">Data Recovery</option>
+          <option value="Other">Other Issue</option>
+        </select>
+      </div>
+      
+      <div class="form-field">
+        <textarea id="message" name="message" placeholder="DESCRIBE YOUR COMPUTER ISSUE" rows="4" required></textarea>
+      </div>
+    </>
+  )}
+  
+  {!includeComputerFields && (
+    <div class="form-field">
+      <textarea id="message" name="message" placeholder="MESSAGE" rows="6" required></textarea>
+    </div>
+  )}
+  
+  <!-- Honeypot field (hidden from users) -->
+  <div style="position: absolute; left: -9999px;">
+    <label for="website">Website</label>
+    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+  </div>
+  
+  <button type="submit" class="send-button">{buttonText}</button>
+  
+  <div id="form-message" class="form-message" style="display: none;"></div>
+</form>
+
+<style>
+  .spam-protected-form {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .submit-btn {
+    background: #007bff;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .submit-btn:hover {
+    background: #0056b3;
+  }
+  
+  .submit-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .form-message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 4px;
+    text-align: center;
+  }
+  
+  .form-message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+  
+  .form-message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+  
+  .form-message.warning {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+  }
+</style>
+
+<script>
+  class SpamProtectedForm {
+    constructor(form) {
+      this.form = form;
+      this.startTime = Date.now();
+      this.keystrokes = 0;
+      this.mouseMovements = 0;
+      this.fieldFocusOrder = [];
+      this.copyPasteEvents = 0;
+      this.sessionId = this.generateSessionId();
+      
+      this.init();
+    }
+    
+    init() {
+      // Track form interactions
+      this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+      
+      // Track keystrokes
+      this.form.addEventListener('keypress', () => this.keystrokes++);
+      
+      // Track mouse movements
+      this.form.addEventListener('mousemove', () => this.mouseMovements++);
+      
+      // Track field focus order
+      this.form.querySelectorAll('input, textarea').forEach(field => {
+        field.addEventListener('focus', () => {
+          if (!this.fieldFocusOrder.includes(field.name)) {
+            this.fieldFocusOrder.push(field.name);
+          }
+        });
+      });
+      
+      // Track copy/paste
+      this.form.addEventListener('paste', () => this.copyPasteEvents++);
+    }
+    
+    async handleSubmit(e) {
+      e.preventDefault();
+      
+      const submitBtn = this.form.querySelector('.submit-btn');
+      const messageDiv = document.getElementById('form-message');
+      
+      // Disable submit button
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      
+      // Collect form data
+      const formData = new FormData(this.form);
+      const data = Object.fromEntries(formData);
+      
+      // Add metadata
+      data.formId = this.form.id;
+      data.formType = this.form.dataset.formType || 'contact';
+      data.sessionId = this.sessionId;
+      data.submissionTime = Date.now() - this.startTime;
+      data.keystrokes = this.keystrokes;
+      data.mouseMovements = this.mouseMovements;
+      data.fieldFocusOrder = this.fieldFocusOrder;
+      data.copyPasteEvents = this.copyPasteEvents;
+      data.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      data.language = navigator.language;
+      data.screenResolution = `${screen.width}x${screen.height}`;
+      data.colorDepth = screen.colorDepth;
+      data.platform = navigator.platform;
+      data.plugins = this.getPlugins();
+      
+      try {
+        const response = await fetch(this.form.dataset.endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        
+        // Show message
+        messageDiv.style.display = 'block';
+        
+        if (result.success) {
+          if (result.status === 'pending_review') {
+            messageDiv.className = 'form-message warning';
+          } else {
+            messageDiv.className = 'form-message success';
+          }
+          messageDiv.textContent = result.message;
+          
+          // Reset form
+          this.form.reset();
+          this.resetTracking();
+        } else {
+          messageDiv.className = 'form-message error';
+          messageDiv.textContent = result.message;
+        }
+        
+      } catch (error) {
+        console.error('Form submission error:', error);
+        messageDiv.style.display = 'block';
+        messageDiv.className = 'form-message error';
+        messageDiv.textContent = 'An error occurred. Please try again later.';
+      } finally {
+        // Re-enable submit button
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+      }
+    }
+    
+    resetTracking() {
+      this.startTime = Date.now();
+      this.keystrokes = 0;
+      this.mouseMovements = 0;
+      this.fieldFocusOrder = [];
+      this.copyPasteEvents = 0;
+    }
+    
+    generateSessionId() {
+      return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    }
+    
+    getPlugins() {
+      try {
+        return Array.from(navigator.plugins).map(p => p.name).slice(0, 10);
+      } catch {
+        return [];
+      }
+    }
+  }
+  
+  // Initialize all spam-protected forms
+  document.querySelectorAll('.spam-protected-form').forEach(form => {
+    new SpamProtectedForm(form);
+  });
+</script>

@@ -2,8 +2,8 @@
 import Layout from '../../../layouts/Layout.astro';
 
 // Define county-specific data
-const countyName = "Denton County";
-const cities = ["Denton", "Lewisville", "Flower Mound", "Highland Village", "Lake Dallas", "Hickory Creek", "Trophy Club", "Argyle", "Roanoke", "Coppell", "The Colony", "Little Elm", "Corinth"];
+const countyName = "Kaufman County";
+const cities = ["Terrell", "Forney"];
 ---
 
 <Layout 
@@ -32,7 +32,7 @@ const cities = ["Denton", "Lewisville", "Flower Mound", "Highland Village", "Lak
         
         <div class="cities-grid">
           {cities.map(city => (
-            <a href={`/locations/denton-county/${city.toLowerCase().replace(' ', '-')}`} class="city-card">
+            <a href={`/locations/kaufman-county/${city.toLowerCase().replace(' ', '-')}`} class="city-card">
               <h3>{city}</h3>
               <p>Mobile repair service</p>
             </a>
