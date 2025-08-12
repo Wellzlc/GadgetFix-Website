@@ -6,10 +6,10 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-// Temporarily disable SpamGuard due to import issues
+// SpamGuard disabled - using basic spam protection only
 // import { SpamGuard } from '../../../lib/antispam/SpamGuard';
 
-// Initialize SpamGuard instance (disabled for now)
+// SpamGuard instance disabled for stability
 // const spamGuard = new SpamGuard();
 
 // FormSubmit.co configuration
@@ -91,11 +91,9 @@ export const POST: APIRoute = async ({ request }) => {
         referrer
       };
       
-      // Only run full SpamGuard if simple checks passed
+      // SpamGuard validation disabled - using basic validation only
       if (result.action === 'allow') {
-        // SpamGuard disabled temporarily
         console.log('Full SpamGuard validation skipped - using basic validation only');
-        // result = await spamGuard.validate(submission);
       }
     } catch (spamGuardError) {
       console.error('SpamGuard validation failed, using basic validation:', spamGuardError);
