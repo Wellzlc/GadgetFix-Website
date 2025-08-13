@@ -30,18 +30,8 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
   
-# Enable compression
+# Enable compression hint (let Netlify handle actual compression)
 /*
-  Content-Encoding: gzip
   Vary: Accept-Encoding
 
-# Preload critical resources
-/
-  Link: </styles/critical.css>; rel=preload; as=style
-  Link: </images/optimized/hero-background.webp>; rel=preload; as=image; type=image/webp
-  Link: </fonts/inter-var.woff2>; rel=preload; as=font; type=font/woff2; crossorigin
-
-# Push critical resources for HTTP/2
-/
-  Link: </styles/critical.css>; rel=preload; as=style; nopush
-  Link: </_assets/vendor.js>; rel=modulepreload; nopush
+# CSS and JS assets are handled by Astro build process

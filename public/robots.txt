@@ -85,4 +85,6 @@ Allow: /images/*.jpg
 Allow: /images/*.jpeg
 Allow: /images/*.gif
 Allow: /images/*.svg
-Allow: /images/*.webp<!-- Rebuild trigger: Wed, Aug 13, 2025  3:05:40 PM -->
+Allow: /images/*.webp
+
+# Rebuild trigger: Wed, Aug 13, 2025  3:05:40 PM
