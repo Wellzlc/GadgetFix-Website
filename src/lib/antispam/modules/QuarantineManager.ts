@@ -6,7 +6,7 @@
 import { FormSubmission, QuarantineEntry, Threat, ValidationResult } from '../types';
 
 export class QuarantineManager {
-  private quarantine: Map<string, QuarantineEntry> = new Map();
+  private quarantineStore: Map<string, QuarantineEntry> = new Map();
   private readonly maxQuarantineSize = 1000;
   private readonly quarantineExpiryDays = 7;
   private reviewCallbacks: Map<string, (approved: boolean, notes?: string) => void> = new Map();
@@ -27,7 +27,7 @@ export class QuarantineManager {
       status: 'pending'
     };
 
-    this.quarantine.set(quarantineId, entry);
+    this.quarantineStore.set(quarantineId, entry);
     
     // Enforce size limit
     this.enforceQuarantineLimit();
@@ -47,7 +47,7 @@ export class QuarantineManager {
     reviewedBy: string,
     notes?: string
   ): Promise<ValidationResult> {
-    const entry = this.quarantine.get(quarantineId);
+    const entry = this.quarantineStore.get(quarantineId);
     
     if (!entry) {
       throw new Error(`Quarantine entry ${quarantineId} not found`);
@@ -85,17 +85,17 @@ export class QuarantineManager {
   }
 
   getEntry(quarantineId: string): QuarantineEntry | undefined {
-    return this.quarantine.get(quarantineId);
+    return this.quarantineStore.get(quarantineId);
   }
 
   getPendingEntries(): QuarantineEntry[] {
-    return Array.from(this.quarantine.values())
+    return Array.from(this.quarantineStore.values())
       .filter(entry => entry.status === 'pending')
       .sort((a, b) => b.confidence - a.confidence);
   }
 
   getRecentEntries(limit: number = 50): QuarantineEntry[] {
-    return Array.from(this.quarantine.values())
+    return Array.from(this.quarantineStore.values())
       .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime())
       .slice(0, limit);
   }
@@ -109,7 +109,7 @@ export class QuarantineManager {
     endDate?: Date;
     reviewedBy?: string;
   }): QuarantineEntry[] {
-    let entries = Array.from(this.quarantine.values());
+    let entries = Array.from(this.quarantineStore.values());
     
     if (criteria.status) {
       entries = entries.filter(e => e.status === criteria.status);
@@ -171,26 +171,26 @@ export class QuarantineManager {
   }
 
   private enforceQuarantineLimit() {
-    if (this.quarantine.size > this.maxQuarantineSize) {
+    if (this.quarantineStore.size > this.maxQuarantineSize) {
       // Remove oldest expired entries first
-      const expired = Array.from(this.quarantine.entries())
+      const expired = Array.from(this.quarantineStore.entries())
         .filter(([_, entry]) => entry.status === 'expired')
         .sort((a, b) => a[1].timestamp.getTime() - b[1].timestamp.getTime());
       
       for (const [id] of expired) {
-        if (this.quarantine.size <= this.maxQuarantineSize) break;
-        this.quarantine.delete(id);
+        if (this.quarantineStore.size <= this.maxQuarantineSize) break;
+        this.quarantineStore.delete(id);
       }
       
       // If still over limit, remove oldest reviewed entries
-      if (this.quarantine.size > this.maxQuarantineSize) {
-        const reviewed = Array.from(this.quarantine.entries())
+      if (this.quarantineStore.size > this.maxQuarantineSize) {
+        const reviewed = Array.from(this.quarantineStore.entries())
           .filter(([_, entry]) => entry.status !== 'pending')
           .sort((a, b) => a[1].timestamp.getTime() - b[1].timestamp.getTime());
         
         for (const [id] of reviewed) {
-          if (this.quarantine.size <= this.maxQuarantineSize) break;
-          this.quarantine.delete(id);
+          if (this.quarantineStore.size <= this.maxQuarantineSize) break;
+          this.quarantineStore.delete(id);
         }
       }
     }
@@ -198,12 +198,12 @@ export class QuarantineManager {
 
   private scheduleExpiry(quarantineId: string) {
     setTimeout(() => {
-      const entry = this.quarantine.get(quarantineId);
+      const entry = this.quarantineStore.get(quarantineId);
       if (entry && entry.status === 'pending') {
         entry.status = 'expired';
         this.handleExpiredEntry(entry);
       }
-    }, this.quarantineExpiryDays * 24 * 60 * 60 * 1000);
+    }, this.quarantineStoreExpiryDays * 24 * 60 * 60 * 1000);
   }
 
   private async handleExpiredEntry(entry: QuarantineEntry) {
@@ -255,7 +255,7 @@ export class QuarantineManager {
 
   getStatistics() {
     const stats = {
-      total: this.quarantine.size,
+      total: this.quarantineStore.size,
       pending: 0,
       approved: 0,
       rejected: 0,
@@ -272,7 +272,7 @@ export class QuarantineManager {
     
     const reviewTimes: number[] = [];
     
-    for (const entry of this.quarantine.values()) {
+    for (const entry of this.quarantineStore.values()) {
       // Status counts
       stats[entry.status]++;
       
@@ -303,7 +303,7 @@ export class QuarantineManager {
   }
 
   exportEntries(format: 'json' | 'csv' = 'json'): string {
-    const entries = Array.from(this.quarantine.values());
+    const entries = Array.from(this.quarantineStore.values());
     
     if (format === 'json') {
       return JSON.stringify(entries, null, 2);
@@ -334,12 +334,12 @@ export class QuarantineManager {
 
   clearExpired() {
     const now = new Date();
-    const expiryTime = this.quarantineExpiryDays * 24 * 60 * 60 * 1000;
+    const expiryTime = this.quarantineStoreExpiryDays * 24 * 60 * 60 * 1000;
     
-    for (const [id, entry] of this.quarantine.entries()) {
+    for (const [id, entry] of this.quarantineStore.entries()) {
       if (entry.status === 'expired' || 
           (now.getTime() - entry.timestamp.getTime() > expiryTime * 2)) {
-        this.quarantine.delete(id);
+        this.quarantineStore.delete(id);
       }
     }
   }

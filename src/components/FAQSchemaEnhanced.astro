@@ -61,6 +61,13 @@ const metrics = measureFAQPerformance(startTime, sortedFAQs, schemaString, hasIn
 
 // Generate unique component ID
 const componentId = `faq-${Math.random().toString(36).substr(2, 9)}`;
+
+// Calculate category counts for filtering
+const categoryCounts = sortedFAQs.reduce((acc, faq) => {
+  const cat = faq.category || 'general';
+  acc[cat] = (acc[cat] || 0) + 1;
+  return acc;
+}, {} as Record<string, number>);
 ---
 
 <!-- JSON-LD Schema -->
@@ -97,14 +104,8 @@ const componentId = `faq-${Math.random().toString(36).substr(2, 9)}`;
         <button class="faq-category active" data-category="all">
           All ({sortedFAQs.length})
         </button>
-        {Object.entries(
-          sortedFAQs.reduce((acc, faq) => {
-            const cat = faq.category || 'general';
-            acc[cat] = (acc[cat] || 0) + 1;
-            return acc;
-          }, {} as Record<string, number>)
-        ).map(([category, count]) => (
-          <button class="faq-category" data-category={category}>
+        {Object.entries(categoryCounts).map(([category, count]) => (
+          <button class="faq-category" data-category={category} key={category}>
             {category.charAt(0).toUpperCase() + category.slice(1)} ({count})
           </button>
         ))}

@@ -1,0 +1,82 @@
+{
+  "$ref": "#/definitions/faqTemplates",
+  "definitions": {
+    "faqTemplates": {
+      "type": "object",
+      "properties": {
+        "templateName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "variables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "baseFAQs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              },
+              "answer": {
+                "type": "string"
+              },
+              "category": {
+                "type": "string"
+              },
+              "priority": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "question",
+              "answer",
+              "category",
+              "priority"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "customization": {
+          "type": "object",
+          "properties": {
+            "allowAdditions": {
+              "type": "boolean",
+              "default": true
+            },
+            "allowRemoval": {
+              "type": "boolean",
+              "default": false
+            },
+            "maxFAQs": {
+              "type": "number",
+              "default": 15
+            },
+            "minFAQs": {
+              "type": "number",
+              "default": 5
+            }
+          },
+          "additionalProperties": false
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "templateName",
+        "description",
+        "variables",
+        "baseFAQs"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

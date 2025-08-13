@@ -147,3 +147,12 @@ export type ProcessedFAQ<T extends FAQItem = FAQItem> = T & {
   processed: boolean;
   locationReplaced?: boolean;
 };
+
+// Filter type for FAQ queries
+export interface FAQFilter {
+  serviceType?: string;
+  location?: string;
+  categories?: string[];
+  maxItems?: number;
+  minPriority?: number;
+}

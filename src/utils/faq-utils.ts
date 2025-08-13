@@ -3,7 +3,8 @@ import type {
   FAQPageSchema, 
   ProcessedFAQ, 
   LocationConfig,
-  FAQPerformanceMetrics 
+  FAQPerformanceMetrics,
+  FAQFilter 
 } from '../types/faq';
 
 /**
@@ -283,4 +284,55 @@ export function generateBreadcrumb(path: string[], currentPage: string) {
       item: index === path.length - 1 ? undefined : `/${path.slice(0, index + 1).join('/')}`
     }))
   };
+}
+
+/**
+ * Get filtered FAQs from content collections
+ */
+export async function getFilteredFAQs(filter: FAQFilter): Promise<FAQItem[]> {
+  try {
+    // Import getCollection dynamically to avoid SSR issues
+    const { getCollection } = await import('astro:content');
+    
+    // Get all FAQ collections
+    const faqCollections = await getCollection('faqs');
+    
+    // Flatten all FAQs from all collections
+    let allFAQs: FAQItem[] = [];
+    for (const collection of faqCollections) {
+      if (collection.data.faqs && Array.isArray(collection.data.faqs)) {
+        allFAQs.push(...collection.data.faqs);
+      }
+    }
+    
+    // Apply filters
+    let filteredFAQs = allFAQs;
+    
+    // Filter by categories
+    if (filter.categories && filter.categories.length > 0) {
+      filteredFAQs = filteredFAQs.filter(faq => 
+        filter.categories!.includes(faq.category || 'general')
+      );
+    }
+    
+    // Filter by minimum priority
+    if (filter.minPriority !== undefined) {
+      filteredFAQs = filteredFAQs.filter(faq => 
+        (faq.priority || 50) >= filter.minPriority!
+      );
+    }
+    
+    // Sort by priority (higher first)
+    filteredFAQs = sortByPriority(filteredFAQs);
+    
+    // Limit results
+    if (filter.maxItems && filter.maxItems > 0) {
+      filteredFAQs = filteredFAQs.slice(0, filter.maxItems);
+    }
+    
+    return filteredFAQs;
+  } catch (error) {
+    console.error('Error loading FAQs from content collections:', error);
+    return [];
+  }
 }

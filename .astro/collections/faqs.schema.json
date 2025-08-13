@@ -1,0 +1,163 @@
+{
+  "$ref": "#/definitions/faqs",
+  "definitions": {
+    "faqs": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "faqs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string",
+                "minLength": 10,
+                "errorMessage": {
+                  "minLength": "Question must be at least 10 characters"
+                }
+              },
+              "answer": {
+                "type": "string",
+                "minLength": 20,
+                "errorMessage": {
+                  "minLength": "Answer must be at least 20 characters"
+                }
+              },
+              "category": {
+                "type": "string",
+                "enum": [
+                  "general",
+                  "services",
+                  "pricing",
+                  "technical",
+                  "emergency",
+                  "location",
+                  "business"
+                ],
+                "default": "general"
+              },
+              "priority": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100,
+                "default": 50
+              },
+              "keywords": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "relatedServices": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "lastUpdated": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  {
+                    "type": "integer",
+                    "format": "unix-time"
+                  }
+                ]
+              },
+              "isLocationSpecific": {
+                "type": "boolean",
+                "default": false
+              }
+            },
+            "required": [
+              "question",
+              "answer"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "locationVariables": {
+          "type": "boolean",
+          "default": false
+        },
+        "schemaType": {
+          "type": "string",
+          "enum": [
+            "FAQPage",
+            "SpecialAnnouncement",
+            "HowTo"
+          ],
+          "default": "FAQPage"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "author": {
+              "type": "string"
+            },
+            "datePublished": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "integer",
+                  "format": "unix-time"
+                }
+              ]
+            },
+            "dateModified": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "integer",
+                  "format": "unix-time"
+                }
+              ]
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "faqs"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

@@ -1,74 +1,55 @@
-[
-  {
-    "question": "How long does virus removal take?",
-    "answer": "Most virus removals take 30-60 minutes. Password resets typically take 15-30 minutes, computer optimization takes 30-45 minutes, and full system cleanups take 45-60 minutes. We complete services on-site while you wait.",
-    "category": "service",
-    "priority": 10,
-    "tags": ["virus-removal", "timing", "password-reset", "optimization"],
-    "services": ["virus-removal", "password-reset", "optimization"],
-    "metaTitle": "Computer Virus Removal Time - How Long Does It Take?",
-    "metaDescription": "Learn how long computer virus removal, password reset, and optimization services take. Most services completed in 30-60 minutes on-site.",
-    "acceptedAnswerType": "text",
-    "clickTrackingId": "faq-virus-removal-time"
-  },
-  {
-    "question": "Do you come to my location?",
-    "answer": "Yes! We're a 100% mobile service covering all of Dallas-Fort Worth. We come to your home, office, coffee shop, or any safe public location. Our service area includes Dallas, Fort Worth, Plano, Frisco, Irving, Arlington, and surrounding cities within a 30-mile radius.",
-    "category": "service",
-    "priority": 9,
-    "tags": ["mobile-service", "service-area", "dfw"],
-    "services": ["mobile-service"],
-    "metaTitle": "Mobile Computer Service - We Come to You",
-    "metaDescription": "100% mobile computer service in Dallas-Fort Worth. We come to your location - home, office, or any safe public place.",
-    "acceptedAnswerType": "text",
-    "clickTrackingId": "faq-mobile-service"
-  },
-  {
-    "question": "What guarantee do you offer?",
-    "answer": "All services come with our satisfaction guarantee. If you experience any issues with the service we provided, we'll return to fix it at no additional charge. We guarantee complete virus removal and full password recovery on all supported systems.",
-    "category": "warranty",
-    "priority": 8,
-    "tags": ["guarantee", "warranty", "satisfaction"],
-    "services": ["all"],
-    "metaTitle": "Computer Service Guarantee and Warranty",
-    "metaDescription": "All computer services backed by satisfaction guarantee. Free return service if issues arise with our work.",
-    "acceptedAnswerType": "text",
-    "clickTrackingId": "faq-guarantee"
-  },
-  {
-    "question": "Can you reset Windows passwords?",
-    "answer": "Yes, our technicians are experts at Windows password reset. We can reset local accounts, Microsoft accounts, and administrator passwords without data loss. We use professional tools to regain access while preserving all your files and programs.",
-    "category": "device",
-    "priority": 8,
-    "tags": ["windows", "password-reset", "data-preservation"],
-    "services": ["password-reset", "windows-troubleshooting"],
-    "metaTitle": "Windows Password Reset Service - No Data Loss",
-    "metaDescription": "Expert Windows password reset service. Reset local, Microsoft, and admin passwords without losing data or programs.",
-    "acceptedAnswerType": "text",
-    "clickTrackingId": "faq-windows-password"
-  },
-  {
-    "question": "Do you offer emergency computer service?",
-    "answer": "Yes, we offer emergency same-day computer service throughout Dallas-Fort Worth. For urgent issues, we typically arrive within 30 minutes to 1 hour. Emergency service is available for virus removal, password reset, and critical issues.",
-    "category": "booking",
-    "priority": 7,
-    "tags": ["emergency", "same-day", "urgent"],
-    "services": ["emergency-service"],
-    "metaTitle": "Emergency Computer Service Dallas-Fort Worth",
-    "metaDescription": "Same-day emergency computer service in DFW. 30-minute to 1-hour response for urgent computer issues.",
-    "acceptedAnswerType": "text",
-    "clickTrackingId": "faq-emergency-service"
-  },
-  {
-    "question": "Are you open on weekends?",
-    "answer": "Yes, we're open 7 days a week including weekends. Our hours are Monday through Sunday, 8:00 AM to 6:00 PM. Weekend appointments fill quickly, so we recommend calling early to schedule your preferred time.",
-    "category": "booking",
-    "priority": 6,
-    "tags": ["hours", "weekend", "scheduling"],
-    "services": ["all"],
-    "metaTitle": "Computer Service Hours - Open 7 Days a Week",
-    "metaDescription": "Computer service available 7 days a week, 8AM-6PM including weekends. Weekend appointments available.",
-    "acceptedAnswerType": "text",
-    "clickTrackingId": "faq-hours"
-  }
-]
+{
+  "title": "General Computer Service FAQs",
+  "description": "Frequently asked questions about our computer services",
+  "faqs": [
+    {
+      "question": "How long does virus removal take?",
+      "answer": "Most virus removals take 30-60 minutes. Password resets typically take 15-30 minutes, computer optimization takes 30-45 minutes, and full system cleanups take 45-60 minutes. We complete services on-site while you wait.",
+      "category": "services",
+      "priority": 10,
+      "keywords": ["virus-removal", "timing", "password-reset", "optimization"],
+      "relatedServices": ["virus-removal", "password-reset", "optimization"]
+    },
+    {
+      "question": "Do you come to my location?",
+      "answer": "Yes! We're a 100% mobile service covering all of Dallas-Fort Worth. We come to your home, office, coffee shop, or any safe public location. Our service area includes Dallas, Fort Worth, Plano, Frisco, Irving, Arlington, and surrounding cities within a 30-mile radius.",
+      "category": "services",
+      "priority": 9,
+      "keywords": ["mobile-service", "service-area", "dfw"],
+      "relatedServices": ["mobile-service"]
+    },
+    {
+      "question": "What guarantee do you offer?",
+      "answer": "All services come with our satisfaction guarantee. If you experience any issues with the service we provided, we'll return to fix it at no additional charge. We guarantee complete virus removal and full password recovery on all supported systems.",
+      "category": "business",
+      "priority": 8,
+      "keywords": ["guarantee", "warranty", "satisfaction"],
+      "relatedServices": ["all"]
+    },
+    {
+      "question": "Can you reset Windows passwords?",
+      "answer": "Yes, our technicians are experts at Windows password reset. We can reset local accounts, Microsoft accounts, and administrator passwords without data loss. We use professional tools to regain access while preserving all your files and programs.",
+      "category": "technical",
+      "priority": 8,
+      "keywords": ["windows", "password-reset", "data-preservation"],
+      "relatedServices": ["password-reset", "windows-troubleshooting"]
+    },
+    {
+      "question": "Do you offer emergency computer service?",
+      "answer": "Yes, we offer emergency same-day computer service throughout Dallas-Fort Worth. For urgent issues, we typically arrive within 30 minutes to 1 hour. Emergency service is available for virus removal, password reset, and critical issues.",
+      "category": "emergency",
+      "priority": 7,
+      "keywords": ["emergency", "same-day", "urgent"],
+      "relatedServices": ["emergency-service"]
+    },
+    {
+      "question": "Are you open on weekends?",
+      "answer": "Yes, we're open 7 days a week including weekends. Our hours are Monday through Sunday, 8:00 AM to 6:00 PM. Weekend appointments fill quickly, so we recommend calling early to schedule your preferred time.",
+      "category": "business",
+      "priority": 6,
+      "keywords": ["hours", "weekend", "scheduling"],
+      "relatedServices": ["all"]
+    }
+  ],
+  "schemaType": "FAQPage"
+}
