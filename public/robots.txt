@@ -8,6 +8,23 @@ Disallow: /api/
 Disallow: /_astro/
 Disallow: /temp/
 Disallow: /private/
+Disallow: /test-form
+Disallow: /contact-smu
+Disallow: /contact-tcu
+Disallow: /contact-uta
+Disallow: /contact-utd
+
+# Block WordPress media attachment pages
+Disallow: /*-png/
+Disallow: /*-jpg/
+Disallow: /*-jpeg/
+Disallow: /*-gif/
+Disallow: /*-webp/
+Disallow: /?attachment_id=
+Disallow: /wp-content/
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+
 Crawl-delay: 0
 
 # Sitemap location
@@ -16,11 +33,27 @@ Sitemap: https://gadgetfixllc.com/sitemap.xml
 # Google specific
 User-agent: Googlebot
 Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*-png/
+Disallow: /*-jpg/
+Disallow: /*-jpeg/
+Disallow: /*-gif/
+Disallow: /*-webp/
+Disallow: /?attachment_id=
 Crawl-delay: 0
 
 # Bing specific  
 User-agent: Bingbot
 Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*-png/
+Disallow: /*-jpg/
+Disallow: /*-jpeg/
+Disallow: /*-gif/
+Disallow: /*-webp/
+Disallow: /?attachment_id=
 Crawl-delay: 0
 
 # Allow important pages for SEO
@@ -30,19 +63,23 @@ Allow: /about/
 Allow: /blog/
 Allow: /contact/
 Allow: /locations/
-Allow: /iphone-repair-dallas/
-Allow: /samsung-repair-fort-worth/
-Allow: /emergency-phone-repair/
-Allow: /screen-replacement/
+Allow: /virus-removal-service/
+Allow: /password-reset-service/
+Allow: /computer-optimization/
+Allow: /emergency-computer-service/
+Allow: /windows-troubleshooting/
+Allow: /mac-troubleshooting/
+Allow: /networking-cabling/
 
-# Allow CSS, JS, and image files for proper rendering
+# Allow CSS, JS, and actual image files for proper rendering
 Allow: /assets/
-Allow: /_astro/
+Allow: /_assets/
+Allow: /images/
 Allow: *.css
 Allow: *.js
-Allow: *.png
-Allow: *.jpg
-Allow: *.jpeg
-Allow: *.gif
-Allow: *.svg
-Allow: *.webp
+Allow: /images/*.png
+Allow: /images/*.jpg
+Allow: /images/*.jpeg
+Allow: /images/*.gif
+Allow: /images/*.svg
+Allow: /images/*.webp

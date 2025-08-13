@@ -37,12 +37,14 @@ const {
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		
-		<!-- DNS Prefetch and Preconnect for external resources -->
+		<!-- Critical Resource Hints for Performance -->
 		<link rel="dns-prefetch" href="https://www.googletagmanager.com">
 		<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+		<link rel="dns-prefetch" href="https://fonts.gstatic.com">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link rel="preconnect" href="https://www.googletagmanager.com">
+		<!-- Defer non-critical preconnects -->
+		<link rel="preconnect" href="https://www.googletagmanager.com" media="print" onload="this.media='all'">
 		<meta name="generator" content={Astro.generator} />
 		
 		<!-- Critical above-the-fold CSS for instant rendering -->
@@ -123,68 +125,89 @@ const {
 		<meta name="google-site-verification" content="VWfgCzwbjtKtlwg5w9leLSFCzLKsQOacl5pGH62EbFA" />
 		<!-- Google Search Console verification code successfully configured -->
 		
-		<!-- Optimized Google Analytics - Delay loading for better performance -->
+		<!-- Ultra-Optimized Analytics Loading -->
 		<script>
-		  // Initialize dataLayer but delay gtag loading
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
+		  // Defer all analytics until after page load
+		  if ('requestIdleCallback' in window) {
+		    requestIdleCallback(() => {
+		      loadAnalyticsWhenReady();
+		    }, {timeout: 4000});
+		  } else {
+		    window.addEventListener('load', () => {
+		      setTimeout(loadAnalyticsWhenReady, 1000);
+		    });
+		  }
 		  
-		  // Load analytics after user interaction or 3 seconds
-		  let analyticsLoaded = false;
-		  function loadAnalytics() {
-		    if (analyticsLoaded) return;
-		    analyticsLoaded = true;
+		  function loadAnalyticsWhenReady() {
+		    // Initialize dataLayer
+		    window.dataLayer = window.dataLayer || [];
+		    function gtag(){dataLayer.push(arguments);}
 		    
+		    // Configure before loading script
 		    gtag('js', new Date());
 		    gtag('config', 'G-ZMZTT343DN', {
 		      page_title: document.title,
-		      page_location: window.location.href
+		      page_location: window.location.href,
+		      send_page_view: true,
+		      cookie_flags: 'SameSite=None;Secure'
 		    });
 		    
-		    var gtagScript = document.createElement('script');
-		    gtagScript.async = true;
-		    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-ZMZTT343DN';
-		    document.head.appendChild(gtagScript);
+		    // Load script with performance hints
+		    const script = document.createElement('script');
+		    script.async = true;
+		    script.defer = true;
+		    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-ZMZTT343DN';
+		    script.setAttribute('fetchpriority', 'low');
+		    document.head.appendChild(script);
 		  }
-		  
-		  // Load on user interaction
-		  ['scroll', 'click', 'touchstart'].forEach(event => {
-		    window.addEventListener(event, loadAnalytics, {once: true, passive: true});
-		  });
-		  
-		  // Or load after 3 seconds as fallback
-		  setTimeout(loadAnalytics, 3000);
 		</script>
 		
-		<!-- Google Ads (AdWords) Conversion Tracking - Delayed -->
+		<!-- Deferred Google Ads Loading -->
 		<script>
-		  // Delay Google Ads loading for better performance
+		  // Load Google Ads only after critical resources
+		  if ('requestIdleCallback' in window) {
+		    requestIdleCallback(() => {
+		      loadGoogleAds();
+		    }, {timeout: 6000});
+		  } else {
+		    window.addEventListener('load', () => {
+		      setTimeout(loadGoogleAds, 2000);
+		    });
+		  }
+		  
 		  function loadGoogleAds() {
-		    var googleAdsScript = document.createElement('script');
-		    googleAdsScript.async = true;
-		    googleAdsScript.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17217204638';
-		    document.head.appendChild(googleAdsScript);
-		    
-		    googleAdsScript.onload = function() {
+		    const script = document.createElement('script');
+		    script.async = true;
+		    script.defer = true;
+		    script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17217204638';
+		    script.setAttribute('fetchpriority', 'low');
+		    script.onload = () => {
 		      if (typeof gtag !== 'undefined') {
-		        try {
-		          gtag('config', 'AW-17217204638');
-		        } catch (e) {
-		          console.debug('Google Ads config unavailable');
-		        }
+		        gtag('config', 'AW-17217204638', {
+		          send_page_view: false
+		        });
 		      }
 		    };
+		    document.head.appendChild(script);
 		  }
-		  
-		  // Load after analytics (which loads after interaction)
-		  setTimeout(loadGoogleAds, 4000);
 		</script>
 		
-		<!-- Optimized Google Fonts Loading -->
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
+		<!-- Optimized Font Loading with font-display: swap -->
+		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap"></noscript>
+		<!-- Inline critical font-face declarations -->
+		<style>
+		  @font-face {
+		    font-family: 'Inter';
+		    font-display: swap;
+		    src: local('Inter');
+		  }
+		  @font-face {
+		    font-family: 'Bebas Neue';
+		    font-display: swap;
+		    src: local('Bebas Neue');
+		  }
+		</style>
 		
 		<!-- Enhanced Local Business Schema -->
 		<script type="application/ld+json">

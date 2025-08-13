@@ -4,22 +4,72 @@ import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://gadgetfixllc.com',
   output: 'server',
   adapter: netlify(),
   build: {
-    inlineStylesheets: 'auto',
-    split: true
+    // Extract CSS to external files for better caching
+    inlineStylesheets: 'never',
+    // Enable code splitting for better performance
+    split: true,
+    // Optimize assets
+    assets: '_assets',
+    assetsPrefix: '/_assets'
   },
   compressHTML: true,
+  // Image optimization settings
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp'
+    }
+  },
   vite: {
     build: {
+      // Optimize chunk size
+      chunkSizeWarningLimit: 1000,
       cssCodeSplit: true,
       minify: 'terser',
       terserOptions: {
         compress: {
           drop_console: true,
-          drop_debugger: true
+          drop_debugger: true,
+          pure_funcs: ['console.log', 'console.info'],
+          passes: 2
+        },
+        format: {
+          comments: false
         }
+      },
+      // Optimize rollup output
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            // Group vendor libraries
+            'vendor': ['astro:content'],
+            // Separate location pages into their own chunk
+            'locations': [
+              './src/pages/locations/**/*.astro'
+            ]
+          },
+          // Use more efficient hashing
+          assetFileNames: '_assets/[name].[hash:8][extname]',
+          chunkFileNames: '_chunks/[name].[hash:8].js',
+          entryFileNames: '_entry/[name].[hash:8].js'
+        }
+      }
+    },
+    // Optimize dependencies
+    optimizeDeps: {
+      include: [],
+      exclude: ['@astrojs/netlify']
+    },
+    // Enable compression
+    plugins: [],
+    // Optimize CSS
+    css: {
+      devSourcemap: false,
+      modules: {
+        generateScopedName: '[hash:8]'
       }
     }
   }

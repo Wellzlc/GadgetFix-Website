@@ -1,0 +1,38 @@
+---
+import Layout from './Layout.astro';
+import ResourceHints from '../components/ResourceHints.astro';
+import '../styles/location-pages.css';
+
+export interface Props {
+  cityName: string;
+  countyName: string;
+  title?: string;
+  description?: string;
+  keywords?: string;
+}
+
+const { 
+  cityName,
+  countyName,
+  title = `Computer Service ${cityName}, TX | Mobile Service | GadgetFix LLC`,
+  description = `Professional computer service in ${cityName}, Texas. Virus removal, password reset, optimization. We come to you! Same-day service, 90-day warranty. Call (402) 416-6942`,
+  keywords = `computer service ${cityName.toLowerCase()}, virus removal ${cityName.toLowerCase()}, password reset ${cityName.toLowerCase()}`
+} = Astro.props;
+---
+
+<Layout title={title} description={description} keywords={keywords}>
+  <!-- Resource hints for location pages -->
+  <ResourceHints 
+    prefetchPages={['/contact', '/contact-computer']}
+    criticalCSS={true}
+  />
+  
+  <main>
+    <slot />
+  </main>
+</Layout>
+
+<style>
+  /* Critical CSS moved to external file: /src/styles/location-pages.css */
+  /* This reduces duplication across 80+ location pages */
+</style>

@@ -1,0 +1,220 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-01-13",
+  "settings": {
+    "defaultModel": "claude-3-5-sonnet",
+    "verbose": false,
+    "caching": true,
+    "autoLoad": true,
+    "colorOutput": true
+  },
+  "agents": {
+    "bug-debugger": {
+      "name": "Bug Debugger",
+      "model": "claude-3-5-sonnet",
+      "emoji": "🐛",
+      "description": "Advanced debugging and error resolution specialist",
+      "shortcuts": ["debug", "fix"],
+      "capabilities": [
+        "Runtime error analysis",
+        "Stack trace interpretation",
+        "Logic bug detection",
+        "Performance bottleneck identification",
+        "Root cause analysis"
+      ],
+      "temperature": 0.3,
+      "maxTokens": 4000
+    },
+    "code-reviewer": {
+      "name": "Code Reviewer",
+      "model": "claude-3-5-sonnet",
+      "emoji": "📝",
+      "description": "Comprehensive code quality assessment",
+      "shortcuts": ["review", "cr"],
+      "capabilities": [
+        "Code quality analysis",
+        "Best practices enforcement",
+        "Security vulnerability detection",
+        "Performance optimization suggestions",
+        "Maintainability assessment"
+      ],
+      "temperature": 0.4,
+      "maxTokens": 4000
+    },
+    "test-generator": {
+      "name": "Test Generator",
+      "model": "claude-3-5-haiku",
+      "emoji": "🧪",
+      "description": "Create comprehensive test suites",
+      "shortcuts": ["test", "tg"],
+      "capabilities": [
+        "Unit test generation",
+        "Integration test creation",
+        "Edge case identification",
+        "Mock data generation",
+        "Test fixture creation"
+      ],
+      "temperature": 0.2,
+      "maxTokens": 3000
+    },
+    "refactoring-specialist": {
+      "name": "Refactoring Specialist",
+      "model": "claude-3-5-sonnet",
+      "emoji": "♻️",
+      "description": "Clean up and optimize existing code",
+      "shortcuts": ["refactor", "clean"],
+      "capabilities": [
+        "Code duplication removal",
+        "Design pattern application",
+        "Complexity reduction",
+        "Module extraction",
+        "Code modernization"
+      ],
+      "temperature": 0.3,
+      "maxTokens": 4000
+    },
+    "docs-writer": {
+      "name": "Documentation Writer",
+      "model": "claude-3-5-haiku",
+      "emoji": "📚",
+      "description": "Generate comprehensive documentation",
+      "shortcuts": ["docs", "document"],
+      "capabilities": [
+        "API documentation",
+        "README generation",
+        "Code comments",
+        "User guides",
+        "Technical specifications"
+      ],
+      "temperature": 0.5,
+      "maxTokens": 3000
+    },
+    "performance-optimizer": {
+      "name": "Performance Optimizer",
+      "model": "claude-3-5-sonnet",
+      "emoji": "⚡",
+      "description": "Identify and fix performance bottlenecks",
+      "shortcuts": ["perf", "optimize"],
+      "capabilities": [
+        "Performance profiling",
+        "Algorithm optimization",
+        "Memory usage reduction",
+        "Query optimization",
+        "Caching strategies"
+      ],
+      "temperature": 0.3,
+      "maxTokens": 4000
+    },
+    "security-auditor": {
+      "name": "Security Auditor",
+      "model": "claude-3-opus",
+      "emoji": "🔒",
+      "description": "Security vulnerability assessment",
+      "shortcuts": ["security", "audit"],
+      "capabilities": [
+        "Vulnerability scanning",
+        "Security best practices",
+        "Penetration testing prep",
+        "Compliance checking",
+        "Encryption review"
+      ],
+      "temperature": 0.2,
+      "maxTokens": 5000
+    },
+    "database-optimizer": {
+      "name": "Database Optimizer",
+      "model": "claude-3-5-sonnet",
+      "emoji": "🗄️",
+      "description": "Database query and schema optimization",
+      "shortcuts": ["db", "database"],
+      "capabilities": [
+        "Query optimization",
+        "Index analysis",
+        "Schema design",
+        "N+1 problem resolution",
+        "Database scaling strategies"
+      ],
+      "temperature": 0.3,
+      "maxTokens": 4000
+    },
+    "seo-auditor": {
+      "name": "SEO Auditor",
+      "model": "claude-3-5-haiku",
+      "emoji": "🔍",
+      "description": "SEO analysis and optimization",
+      "shortcuts": ["seo", "search"],
+      "capabilities": [
+        "Technical SEO audit",
+        "Content optimization",
+        "Core Web Vitals analysis",
+        "Competitor analysis",
+        "Keyword research"
+      ],
+      "temperature": 0.4,
+      "maxTokens": 3000
+    },
+    "architecture-advisor": {
+      "name": "Architecture Advisor",
+      "model": "claude-3-opus",
+      "emoji": "🏗️",
+      "description": "System design and architectural guidance",
+      "shortcuts": ["arch", "design"],
+      "capabilities": [
+        "System design",
+        "Technology selection",
+        "Scalability planning",
+        "Microservices architecture",
+        "Cloud deployment strategies"
+      ],
+      "temperature": 0.5,
+      "maxTokens": 5000
+    },
+    "devops-pipeline": {
+      "name": "DevOps Pipeline",
+      "model": "claude-3-5-sonnet",
+      "emoji": "🚢",
+      "description": "CI/CD and deployment automation",
+      "shortcuts": ["devops", "deploy"],
+      "capabilities": [
+        "CI/CD workflow setup",
+        "Container orchestration",
+        "Infrastructure as code",
+        "Monitoring setup",
+        "Deployment troubleshooting"
+      ],
+      "temperature": 0.3,
+      "maxTokens": 4000
+    },
+    "api-integration": {
+      "name": "API Integration",
+      "model": "claude-3-5-haiku",
+      "emoji": "🔌",
+      "description": "Third-party API integration assistance",
+      "shortcuts": ["api", "integrate"],
+      "capabilities": [
+        "REST API integration",
+        "OAuth implementation",
+        "Webhook setup",
+        "GraphQL integration",
+        "Payment gateway integration"
+      ],
+      "temperature": 0.3,
+      "maxTokens": 3000
+    }
+  },
+  "promptTemplates": {
+    "default": "You are a specialized AI assistant focused on {agentType}. Please {task}.",
+    "debug": "Analyze the following error and provide a detailed solution: {error}",
+    "review": "Review the following code for quality, security, and best practices: {code}",
+    "test": "Generate comprehensive tests for the following code: {code}",
+    "refactor": "Refactor the following code to improve maintainability and performance: {code}",
+    "docs": "Create detailed documentation for: {topic}",
+    "performance": "Analyze and optimize the performance of: {code}",
+    "security": "Perform a security audit on: {system}",
+    "database": "Optimize the following database queries: {queries}",
+    "seo": "Perform an SEO audit on: {url}",
+    "architecture": "Provide architectural guidance for: {project}",
+    "devops": "Setup deployment pipeline for: {project}",
+    "api": "Integrate the following API: {apiName}"
+  }
+}

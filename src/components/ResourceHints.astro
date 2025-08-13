@@ -1,0 +1,159 @@
+---
+// Component to manage resource hints and preloading
+export interface Props {
+  prefetchPages?: string[];
+  preloadImages?: string[];
+  criticalCSS?: boolean;
+}
+
+const { 
+  prefetchPages = [],
+  preloadImages = [],
+  criticalCSS = false
+} = Astro.props;
+
+// Determine which resources to preload based on the current page
+const currentPath = Astro.url.pathname;
+const isHomepage = currentPath === '/';
+const isLocationPage = currentPath.includes('/locations/');
+const isContactPage = currentPath.includes('/contact');
+
+// Critical resources for different page types
+const criticalResources = {
+  homepage: [
+    '/images/optimized/hero-background.webp'
+  ],
+  location: [
+    '/styles/location-pages.css'
+  ],
+  contact: [
+    '/scripts/spam-protection.js'
+  ]
+};
+---
+
+<!-- Adaptive Resource Loading -->
+{isHomepage && (
+  <>
+    <!-- Preload hero image for homepage -->
+    <link rel="preload" as="image" href="/images/optimized/hero-background.webp" type="image/webp" />
+    <!-- Prefetch likely next pages -->
+    <link rel="prefetch" href="/contact" />
+    <link rel="prefetch" href="/about" />
+  </>
+)}
+
+{isLocationPage && (
+  <>
+    <!-- Preload location-specific CSS -->
+    <link rel="preload" as="style" href="/styles/location-pages.css" />
+    <!-- Prefetch contact page (likely next action) -->
+    <link rel="prefetch" href="/contact" />
+  </>
+)}
+
+{isContactPage && (
+  <>
+    <!-- Preload form validation script -->
+    <link rel="preload" as="script" href="/scripts/spam-protection.js" />
+  </>
+)}
+
+<!-- Custom preloads from props -->
+{preloadImages.map(image => (
+  <link rel="preload" as="image" href={image} />
+))}
+
+<!-- Prefetch pages specified in props -->
+{prefetchPages.map(page => (
+  <link rel="prefetch" href={page} />
+))}
+
+<!-- Intersection Observer for lazy prefetching -->
+<script>
+  // Intelligent prefetching based on user interaction
+  document.addEventListener('DOMContentLoaded', () => {
+    // Prefetch links when they're about to be visible
+    if ('IntersectionObserver' in window && 'requestIdleCallback' in window) {
+      const linkObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const link = entry.target;
+            const href = link.getAttribute('href');
+            
+            if (href && href.startsWith('/') && !href.includes('#')) {
+              requestIdleCallback(() => {
+                const prefetchLink = document.createElement('link');
+                prefetchLink.rel = 'prefetch';
+                prefetchLink.href = href;
+                document.head.appendChild(prefetchLink);
+              });
+              
+              linkObserver.unobserve(link);
+            }
+          }
+        });
+      }, {
+        rootMargin: '100px'
+      });
+      
+      // Observe internal links
+      document.querySelectorAll('a[href^="/"]').forEach(link => {
+        linkObserver.observe(link);
+      });
+    }
+    
+    // Preload images just before they enter viewport
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            const src = img.dataset.src;
+            
+            if (src && !img.src) {
+              // Create a preload link
+              const preloadLink = document.createElement('link');
+              preloadLink.rel = 'preload';
+              preloadLink.as = 'image';
+              preloadLink.href = src;
+              document.head.appendChild(preloadLink);
+              
+              // Load the image
+              img.src = src;
+              img.removeAttribute('data-src');
+            }
+            
+            imageObserver.unobserve(img);
+          }
+        });
+      }, {
+        rootMargin: '200px'
+      });
+      
+      // Observe lazy-loaded images
+      document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+      });
+    }
+  });
+  
+  // Network-aware prefetching
+  if ('connection' in navigator) {
+    const connection = navigator.connection;
+    
+    // Only prefetch on good connections
+    if (connection.effectiveType === '4g' && !connection.saveData) {
+      // Prefetch common next pages after idle
+      requestIdleCallback(() => {
+        const commonPages = ['/contact', '/about', '/faq'];
+        commonPages.forEach(page => {
+          const link = document.createElement('link');
+          link.rel = 'prefetch';
+          link.href = page;
+          document.head.appendChild(link);
+        });
+      }, { timeout: 2000 });
+    }
+  }
+</script>
