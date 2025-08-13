@@ -6,29 +6,12 @@
 [build.environment]
   NODE_VERSION = "18"
 
-# Include static assets
+# Serve static assets directly
 [[redirects]]
-  from = "/_assets/*"
-  to = "/_assets/:splat"
+  from = "/_astro/*"
+  to = "/_astro/:splat"
   status = 200
   force = false
-
-[[redirects]]
-  from = "/_chunks/*"
-  to = "/_chunks/:splat"
-  status = 200
-  force = false
-
-[[redirects]]
-  from = "/_entry/*"
-  to = "/_entry/:splat"
-  status = 200
-  force = false
-
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
 
 [[headers]]
   for = "/*"

@@ -5,16 +5,11 @@ import netlify from '@astrojs/netlify';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.gadgetfixllc.com',
-  output: 'hybrid',
+  output: 'server',
   adapter: netlify(),
   build: {
     // Extract CSS to external files for better caching
-    inlineStylesheets: 'never',
-    // Enable code splitting for better performance
-    split: true,
-    // Optimize assets
-    assets: '_assets',
-    assetsPrefix: '/_assets'
+    inlineStylesheets: 'never'
   },
   compressHTML: true,
   // Image optimization settings
@@ -45,16 +40,8 @@ export default defineConfig({
         output: {
           manualChunks: {
             // Group vendor libraries
-            'vendor': ['astro:content'],
-            // Separate location pages into their own chunk
-            'locations': [
-              './src/pages/locations/**/*.astro'
-            ]
-          },
-          // Use more efficient hashing
-          assetFileNames: '_assets/[name].[hash:8][extname]',
-          chunkFileNames: '_chunks/[name].[hash:8].js',
-          entryFileNames: '_entry/[name].[hash:8].js'
+            'vendor': ['astro:content']
+          }
         }
       }
     },
