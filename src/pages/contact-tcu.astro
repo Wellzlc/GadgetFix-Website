@@ -4,9 +4,9 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 ---
 
 <Layout 
-	title="Network Cabling Dallas Fort Worth Plano Arlington | Cat6 Installation"
-	description="Professional networking and cabling services in Dallas, Fort Worth, Plano, Arlington, Irving, Frisco. Cat6 installation, WiFi setup, network troubleshooting. Call (402) 416-6942!"
-	keywords="network cabling dallas, cat6 installation fort worth, business networking plano, structured cabling arlington, wifi setup irving, network services frisco, mckinney network installation"
+	title="TCU Computer Service Request | Password Reset & Virus Removal Fort Worth"
+	description="TCU students - Request computer service now! Password reset, virus removal, slow computer fixes. We come to your dorm or meet on campus. Call (402) 416-6942!"
+	keywords="TCU computer repair, TCU laptop password reset, Fort Worth student computer service, TCU virus removal, campus WiFi troubleshooting, TCU emergency computer help"
 >
 	<!-- Full-Screen Split Contact Section -->
 	<section class="split-contact">
@@ -16,13 +16,18 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 		<div class="contact-left">
 			<div class="contact-overlay"></div>
 			<div class="left-content">
-				<h1>NETWORKING & CABLING CONTACT</h1>
+				<h1>TCU STUDENT COMPUTER SERVICE</h1>
 				<p class="call-to-action">
-					CALL GADGETFIX TODAY AT 
+					CALL GADGETFIX NOW AT 
 					<a href="tel:+14024166942" class="phone-number">(402) 416-6942</a>
 				</p>
-				<p class="or-text">OR FILL OUT OUR SERVICE REQUEST FORM.</p>
-				<p class="support-text">Professional network installation and cabling services for homes and businesses throughout Dallas-Fort Worth. Cat6, WiFi, and complete network solutions!</p>
+				<p class="or-text">OR SUBMIT YOUR SERVICE REQUEST.</p>
+				<p class="support-text">Locked out of your laptop? Computer crisis before finals? We come to your dorm in Fort Worth or meet you on campus - no waiting in repair shops!</p>
+				<div class="service-features">
+					<div class="feature">✓ 20-30 min response to TCU</div>
+					<div class="feature">✓ Dorm room service available</div>
+					<div class="feature">✓ Parent payment options</div>
+				</div>
 			</div>
 		</div>
 		
@@ -38,17 +43,13 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 				<div class="device-screen">
 					<form class="mobile-form" id="contactForm" action="https://formsubmit.co/wellz.levi@gmail.com" method="POST">
 						<!-- FormSubmit Configuration -->
-						<input type="hidden" name="_subject" value="New Networking Service Request from GadgetFix">
+						<input type="hidden" name="_subject" value="TCU STUDENT EMERGENCY - Computer Service Request">
 						<input type="hidden" name="_captcha" value="false">
 						<input type="hidden" name="_template" value="table">
-						<input type="hidden" name="service_type" value="Networking and Cabling">
+						<input type="hidden" name="service_type" value="TCU Student Computer Service">
 						
 						<div class="form-field">
-							<input type="text" id="fullName" name="name" placeholder="FULL NAME" required>
-						</div>
-						
-						<div class="form-field">
-							<input type="text" id="businessName" name="business_name" placeholder="BUSINESS/HOME NAME">
+							<input type="text" id="fullName" name="name" placeholder="YOUR NAME" required>
 						</div>
 						
 						<div class="form-field">
@@ -60,35 +61,56 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 						</div>
 						
 						<div class="form-field">
-							<select id="serviceType" name="network_service_type" required>
-								<option value="">SELECT SERVICE TYPE</option>
-								<option value="Home WiFi Setup">Home WiFi Setup</option>
-								<option value="Home Network Wiring">Home Network Wiring</option>
-								<option value="Cat6 Installation">Cat6 Cable Installation</option>
-								<option value="WiFi Setup">Business WiFi Setup</option>
-								<option value="Network Troubleshooting">Network Troubleshooting</option>
-								<option value="Office Network Design">Office Network Design</option>
-								<option value="Structured Cabling">Structured Cabling</option>
-								<option value="Server Room Setup">Server Room Setup</option>
-								<option value="Multiple Services">Multiple Services</option>
-								<option value="Other">Other Network Service</option>
+							<div class="os-toggle">
+								<input type="radio" id="windows" name="operating_system" value="Windows" required>
+								<label for="windows" class="os-label">
+									<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+										<path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
+									</svg>
+									Windows
+								</label>
+								<input type="radio" id="mac" name="operating_system" value="Mac" required>
+								<label for="mac" class="os-label">
+									<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+										<path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+									</svg>
+									Mac
+								</label>
+							</div>
+						</div>
+						
+						<div class="form-field">
+							<select id="issueType" name="issue_type" required>
+								<option value="">SELECT YOUR EMERGENCY</option>
+								<option value="Password Locked Out">Locked Out - Can't Login</option>
+								<option value="Computer Too Slow">Computer Running Too Slow</option>
+								<option value="Virus/Malware">Virus/Malware Issues</option>
+								<option value="WiFi Not Working">WiFi/Network Problems</option>
+								<option value="Lost Files">Lost/Deleted Files</option>
+								<option value="Software Setup">Software Installation</option>
+								<option value="Won't Start">Computer Won't Start</option>
+								<option value="Blue Screen">Blue Screen Errors</option>
+								<option value="Other">Other Emergency</option>
 							</select>
 						</div>
 						
 						<div class="form-field">
-							<select id="businessSize" name="business_size" required>
-								<option value="">SELECT SIZE</option>
-								<option value="Residential/Home">Residential/Home</option>
-								<option value="1-10 employees">1-10 Employees</option>
-								<option value="11-25 employees">11-25 Employees</option>
-								<option value="26-50 employees">26-50 Employees</option>
-								<option value="51-100 employees">51-100 Employees</option>
-								<option value="100+ employees">100+ Employees</option>
+							<select id="location" name="location" required>
+								<option value="">WHERE ARE YOU?</option>
+								<option value="UV Apartments">Clark Hall</option>
+								<option value="Canyon Creek">Foster Hall</option>
+								<option value="Res Hall West">Sherley Hall</option>
+								<option value="Res Hall North">Colby Hall</option>
+								<option value="Res Hall South">Waits Hall</option>
+								<option value="Northside">Worth Hills</option>
+								<option value="GrandMarc">GrandMarc</option>
+								<option value="On Campus">On Campus - Other Building</option>
+								<option value="Off Campus">Off Campus Housing</option>
 							</select>
 						</div>
 						
 						<div class="form-field">
-							<textarea id="message" name="message" placeholder="DESCRIBE YOUR NETWORKING NEEDS" rows="3" required></textarea>
+							<textarea id="message" name="message" placeholder="DESCRIBE YOUR ISSUE (e.g., 'Final exam tomorrow, laptop won't start')" rows="4" required></textarea>
 						</div>
 						
 						<!-- Honeypot field - hidden from users, visible to bots -->
@@ -102,7 +124,7 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 							style="margin: 15px 0;">
 						</div>
 						
-						<button type="submit" class="send-button">REQUEST QUOTE</button>
+						<button type="submit" class="send-button">REQUEST EMERGENCY SERVICE</button>
 					</form>
 					<div id="formMessage" class="form-message"></div>
 				</div>
@@ -110,16 +132,16 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 		</div>
 	</section>
 
-	<!-- Schema Markup for Networking Service ContactPage -->
+	<!-- Schema Markup for TCU Student Service ContactPage -->
 	<script type="application/ld+json">
 	{
 	  "@context": "https://schema.org",
 	  "@type": "ContactPage",
 	  "mainEntity": {
 	    "@type": "LocalBusiness",
-	    "name": "GadgetFix LLC - Networking Services",
+	    "name": "GadgetFix LLC - TCU Student Computer Service",
 	    "telephone": "+14024166942",
-	    "areaServed": ["Dallas", "Fort Worth", "Plano", "Frisco", "Irving", "Arlington", "Richardson", "McKinney"],
+	    "areaServed": ["Fort Worth", "TCU Campus", "University Village", "Canyon Creek"],
 	    "openingHoursSpecification": {
 	      "@type": "OpeningHoursSpecification",
 	      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
@@ -130,7 +152,7 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 	      "@type": "ContactPoint",
 	      "telephone": "+14024166942",
 	      "contactType": "customer service",
-	      "areaServed": ["Dallas", "Fort Worth", "Plano", "Frisco", "Irving", "Arlington", "Richardson", "McKinney"],
+	      "areaServed": ["Fort Worth", "TCU Campus"],
 	      "availableLanguage": "English"
 	    }
 	  }
@@ -154,8 +176,7 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: linear-gradient(135deg, rgba(30, 58, 138, 0.9) 0%, rgba(37, 99, 235, 0.8) 100%), 
-					url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="network" patternUnits="userSpaceOnUse" width="100" height="100"><rect fill="%23111827" width="100" height="100"/><circle fill="%232563eb" opacity="0.1" cx="20" cy="20" r="3"/><circle fill="%232563eb" opacity="0.1" cx="80" cy="80" r="3"/><circle fill="%232563eb" opacity="0.1" cx="80" cy="20" r="3"/><circle fill="%232563eb" opacity="0.1" cx="20" cy="80" r="3"/><line stroke="%232563eb" opacity="0.2" x1="20" y1="20" x2="80" y2="20" stroke-width="0.5"/><line stroke="%232563eb" opacity="0.2" x1="20" y1="80" x2="80" y2="80" stroke-width="0.5"/><line stroke="%232563eb" opacity="0.2" x1="20" y1="20" x2="20" y2="80" stroke-width="0.5"/><line stroke="%232563eb" opacity="0.2" x1="80" y1="20" x2="80" y2="80" stroke-width="0.5"/><line stroke="%232563eb" opacity="0.15" x1="20" y1="20" x2="80" y2="80" stroke-width="0.5"/><line stroke="%232563eb" opacity="0.15" x1="80" y1="20" x2="20" y2="80" stroke-width="0.5"/></pattern></defs><rect fill="url(%23network)" width="1000" height="1000"/></svg>') center/cover;
+		background: linear-gradient(135deg, #1e3a8a 0%, #000000 100%);
 		z-index: 1;
 	}
 
@@ -176,7 +197,7 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: rgba(0, 0, 0, 0.3);
+		background: rgba(0, 0, 0, 0.4);
 		z-index: -1;
 	}
 
@@ -204,7 +225,7 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 	}
 
 	.phone-number {
-		color: #60a5fa;
+		color: #2563EB;
 		text-decoration: none;
 		font-weight: 700;
 		font-size: 1.6rem;
@@ -212,7 +233,7 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 	}
 
 	.phone-number:hover {
-		color: #93bbfc;
+		color: #60a5fa;
 		text-decoration: underline;
 	}
 
@@ -220,13 +241,26 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 		font-size: 1.2rem;
 		font-weight: 600;
 		margin-bottom: 2rem;
-		opacity: 0.95;
+		opacity: 0.9;
 	}
 
 	.support-text {
 		font-size: 1.1rem;
 		line-height: 1.6;
 		opacity: 0.9;
+		margin-bottom: 2rem;
+	}
+
+	.service-features {
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+	}
+
+	.feature {
+		font-size: 1rem;
+		opacity: 0.95;
+		padding-left: 1rem;
 	}
 
 	/* Right Side - Mobile Device Form */
@@ -279,13 +313,15 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 		border-radius: 20px;
 		padding: 30px 25px;
 		min-height: 500px;
+		max-height: 70vh;
+		overflow-y: auto;
 	}
 
 	/* Mobile Form */
 	.mobile-form {
 		display: flex;
 		flex-direction: column;
-		gap: 20px;
+		gap: 15px;
 		height: 100%;
 	}
 
@@ -314,7 +350,7 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 		outline: none;
 		border-color: #2563EB;
 		background: white;
-		box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+		box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 	}
 
 	.form-field input::placeholder,
@@ -323,13 +359,60 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 1px;
-		font-size: 14px;
+		font-size: 13px;
 	}
 
 	.form-field textarea {
 		border-radius: 20px;
 		min-height: 100px;
 		font-family: inherit;
+	}
+
+	/* OS Toggle */
+	.os-toggle {
+		display: flex;
+		gap: 10px;
+		justify-content: space-between;
+	}
+
+	.os-toggle input[type="radio"] {
+		display: none;
+	}
+
+	.os-label {
+		flex: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		padding: 15px 20px;
+		border: 2px solid #e5e7eb;
+		border-radius: 25px;
+		background: #f9fafb;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		font-size: 14px;
+		color: #6b7280;
+	}
+
+	.os-label:hover {
+		border-color: #2563EB;
+		background: white;
+	}
+
+	.os-toggle input[type="radio"]:checked + .os-label {
+		background: #2563EB;
+		border-color: #2563EB;
+		color: white;
+		box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+	}
+
+	.os-label svg {
+		width: 20px;
+		height: 20px;
 	}
 
 	/* Send Button */
@@ -404,6 +487,10 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 			margin-bottom: 2rem;
 		}
 
+		.service-features {
+			align-items: center;
+		}
+
 		.mobile-device {
 			max-width: 100%;
 		}
@@ -430,7 +517,7 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 		.form-field textarea,
 		.form-field select {
 			padding: 12px;
-			font-size: 12px;
+			font-size: 14px;
 		}
 
 		.send-button {
@@ -468,7 +555,7 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 				if (now - lastSubmitTime < RATE_LIMIT_MS) {
 					const secondsLeft = Math.ceil((RATE_LIMIT_MS - (now - lastSubmitTime)) / 1000);
 					console.log(`Rate limited: ${secondsLeft} seconds remaining`);
-					formMessage.style.color = '#ef4444';
+					formMessage.className = 'form-message error';
 					formMessage.textContent = `Please wait ${secondsLeft} seconds before submitting again.`;
 					formMessage.style.display = 'block';
 					return false;
@@ -478,7 +565,7 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 				const honeypot = form.querySelector('input[name="website"]');
 				if (honeypot && honeypot.value.trim() !== '') {
 					console.log('Spam blocked: honeypot field filled');
-					formMessage.style.color = '#ef4444';
+					formMessage.className = 'form-message error';
 					formMessage.textContent = 'Form submission blocked. Please call (402) 416-6942.';
 					formMessage.style.display = 'block';
 					return false;
@@ -501,7 +588,7 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 					const turnstileResponse = form.querySelector('[name="cf-turnstile-response"]');
 					if (turnstileResponse && !turnstileResponse.value) {
 						console.log('Turnstile not completed');
-						formMessage.style.color = '#ef4444';
+						formMessage.className = 'form-message error';
 						formMessage.textContent = 'Please complete the security check.';
 						formMessage.style.display = 'block';
 						submitButton.textContent = originalText;
@@ -524,7 +611,7 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 					if (response.ok) {
 						// Success - show message and reset form
 						formMessage.className = 'form-message success';
-						formMessage.textContent = 'Quote request sent successfully! We\'ll contact you within 1 business day.';
+						formMessage.textContent = 'Emergency request sent! We\'ll call you within 10 minutes.';
 						formMessage.style.display = 'block';
 						form.reset();
 						lastSubmitTime = now; // Update rate limit timer
