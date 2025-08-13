@@ -15,9 +15,9 @@ export interface Props {
 }
 
 const { 
-	title = "Same-Day Phone Repair Dallas Fort Worth | We Come to You | GadgetFix", 
-	description = "Get same-day phone repair at your location in Dallas Fort Worth. iPhone, Samsung & iPad fix with 90-day warranty. Call (402) 416-6942 now for mobile service!",
-	keywords = "phone repair dallas, iphone repair fort worth, samsung repair dfw, screen replacement near me, GadgetFix dallas, emergency phone repair, same day repair dallas fort worth",
+	title = "Same-Day Computer Service Dallas Fort Worth | We Come to You | GadgetFix", 
+	description = "Get same-day computer service at your location in Dallas Fort Worth. Virus removal, password reset & optimization with 90-day warranty. Call (402) 416-6942 now!",
+	keywords = "computer service dallas, virus removal fort worth, password reset dfw, computer optimization near me, GadgetFix dallas, emergency computer service, same day service dallas fort worth",
 	breadcrumbs = []
 } = Astro.props;
 ---
@@ -47,39 +47,12 @@ const {
 		<link rel="preconnect" href="https://www.googletagmanager.com" media="print" onload="this.media='all'">
 		<meta name="generator" content={Astro.generator} />
 		
-		<!-- Critical above-the-fold CSS for instant rendering -->
+		<!-- Minimal Critical CSS - Only Above-the-fold -->
 		<style>
-			:root { 
-				--primary-blue: #0066cc; 
-				--secondary-blue: #4d94ff;
-				--light-blue: #e6f2ff;
-				--dark-blue: #004499;
-			}
-			body { 
-				margin: 0; 
-				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Helvetica Neue', Arial, sans-serif;
-				line-height: 1.6;
-				-webkit-font-smoothing: antialiased;
-				-moz-osx-font-smoothing: grayscale;
-				text-rendering: optimizeLegibility;
-			}
-			.container {
-				max-width: 1200px;
-				margin: 0 auto;
-				padding: 0 1rem;
-			}
-			/* Prevent layout shift */
-			* {
-				box-sizing: border-box;
-			}
-			h1, h2, h3 { 
-				line-height: 1.2;
-				margin-top: 0;
-			}
-			/* Mobile-first responsive */
-			@media (max-width: 768px) {
-				html { font-size: 16px; }
-			}
+			body{margin:0;font-family:system-ui,sans-serif;line-height:1.6}
+			.container{max-width:1200px;margin:0 auto;padding:0 1rem}
+			*{box-sizing:border-box}
+			.header{background:#fff;position:sticky;top:0;z-index:100}
 		</style>
 		<title>{title}</title>
 		<meta name="description" content={description} />
@@ -125,91 +98,53 @@ const {
 		<meta name="google-site-verification" content="VWfgCzwbjtKtlwg5w9leLSFCzLKsQOacl5pGH62EbFA" />
 		<!-- Google Search Console verification code successfully configured -->
 		
-		<!-- Ultra-Optimized Analytics Loading -->
+		<!-- Optimized Analytics with Facade Pattern -->
 		<script>
-		  // Defer all analytics until after page load
-		  if ('requestIdleCallback' in window) {
-		    requestIdleCallback(() => {
-		      loadAnalyticsWhenReady();
-		    }, {timeout: 4000});
-		  } else {
-		    window.addEventListener('load', () => {
-		      setTimeout(loadAnalyticsWhenReady, 1000);
-		    });
-		  }
-		  
-		  function loadAnalyticsWhenReady() {
-		    // Initialize dataLayer
-		    window.dataLayer = window.dataLayer || [];
-		    function gtag(){dataLayer.push(arguments);}
-		    
-		    // Configure before loading script
-		    gtag('js', new Date());
-		    gtag('config', 'G-ZMZTT343DN', {
-		      page_title: document.title,
-		      page_location: window.location.href,
-		      send_page_view: true,
-		      cookie_flags: 'SameSite=None;Secure'
-		    });
-		    
-		    // Load script with performance hints
-		    const script = document.createElement('script');
-		    script.async = true;
-		    script.defer = true;
-		    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-ZMZTT343DN';
-		    script.setAttribute('fetchpriority', 'low');
-		    document.head.appendChild(script);
-		  }
-		</script>
-		
-		<!-- Deferred Google Ads Loading -->
-		<script>
-		  // Load Google Ads only after critical resources
-		  if ('requestIdleCallback' in window) {
-		    requestIdleCallback(() => {
-		      loadGoogleAds();
-		    }, {timeout: 6000});
-		  } else {
-		    window.addEventListener('load', () => {
-		      setTimeout(loadGoogleAds, 2000);
-		    });
-		  }
-		  
-		  function loadGoogleAds() {
-		    const script = document.createElement('script');
-		    script.async = true;
-		    script.defer = true;
-		    script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17217204638';
-		    script.setAttribute('fetchpriority', 'low');
-		    script.onload = () => {
-		      if (typeof gtag !== 'undefined') {
-		        gtag('config', 'AW-17217204638', {
-		          send_page_view: false
-		        });
-		      }
+		  // Minimal analytics stub - defers loading until interaction
+		  window.dataLayer=window.dataLayer||[];
+		  window.gtag=function(){dataLayer.push(arguments)};
+		  // Delay analytics by 4 seconds or first interaction
+		  let analyticsTimer=setTimeout(()=>loadAnalytics(),4000);
+		  ['scroll','click','touchstart'].forEach(e=>
+		    addEventListener(e,()=>{clearTimeout(analyticsTimer);loadAnalytics()},{once:true,passive:true})
+		  );
+		  function loadAnalytics(){
+		    if(window.__al)return;
+		    window.__al=1;
+		    let s=document.createElement('script');
+		    s.async=s.defer=1;
+		    s.src='https://www.googletagmanager.com/gtag/js?id=G-ZMZTT343DN';
+		    s.onload=()=>{
+		      gtag('js',new Date());
+		      gtag('config','G-ZMZTT343DN',{page_title:document.title,page_location:location.href,send_page_view:true});
 		    };
-		    document.head.appendChild(script);
+		    document.head.appendChild(s);
 		  }
 		</script>
 		
-		<!-- Optimized Font Loading with font-display: swap -->
-		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap"></noscript>
-		<!-- Inline critical font-face declarations -->
-		<style>
-		  @font-face {
-		    font-family: 'Inter';
-		    font-display: swap;
-		    src: local('Inter');
-		  }
-		  @font-face {
-		    font-family: 'Bebas Neue';
-		    font-display: swap;
-		    src: local('Bebas Neue');
-		  }
-		</style>
+		<!-- Google Ads - Ultra Deferred -->
+		<script>
+		  // Load Ads after 6s or interaction
+		  setTimeout(()=>{
+		    if(window.__ads||!window.gtag)return;
+		    window.__ads=1;
+		    let s=document.createElement('script');
+		    s.async=s.defer=1;
+		    s.src='https://www.googletagmanager.com/gtag/js?id=AW-17217204638';
+		    s.onload=()=>gtag('config','AW-17217204638',{send_page_view:false});
+		    document.head.appendChild(s);
+		  },6000);
+		</script>
 		
-		<!-- Enhanced Local Business Schema -->
+		<!-- Async Font Loading -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" as="style">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" media="print" onload="this.media='all'">
+		
+		<!-- Schema Markup - Deferred Loading -->
+		<script src="/js/schema.js" defer></script>
+		<!-- Minimal Critical Schema for SEO -->
 		<script type="application/ld+json">
 		{
 		  "@context": "https://schema.org",
@@ -512,262 +447,23 @@ const {
 		</footer>
 
 
-		<script>
-			// Mobile menu toggle
-			const mobileToggle = document.querySelector('.mobile-menu-toggle');
-			const nav = document.querySelector('.nav');
-			
-			if (mobileToggle && nav) {
-				mobileToggle.addEventListener('click', () => {
-					nav.classList.toggle('nav-open');
-					mobileToggle.classList.toggle('active');
+		<script defer>
+			// Mobile menu - deferred
+			document.addEventListener('DOMContentLoaded',()=>{
+				let t=document.querySelector('.mobile-menu-toggle'),
+				    n=document.querySelector('.nav');
+				if(t&&n)t.addEventListener('click',()=>{
+					n.classList.toggle('nav-open');
+					t.classList.toggle('active');
 				});
-			}
+			});
 		</script>
 		
 		<!-- Bot Protection System -->
 		<!-- <BotProtection /> Disabled: Too many false positives -->
 		
-		<!-- Performance optimized JavaScript -->
-		<script>
-			// Defer non-critical JavaScript
-			window.addEventListener('load', function() {
-				// Mark page as loaded for CSS optimizations
-				document.documentElement.classList.add('loaded');
-				
-				// Prefetch internal links on hover for instant navigation
-				document.addEventListener('mouseover', function(e) {
-					const link = e.target.closest('a');
-					if (link && link.hostname === window.location.hostname && !link.hasAttribute('data-prefetched')) {
-						const prefetchLink = document.createElement('link');
-						prefetchLink.rel = 'prefetch';
-						prefetchLink.href = link.href;
-						document.head.appendChild(prefetchLink);
-						link.setAttribute('data-prefetched', 'true');
-					}
-				});
-				
-				// Enhanced Phone Call Conversion Tracking
-				const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
-				phoneLinks.forEach(link => {
-					link.addEventListener('click', function(e) {
-						const clickSource = this.className || this.closest('div').className || 'unknown';
-						const phoneNumber = this.href.replace('tel:', '');
-						const pageLocation = window.location.pathname;
-						
-						if (typeof gtag !== 'undefined') {
-							try {
-								// Primary phone call conversion event (GA4)
-								gtag('event', 'click_to_call', {
-								'event_category': 'Phone_Conversion',
-								'event_label': `Phone Call - ${clickSource} - ${phoneNumber}`,
-								'phone_source': clickSource,
-								'phone_number': phoneNumber,
-								'page_location': pageLocation,
-								'value': 10
-							});
-							
-							// Google Ads conversion tracking
-								gtag('event', 'conversion', {
-									'send_to': 'AW-17217204638/phone_call_conversion',
-									'value': 25.0,
-									'currency': 'USD'
-								});
-							} catch (e) {
-								console.debug('Analytics tracking unavailable');
-							}
-						}
-						
-						// Enhanced tracking for different phone elements
-						if (typeof gtag !== 'undefined') {
-							try {
-								if (clickSource.includes('floating')) {
-									gtag('event', 'floating_phone_click', {
-										'event_category': 'High_Intent_Conversion',
-										'event_label': 'Floating Button',
-										'value': 15
-									});
-								} else if (clickSource.includes('banner')) {
-									gtag('event', 'banner_phone_click', {
-										'event_category': 'Top_Banner_Conversion',
-										'event_label': 'Top Banner',
-										'value': 12
-									});
-								} else if (clickSource.includes('footer')) {
-									gtag('event', 'footer_phone_click', {
-										'event_category': 'Footer_Conversion',
-										'event_label': 'Footer Link',
-										'value': 8
-									});
-								}
-							} catch (e) {
-								console.debug('Enhanced phone tracking unavailable');
-							}
-						}
-					});
-				});
-				
-				// Scroll Depth Tracking
-				let scrollDepths = {25: false, 50: false, 75: false, 100: false};
-				let maxScroll = 0;
-				
-				function trackScrollDepth() {
-					const scrollPercent = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
-					
-					if (scrollPercent > maxScroll) {
-						maxScroll = scrollPercent;
-						
-						Object.keys(scrollDepths).forEach(depth => {
-							if (scrollPercent >= depth && !scrollDepths[depth]) {
-								scrollDepths[depth] = true;
-								if (typeof gtag !== 'undefined') {
-									try {
-										gtag('event', 'scroll', {
-											'event_category': 'Engagement',
-											'event_label': `${depth}%`,
-											'value': depth
-										});
-									} catch (e) {
-										console.debug('Scroll tracking unavailable');
-									}
-								}
-							}
-						});
-					}
-				}
-				
-				// Debounced scroll tracking
-				let scrollTimer;
-				window.addEventListener('scroll', () => {
-					clearTimeout(scrollTimer);
-					scrollTimer = setTimeout(trackScrollDepth, 100);
-				}, { passive: true });
-				
-				// Page Engagement Time Tracking
-				let startTime = Date.now();
-				let totalEngagedTime = 0;
-				let isEngaged = true;
-				let engagementTimer;
-				
-				function trackEngagement() {
-					if (isEngaged) {
-						totalEngagedTime += Date.now() - startTime;
-						
-						// Send engagement time every 30 seconds
-						if (totalEngagedTime > 0 && totalEngagedTime % 30000 < 1000) {
-							if (typeof gtag !== 'undefined') {
-								try {
-									gtag('event', 'page_engagement', {
-										'event_category': 'Engagement',
-										'event_label': 'Time on Page',
-										'value': Math.round(totalEngagedTime / 1000),
-										'engagement_time_seconds': Math.round(totalEngagedTime / 1000)
-									});
-								} catch (e) {
-									console.debug('Engagement tracking unavailable');
-								}
-							}
-						}
-					}
-					startTime = Date.now();
-				}
-				
-				// Track when user is engaged/disengaged
-				document.addEventListener('visibilitychange', () => {
-					isEngaged = !document.hidden;
-					if (isEngaged) {
-						startTime = Date.now();
-						engagementTimer = setInterval(trackEngagement, 1000);
-					} else {
-						clearInterval(engagementTimer);
-						trackEngagement();
-					}
-				});
-				
-				// Start engagement tracking
-				engagementTimer = setInterval(trackEngagement, 1000);
-				
-				// Track CTA Button Clicks
-				document.addEventListener('click', function(e) {
-					const button = e.target.closest('.btn, .cta-button, button[type="submit"]');
-					if (button) {
-						const buttonText = button.textContent.trim();
-						const buttonClass = button.className;
-						
-						if (typeof gtag !== 'undefined') {
-							try {
-								gtag('event', 'cta_click', {
-									'event_category': 'Engagement',
-									'event_label': buttonText,
-									'button_class': buttonClass,
-									'page_location': window.location.pathname
-								});
-								
-								// Track high-intent CTAs for Google Ads
-								if (buttonText.toLowerCase().includes('call') || 
-									buttonText.toLowerCase().includes('contact') ||
-									buttonText.toLowerCase().includes('book') ||
-									buttonText.toLowerCase().includes('schedule')) {
-									gtag('event', 'conversion', {
-										'send_to': 'AW-17217204638/cta_high_intent',
-										'value': 5.0,
-										'currency': 'USD'
-									});
-								}
-							} catch (e) {
-								console.debug('CTA tracking unavailable');
-							}
-						}
-					}
-				});
-				
-				// Track Outbound Links
-				document.addEventListener('click', function(e) {
-					const link = e.target.closest('a');
-					if (link && link.hostname !== window.location.hostname && 
-						!link.href.startsWith('tel:') && !link.href.startsWith('mailto:')) {
-						if (typeof gtag !== 'undefined') {
-							try {
-								gtag('event', 'click', {
-									'event_category': 'Outbound Link',
-									'event_label': link.href,
-									'transport_type': 'beacon'
-								});
-							} catch (e) {
-								console.debug('Outbound link tracking unavailable');
-							}
-						}
-					}
-				});
-				
-				// Lazy load image fade-in
-				if ('loading' in HTMLImageElement.prototype) {
-					const images = document.querySelectorAll('img[loading="lazy"]');
-					images.forEach(img => {
-						img.addEventListener('load', () => {
-							img.classList.add('loaded');
-						});
-						if (img.complete) {
-							img.classList.add('loaded');
-						}
-					});
-				}
-			});
-			
-			// Optimize scroll performance
-			let ticking = false;
-			function requestTick() {
-				if (!ticking) {
-					window.requestAnimationFrame(updateScroll);
-					ticking = true;
-				}
-			}
-			function updateScroll() {
-				ticking = false;
-				// Add scroll-based optimizations here if needed
-			}
-			window.addEventListener('scroll', requestTick, { passive: true });
-		</script>
+		<!-- Optimized External JavaScript -->
+		<script src="/js/main-optimized.js" defer></script>
 		
 		<!-- Load Turnstile only on contact pages -->
 		{(Astro.url.pathname.includes('/contact') || Astro.url.pathname.includes('/computer')) && (
@@ -777,77 +473,14 @@ const {
 	</body>
 </html>
 
+<!-- Load non-critical styles asynchronously -->
+<link rel="preload" href="/css/layout.css" as="style">
+<link rel="stylesheet" href="/css/layout.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="/css/layout.css"></noscript>
+
 <style>
-	/* CSS Reset and Base Styles */
-	*, *::before, *::after {
-		box-sizing: border-box;
-		margin: 0;
-		padding: 0;
-	}
-
-	/* Image Optimization for Core Web Vitals */
-	img {
-		max-width: 100%;
-		height: auto;
-		display: block;
-	}
-
-	/* Lazy load fade-in effect */
-	img[loading="lazy"] {
-		opacity: 0;
-		transition: opacity 0.3s;
-	}
-
-	img[loading="lazy"].loaded {
-		opacity: 1;
-	}
-
-	/* Optimize background images */
-	.hero-section, .hero {
-		background-size: cover;
-		background-position: center;
-		will-change: transform;
-		/* Use CSS containment for performance */
-		contain: layout style paint;
-	}
-
-	/* Preload critical images */
-	link[rel="preload"][as="image"] {
-		importance: high;
-	}
-
-	:root {
-		--font-heading: 'Bebas Neue', sans-serif;
-		--font-body: 'Inter', system-ui, sans-serif;
-		/* EXACT HOMEPAGE COLORS - Apply these everywhere */
-		--homepage-hero-bg: #1e3a8a;
-		--homepage-button-bg: #000000;
-		--homepage-button-hover: #333333;
-		--homepage-primary-blue: #2563EB;
-		--homepage-secondary-blue: #1E40AF;
-		--color-primary: #1e3a8a;
-		--color-secondary: #000000;
-		--color-dark: #1f2937;
-		--color-light: #ffffff;
-	}
-
-	html {
-		font-family: var(--font-body);
-		line-height: 1.6;
-	}
-
-	body {
-		background-color: var(--color-light);
-		color: var(--color-dark);
-		font-weight: 400;
-	}
-
-	/* Container */
-	.container {
-		max-width: 1200px;
-		margin: 0 auto;
-		padding: 0 1rem;
-	}
+	/* Critical inline styles moved to external CSS file */
+	/* Only keeping truly critical above-the-fold styles inline */
 
 	/* Header */
 	.header {
