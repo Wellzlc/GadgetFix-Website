@@ -9,10 +9,6 @@ Disallow: /_astro/
 Disallow: /temp/
 Disallow: /private/
 Disallow: /test-form
-Disallow: /contact-smu
-Disallow: /contact-tcu
-Disallow: /contact-uta
-Disallow: /contact-utd
 
 # Block WordPress media attachment pages
 Disallow: /*-png/

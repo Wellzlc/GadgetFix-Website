@@ -1,0 +1,35 @@
+# Netlify Redirects Configuration
+# Force www redirect for SEO consistency
+https://gadgetfixllc.com/* https://www.gadgetfixllc.com/:splat 301!
+http://gadgetfixllc.com/* https://www.gadgetfixllc.com/:splat 301!
+http://www.gadgetfixllc.com/* https://www.gadgetfixllc.com/:splat 301!
+
+# Legacy URL redirects (if any old URLs exist)
+/phone-repair /services 301
+/iphone-repair /virus-removal-service 301
+/samsung-repair /password-reset-service 301
+/screen-repair /computer-optimization 301
+/battery-replacement /software-installation 301
+/device-repair /services 301
+/smartphone-repair /services 301
+/tablet-repair /services 301
+
+# Service redirects
+/computer-repair /services 301
+/pc-repair /services 301
+/laptop-repair /services 301
+/mac-repair /services 301
+
+# Contact form redirects
+/contact-form /contact 301
+/get-quote /contact 301
+/quote /contact 301
+
+# Common misspellings and variations
+/service /services 301
+/location /locations 301
+/aboutus /about 301
+/contact-us /contact 301
+
+# 404 fallback
+/* /404 404
