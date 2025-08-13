@@ -1,0 +1,562 @@
+---
+import type { FAQSchemaProps, LocationConfig } from '../types/faq';
+import { 
+  processFAQs, 
+  generateFAQSchema, 
+  sortByPriority,
+  chunkFAQs,
+  measureFAQPerformance 
+} from '../utils/faq-utils';
+
+export interface Props extends FAQSchemaProps {}
+
+const {
+  faqs,
+  location,
+  title = "Frequently Asked Questions",
+  description,
+  variant = 'default',
+  showSearch = false,
+  showCategories = false,
+  analyticsEnabled = false,
+  lazyLoad = true,
+  initialCount = 5
+} = Astro.props;
+
+// Start performance measurement
+const startTime = performance.now();
+
+// Process location configuration
+const locationConfig: LocationConfig | undefined = location ? {
+  location,
+  state: 'Texas',
+  customReplacements: {
+    '[area]': `${location} area`,
+    '[city]': location
+  }
+} : undefined;
+
+// Process and sort FAQs
+const processedFAQs = processFAQs(faqs, locationConfig);
+const sortedFAQs = sortByPriority(processedFAQs);
+
+// Chunk FAQs for progressive loading
+const faqChunks = lazyLoad ? chunkFAQs(sortedFAQs, initialCount) : [sortedFAQs];
+const initialFAQs = faqChunks[0] || [];
+const remainingFAQs = faqChunks.slice(1).flat();
+
+// Generate schema
+const schema = generateFAQSchema(sortedFAQs, {
+  title,
+  description,
+  organizationName: 'GadgetFix LLC',
+  organizationUrl: 'https://www.gadgetfixllc.com'
+});
+
+const schemaString = JSON.stringify(schema);
+
+// Measure performance
+const hasInteractivity = showSearch || showCategories || lazyLoad;
+const metrics = measureFAQPerformance(startTime, sortedFAQs, schemaString, hasInteractivity);
+
+// Generate unique component ID
+const componentId = `faq-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<!-- JSON-LD Schema -->
+<script type="application/ld+json" set:html={schemaString}></script>
+
+<!-- FAQ Component -->
+<div 
+  class={`faq-container faq-${variant}`} 
+  id={componentId}
+  data-faq-count={sortedFAQs.length}
+  data-performance={JSON.stringify(metrics)}
+>
+  <!-- Header -->
+  <div class="faq-header">
+    <h2 class="faq-title">{title}</h2>
+    {description && <p class="faq-description">{description}</p>}
+    
+    {/* Search Bar - Progressive Enhancement */}
+    {showSearch && (
+      <div class="faq-search" data-search>
+        <input 
+          type="search" 
+          placeholder="Search FAQs..."
+          class="faq-search-input"
+          aria-label="Search frequently asked questions"
+        />
+        <span class="faq-search-results" aria-live="polite"></span>
+      </div>
+    )}
+    
+    {/* Category Filter - Progressive Enhancement */}
+    {showCategories && (
+      <div class="faq-categories" data-categories>
+        <button class="faq-category active" data-category="all">
+          All ({sortedFAQs.length})
+        </button>
+        {Object.entries(
+          sortedFAQs.reduce((acc, faq) => {
+            const cat = faq.category || 'general';
+            acc[cat] = (acc[cat] || 0) + 1;
+            return acc;
+          }, {} as Record<string, number>)
+        ).map(([category, count]) => (
+          <button class="faq-category" data-category={category}>
+            {category.charAt(0).toUpperCase() + category.slice(1)} ({count})
+          </button>
+        ))}
+      </div>
+    )}
+  </div>
+
+  <!-- FAQ Items -->
+  <div class="faq-list" role="region" aria-label="Frequently asked questions">
+    {/* Initial FAQs (visible immediately) */}
+    {initialFAQs.map((faq) => (
+      <details 
+        class="faq-item" 
+        data-category={faq.category}
+        data-priority={faq.priority}
+        data-faq-id={faq.id}
+      >
+        <summary class="faq-question">
+          <span class="faq-question-text">{faq.question}</span>
+          <svg 
+            class="faq-icon" 
+            width="20" 
+            height="20" 
+            viewBox="0 0 20 20"
+            aria-hidden="true"
+          >
+            <path 
+              fill="currentColor" 
+              d="M10 13l-5-5h10l-5 5z"
+            />
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p set:html={faq.answer}></p>
+          {faq.relatedServices && faq.relatedServices.length > 0 && (
+            <div class="faq-related">
+              <span class="faq-related-label">Related services:</span>
+              {faq.relatedServices.map(service => (
+                <a href={`/${service.toLowerCase().replace(/\s+/g, '-')}`} class="faq-related-link">
+                  {service}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      </details>
+    ))}
+    
+    {/* Lazy-loaded FAQs */}
+    {lazyLoad && remainingFAQs.length > 0 && (
+      <div class="faq-lazy" data-lazy-faqs={JSON.stringify(remainingFAQs)}>
+        <button class="faq-load-more" data-load-more>
+          Show {remainingFAQs.length} more questions
+        </button>
+      </div>
+    )}
+  </div>
+
+  {/* Analytics Tracking */}
+  {analyticsEnabled && (
+    <script define:vars={{ componentId }}>
+      // Track FAQ interactions
+      document.getElementById(componentId)?.addEventListener('toggle', (e) => {
+        if (e.target.open) {
+          const faqId = e.target.dataset.faqId;
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'faq_expand', {
+              event_category: 'FAQ',
+              event_label: faqId
+            });
+          }
+        }
+      });
+    </script>
+  )}
+</div>
+
+<!-- Progressive Enhancement JavaScript -->
+{hasInteractivity && (
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('{componentId}');
+      if (!container) return;
+
+      // Search functionality
+      const searchInput = container.querySelector('[data-search] input');
+      const searchResults = container.querySelector('.faq-search-results');
+      const faqItems = container.querySelectorAll('.faq-item');
+      
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const term = e.target.value.toLowerCase();
+          let visibleCount = 0;
+          
+          faqItems.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            const visible = !term || text.includes(term);
+            item.style.display = visible ? '' : 'none';
+            if (visible) visibleCount++;
+          });
+          
+          if (searchResults) {
+            searchResults.textContent = term 
+              ? `${visibleCount} result${visibleCount !== 1 ? 's' : ''}`
+              : '';
+          }
+        });
+      }
+
+      // Category filtering
+      const categoryButtons = container.querySelectorAll('[data-category]');
+      if (categoryButtons.length > 0) {
+        categoryButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const category = btn.dataset.category;
+            
+            // Update active state
+            categoryButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // Filter items
+            faqItems.forEach(item => {
+              const itemCategory = item.dataset.category || 'general';
+              const visible = category === 'all' || itemCategory === category;
+              item.style.display = visible ? '' : 'none';
+            });
+          });
+        });
+      }
+
+      // Load more functionality
+      const loadMoreBtn = container.querySelector('[data-load-more]');
+      const lazyContainer = container.querySelector('[data-lazy-faqs]');
+      
+      if (loadMoreBtn && lazyContainer) {
+        loadMoreBtn.addEventListener('click', () => {
+          const faqs = JSON.parse(lazyContainer.dataset.lazyFaqs);
+          const faqList = container.querySelector('.faq-list');
+          
+          faqs.forEach(faq => {
+            const details = document.createElement('details');
+            details.className = 'faq-item';
+            details.dataset.category = faq.category || 'general';
+            details.dataset.priority = faq.priority || 50;
+            details.dataset.faqId = faq.id;
+            
+            details.innerHTML = `
+              <summary class="faq-question">
+                <span class="faq-question-text">${faq.question}</span>
+                <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill="currentColor" d="M10 13l-5-5h10l-5 5z"/>
+                </svg>
+              </summary>
+              <div class="faq-answer">
+                <p>${faq.answer}</p>
+              </div>
+            `;
+            
+            faqList.insertBefore(details, lazyContainer);
+          });
+          
+          lazyContainer.remove();
+        });
+      }
+    });
+  </script>
+)}
+
+<style>
+  /* Base Styles */
+  .faq-container {
+    --faq-primary: #1e3a8a;
+    --faq-secondary: #2563eb;
+    --faq-text: #1f2937;
+    --faq-bg: #ffffff;
+    --faq-border: #e5e7eb;
+    --faq-hover: #f3f4f6;
+    
+    margin: 2rem 0;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  .faq-header {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .faq-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--faq-primary);
+    margin: 0 0 0.5rem;
+  }
+
+  .faq-description {
+    color: var(--faq-text);
+    opacity: 0.8;
+    margin: 0 0 1.5rem;
+  }
+
+  /* Search Bar */
+  .faq-search {
+    max-width: 500px;
+    margin: 1.5rem auto;
+    position: relative;
+  }
+
+  .faq-search-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--faq-border);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+  }
+
+  .faq-search-input:focus {
+    outline: none;
+    border-color: var(--faq-secondary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+
+  .faq-search-results {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.875rem;
+    color: var(--faq-text);
+    opacity: 0.6;
+  }
+
+  /* Categories */
+  .faq-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin: 1.5rem 0;
+  }
+
+  .faq-category {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--faq-border);
+    background: var(--faq-bg);
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .faq-category:hover {
+    background: var(--faq-hover);
+  }
+
+  .faq-category.active {
+    background: var(--faq-primary);
+    color: white;
+    border-color: var(--faq-primary);
+  }
+
+  /* FAQ Items */
+  .faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .faq-item {
+    background: var(--faq-bg);
+    border: 1px solid var(--faq-border);
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+
+  .faq-item:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .faq-question {
+    padding: 1.25rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    color: var(--faq-text);
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question-text {
+    flex: 1;
+    padding-right: 1rem;
+  }
+
+  .faq-icon {
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+
+  details[open] .faq-icon {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 1.25rem 1.25rem;
+    color: var(--faq-text);
+    line-height: 1.6;
+  }
+
+  .faq-answer p {
+    margin: 0;
+  }
+
+  /* Related Services */
+  .faq-related {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--faq-border);
+  }
+
+  .faq-related-label {
+    font-size: 0.875rem;
+    color: var(--faq-text);
+    opacity: 0.7;
+    margin-right: 0.5rem;
+  }
+
+  .faq-related-link {
+    display: inline-block;
+    margin: 0.25rem;
+    padding: 0.25rem 0.75rem;
+    background: var(--faq-hover);
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    color: var(--faq-secondary);
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .faq-related-link:hover {
+    background: var(--faq-border);
+  }
+
+  /* Load More Button */
+  .faq-lazy {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  .faq-load-more {
+    padding: 0.75rem 2rem;
+    background: var(--faq-primary);
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .faq-load-more:hover {
+    background: var(--faq-secondary);
+  }
+
+  /* Variants */
+  .faq-compact .faq-item {
+    margin-bottom: 0.5rem;
+  }
+
+  .faq-compact .faq-question {
+    padding: 1rem;
+  }
+
+  .faq-detailed .faq-item {
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 640px) {
+    .faq-title {
+      font-size: 1.5rem;
+    }
+
+    .faq-categories {
+      justify-content: flex-start;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .faq-question {
+      padding: 1rem;
+    }
+
+    .faq-answer {
+      padding: 0 1rem 1rem;
+    }
+  }
+
+  /* Print Styles */
+  @media print {
+    .faq-search,
+    .faq-categories,
+    .faq-load-more {
+      display: none;
+    }
+
+    .faq-item {
+      break-inside: avoid;
+    }
+
+    details {
+      open: true;
+    }
+  }
+
+  /* Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    .faq-icon,
+    .faq-item,
+    .faq-category,
+    .faq-load-more {
+      transition: none;
+    }
+  }
+
+  /* High Contrast */
+  @media (prefers-contrast: high) {
+    .faq-item {
+      border-width: 2px;
+    }
+
+    .faq-question {
+      font-weight: 700;
+    }
+  }
+
+  /* Dark Mode Support */
+  @media (prefers-color-scheme: dark) {
+    .faq-container {
+      --faq-text: #f3f4f6;
+      --faq-bg: #1f2937;
+      --faq-border: #374151;
+      --faq-hover: #111827;
+    }
+  }
+</style>

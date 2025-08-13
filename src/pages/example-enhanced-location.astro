@@ -1,0 +1,302 @@
+---
+import Layout from '../layouts/Layout.astro';
+import FAQComplete from '../components/enhanced/FAQComplete.astro';
+
+// Define city-specific data
+const cityName = "Dallas";
+const countyName = "Dallas County";
+
+// Example of how to use the enhanced FAQ system
+---
+
+<Layout 
+  title={`Computer Service ${cityName}, TX | Mobile Service | GadgetFix LLC`}
+  description={`Professional computer service in ${cityName}, Texas. Virus removal, password reset, optimization. We come to you! Same-day service, 90-day warranty. Call (402) 416-6942`}
+  keywords={`computer service ${cityName.toLowerCase()}, computer service ${cityName.toLowerCase()} tx, password reset ${cityName.toLowerCase()}, mobile repair ${cityName.toLowerCase()}`}
+>
+  <main>
+    <!-- Hero Section -->
+    <section class="city-hero">
+      <div class="container">
+        <h1>Computer Service in {cityName}, Texas</h1>
+        <p class="hero-subtitle">Professional Mobile Computer Service - We Come to You</p>
+        <div class="hero-buttons">
+          <a href="tel:4024166942" class="btn-primary">CALL NOW: (402) 416-6942</a>
+          <a href="/contact" class="btn-secondary">SCHEDULE SERVICE</a>
+        </div>
+        <p class="service-note">Serving {cityName} and surrounding areas • 7 days a week</p>
+      </div>
+    </section>
+
+    <!-- Service Content -->
+    <section class="local-info">
+      <div class="container">
+        <h2>Mobile Computer Service in {cityName}</h2>
+        <p>GadgetFix LLC provides professional mobile computer service throughout {cityName}, {countyName}. 
+        We serve all {cityName} neighborhoods with same-day service and professional technicians.</p>
+      </div>
+    </section>
+
+    <!-- Enhanced FAQ Section - Multiple Variants -->
+    
+    <!-- 1. Full-featured FAQ with search and filters -->
+    <section class="faq-detailed-section">
+      <div class="container">
+        <FAQComplete
+          location={cityName}
+          serviceType="virus-removal"
+          title={`${cityName} Computer Service FAQ`}
+          variant="detailed"
+          enableSearch={true}
+          enableFilters={true}
+          enableAnalytics={true}
+          maxItems={15}
+          maxInitialItems={8}
+          categories={['service', 'warranty', 'booking']}
+          customSchemaProperties={{
+            "publisher": {
+              "@type": "Organization",
+              "name": "GadgetFix LLC"
+            }
+          }}
+        />
+      </div>
+    </section>
+
+    <!-- 2. Compact FAQ for quick reference -->
+    <section class="faq-compact-section">
+      <div class="container">
+        <h2>Quick Answers</h2>
+        <FAQComplete
+          location={cityName}
+          variant="compact"
+          maxInitialItems={4}
+          enableAnalytics={true}
+          className="quick-faq"
+        />
+      </div>
+    </section>
+
+    <!-- 3. Service-specific FAQ -->
+    <section class="service-faq-section">
+      <div class="container">
+        <FAQComplete
+          location={cityName}
+          serviceType="password-reset"
+          title="Password Reset Service FAQ"
+          variant="default"
+          maxItems={8}
+          categories={['service', 'device']}
+        />
+      </div>
+    </section>
+
+    <!-- 4. Manual FAQ override example -->
+    <section class="manual-faq-section">
+      <div class="container">
+        <FAQComplete
+          useContentCollections={false}
+          title="Custom Business FAQ"
+          variant="default"
+          manualFAQs={[
+            {
+              question: "Do you provide enterprise computer services?",
+              answer: "Yes, we offer dedicated enterprise support with priority response times and volume discounts for businesses with 10+ computers.",
+              category: "business",
+              priority: 10,
+              clickTrackingId: "enterprise-services"
+            },
+            {
+              question: "What are your corporate hours?",
+              answer: "Our corporate support is available Monday-Friday 7:00 AM to 7:00 PM, with emergency support available 24/7 for critical business systems.",
+              category: "business", 
+              priority: 8,
+              clickTrackingId: "corporate-hours"
+            }
+          ]}
+        />
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="city-cta">
+      <div class="container">
+        <h2>Get Your Computer Fixed Today in {cityName}</h2>
+        <p>Don't let computer problems disrupt your day. Professional mobile computer service at your location.</p>
+        <div class="cta-buttons">
+          <a href="tel:4024166942" class="btn-primary">CALL NOW: (402) 416-6942</a>
+        </div>
+        <p class="hours">Open 7 Days • Monday-Sunday 8:00 AM - 6:00 PM</p>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  /* Clean, professional style matching homepage */
+  .city-hero {
+    background: #1e3a8a;
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    margin: 1rem 0 2rem;
+    opacity: 0.95;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .service-note {
+    opacity: 0.9;
+    margin-top: 1rem;
+  }
+
+  .btn-primary, .btn-secondary {
+    background: #000000;
+    color: white;
+    border: 2px solid #000000;
+    border-radius: 100px;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .btn-primary:hover, .btn-secondary:hover {
+    background: #333333;
+    border-color: #333333;
+    transform: translateY(-2px);
+  }
+
+  section {
+    padding: 3rem 0;
+  }
+
+  section:nth-child(even) {
+    background: #f8f9fa;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    color: #1e3a8a;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+  }
+
+  .local-info p {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .city-cta {
+    background: #1e3a8a;
+    color: white;
+    text-align: center;
+  }
+
+  .city-cta h2 {
+    color: white;
+  }
+
+  .cta-buttons {
+    margin: 2rem 0;
+  }
+
+  .hours {
+    opacity: 0.95;
+  }
+
+  /* FAQ section specific styles */
+  .faq-detailed-section {
+    background: white;
+  }
+
+  .faq-compact-section {
+    background: #f1f5f9;
+    padding: 2rem 0;
+  }
+
+  .service-faq-section {
+    background: white;
+  }
+
+  .manual-faq-section {
+    background: #f8f9fa;
+  }
+
+  .quick-faq {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 1.8rem;
+    }
+    
+    .hero-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .btn-primary, .btn-secondary {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    section {
+      padding: 2rem 0;
+    }
+  }
+</style>
+
+<!-- Performance monitoring -->
+<script>
+  // Monitor page load performance
+  window.addEventListener('load', () => {
+    if (typeof performance !== 'undefined' && typeof gtag !== 'undefined') {
+      const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+      
+      gtag('event', 'page_load_time', {
+        page_type: 'location_page',
+        location: 'Dallas',
+        load_time: loadTime,
+        faq_variants: 4
+      });
+    }
+  });
+
+  // Monitor FAQ interaction
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqSections = document.querySelectorAll('.faq-complete-wrapper');
+    console.log(`Enhanced FAQ system loaded with ${faqSections.length} sections`);
+  });
+</script>

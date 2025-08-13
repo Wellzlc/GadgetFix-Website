@@ -1,0 +1,82 @@
+[
+  {
+    "templateId": "computer-services-location",
+    "baseQuestion": "What computer services do you offer in [location]?",
+    "baseAnswer": "We provide comprehensive computer services in [location] including virus removal, password reset, computer optimization, software installation, and emergency troubleshooting for both Windows and Mac computers.",
+    "locationVariables": ["[location]", "[Location]"],
+    "category": "service",
+    "priority": 9,
+    "applicableServices": ["virus-removal", "password-reset", "optimization"],
+    "isActive": true
+  },
+  {
+    "templateId": "response-time-location", 
+    "baseQuestion": "How quickly can you arrive for computer service in [location]?",
+    "baseAnswer": "We typically arrive within 30 minutes for computer service calls in [location]. Our mobile technicians know the area well and can quickly reach all neighborhoods in [location].",
+    "locationVariables": ["[location]", "[Location]"],
+    "category": "service",
+    "priority": 8,
+    "applicableServices": ["emergency-service"],
+    "isActive": true
+  },
+  {
+    "templateId": "platforms-location",
+    "baseQuestion": "Do you service both Windows and Mac computers in [location]?",
+    "baseAnswer": "Yes, our [location] technicians are certified to work on both Windows PCs and Mac computers. We handle all operating system issues, software problems, and optimization needs for both platforms.",
+    "locationVariables": ["[location]", "[Location]"],
+    "category": "device",
+    "priority": 7,
+    "applicableServices": ["windows-troubleshooting", "mac-troubleshooting"],
+    "isActive": true
+  },
+  {
+    "templateId": "service-areas-location",
+    "baseQuestion": "What areas of [location] do you serve?",
+    "baseAnswer": "We provide mobile computer service throughout [location] and surrounding neighborhoods. Our service area covers all major districts and residential areas within [location].",
+    "locationVariables": ["[location]", "[Location]"],
+    "category": "service",
+    "priority": 6,
+    "applicableServices": ["mobile-service"],
+    "isActive": true
+  },
+  {
+    "templateId": "pricing-location",
+    "baseQuestion": "How much does computer service cost in [location]?",
+    "baseAnswer": "Our [location] computer service pricing is competitive and transparent. We provide upfront quotes with no hidden fees. Contact us at (402) 416-6942 for specific pricing based on your computer issue.",
+    "locationVariables": ["[location]", "[Location]"],
+    "category": "booking",
+    "priority": 5,
+    "applicableServices": ["all"],
+    "isActive": true
+  },
+  {
+    "templateId": "emergency-location",
+    "baseQuestion": "Do you offer emergency computer service in [location]?",
+    "baseAnswer": "Yes, we offer same-day emergency computer service throughout [location]. Whether you have a critical work presentation or urgent deadline, we prioritize emergency calls with rapid response times.",
+    "locationVariables": ["[location]", "[Location]"],
+    "category": "booking",
+    "priority": 8,
+    "applicableServices": ["emergency-service"],
+    "isActive": true
+  },
+  {
+    "templateId": "virus-removal-location",
+    "baseQuestion": "Can you remove viruses from my computer in [location]?",
+    "baseAnswer": "Absolutely! Virus removal is one of our most requested services in [location]. We thoroughly scan, remove malware, and install protection to prevent future infections on your computer.",
+    "locationVariables": ["[location]", "[Location]"],
+    "category": "service",
+    "priority": 7,
+    "applicableServices": ["virus-removal"],
+    "isActive": true
+  },
+  {
+    "templateId": "business-service-location",
+    "baseQuestion": "Do you provide computer service for businesses in [location]?",
+    "baseAnswer": "Yes, we serve many [location] businesses and offer corporate accounts with priority service and volume discounts for companies. We understand business downtime costs money.",
+    "locationVariables": ["[location]", "[Location]"],
+    "category": "service", 
+    "priority": 6,
+    "applicableServices": ["business-service"],
+    "isActive": true
+  }
+]

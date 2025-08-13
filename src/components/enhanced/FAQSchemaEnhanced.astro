@@ -1,0 +1,312 @@
+---
+import { getCollection } from 'astro:content';
+import type { FAQ, FAQTemplate } from '../../content/config';
+
+export interface FAQItem {
+  question: string;
+  answer: string;
+  category?: string;
+  priority?: number;
+  clickTrackingId?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+}
+
+export interface Props {
+  faqs?: FAQItem[];
+  location?: string;
+  serviceType?: string;
+  useContentCollections?: boolean;
+  maxItems?: number;
+  categories?: string[];
+  enableValidation?: boolean;
+  customSchemaProperties?: Record<string, any>;
+}
+
+const { 
+  faqs = [],
+  location = "",
+  serviceType = "",
+  useContentCollections = true,
+  maxItems = 20,
+  categories = [],
+  enableValidation = true,
+  customSchemaProperties = {}
+} = Astro.props;
+
+// Content Collections Integration
+async function getEnhancedFAQs(): Promise<FAQItem[]> {
+  if (!useContentCollections) {
+    return faqs;
+  }
+
+  try {
+    // Get static FAQs from content collections
+    const staticFAQs = await getCollection('faqs');
+    
+    // Get FAQ templates for location-specific questions
+    const faqTemplates = await getCollection('faq-templates');
+    
+    let allFAQs: FAQItem[] = [];
+
+    // Add static FAQs
+    if (staticFAQs) {
+      allFAQs = staticFAQs
+        .filter(faq => faq.data.isActive)
+        .filter(faq => {
+          // Filter by service type if specified
+          if (serviceType && faq.data.services && !faq.data.services.includes(serviceType) && !faq.data.services.includes('all')) {
+            return false;
+          }
+          // Filter by categories if specified
+          if (categories.length > 0 && faq.data.category && !categories.includes(faq.data.category)) {
+            return false;
+          }
+          return true;
+        })
+        .map(faq => ({
+          question: faq.data.question,
+          answer: faq.data.answer,
+          category: faq.data.category,
+          priority: faq.data.priority,
+          clickTrackingId: faq.data.clickTrackingId,
+          metaTitle: faq.data.metaTitle,
+          metaDescription: faq.data.metaDescription,
+        }));
+    }
+
+    // Add location-specific FAQs if location is provided
+    if (location && faqTemplates) {
+      const locationFAQs = faqTemplates
+        .filter(template => template.data.isActive)
+        .filter(template => {
+          // Filter by service type
+          if (serviceType && template.data.applicableServices && 
+              !template.data.applicableServices.includes(serviceType) && 
+              !template.data.applicableServices.includes('all')) {
+            return false;
+          }
+          return true;
+        })
+        .map(template => ({
+          question: replaceLocationVariables(template.data.baseQuestion, location),
+          answer: replaceLocationVariables(template.data.baseAnswer, location),
+          category: template.data.category,
+          priority: template.data.priority,
+          clickTrackingId: `location-${template.data.templateId}-${location.toLowerCase().replace(/\s+/g, '-')}`,
+        }));
+      
+      allFAQs = [...allFAQs, ...locationFAQs];
+    }
+
+    // Add any manually passed FAQs
+    if (faqs.length > 0) {
+      allFAQs = [...allFAQs, ...faqs];
+    }
+
+    // Remove duplicates based on question
+    const uniqueFAQs = allFAQs.filter((faq, index, self) => 
+      index === self.findIndex(f => f.question === faq.question)
+    );
+
+    // Sort by priority and limit
+    return uniqueFAQs
+      .sort((a, b) => (b.priority || 5) - (a.priority || 5))
+      .slice(0, maxItems);
+
+  } catch (error) {
+    console.error('Error loading FAQ content collections:', error);
+    return faqs; // Fallback to manual FAQs
+  }
+}
+
+// Location variable replacement function
+function replaceLocationVariables(text: string, locationName: string): string {
+  if (!locationName) return text;
+  
+  const replacements = new Map([
+    ['[location]', locationName],
+    ['[Location]', locationName.charAt(0).toUpperCase() + locationName.slice(1)],
+    ['[LOCATION]', locationName.toUpperCase()],
+    // Add more patterns as needed
+  ]);
+
+  let result = text;
+  for (const [pattern, replacement] of replacements) {
+    result = result.replace(new RegExp(pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), replacement);
+  }
+  
+  return result;
+}
+
+// Get processed FAQs
+const processedFAQs = await getEnhancedFAQs();
+
+// Schema validation function
+function validateFAQSchema(schema: any): { isValid: boolean; errors: string[] } {
+  const errors: string[] = [];
+  
+  if (!schema['@context']) {
+    errors.push('Missing @context property');
+  }
+  
+  if (!schema['@type'] || schema['@type'] !== 'FAQPage') {
+    errors.push('Invalid or missing @type property');
+  }
+  
+  if (!schema.mainEntity || !Array.isArray(schema.mainEntity)) {
+    errors.push('Missing or invalid mainEntity array');
+  } else {
+    schema.mainEntity.forEach((entity: any, index: number) => {
+      if (!entity['@type'] || entity['@type'] !== 'Question') {
+        errors.push(`Question ${index + 1}: Invalid @type`);
+      }
+      
+      if (!entity.name || typeof entity.name !== 'string') {
+        errors.push(`Question ${index + 1}: Missing or invalid name`);
+      }
+      
+      if (!entity.acceptedAnswer || !entity.acceptedAnswer['@type'] || entity.acceptedAnswer['@type'] !== 'Answer') {
+        errors.push(`Question ${index + 1}: Invalid acceptedAnswer structure`);
+      }
+      
+      if (!entity.acceptedAnswer?.text || typeof entity.acceptedAnswer.text !== 'string') {
+        errors.push(`Question ${index + 1}: Missing or invalid answer text`);
+      }
+    });
+  }
+  
+  return {
+    isValid: errors.length === 0,
+    errors
+  };
+}
+
+// Generate enhanced FAQ schema with additional properties
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": processedFAQs.map((faq, index) => ({
+    "@type": "Question",
+    "@id": `#faq-${index + 1}`,
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer,
+      ...(faq.metaTitle && { "headline": faq.metaTitle }),
+      ...(faq.metaDescription && { "description": faq.metaDescription }),
+    },
+    // Add additional schema properties
+    ...(faq.category && { "about": faq.category }),
+    ...(location && { "spatial": location }),
+    ...(serviceType && { "keywords": serviceType }),
+  })),
+  // Add page-level properties
+  ...(location && { 
+    "about": {
+      "@type": "Place",
+      "name": location
+    }
+  }),
+  ...(serviceType && { "keywords": serviceType }),
+  "dateModified": new Date().toISOString(),
+  "inLanguage": "en-US",
+  // Merge any custom schema properties
+  ...customSchemaProperties
+};
+
+// Validate schema if enabled
+let validationResult = { isValid: true, errors: [] };
+if (enableValidation) {
+  validationResult = validateFAQSchema(faqSchema);
+  
+  if (!validationResult.isValid) {
+    console.error('FAQ Schema Validation Errors:', validationResult.errors);
+  }
+}
+
+// Only render if we have FAQs and valid schema
+const shouldRender = processedFAQs.length > 0 && validationResult.isValid;
+---
+
+{shouldRender && (
+  <script 
+    type="application/ld+json" 
+    set:html={JSON.stringify(faqSchema, null, 0)}
+    data-schema-type="FAQPage"
+    data-validation-status={validationResult.isValid ? 'valid' : 'invalid'}
+  ></script>
+)}
+
+{!validationResult.isValid && (
+  <!-- Development mode error display -->
+  <div class="faq-schema-error" style="display: none;" data-dev-only>
+    <h3>FAQ Schema Validation Errors:</h3>
+    <ul>
+      {validationResult.errors.map(error => <li>{error}</li>)}
+    </ul>
+  </div>
+)}
+
+<!-- Performance monitoring for schema -->
+<script>
+  // Monitor schema loading and validation
+  if (typeof window !== 'undefined' && window.performance) {
+    const schemaElement = document.querySelector('[data-schema-type="FAQPage"]');
+    if (schemaElement) {
+      // Log schema load time
+      const loadTime = performance.now();
+      console.debug('FAQ Schema loaded in:', loadTime.toFixed(2), 'ms');
+      
+      // Validate JSON parsing
+      try {
+        const schemaContent = JSON.parse(schemaElement.textContent || '{}');
+        console.debug('FAQ Schema parsed successfully:', schemaContent.mainEntity?.length || 0, 'questions');
+        
+        // Optional: Send analytics about FAQ schema usage
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'faq_schema_loaded', {
+            question_count: schemaContent.mainEntity?.length || 0,
+            location: schemaContent.about?.name || 'general',
+            load_time: Math.round(loadTime)
+          });
+        }
+      } catch (error) {
+        console.error('FAQ Schema JSON parsing failed:', error);
+        
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'faq_schema_error', {
+            error_type: 'parse_failure'
+          });
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  .faq-schema-error {
+    background: #fee;
+    border: 1px solid #fcc;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 0.25rem;
+    color: #c00;
+  }
+  
+  .faq-schema-error h3 {
+    margin-top: 0;
+    color: #c00;
+  }
+  
+  .faq-schema-error ul {
+    margin-bottom: 0;
+  }
+  
+  /* Hide dev errors in production */
+  @media (min-width: 1px) {
+    .faq-schema-error[data-dev-only] {
+      display: none !important;
+    }
+  }
+</style>

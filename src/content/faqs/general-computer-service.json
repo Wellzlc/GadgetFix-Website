@@ -1,0 +1,92 @@
+{
+  "title": "Computer Service FAQs",
+  "description": "Common questions about our computer repair and optimization services",
+  "locationVariables": true,
+  "schemaType": "FAQPage",
+  "metadata": {
+    "author": "GadgetFix LLC",
+    "tags": ["computer service", "virus removal", "password reset", "optimization"]
+  },
+  "faqs": [
+    {
+      "question": "What computer services do you offer in [location]?",
+      "answer": "We provide comprehensive computer services in [location] including virus removal, password reset, computer optimization, software installation, and emergency troubleshooting for both Windows and Mac computers.",
+      "category": "services",
+      "priority": 100,
+      "keywords": ["services", "computer repair", "virus removal"],
+      "relatedServices": ["virus-removal-service", "password-reset-service", "computer-optimization"],
+      "isLocationSpecific": true
+    },
+    {
+      "question": "How quickly can you arrive for computer service in [location]?",
+      "answer": "We typically arrive within 30 minutes for computer service calls in [location]. Our mobile technicians know the [area] well and can quickly reach all neighborhoods.",
+      "category": "services",
+      "priority": 95,
+      "keywords": ["response time", "mobile service", "emergency"],
+      "isLocationSpecific": true
+    },
+    {
+      "question": "Do you service both Windows and Mac computers?",
+      "answer": "Yes, our technicians are certified to work on both Windows PCs and Mac computers. We handle all operating system issues, software problems, and optimization needs for both platforms.",
+      "category": "technical",
+      "priority": 90,
+      "keywords": ["Windows", "Mac", "operating systems"],
+      "relatedServices": ["windows-troubleshooting", "mac-troubleshooting"]
+    },
+    {
+      "question": "What areas of [location] do you serve?",
+      "answer": "We provide mobile computer service throughout [location] and surrounding neighborhoods. Our technicians are familiar with all areas and can reach you quickly wherever you are in the [area].",
+      "category": "location",
+      "priority": 85,
+      "keywords": ["service area", "coverage", "mobile"],
+      "isLocationSpecific": true
+    },
+    {
+      "question": "How much does computer service cost?",
+      "answer": "Our computer service pricing is competitive and transparent. We provide upfront quotes with no hidden fees. Contact us at (402) 416-6942 for specific pricing based on your computer issue.",
+      "category": "pricing",
+      "priority": 80,
+      "keywords": ["cost", "pricing", "fees", "quotes"]
+    },
+    {
+      "question": "Do you offer emergency computer service?",
+      "answer": "Yes, we offer same-day emergency computer service throughout [location]. Whether you have a critical work presentation or urgent deadline, we prioritize emergency calls with rapid response times.",
+      "category": "emergency",
+      "priority": 75,
+      "keywords": ["emergency", "same-day", "urgent"],
+      "relatedServices": ["emergency-computer-service"],
+      "isLocationSpecific": true
+    },
+    {
+      "question": "Can you remove viruses from my computer?",
+      "answer": "Absolutely! Virus removal is one of our most requested services. We thoroughly scan, remove malware, and install protection to prevent future infections on your computer.",
+      "category": "technical",
+      "priority": 70,
+      "keywords": ["virus", "malware", "security", "antivirus"],
+      "relatedServices": ["virus-removal-service"]
+    },
+    {
+      "question": "Do you provide computer service for businesses?",
+      "answer": "Yes, we serve many businesses in [location] and offer corporate accounts with priority service and volume discounts. We understand the importance of minimal downtime for business operations.",
+      "category": "business",
+      "priority": 65,
+      "keywords": ["business", "corporate", "commercial"],
+      "isLocationSpecific": true
+    },
+    {
+      "question": "What if I forgot my Windows or Mac password?",
+      "answer": "We specialize in password recovery and reset for both Windows and Mac computers. Our technicians can help you regain access to your computer without data loss.",
+      "category": "technical",
+      "priority": 60,
+      "keywords": ["password", "reset", "recovery", "locked out"],
+      "relatedServices": ["password-reset-service"]
+    },
+    {
+      "question": "Do you offer any warranty on your services?",
+      "answer": "Yes, all our computer services come with a 90-day warranty. If you experience the same issue within 90 days of our service, we'll fix it at no additional charge.",
+      "category": "general",
+      "priority": 55,
+      "keywords": ["warranty", "guarantee", "protection"]
+    }
+  ]
+}

@@ -1,0 +1,466 @@
+---
+import FAQSchemaEnhanced from './FAQSchemaEnhanced.astro';
+import FAQInteractive from './FAQInteractive.astro';
+import { getFilteredFAQs, type FAQFilter } from '../../utils/faq-utils';
+
+export interface Props {
+  // Content source options
+  location?: string;
+  serviceType?: string;
+  useContentCollections?: boolean;
+  
+  // Display options
+  title?: string;
+  enableSearch?: boolean;
+  enableFilters?: boolean;
+  maxItems?: number;
+  maxInitialItems?: number;
+  
+  // Performance options
+  enableAnalytics?: boolean;
+  enableSchemaValidation?: boolean;
+  enableIslands?: boolean;
+  
+  // Filtering options
+  categories?: string[];
+  minPriority?: number;
+  
+  // Schema options
+  customSchemaProperties?: Record<string, any>;
+  
+  // Style options
+  className?: string;
+  variant?: 'default' | 'compact' | 'detailed';
+  
+  // Manual FAQ override
+  manualFAQs?: Array<{
+    question: string;
+    answer: string;
+    category?: string;
+    priority?: number;
+    clickTrackingId?: string;
+  }>;
+}
+
+const {
+  location = "",
+  serviceType = "",
+  useContentCollections = true,
+  title = "Frequently Asked Questions",
+  enableSearch = false,
+  enableFilters = false,
+  maxItems = 20,
+  maxInitialItems = 6,
+  enableAnalytics = false,
+  enableSchemaValidation = true,
+  enableIslands = true,
+  categories = [],
+  minPriority = 0,
+  customSchemaProperties = {},
+  className = "",
+  variant = 'default',
+  manualFAQs = []
+} = Astro.props;
+
+// Performance monitoring
+const startTime = typeof performance !== 'undefined' ? performance.now() : Date.now();
+
+// Build filter for FAQ retrieval
+const faqFilter: FAQFilter = {
+  serviceType,
+  location,
+  categories,
+  maxItems,
+  minPriority
+};
+
+// Get FAQs from content collections or use manual ones
+let faqs = [];
+if (useContentCollections) {
+  try {
+    faqs = await getFilteredFAQs(faqFilter);
+  } catch (error) {
+    console.error('Failed to load FAQs from content collections:', error);
+    faqs = manualFAQs;
+  }
+} else {
+  faqs = manualFAQs;
+}
+
+// Apply location variable replacement to manual FAQs if needed
+if (location && manualFAQs.length > 0) {
+  const { replaceLocationVariables } = await import('../../utils/faq-utils');
+  faqs = faqs.map(faq => ({
+    ...faq,
+    question: replaceLocationVariables(faq.question, location),
+    answer: replaceLocationVariables(faq.answer, location)
+  }));
+}
+
+// Performance logging
+if (typeof performance !== 'undefined') {
+  const loadTime = performance.now() - startTime;
+  console.debug(`FAQ data loaded in ${loadTime.toFixed(2)}ms`);
+}
+
+// Determine if we should render
+const shouldRender = faqs.length > 0;
+
+// Apply variant-specific configurations
+const variantConfig = {
+  default: {
+    showTitle: true,
+    enableInteractivity: true,
+    enableSchema: true
+  },
+  compact: {
+    showTitle: false,
+    enableInteractivity: false,
+    enableSchema: true,
+    maxInitialItems: Math.min(maxInitialItems, 3)
+  },
+  detailed: {
+    showTitle: true,
+    enableInteractivity: true,
+    enableSchema: true,
+    enableSearch: true,
+    enableFilters: true
+  }
+};
+
+const config = variantConfig[variant];
+const finalEnableSearch = config.enableSearch || enableSearch;
+const finalEnableFilters = config.enableFilters || enableFilters;
+const finalMaxInitialItems = config.maxInitialItems || maxInitialItems;
+---
+
+{shouldRender && (
+  <div class={`faq-complete-wrapper ${className}`} data-variant={variant}>
+    <!-- Schema markup -->
+    {config.enableSchema && (
+      <FAQSchemaEnhanced
+        faqs={faqs}
+        location={location}
+        serviceType={serviceType}
+        useContentCollections={false}
+        enableValidation={enableSchemaValidation}
+        customSchemaProperties={customSchemaProperties}
+      />
+    )}
+
+    <!-- Interactive FAQ component -->
+    {config.enableInteractivity ? (
+      <FAQInteractive
+        faqs={faqs}
+        title={config.showTitle ? title : undefined}
+        enableSearch={finalEnableSearch}
+        enableFilters={finalEnableFilters}
+        maxInitialItems={finalMaxInitialItems}
+        enableAnalytics={enableAnalytics}
+        className={`faq-${variant}`}
+      />
+    ) : (
+      <!-- Simple static FAQ display for compact variant -->
+      <div class={`faq-simple faq-${variant}`}>
+        {config.showTitle && <h2 class="faq-title">{title}</h2>}
+        <div class="faq-list-simple">
+          {faqs.slice(0, finalMaxInitialItems).map((faq, index) => (
+            <div class="faq-item-simple" data-category={faq.category}>
+              <h3 class="faq-question-simple">{faq.question}</h3>
+              <div class="faq-answer-simple">
+                <p set:html={faq.answer}></p>
+              </div>
+            </div>
+          ))}
+        </div>
+        {faqs.length > finalMaxInitialItems && (
+          <div class="faq-more-link">
+            <a href="/faq" class="view-all-link">View All {faqs.length} Questions →</a>
+          </div>
+        )}
+      </div>
+    )}
+
+    <!-- Performance and analytics tracking -->
+    {enableAnalytics && (
+      <script define:vars={{ 
+        location, 
+        serviceType, 
+        faqCount: faqs.length, 
+        variant,
+        loadTime: typeof performance !== 'undefined' ? performance.now() - startTime : 0
+      }}>
+        // Track FAQ component performance
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'faq_component_loaded', {
+            location: location || 'general',
+            service_type: serviceType || 'general',
+            faq_count: faqCount,
+            variant: variant,
+            load_time: Math.round(loadTime)
+          });
+        }
+
+        // Track viewport visibility
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting && typeof gtag !== 'undefined') {
+                gtag('event', 'faq_section_viewed', {
+                  location: location || 'general',
+                  service_type: serviceType || 'general',
+                  variant: variant
+                });
+                observer.disconnect();
+              }
+            });
+          });
+
+          const faqWrapper = document.querySelector('.faq-complete-wrapper');
+          if (faqWrapper) {
+            observer.observe(faqWrapper);
+          }
+        }
+      </script>
+    )}
+  </div>
+)}
+
+{!shouldRender && (
+  <!-- Fallback content when no FAQs are available -->
+  <div class="faq-fallback">
+    <h2>{title}</h2>
+    <p>
+      Have questions about our services? 
+      <a href="tel:4024166942" class="contact-link">Call us at (402) 416-6942</a> 
+      or <a href="/contact" class="contact-link">contact us online</a> for immediate assistance.
+    </p>
+  </div>
+)}
+
+<style>
+  .faq-complete-wrapper {
+    width: 100%;
+  }
+
+  /* Variant-specific styles */
+  .faq-complete-wrapper[data-variant="compact"] {
+    margin: 1rem 0;
+  }
+
+  .faq-complete-wrapper[data-variant="default"] {
+    margin: 2rem 0;
+  }
+
+  .faq-complete-wrapper[data-variant="detailed"] {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 1rem;
+  }
+
+  /* Simple FAQ styles for compact variant */
+  .faq-simple {
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  .faq-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .faq-compact .faq-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+
+  .faq-list-simple {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .faq-compact .faq-list-simple {
+    gap: 0.75rem;
+  }
+
+  .faq-item-simple {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .faq-item-simple:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .faq-compact .faq-item-simple {
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+  }
+
+  .faq-question-simple {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.4;
+  }
+
+  .faq-compact .faq-question-simple {
+    font-size: 0.9rem;
+    margin-bottom: 0.375rem;
+  }
+
+  .faq-answer-simple {
+    color: #4b5563;
+    line-height: 1.6;
+  }
+
+  .faq-answer-simple p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
+  .faq-compact .faq-answer-simple p {
+    font-size: 0.85rem;
+  }
+
+  .faq-answer-simple a {
+    color: #2563eb;
+    text-decoration: underline;
+  }
+
+  .faq-answer-simple a:hover {
+    color: #1d4ed8;
+  }
+
+  .faq-more-link {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+
+  .faq-compact .faq-more-link {
+    margin-top: 1rem;
+  }
+
+  .view-all-link {
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid #2563eb;
+    border-radius: 0.375rem;
+    transition: all 0.2s ease;
+    display: inline-block;
+  }
+
+  .view-all-link:hover {
+    background: #2563eb;
+    color: white;
+  }
+
+  .faq-compact .view-all-link {
+    font-size: 0.875rem;
+    padding: 0.375rem 0.75rem;
+  }
+
+  /* Fallback styles */
+  .faq-fallback {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: #f8f9fa;
+    border-radius: 0.5rem;
+    margin: 2rem 0;
+  }
+
+  .faq-fallback h2 {
+    color: #1e3a8a;
+    margin-bottom: 1rem;
+  }
+
+  .faq-fallback .contact-link {
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  .faq-fallback .contact-link:hover {
+    color: #1d4ed8;
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .faq-complete-wrapper[data-variant="detailed"] {
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+
+    .faq-title {
+      font-size: 1.375rem;
+    }
+
+    .faq-compact .faq-title {
+      font-size: 1.125rem;
+    }
+
+    .faq-question-simple {
+      font-size: 0.95rem;
+    }
+
+    .faq-compact .faq-question-simple {
+      font-size: 0.875rem;
+    }
+  }
+
+  /* Print styles */
+  @media print {
+    .faq-complete-wrapper {
+      break-inside: avoid;
+    }
+
+    .faq-item-simple {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+    }
+
+    .faq-more-link {
+      display: none;
+    }
+  }
+
+  /* High contrast mode */
+  @media (prefers-contrast: high) {
+    .faq-item-simple {
+      border: 2px solid #000;
+    }
+
+    .faq-question-simple {
+      color: #000;
+    }
+
+    .view-all-link {
+      border-color: #000;
+      color: #000;
+    }
+
+    .view-all-link:hover {
+      background: #000;
+      color: #fff;
+    }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .faq-item-simple,
+    .view-all-link {
+      transition: none;
+    }
+  }
+</style>

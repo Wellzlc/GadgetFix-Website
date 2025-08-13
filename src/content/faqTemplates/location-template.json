@@ -1,0 +1,49 @@
+{
+  "templateName": "Location Page FAQ Template",
+  "description": "Template for generating location-specific FAQs",
+  "variables": ["location", "area", "city", "county", "neighborhoods"],
+  "customization": {
+    "allowAdditions": true,
+    "allowRemoval": false,
+    "maxFAQs": 12,
+    "minFAQs": 6
+  },
+  "baseFAQs": [
+    {
+      "question": "What computer services are available in [location]?",
+      "answer": "We offer comprehensive computer services in [location] including virus removal, password reset, optimization, and emergency support for both Windows and Mac systems.",
+      "category": "services",
+      "priority": 100
+    },
+    {
+      "question": "How fast is your response time in [location]?",
+      "answer": "Our mobile technicians typically arrive within 30 minutes in [location]. We know the local area well and can quickly reach any neighborhood.",
+      "category": "services",
+      "priority": 95
+    },
+    {
+      "question": "Do you serve all areas of [location]?",
+      "answer": "Yes, we provide complete coverage throughout [location] and surrounding areas. No location is too far for our mobile service team.",
+      "category": "location",
+      "priority": 90
+    },
+    {
+      "question": "What are your service hours in [location]?",
+      "answer": "We're available 7 days a week from 8:00 AM to 6:00 PM. Emergency services may be available outside regular hours for critical issues.",
+      "category": "general",
+      "priority": 85
+    },
+    {
+      "question": "Can you help with virus removal in [location]?",
+      "answer": "Yes, virus removal is one of our specialties. We'll thoroughly clean your computer and install protection to prevent future infections.",
+      "category": "technical",
+      "priority": 80
+    },
+    {
+      "question": "Do you offer business services in [location]?",
+      "answer": "Absolutely! We provide priority service for businesses in [location] with corporate accounts and volume discounts available.",
+      "category": "business",
+      "priority": 75
+    }
+  ]
+}

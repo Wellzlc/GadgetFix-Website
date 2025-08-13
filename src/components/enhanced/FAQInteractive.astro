@@ -1,0 +1,608 @@
+---
+export interface FAQItem {
+  question: string;
+  answer: string;
+  category?: string;
+  priority?: number;
+  clickTrackingId?: string;
+}
+
+export interface Props {
+  faqs: FAQItem[];
+  title?: string;
+  enableSearch?: boolean;
+  enableFilters?: boolean;
+  maxInitialItems?: number;
+  enableAnalytics?: boolean;
+  className?: string;
+}
+
+const { 
+  faqs, 
+  title = "Frequently Asked Questions",
+  enableSearch = false,
+  enableFilters = false,
+  maxInitialItems = faqs.length,
+  enableAnalytics = false,
+  className = ""
+} = Astro.props;
+
+// Sort FAQs by priority (higher first) and limit initial display
+const sortedFAQs = faqs
+  .sort((a, b) => (b.priority || 5) - (a.priority || 5))
+  .slice(0, maxInitialItems);
+
+// Get unique categories for filters
+const categories = enableFilters 
+  ? [...new Set(faqs.map(faq => faq.category).filter(Boolean))]
+  : [];
+
+// Generate unique component ID for multiple FAQ sections on same page
+const componentId = `faq-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class={`faq-enhanced ${className}`} data-component="faq-interactive" data-faq-id={componentId}>
+  <div class="faq-header">
+    <h2 class="faq-title" id={`${componentId}-heading`}>{title}</h2>
+    
+    {enableSearch && (
+      <div class="faq-search">
+        <label for={`${componentId}-search`} class="sr-only">Search FAQs</label>
+        <input 
+          type="search" 
+          id={`${componentId}-search`}
+          class="faq-search-input"
+          placeholder="Search frequently asked questions..."
+          aria-describedby={`${componentId}-search-help`}
+          data-faq-search
+        />
+        <div id={`${componentId}-search-help`} class="sr-only">
+          Type to search through frequently asked questions
+        </div>
+      </div>
+    )}
+    
+    {enableFilters && categories.length > 0 && (
+      <div class="faq-filters" role="group" aria-labelledby={`${componentId}-filter-label`}>
+        <span id={`${componentId}-filter-label`} class="filter-label">Filter by category:</span>
+        <button 
+          class="filter-btn active" 
+          data-filter="all"
+          aria-pressed="true"
+        >
+          All
+        </button>
+        {categories.map(category => (
+          <button 
+            class="filter-btn" 
+            data-filter={category}
+            aria-pressed="false"
+          >
+            {category.charAt(0).toUpperCase() + category.slice(1)}
+          </button>
+        ))}
+      </div>
+    )}
+  </div>
+
+  <div 
+    class="faq-list" 
+    role="region" 
+    aria-labelledby={`${componentId}-heading`}
+    data-faq-list
+  >
+    {sortedFAQs.map((faq, index) => (
+      <details 
+        class="faq-item" 
+        data-faq-item={index}
+        data-category={faq.category || 'general'}
+        data-priority={faq.priority || 5}
+      >
+        <summary 
+          class="faq-question" 
+          role="button" 
+          aria-expanded="false"
+          data-click-tracking={faq.clickTrackingId}
+          tabindex="0"
+        >
+          <h3 class="question-text">{faq.question}</h3>
+          <span class="expand-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </span>
+        </summary>
+        <div class="faq-answer" role="region">
+          <div class="answer-content">
+            <p set:html={faq.answer}></p>
+          </div>
+        </div>
+      </details>
+    ))}
+  </div>
+
+  {faqs.length > maxInitialItems && (
+    <div class="faq-load-more">
+      <button 
+        class="load-more-btn"
+        data-load-more
+        aria-controls={`${componentId}-list`}
+      >
+        Show More Questions
+        <span class="remaining-count">({faqs.length - maxInitialItems} more)</span>
+      </button>
+    </div>
+  )}
+
+  <div class="faq-footer">
+    <p class="help-text">
+      Still have questions? 
+      <a href="tel:4024166942" class="contact-link">Call us at (402) 416-6942</a> 
+      or <a href="/contact" class="contact-link">contact us online</a>.
+    </p>
+  </div>
+</div>
+
+{enableAnalytics && (
+  <script>
+    // Analytics tracking for FAQ interactions
+    document.addEventListener('DOMContentLoaded', () => {
+      const faqComponent = document.querySelector(`[data-faq-id="${componentId}"]`);
+      if (!faqComponent) return;
+
+      // Track FAQ expansions
+      faqComponent.addEventListener('click', (e) => {
+        const summary = e.target.closest('summary');
+        if (summary && summary.dataset.clickTracking) {
+          // Send analytics event (replace with your analytics provider)
+          console.log('FAQ Clicked:', summary.dataset.clickTracking);
+          // gtag('event', 'faq_expand', { question_id: summary.dataset.clickTracking });
+        }
+      });
+
+      // Track search usage
+      const searchInput = faqComponent.querySelector('[data-faq-search]');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          if (e.target.value.length >= 3) {
+            console.log('FAQ Search:', e.target.value);
+            // gtag('event', 'faq_search', { search_term: e.target.value });
+          }
+        });
+      }
+    });
+  </script>
+)}
+
+<script>
+  // Progressive enhancement for FAQ interactions
+  class FAQInteractive {
+    constructor(container) {
+      this.container = container;
+      this.searchInput = container.querySelector('[data-faq-search]');
+      this.filterBtns = container.querySelectorAll('.filter-btn');
+      this.faqItems = container.querySelectorAll('.faq-item');
+      this.loadMoreBtn = container.querySelector('[data-load-more]');
+      this.hiddenFAQs = [];
+      
+      this.init();
+    }
+
+    init() {
+      this.setupSearch();
+      this.setupFilters();
+      this.setupLoadMore();
+      this.setupKeyboardNavigation();
+      this.setupAccessibility();
+    }
+
+    setupSearch() {
+      if (!this.searchInput) return;
+
+      let searchTimeout;
+      this.searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+          this.performSearch(e.target.value.toLowerCase());
+        }, 300);
+      });
+    }
+
+    performSearch(query) {
+      if (!query) {
+        this.showAllItems();
+        return;
+      }
+
+      this.faqItems.forEach(item => {
+        const question = item.querySelector('.question-text').textContent.toLowerCase();
+        const answer = item.querySelector('.answer-content').textContent.toLowerCase();
+        
+        if (question.includes(query) || answer.includes(query)) {
+          item.style.display = 'block';
+          item.setAttribute('data-search-match', 'true');
+        } else {
+          item.style.display = 'none';
+          item.setAttribute('data-search-match', 'false');
+        }
+      });
+    }
+
+    setupFilters() {
+      this.filterBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.setActiveFilter(btn);
+          this.filterByCategory(btn.dataset.filter);
+        });
+      });
+    }
+
+    setActiveFilter(activeBtn) {
+      this.filterBtns.forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-pressed', 'false');
+      });
+      activeBtn.classList.add('active');
+      activeBtn.setAttribute('aria-pressed', 'true');
+    }
+
+    filterByCategory(category) {
+      this.faqItems.forEach(item => {
+        if (category === 'all' || item.dataset.category === category) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    showAllItems() {
+      this.faqItems.forEach(item => {
+        item.style.display = 'block';
+        item.removeAttribute('data-search-match');
+      });
+    }
+
+    setupLoadMore() {
+      if (!this.loadMoreBtn) return;
+
+      this.loadMoreBtn.addEventListener('click', () => {
+        // This would typically load more FAQs via AJAX
+        // For now, just hide the button
+        this.loadMoreBtn.style.display = 'none';
+      });
+    }
+
+    setupKeyboardNavigation() {
+      this.container.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          const summary = e.target.closest('summary');
+          if (summary) {
+            e.preventDefault();
+            summary.click();
+          }
+        }
+      });
+    }
+
+    setupAccessibility() {
+      // Update aria-expanded when details are toggled
+      this.faqItems.forEach(item => {
+        const details = item;
+        const summary = item.querySelector('summary');
+        
+        details.addEventListener('toggle', () => {
+          summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+        });
+      });
+    }
+  }
+
+  // Initialize FAQ components
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-component="faq-interactive"]').forEach(container => {
+      new FAQInteractive(container);
+    });
+  });
+</script>
+
+<style>
+  .faq-enhanced {
+    margin: 2rem 0;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  .faq-header {
+    margin-bottom: 2rem;
+  }
+
+  .faq-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .faq-search {
+    margin-bottom: 1.5rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .faq-search-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+  }
+
+  .faq-search-input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+
+  .faq-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .filter-label {
+    font-weight: 600;
+    color: #374151;
+    margin-right: 0.5rem;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #d1d5db;
+    background: white;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .filter-btn:hover {
+    background: #f3f4f6;
+    border-color: #9ca3af;
+  }
+
+  .filter-btn.active {
+    background: #2563eb;
+    color: white;
+    border-color: #2563eb;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .faq-item {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .faq-item:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  .faq-item[open] {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem;
+    background: #f8f9fa;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border: none;
+    width: 100%;
+    text-align: left;
+  }
+
+  .faq-question:hover {
+    background: #e9ecef;
+  }
+
+  .faq-question:focus {
+    outline: 2px solid #2563eb;
+    outline-offset: -2px;
+  }
+
+  .question-text {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+    flex: 1;
+  }
+
+  .expand-icon {
+    flex-shrink: 0;
+    margin-left: 1rem;
+    transition: transform 0.2s ease;
+    color: #6b7280;
+  }
+
+  .faq-item[open] .expand-icon {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0;
+    margin: 0;
+  }
+
+  .answer-content {
+    padding: 1.25rem;
+    background: white;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .answer-content p {
+    margin: 0;
+    line-height: 1.6;
+    color: #4b5563;
+  }
+
+  .answer-content a {
+    color: #2563eb;
+    text-decoration: underline;
+  }
+
+  .answer-content a:hover {
+    color: #1d4ed8;
+  }
+
+  .faq-load-more {
+    text-align: center;
+    margin: 2rem 0;
+  }
+
+  .load-more-btn {
+    padding: 0.75rem 1.5rem;
+    background: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .load-more-btn:hover {
+    background: #e5e7eb;
+  }
+
+  .remaining-count {
+    color: #6b7280;
+    font-size: 0.875rem;
+  }
+
+  .faq-footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 0.5rem;
+  }
+
+  .help-text {
+    margin: 0;
+    color: #4b5563;
+  }
+
+  .contact-link {
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .contact-link:hover {
+    text-decoration: underline;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .faq-title {
+      font-size: 1.75rem;
+    }
+
+    .faq-filters {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .filter-btn {
+      text-align: center;
+    }
+
+    .faq-question {
+      padding: 1rem;
+    }
+
+    .question-text {
+      font-size: 1rem;
+    }
+
+    .answer-content {
+      padding: 1rem;
+    }
+  }
+
+  /* Print styles */
+  @media print {
+    .faq-search,
+    .faq-filters,
+    .faq-load-more {
+      display: none;
+    }
+
+    .faq-item {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+    }
+
+    .faq-question {
+      background: white;
+    }
+
+    .expand-icon {
+      display: none;
+    }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .expand-icon,
+    .faq-question,
+    .faq-item {
+      transition: none;
+    }
+  }
+
+  /* High contrast mode */
+  @media (prefers-contrast: high) {
+    .faq-item {
+      border: 2px solid #000;
+    }
+
+    .faq-question {
+      background: #f0f0f0;
+    }
+
+    .filter-btn.active {
+      background: #000;
+      color: #fff;
+    }
+  }
+</style>
