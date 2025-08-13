@@ -1,9 +1,46 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import FAQSchema from '../../../components/FAQSchema.astro';
 const cityName = "DeSoto";
 const countyName = "Dallas County";
 const population = "55,000";
 const neighborhoods = "Hampton Road Corridor, Belt Line Road Area, Pleasant Run Road";
+
+// FAQ data for DeSoto
+const faqData = [
+  {
+    question: "What computer services do you offer in [location]?",
+    answer: "We provide comprehensive computer services in [location] including virus removal, password reset, computer optimization, software installation, and emergency troubleshooting for both Windows and Mac computers."
+  },
+  {
+    question: "How quickly can you arrive for computer service in [location]?",
+    answer: "We typically arrive within 30 minutes for computer service calls in [location]. Our mobile technicians know the area well and can quickly reach all neighborhoods throughout [location]."
+  },
+  {
+    question: "Do you service both Windows and Mac computers in [location]?",
+    answer: "Yes, our [location] technicians are certified to work on both Windows PCs and Mac computers. We handle all operating system issues, software problems, and optimization needs for both platforms."
+  },
+  {
+    question: "What areas of [location] do you serve?",
+    answer: "We provide mobile computer service throughout [location] and surrounding neighborhoods. Our technicians are familiar with all areas and can reach you quickly wherever you are."
+  },
+  {
+    question: "How much does computer service cost in [location]?",
+    answer: "Our [location] computer service pricing is competitive and transparent. We provide upfront quotes with no hidden fees. Contact us at (402) 416-6942 for specific pricing based on your computer issue."
+  },
+  {
+    question: "Do you offer emergency computer service in [location]?",
+    answer: "Yes, we offer same-day emergency computer service throughout [location]. Whether you have a critical work presentation or urgent deadline, we prioritize emergency calls with rapid response times."
+  },
+  {
+    question: "Can you remove viruses from my computer in [location]?",
+    answer: "Absolutely! Virus removal is one of our most requested services in [location]. We thoroughly scan, remove malware, and install protection to prevent future infections on your computer."
+  },
+  {
+    question: "Do you provide computer service for businesses in [location]?",
+    answer: "Yes, we serve many [location] businesses and offer corporate accounts with priority service and volume discounts. We understand the importance of minimal downtime for business operations."
+  }
+];
 ---
 <Layout title={`Computer Service ${cityName}, TX | Mobile Service | GadgetFix LLC`} description={`Professional computer service in ${cityName}, Texas. Virus removal, password reset, optimization. We come to you! Same-day service, 90-day warranty. Call (402) 416-6942`} keywords={`computer service desoto, icomputer service desoto tx, password reset desoto, mobile repair desoto, windows troubleshooting desoto, mac troubleshooting desoto, computer repair desoto, virus removal desoto, password reset desoto`}>
 <main><section class="city-hero"><div class="container"><h1>computer service in {cityName}, Texas</h1><p class="hero-subtitle">Professional Mobile computer service Service - We Come to You</p><div class="hero-buttons"><a href="tel:4024166942" class="btn-primary">CALL NOW: (402) 416-6942</a><a href="/contact" class="btn-secondary">SCHEDULE SERVICE</a></div><p class="service-note">Serving {cityName} and surrounding areas • 7 days a week</p></div></section><section class="local-info"><div class="container"><h2>Mobile Repair Service in {cityName}</h2><p>GadgetFix LLC provides professional mobile computer service throughout {cityName}, {countyName}. DeSoto residents trust our professional computer service for all their technology needs. With a population of {population}, {cityName} residents rely on their devices daily. When your computer has issues, we bring the service to you - whether you're at home, work, or your favorite coffee shop.</p><p>We serve all {cityName} neighborhoods including {neighborhoods}.</p></div></section><section class="services-section"><div class="container"><h2>Our {cityName} Computer Services</h2>                <div class="services-grid">

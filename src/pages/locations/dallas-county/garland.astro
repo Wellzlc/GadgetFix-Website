@@ -1,5 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import FAQSchema from '../../../components/FAQSchema.astro';
 
 // Define city-specific data
 const cityName = "Garland";
@@ -7,6 +8,42 @@ const countyName = "Dallas County";
 const population = "240,000";
 const neighborhoods = "Downtown Garland, Duck Creek, Firewheel, Sachse Road Corridor, South Garland, Spring Park";
 const landmarks = "Firewheel Town Center, Hawaiian Falls, Garland Landmark Museum";
+
+// FAQ data for Garland
+const faqData = [
+  {
+    question: "What computer services do you offer in [location]?",
+    answer: "We provide comprehensive computer services in [location] including virus removal, password reset, computer optimization, software installation, and emergency troubleshooting for both Windows and Mac computers."
+  },
+  {
+    question: "How quickly can you arrive for computer service in [location]?",
+    answer: "We typically arrive within 30 minutes for computer service calls in [location]. Our mobile technicians know the area well and can quickly reach all neighborhoods throughout [location]."
+  },
+  {
+    question: "Do you service both Windows and Mac computers in [location]?",
+    answer: "Yes, our [location] technicians are certified to work on both Windows PCs and Mac computers. We handle all operating system issues, software problems, and optimization needs for both platforms."
+  },
+  {
+    question: "What areas of [location] do you serve?",
+    answer: "We provide mobile computer service throughout [location] and surrounding neighborhoods. Our technicians are familiar with all areas and can reach you quickly wherever you are."
+  },
+  {
+    question: "How much does computer service cost in [location]?",
+    answer: "Our [location] computer service pricing is competitive and transparent. We provide upfront quotes with no hidden fees. Contact us at (402) 416-6942 for specific pricing based on your computer issue."
+  },
+  {
+    question: "Do you offer emergency computer service in [location]?",
+    answer: "Yes, we offer same-day emergency computer service throughout [location]. Whether you have a critical work presentation or urgent deadline, we prioritize emergency calls with rapid response times."
+  },
+  {
+    question: "Can you remove viruses from my computer in [location]?",
+    answer: "Absolutely! Virus removal is one of our most requested services in [location]. We thoroughly scan, remove malware, and install protection to prevent future infections on your computer."
+  },
+  {
+    question: "Do you provide computer service for businesses in [location]?",
+    answer: "Yes, we serve many [location] businesses and offer corporate accounts with priority service and volume discounts. We understand the importance of minimal downtime for business operations."
+  }
+];
 ---
 
 <Layout 
@@ -168,6 +205,28 @@ const landmarks = "Firewheel Town Center, Hawaiian Falls, Garland Landmark Museu
         we can reach you quickly with professional repair service.</p>
       </div>
     </section>
+
+    
+
+
+    <!-- FAQ Section with Schema -->
+
+
+    <section class="faq-section-wrapper">
+
+
+      <div class="container">
+
+
+        <FAQSchema faqs={faqData} location={cityName} />
+
+
+      </div>
+
+
+    </section>
+
+
 
     <!-- CTA Section -->
     <section class="city-cta">
@@ -461,6 +520,13 @@ h3 {
 
 .hours {
   opacity: 0.95;
+}
+
+
+/* FAQ Section Styling */
+.faq-section-wrapper {
+  padding: 3rem 0;
+  background: #ffffff;
 }
 
 @media (max-width: 768px) {
