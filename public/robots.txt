@@ -7,18 +7,13 @@ Disallow: /admin/
 Disallow: /api/
 Disallow: /temp/
 Disallow: /private/
-Disallow: /test-form
 
-# Block WordPress media attachment pages
+# Block media attachment URLs
 Disallow: /*-png/
 Disallow: /*-jpg/
 Disallow: /*-jpeg/
 Disallow: /*-gif/
 Disallow: /*-webp/
-Disallow: /?attachment_id=
-Disallow: /wp-content/
-Disallow: /wp-admin/
-Disallow: /wp-includes/
 
 Crawl-delay: 0
 
@@ -38,7 +33,6 @@ Disallow: /*-jpg/
 Disallow: /*-jpeg/
 Disallow: /*-gif/
 Disallow: /*-webp/
-Disallow: /?attachment_id=
 Crawl-delay: 0
 
 # Bing specific  
@@ -54,7 +48,6 @@ Disallow: /*-jpg/
 Disallow: /*-jpeg/
 Disallow: /*-gif/
 Disallow: /*-webp/
-Disallow: /?attachment_id=
 Crawl-delay: 0
 
 # Allow important pages for SEO
@@ -86,5 +79,3 @@ Allow: /images/*.jpeg
 Allow: /images/*.gif
 Allow: /images/*.svg
 Allow: /images/*.webp
-
-# Rebuild trigger: Wed, Aug 13, 2025  3:05:40 PM
