@@ -1,0 +1,777 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// This page provides real-time SEO monitoring for the FAQ implementation
+---
+
+<Layout 
+  title="SEO Monitoring Dashboard | GadgetFix"
+  description="Monitor FAQ schema performance, Core Web Vitals, and search visibility"
+>
+  <main class="seo-dashboard">
+    <div class="container">
+      <!-- Header -->
+      <header class="dashboard-header">
+        <h1>SEO Monitoring Dashboard</h1>
+        <p>Real-time tracking of FAQ schema implementation and SEO performance</p>
+        <div class="last-updated">Last updated: <span id="lastUpdated">--</span></div>
+      </header>
+
+      <!-- Key Metrics -->
+      <section class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-icon">📊</span>
+            <h3>FAQ Schema Status</h3>
+          </div>
+          <div class="metric-value" id="schemaStatus">Checking...</div>
+          <div class="metric-details" id="schemaDetails">--</div>
+          <div class="metric-badge" id="schemaBadge">--</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-icon">⚡</span>
+            <h3>Core Web Vitals</h3>
+          </div>
+          <div class="metric-value" id="cwvScore">--</div>
+          <div class="metric-details" id="cwvDetails">
+            <div>LCP: <span id="lcpValue">--</span></div>
+            <div>FID: <span id="fidValue">--</span></div>
+            <div>CLS: <span id="clsValue">--</span></div>
+          </div>
+          <div class="metric-badge" id="cwvBadge">--</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-icon">🔍</span>
+            <h3>Rich Results</h3>
+          </div>
+          <div class="metric-value" id="richResultsStatus">Monitoring...</div>
+          <div class="metric-details" id="richResultsDetails">FAQ snippets eligibility</div>
+          <div class="metric-badge" id="richResultsBadge">--</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-icon">📍</span>
+            <h3>Local Search</h3>
+          </div>
+          <div class="metric-value" id="localSearchStatus">Active</div>
+          <div class="metric-details" id="localSearchDetails">Dallas-Fort Worth area</div>
+          <div class="metric-badge" id="localSearchBadge">--</div>
+        </div>
+      </section>
+
+      <!-- FAQ Performance -->
+      <section class="faq-performance">
+        <h2>FAQ Performance Metrics</h2>
+        <div class="performance-grid">
+          <div class="perf-item">
+            <span class="perf-label">Questions Count</span>
+            <span class="perf-value" id="faqCount">--</span>
+          </div>
+          <div class="perf-item">
+            <span class="perf-label">Schema Valid</span>
+            <span class="perf-value" id="schemaValid">--</span>
+          </div>
+          <div class="perf-item">
+            <span class="perf-label">Rich Results Eligible</span>
+            <span class="perf-value" id="richEligible">--</span>
+          </div>
+          <div class="perf-item">
+            <span class="perf-label">FAQ Interactions</span>
+            <span class="perf-value" id="faqInteractions">--</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Alerts -->
+      <section class="alerts-section">
+        <h2>Active Alerts</h2>
+        <div id="alertsContainer" class="alerts-container">
+          <div class="no-alerts">✅ No active alerts - All systems healthy</div>
+        </div>
+      </section>
+
+      <!-- Recommendations -->
+      <section class="recommendations-section">
+        <h2>SEO Recommendations</h2>
+        <div id="recommendationsContainer" class="recommendations-container">
+          <div class="recommendation">
+            <span class="rec-icon">💡</span>
+            <div class="rec-content">
+              <strong>Monitor Rich Results:</strong> Check Google Search Console for FAQ snippet appearances
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Actions -->
+      <section class="actions-section">
+        <h2>Quick Actions</h2>
+        <div class="actions-grid">
+          <button class="action-btn" onclick="testRichResults()">
+            🧪 Test Rich Results
+          </button>
+          <button class="action-btn" onclick="validateSchema()">
+            ✓ Validate Schema
+          </button>
+          <button class="action-btn" onclick="checkSearchConsole()">
+            📊 Search Console
+          </button>
+          <button class="action-btn" onclick="exportReport()">
+            📥 Export Report
+          </button>
+          <button class="action-btn" onclick="runAudit()">
+            🔍 Run Full Audit
+          </button>
+          <button class="action-btn" onclick="refreshDashboard()">
+            🔄 Refresh Data
+          </button>
+        </div>
+      </section>
+
+      <!-- Timeline -->
+      <section class="timeline-section">
+        <h2>FAQ Implementation Timeline</h2>
+        <div class="timeline">
+          <div class="timeline-item completed">
+            <div class="timeline-marker">✓</div>
+            <div class="timeline-content">
+              <strong>Phase 1: Pilot Pages</strong>
+              <p>10 location pages with FAQ schema</p>
+            </div>
+          </div>
+          <div class="timeline-item active">
+            <div class="timeline-marker">⏳</div>
+            <div class="timeline-content">
+              <strong>Monitoring Period</strong>
+              <p>72-hour validation checkpoint</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker">🎯</div>
+            <div class="timeline-content">
+              <strong>Phase 2: 50% Rollout</strong>
+              <p>40 additional location pages</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker">🚀</div>
+            <div class="timeline-content">
+              <strong>Phase 3: Full Deployment</strong>
+              <p>All 100+ location pages</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Load monitoring script -->
+  <script src="/src/scripts/seo-monitoring.js"></script>
+  
+  <script>
+    // Dashboard functionality
+    let dashboard = {
+      updateInterval: 30000, // 30 seconds
+      
+      init() {
+        this.updateDashboard();
+        this.startAutoRefresh();
+        this.loadStoredData();
+      },
+      
+      updateDashboard() {
+        document.getElementById('lastUpdated').textContent = new Date().toLocaleString();
+        
+        // Update metrics from SEO monitor if available
+        if (window.seoMonitor && window.seoMonitor.initialized) {
+          this.updateFromMonitor();
+        } else {
+          // Fallback to manual checks
+          this.checkSchemaStatus();
+          this.checkCoreWebVitals();
+        }
+        
+        this.loadAlerts();
+        this.loadRecommendations();
+      },
+      
+      updateFromMonitor() {
+        const report = window.seoMonitor.generateReport();
+        
+        // Update schema status
+        const schema = report.metrics.faqPerformance?.schemaValidation;
+        if (schema) {
+          document.getElementById('schemaStatus').textContent = schema.isValid ? 'Valid' : 'Invalid';
+          document.getElementById('schemaDetails').textContent = `${schema.questionCount} questions`;
+          document.getElementById('schemaBadge').textContent = schema.richResultEligible ? 'Eligible' : 'Not Eligible';
+          document.getElementById('schemaBadge').className = 'metric-badge ' + (schema.richResultEligible ? 'badge-success' : 'badge-warning');
+          
+          document.getElementById('faqCount').textContent = schema.questionCount;
+          document.getElementById('schemaValid').textContent = schema.isValid ? '✓' : '✗';
+          document.getElementById('richEligible').textContent = schema.richResultEligible ? '✓' : '✗';
+        }
+        
+        // Update Core Web Vitals
+        const cwv = report.metrics.coreWebVitals;
+        if (cwv.LCP) {
+          document.getElementById('lcpValue').textContent = Math.round(cwv.LCP.value) + 'ms';
+          document.getElementById('lcpValue').className = this.getVitalClass(cwv.LCP.rating);
+        }
+        if (cwv.FID) {
+          document.getElementById('fidValue').textContent = Math.round(cwv.FID.value) + 'ms';
+          document.getElementById('fidValue').className = this.getVitalClass(cwv.FID.rating);
+        }
+        if (cwv.CLS) {
+          document.getElementById('clsValue').textContent = cwv.CLS.value.toFixed(3);
+          document.getElementById('clsValue').className = this.getVitalClass(cwv.CLS.rating);
+        }
+        
+        // Calculate overall CWV score
+        const cwvScore = this.calculateCWVScore(cwv);
+        document.getElementById('cwvScore').textContent = cwvScore;
+        document.getElementById('cwvBadge').textContent = this.getCWVRating(cwvScore);
+        document.getElementById('cwvBadge').className = 'metric-badge ' + this.getCWVBadgeClass(cwvScore);
+      },
+      
+      checkSchemaStatus() {
+        const scripts = document.querySelectorAll('script[type="application/ld+json"]');
+        let faqFound = false;
+        let questionCount = 0;
+        
+        scripts.forEach(script => {
+          try {
+            const data = JSON.parse(script.textContent);
+            if (data['@type'] === 'FAQPage') {
+              faqFound = true;
+              questionCount = data.mainEntity ? data.mainEntity.length : 0;
+            }
+          } catch (e) {}
+        });
+        
+        document.getElementById('schemaStatus').textContent = faqFound ? 'Found' : 'Not Found';
+        document.getElementById('schemaDetails').textContent = faqFound ? `${questionCount} questions` : 'No FAQ schema';
+        document.getElementById('faqCount').textContent = questionCount;
+        document.getElementById('schemaValid').textContent = faqFound ? '✓' : '✗';
+        document.getElementById('richEligible').textContent = questionCount >= 2 ? '✓' : '✗';
+      },
+      
+      checkCoreWebVitals() {
+        // Basic performance metrics if Web Vitals not available
+        const perf = performance.getEntriesByType('navigation')[0];
+        if (perf) {
+          const loadTime = perf.loadEventEnd - perf.fetchStart;
+          document.getElementById('cwvScore').textContent = loadTime < 3000 ? 'Good' : 'Needs Work';
+        }
+      },
+      
+      calculateCWVScore(cwv) {
+        let score = 0;
+        let count = 0;
+        
+        if (cwv.LCP) {
+          score += cwv.LCP.rating === 'good' ? 100 : cwv.LCP.rating === 'needs-improvement' ? 50 : 0;
+          count++;
+        }
+        if (cwv.FID) {
+          score += cwv.FID.rating === 'good' ? 100 : cwv.FID.rating === 'needs-improvement' ? 50 : 0;
+          count++;
+        }
+        if (cwv.CLS) {
+          score += cwv.CLS.rating === 'good' ? 100 : cwv.CLS.rating === 'needs-improvement' ? 50 : 0;
+          count++;
+        }
+        
+        return count > 0 ? Math.round(score / count) + '%' : '--';
+      },
+      
+      getCWVRating(score) {
+        const value = parseInt(score);
+        if (value >= 90) return 'Excellent';
+        if (value >= 70) return 'Good';
+        if (value >= 50) return 'Needs Work';
+        return 'Poor';
+      },
+      
+      getCWVBadgeClass(score) {
+        const value = parseInt(score);
+        if (value >= 90) return 'badge-success';
+        if (value >= 70) return 'badge-info';
+        if (value >= 50) return 'badge-warning';
+        return 'badge-danger';
+      },
+      
+      getVitalClass(rating) {
+        return rating === 'good' ? 'text-success' : rating === 'needs-improvement' ? 'text-warning' : 'text-danger';
+      },
+      
+      loadAlerts() {
+        const alerts = JSON.parse(localStorage.getItem('seo-alerts') || '[]');
+        const recent = alerts.slice(-5).reverse();
+        
+        const container = document.getElementById('alertsContainer');
+        if (recent.length === 0) {
+          container.innerHTML = '<div class="no-alerts">✅ No active alerts - All systems healthy</div>';
+        } else {
+          container.innerHTML = recent.map(alert => `
+            <div class="alert alert-${alert.severity}">
+              <span class="alert-icon">${alert.severity === 'high' ? '🔴' : '🟡'}</span>
+              <div class="alert-content">
+                <strong>${alert.type}:</strong> ${alert.message}
+                <div class="alert-time">${new Date(alert.timestamp).toLocaleString()}</div>
+              </div>
+            </div>
+          `).join('');
+        }
+      },
+      
+      loadRecommendations() {
+        const recs = [];
+        
+        // Check stored metrics
+        const cwvData = localStorage.getItem('cwv-lcp');
+        if (cwvData) {
+          const data = JSON.parse(cwvData);
+          const latest = data[data.length - 1];
+          if (latest && latest.value > 2500) {
+            recs.push({
+              icon: '⚡',
+              content: '<strong>Improve LCP:</strong> Optimize images and server response time'
+            });
+          }
+        }
+        
+        // Add general recommendations
+        recs.push({
+          icon: '📊',
+          content: '<strong>Track Progress:</strong> Monitor Search Console for FAQ rich results'
+        });
+        
+        recs.push({
+          icon: '🎯',
+          content: '<strong>Local SEO:</strong> Focus on Dallas-Fort Worth service area keywords'
+        });
+        
+        const container = document.getElementById('recommendationsContainer');
+        container.innerHTML = recs.map(rec => `
+          <div class="recommendation">
+            <span class="rec-icon">${rec.icon}</span>
+            <div class="rec-content">${rec.content}</div>
+          </div>
+        `).join('');
+      },
+      
+      loadStoredData() {
+        // Load FAQ interaction count
+        const interactions = JSON.parse(localStorage.getItem('faq-interactions') || '[]');
+        document.getElementById('faqInteractions').textContent = interactions.length;
+      },
+      
+      startAutoRefresh() {
+        setInterval(() => this.updateDashboard(), this.updateInterval);
+      }
+    };
+    
+    // Initialize dashboard
+    document.addEventListener('DOMContentLoaded', () => dashboard.init());
+    
+    // Action functions
+    function testRichResults() {
+      const url = window.location.origin + '/faq';
+      window.open('https://search.google.com/test/rich-results?url=' + encodeURIComponent(url), '_blank');
+    }
+    
+    function validateSchema() {
+      const url = window.location.origin + '/faq';
+      window.open('https://validator.schema.org/#url=' + encodeURIComponent(url), '_blank');
+    }
+    
+    function checkSearchConsole() {
+      window.open('https://search.google.com/search-console', '_blank');
+    }
+    
+    function exportReport() {
+      const report = window.seoMonitor ? window.seoMonitor.generateReport() : {
+        timestamp: new Date().toISOString(),
+        message: 'SEO Monitor not initialized'
+      };
+      
+      const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `seo-report-${new Date().toISOString().split('T')[0]}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+    
+    function runAudit() {
+      alert('Running comprehensive SEO audit... Check console for details.');
+      if (window.seoMonitor) {
+        console.log('SEO Audit Report:', window.seoMonitor.generateReport());
+      }
+    }
+    
+    function refreshDashboard() {
+      dashboard.updateDashboard();
+    }
+  </script>
+</Layout>
+
+<style>
+  .seo-dashboard {
+    background: #f8f9fa;
+    min-height: 100vh;
+    padding: 2rem 0;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .dashboard-header {
+    background: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .dashboard-header h1 {
+    color: #1e3a8a;
+    margin: 0 0 0.5rem;
+  }
+
+  .dashboard-header p {
+    color: #6b7280;
+    margin: 0 0 1rem;
+  }
+
+  .last-updated {
+    font-size: 0.875rem;
+    color: #9ca3af;
+  }
+
+  /* Metrics Grid */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .metric-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .metric-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .metric-icon {
+    font-size: 1.5rem;
+  }
+
+  .metric-header h3 {
+    margin: 0;
+    color: #1f2937;
+    font-size: 1rem;
+  }
+
+  .metric-value {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 0.5rem;
+  }
+
+  .metric-details {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+  }
+
+  .metric-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .badge-success {
+    background: #d1fae5;
+    color: #065f46;
+  }
+
+  .badge-info {
+    background: #dbeafe;
+    color: #1e40af;
+  }
+
+  .badge-warning {
+    background: #fed7aa;
+    color: #92400e;
+  }
+
+  .badge-danger {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+
+  /* FAQ Performance */
+  .faq-performance {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .faq-performance h2 {
+    margin: 0 0 1rem;
+    color: #1f2937;
+  }
+
+  .performance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .perf-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background: #f9fafb;
+    border-radius: 0.25rem;
+  }
+
+  .perf-label {
+    color: #6b7280;
+    font-size: 0.875rem;
+  }
+
+  .perf-value {
+    font-weight: 600;
+    color: #1f2937;
+  }
+
+  /* Alerts */
+  .alerts-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .alerts-section h2 {
+    margin: 0 0 1rem;
+    color: #1f2937;
+  }
+
+  .no-alerts {
+    color: #10b981;
+    font-weight: 600;
+  }
+
+  .alert {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .alert-high {
+    background: #fee2e2;
+    border-left: 4px solid #ef4444;
+  }
+
+  .alert-medium {
+    background: #fef3c7;
+    border-left: 4px solid #f59e0b;
+  }
+
+  .alert-icon {
+    font-size: 1.25rem;
+  }
+
+  .alert-content {
+    flex: 1;
+  }
+
+  .alert-time {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-top: 0.25rem;
+  }
+
+  /* Recommendations */
+  .recommendations-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .recommendations-section h2 {
+    margin: 0 0 1rem;
+    color: #1f2937;
+  }
+
+  .recommendation {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f0fdf4;
+    border-left: 4px solid #10b981;
+    border-radius: 0.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .rec-icon {
+    font-size: 1.25rem;
+  }
+
+  .rec-content {
+    flex: 1;
+    color: #1f2937;
+  }
+
+  /* Actions */
+  .actions-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .actions-section h2 {
+    margin: 0 0 1rem;
+    color: #1f2937;
+  }
+
+  .actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .action-btn {
+    padding: 0.75rem 1rem;
+    background: #1e3a8a;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .action-btn:hover {
+    background: #1e40af;
+  }
+
+  /* Timeline */
+  .timeline-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .timeline-section h2 {
+    margin: 0 0 1.5rem;
+    color: #1f2937;
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 3rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e5e7eb;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+  }
+
+  .timeline-marker {
+    position: absolute;
+    left: -2.5rem;
+    width: 2rem;
+    height: 2rem;
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+  }
+
+  .timeline-item.completed .timeline-marker {
+    background: #10b981;
+    color: white;
+    border-color: #10b981;
+  }
+
+  .timeline-item.active .timeline-marker {
+    background: #3b82f6;
+    color: white;
+    border-color: #3b82f6;
+  }
+
+  .timeline-content strong {
+    display: block;
+    color: #1f2937;
+    margin-bottom: 0.25rem;
+  }
+
+  .timeline-content p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 0.875rem;
+  }
+
+  /* Utility Classes */
+  .text-success { color: #10b981; }
+  .text-warning { color: #f59e0b; }
+  .text-danger { color: #ef4444; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .metrics-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .actions-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>
