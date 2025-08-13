@@ -2,10 +2,55 @@
 
 ## Project: GadgetFix Website
 
-## Session Log: January 13, 2025
+## Session Log: January 13, 2025 (Part 2)
+**Task:** Fix critical SEO issues discovered in audit - complete conversion from mobile repair to computer services
+
+### Critical SEO Fixes Completed:
+
+#### 1. Homepage Schema Markup Fixed
+- **Problem:** Schema still showing "@type": "MobilePhoneStore" with phone repair services
+- **Solution:** Changed to "@type": "ComputerStore" with computer services
+- **Files:** `src/layouts/Layout.astro`
+- **Changes:**
+  - Service catalog: iPhone/Samsung repair → virus removal, password reset, optimization
+  - Description: mobile phone repair → mobile computer service
+  - Twitter meta tags updated
+
+#### 2. Computer-Optimization Page Completely Rewritten
+- **Problem:** Page showed Samsung Galaxy phone repair content instead of computer optimization
+- **Solution:** Complete rewrite with proper computer optimization content
+- **File:** `src/pages/computer-optimization.astro`
+- **New content:** Speed optimization, bloatware removal, disk cleanup, system maintenance
+
+#### 3. About Page Mobile References Removed
+- **File:** `src/pages/about.astro`
+- **Changes:**
+  - "mobile devices" → "computers"
+  - "phone breaks" → "computer has issues"
+  - "repair" → "service" throughout
+  - Schema updated from MobilePhoneStore to ComputerStore
+
+#### 4. Contact Page Updated
+- **File:** `src/pages/contact.astro`
+- **Changes:**
+  - "MOBILE ELECTRONICS REPAIR" → "MOBILE COMPUTER SERVICE"
+  - Keywords updated to remove "phone fix" references
+
+#### 5. FAQ Page Verified Clean
+- Already properly converted, only had appropriate "phone call" references
+
+### Impact:
+- 5 files modified
+- 326 insertions, 886 deletions
+- Website now fully represents computer services only
+- No remaining mobile phone repair references in critical SEO elements
+
+---
+
+## Session Log: January 13, 2025 (Part 1)
 **Task:** Complete business transformation to software-only services & create premium landing pages
 
-### Work Completed Today:
+### Work Completed Earlier Today:
 
 #### 1. Fixed Critical Build Error
 - **Problem:** Build failing with "Expected ';' but found 's'" at fort-worth.astro:10:64
