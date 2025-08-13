@@ -1,0 +1,293 @@
+name: FAQ Schema Phased Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      phase:
+        description: 'Deployment Phase'
+        required: true
+        default: 'phase1'
+        type: choice
+        options:
+          - phase1
+          - phase2
+          - phase3
+          - rollback
+      target_branch:
+        description: 'Target branch for deployment'
+        required: true
+        default: 'main'
+        type: string
+      skip_tests:
+        description: 'Skip tests (emergency only)'
+        required: false
+        default: false
+        type: boolean
+
+env:
+  NODE_VERSION: '18'
+  DEPLOYMENT_TIMEOUT: '1800' # 30 minutes
+  HEALTH_CHECK_RETRIES: 5
+  HEALTH_CHECK_DELAY: 30
+
+jobs:
+  pre-deployment-validation:
+    name: Pre-Deployment Validation
+    runs-on: ubuntu-latest
+    outputs:
+      deployment-id: ${{ steps.deploy-id.outputs.deployment-id }}
+      target-pages: ${{ steps.target-pages.outputs.pages }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.target_branch }}
+          fetch-depth: 0
+
+      - name: Generate deployment ID
+        id: deploy-id
+        run: |
+          DEPLOYMENT_ID="faq-deploy-$(date +%Y%m%d-%H%M%S)-${{ inputs.phase }}"
+          echo "deployment-id=$DEPLOYMENT_ID" >> $GITHUB_OUTPUT
+          echo "🚀 Deployment ID: $DEPLOYMENT_ID"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate project structure
+        run: |
+          echo "📁 Validating project structure..."
+          if [ ! -f "src/components/FAQSchema.astro" ]; then
+            echo "❌ FAQSchema component not found"
+            exit 1
+          fi
+          
+          if [ ! -d "src/pages/locations" ]; then
+            echo "❌ Locations directory not found"
+            exit 1
+          fi
+          
+          echo "✅ Project structure validated"
+
+      - name: Determine target pages
+        id: target-pages
+        run: |
+          echo "📊 Determining target pages for ${{ inputs.phase }}..."
+          node scripts/deployment/get-target-pages.js ${{ inputs.phase }} > target-pages.json
+          PAGES=$(cat target-pages.json | jq -r '.pages | @csv')
+          echo "pages=$PAGES" >> $GITHUB_OUTPUT
+          echo "Target pages: $(cat target-pages.json | jq '.pages | length') pages"
+
+      - name: Run unit tests
+        if: ${{ !inputs.skip_tests }}
+        run: npm run test:unit
+
+      - name: Build application
+        run: npm run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-${{ steps.deploy-id.outputs.deployment-id }}
+          path: dist/
+          retention-days: 7
+
+  phase-deployment:
+    name: Deploy Phase ${{ inputs.phase }}
+    runs-on: ubuntu-latest
+    needs: pre-deployment-validation
+    environment: 
+      name: ${{ inputs.phase }}
+      url: https://gadgetfixllc.com
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.target_branch }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create deployment backup
+        run: |
+          echo "💾 Creating deployment backup..."
+          node scripts/deployment/create-backup.js ${{ needs.pre-deployment-validation.outputs.deployment-id }}
+
+      - name: Apply FAQ schema to target pages
+        run: |
+          echo "🔄 Applying FAQ schema for ${{ inputs.phase }}..."
+          node scripts/deployment/apply-faq-schema.js \
+            --phase=${{ inputs.phase }} \
+            --deployment-id=${{ needs.pre-deployment-validation.outputs.deployment-id }} \
+            --target-pages='${{ needs.pre-deployment-validation.outputs.target-pages }}'
+
+      - name: Validate schema implementation
+        run: |
+          echo "🔍 Validating schema implementation..."
+          node scripts/deployment/validate-schema.js ${{ inputs.phase }}
+
+      - name: Build with new schema
+        run: npm run build
+
+      - name: Run integration tests
+        if: ${{ !inputs.skip_tests }}
+        run: npm run test:integration
+
+      - name: Deploy to staging (Netlify preview)
+        run: |
+          echo "🚀 Deploying to staging..."
+          npx netlify-cli deploy \
+            --dir=dist \
+            --message="FAQ Schema ${{ inputs.phase }} - ${{ needs.pre-deployment-validation.outputs.deployment-id }}" \
+            --alias=${{ needs.pre-deployment-validation.outputs.deployment-id }}
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+      - name: Run smoke tests on staging
+        run: |
+          echo "🧪 Running smoke tests..."
+          PREVIEW_URL="https://${{ needs.pre-deployment-validation.outputs.deployment-id }}--gadgetfixllc.netlify.app"
+          node scripts/deployment/smoke-tests.js --url="$PREVIEW_URL" --phase=${{ inputs.phase }}
+
+      - name: Run SEO validation tests
+        run: |
+          echo "🔍 Running SEO validation..."
+          PREVIEW_URL="https://${{ needs.pre-deployment-validation.outputs.deployment-id }}--gadgetfixllc.netlify.app"
+          node scripts/deployment/seo-validation.js --url="$PREVIEW_URL" --phase=${{ inputs.phase }}
+
+      - name: Performance baseline check
+        run: |
+          echo "⚡ Running performance checks..."
+          PREVIEW_URL="https://${{ needs.pre-deployment-validation.outputs.deployment-id }}--gadgetfixllc.netlify.app"
+          node scripts/deployment/performance-check.js --url="$PREVIEW_URL" --phase=${{ inputs.phase }}
+
+  production-deployment:
+    name: Production Deployment
+    runs-on: ubuntu-latest
+    needs: [pre-deployment-validation, phase-deployment]
+    environment:
+      name: production
+      url: https://gadgetfixllc.com
+    
+    steps:
+      - name: Deploy to production
+        run: |
+          echo "🚀 Deploying to production..."
+          npx netlify-cli deploy \
+            --prod \
+            --dir=dist \
+            --message="FAQ Schema ${{ inputs.phase }} - Production Deploy"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+      - name: Wait for deployment propagation
+        run: sleep 60
+
+      - name: Production health checks
+        run: |
+          echo "🏥 Running production health checks..."
+          node scripts/deployment/health-checks.js \
+            --url="https://gadgetfixllc.com" \
+            --phase=${{ inputs.phase }} \
+            --retries=${{ env.HEALTH_CHECK_RETRIES }} \
+            --delay=${{ env.HEALTH_CHECK_DELAY }}
+
+      - name: Validate production SEO
+        run: |
+          echo "🔍 Validating production SEO..."
+          node scripts/deployment/seo-validation.js \
+            --url="https://gadgetfixllc.com" \
+            --phase=${{ inputs.phase }} \
+            --production=true
+
+      - name: Run production performance tests
+        run: |
+          echo "⚡ Running production performance tests..."
+          npm run test:performance
+
+      - name: Update deployment status
+        run: |
+          echo "📊 Updating deployment status..."
+          node scripts/deployment/update-status.js \
+            --deployment-id=${{ needs.pre-deployment-validation.outputs.deployment-id }} \
+            --phase=${{ inputs.phase }} \
+            --status=completed
+
+  post-deployment-monitoring:
+    name: Post-Deployment Monitoring
+    runs-on: ubuntu-latest
+    needs: [pre-deployment-validation, production-deployment]
+    if: always()
+    
+    steps:
+      - name: Setup monitoring
+        run: |
+          echo "📊 Setting up post-deployment monitoring..."
+          node scripts/monitoring/setup-monitoring.js \
+            --deployment-id=${{ needs.pre-deployment-validation.outputs.deployment-id }} \
+            --phase=${{ inputs.phase }}
+
+      - name: Schedule health checks
+        run: |
+          echo "⏰ Scheduling ongoing health checks..."
+          node scripts/monitoring/schedule-health-checks.js \
+            --deployment-id=${{ needs.pre-deployment-validation.outputs.deployment-id }} \
+            --phase=${{ inputs.phase }} \
+            --duration=24h
+
+      - name: Generate deployment report
+        run: |
+          echo "📋 Generating deployment report..."
+          node scripts/deployment/generate-report.js \
+            --deployment-id=${{ needs.pre-deployment-validation.outputs.deployment-id }} \
+            --phase=${{ inputs.phase }}
+
+      - name: Notify team
+        run: |
+          echo "📧 Sending deployment notification..."
+          node scripts/deployment/notify-team.js \
+            --deployment-id=${{ needs.pre-deployment-validation.outputs.deployment-id }} \
+            --phase=${{ inputs.phase }} \
+            --status=completed
+
+  rollback:
+    name: Emergency Rollback
+    runs-on: ubuntu-latest
+    if: ${{ inputs.phase == 'rollback' || failure() }}
+    
+    steps:
+      - name: Execute rollback
+        run: |
+          echo "🔄 Executing emergency rollback..."
+          node scripts/deployment/rollback.js \
+            --deployment-id=${{ needs.pre-deployment-validation.outputs.deployment-id }} \
+            --phase=${{ inputs.phase }}
+
+      - name: Validate rollback
+        run: |
+          echo "✅ Validating rollback..."
+          node scripts/deployment/validate-rollback.js
+
+      - name: Notify team of rollback
+        run: |
+          echo "🚨 Notifying team of rollback..."
+          node scripts/deployment/notify-team.js \
+            --deployment-id=${{ needs.pre-deployment-validation.outputs.deployment-id }} \
+            --phase=${{ inputs.phase }} \
+            --status=rollback

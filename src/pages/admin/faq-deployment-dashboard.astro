@@ -1,0 +1,656 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// This would typically fetch from a database or API
+const deploymentData = {
+  currentPhase: 1,
+  phaseName: "Pilot Deployment",
+  startTime: new Date('2025-01-13T10:00:00'),
+  status: 'in_progress',
+  progress: 30,
+  targetPages: 10,
+  deployedPages: 3,
+  successRate: 100,
+  metrics: {
+    performance: {
+      avgLoadTime: 2.3,
+      p95LoadTime: 3.1,
+      jsBundle: 8.5,
+      trend: 'stable'
+    },
+    seo: {
+      schemaValid: 10,
+      richSnippets: 7,
+      indexingErrors: 0,
+      trend: 'improving'
+    },
+    errors: {
+      total: 0,
+      rate: 0,
+      console: 0,
+      network: 0
+    },
+    engagement: {
+      faqClicks: 145,
+      interactionRate: 12.3,
+      avgTimeOnPage: 125,
+      trend: 'improving'
+    }
+  },
+  recentDeployments: [
+    { page: '/locations/dallas-county/dallas', time: '10:15 AM', status: 'success', loadTime: 2.1 },
+    { page: '/locations/tarrant-county/fort-worth', time: '10:30 AM', status: 'success', loadTime: 2.4 },
+    { page: '/locations/collin-county/plano', time: '10:45 AM', status: 'success', loadTime: 2.5 }
+  ],
+  upcomingPages: [
+    '/locations/denton-county/denton',
+    '/locations/dallas-county/irving',
+    '/locations/tarrant-county/arlington'
+  ]
+};
+
+const getStatusColor = (status: string) => {
+  switch(status) {
+    case 'success': return '#10b981';
+    case 'in_progress': return '#3b82f6';
+    case 'warning': return '#f59e0b';
+    case 'error': return '#ef4444';
+    default: return '#6b7280';
+  }
+};
+
+const getTrendIcon = (trend: string) => {
+  switch(trend) {
+    case 'improving': return '↑';
+    case 'declining': return '↓';
+    case 'stable': return '→';
+    default: return '•';
+  }
+};
+---
+
+<Layout 
+  title="FAQ Deployment Dashboard | GadgetFix Admin"
+  description="Monitor FAQ schema deployment across location pages"
+>
+  <main class="dashboard">
+    <div class="container">
+      <!-- Header -->
+      <header class="dashboard-header">
+        <h1>FAQ Schema Deployment Dashboard</h1>
+        <div class="header-actions">
+          <button class="btn-refresh" onclick="location.reload()">
+            🔄 Refresh
+          </button>
+          <button class="btn-emergency" data-rollback>
+            🚨 Emergency Rollback
+          </button>
+        </div>
+      </header>
+
+      <!-- Phase Status -->
+      <section class="phase-status">
+        <div class="phase-info">
+          <h2>Phase {deploymentData.currentPhase}: {deploymentData.phaseName}</h2>
+          <div class="phase-meta">
+            <span class="status" style={`color: ${getStatusColor(deploymentData.status)}`}>
+              ● {deploymentData.status.replace('_', ' ').toUpperCase()}
+            </span>
+            <span class="timer">Started {Math.round((Date.now() - deploymentData.startTime.getTime()) / 3600000)}h ago</span>
+          </div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style={`width: ${deploymentData.progress}%`}></div>
+          <span class="progress-text">{deploymentData.deployedPages}/{deploymentData.targetPages} pages deployed</span>
+        </div>
+      </section>
+
+      <!-- Metrics Grid -->
+      <section class="metrics-grid">
+        <!-- Performance Card -->
+        <div class="metric-card">
+          <h3>⚡ Performance</h3>
+          <div class="metric-value">
+            {deploymentData.metrics.performance.avgLoadTime}s
+            <span class="metric-label">Avg Load Time</span>
+          </div>
+          <div class="metric-details">
+            <div>P95: {deploymentData.metrics.performance.p95LoadTime}s</div>
+            <div>JS Bundle: {deploymentData.metrics.performance.jsBundle}KB</div>
+          </div>
+          <div class="metric-trend">
+            {getTrendIcon(deploymentData.metrics.performance.trend)} {deploymentData.metrics.performance.trend}
+          </div>
+        </div>
+
+        <!-- SEO Card -->
+        <div class="metric-card">
+          <h3>🔍 SEO Health</h3>
+          <div class="metric-value">
+            {deploymentData.metrics.seo.schemaValid}/{deploymentData.targetPages}
+            <span class="metric-label">Valid Schemas</span>
+          </div>
+          <div class="metric-details">
+            <div>Rich Snippets: {deploymentData.metrics.seo.richSnippets}</div>
+            <div>Indexing Errors: {deploymentData.metrics.seo.indexingErrors}</div>
+          </div>
+          <div class="metric-trend">
+            {getTrendIcon(deploymentData.metrics.seo.trend)} {deploymentData.metrics.seo.trend}
+          </div>
+        </div>
+
+        <!-- Errors Card -->
+        <div class="metric-card">
+          <h3>❌ Error Monitoring</h3>
+          <div class="metric-value">
+            {deploymentData.metrics.errors.rate}%
+            <span class="metric-label">Error Rate</span>
+          </div>
+          <div class="metric-details">
+            <div>Console Errors: {deploymentData.metrics.errors.console}</div>
+            <div>Network Errors: {deploymentData.metrics.errors.network}</div>
+          </div>
+          <div class="metric-trend success">
+            ✓ No critical errors
+          </div>
+        </div>
+
+        <!-- Engagement Card -->
+        <div class="metric-card">
+          <h3>📊 User Engagement</h3>
+          <div class="metric-value">
+            {deploymentData.metrics.engagement.interactionRate}%
+            <span class="metric-label">FAQ Interaction Rate</span>
+          </div>
+          <div class="metric-details">
+            <div>Total Clicks: {deploymentData.metrics.engagement.faqClicks}</div>
+            <div>Avg Time: {deploymentData.metrics.engagement.avgTimeOnPage}s</div>
+          </div>
+          <div class="metric-trend">
+            {getTrendIcon(deploymentData.metrics.engagement.trend)} {deploymentData.metrics.engagement.trend}
+          </div>
+        </div>
+      </section>
+
+      <!-- Deployment Activity -->
+      <section class="deployment-activity">
+        <div class="activity-column">
+          <h3>Recent Deployments</h3>
+          <div class="activity-list">
+            {deploymentData.recentDeployments.map(dep => (
+              <div class="activity-item">
+                <span class={`status-dot ${dep.status}`}></span>
+                <div class="activity-details">
+                  <a href={dep.page} target="_blank">{dep.page}</a>
+                  <span class="activity-meta">{dep.time} • {dep.loadTime}s load time</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        <div class="activity-column">
+          <h3>Upcoming Pages</h3>
+          <div class="activity-list">
+            {deploymentData.upcomingPages.map(page => (
+              <div class="activity-item pending">
+                <span class="status-dot pending"></span>
+                <div class="activity-details">
+                  <span>{page}</span>
+                  <span class="activity-meta">Pending deployment</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- Validation Checklist -->
+      <section class="validation-checklist">
+        <h3>Deployment Validation</h3>
+        <div class="checklist">
+          <label class="check-item">
+            <input type="checkbox" checked disabled />
+            <span>✓ Pre-deployment backup created</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" checked disabled />
+            <span>✓ Schema validation passed</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" checked disabled />
+            <span>✓ Performance benchmarks met</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" disabled />
+            <span>⏳ 72-hour monitoring period</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" disabled />
+            <span>⏳ SEO impact assessment</span>
+          </label>
+        </div>
+      </section>
+
+      <!-- Action Buttons -->
+      <section class="actions">
+        <button class="btn btn-primary" data-continue>
+          Continue to Phase 2
+        </button>
+        <button class="btn btn-secondary" data-pause>
+          Pause Deployment
+        </button>
+        <button class="btn btn-outline" data-report>
+          Generate Report
+        </button>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // Mock dashboard interactions
+    document.querySelector('[data-rollback]')?.addEventListener('click', () => {
+      if (confirm('Are you sure you want to initiate emergency rollback? This will revert all Phase 1 changes.')) {
+        alert('Rollback initiated. Check deployment logs for status.');
+      }
+    });
+
+    document.querySelector('[data-continue]')?.addEventListener('click', () => {
+      alert('Phase 1 validation required. Minimum 72-hour monitoring period not met.');
+    });
+
+    document.querySelector('[data-pause]')?.addEventListener('click', () => {
+      alert('Deployment paused. Resume from dashboard when ready.');
+    });
+
+    document.querySelector('[data-report]')?.addEventListener('click', () => {
+      alert('Report generation started. Check reports/phase1-report.html when complete.');
+    });
+
+    // Auto-refresh every 30 seconds
+    setTimeout(() => {
+      const autoRefresh = document.querySelector('.auto-refresh');
+      if (autoRefresh) {
+        location.reload();
+      }
+    }, 30000);
+  </script>
+</Layout>
+
+<style>
+  .dashboard {
+    background: #f3f4f6;
+    min-height: 100vh;
+    padding: 2rem 0;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .dashboard-header {
+    background: white;
+    padding: 1.5rem 2rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .dashboard-header h1 {
+    margin: 0;
+    color: #1e3a8a;
+    font-size: 1.875rem;
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .btn-refresh, .btn-emergency {
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-refresh {
+    background: #3b82f6;
+    color: white;
+  }
+
+  .btn-refresh:hover {
+    background: #2563eb;
+  }
+
+  .btn-emergency {
+    background: #ef4444;
+    color: white;
+  }
+
+  .btn-emergency:hover {
+    background: #dc2626;
+  }
+
+  /* Phase Status */
+  .phase-status {
+    background: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .phase-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .phase-info h2 {
+    margin: 0;
+    color: #1e3a8a;
+  }
+
+  .phase-meta {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .status {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .timer {
+    color: #6b7280;
+  }
+
+  .progress-bar {
+    position: relative;
+    height: 2rem;
+    background: #e5e7eb;
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    transition: width 0.5s ease;
+  }
+
+  .progress-text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    color: #1f2937;
+  }
+
+  /* Metrics Grid */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .metric-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .metric-card h3 {
+    margin: 0 0 1rem;
+    color: #1f2937;
+    font-size: 1.125rem;
+  }
+
+  .metric-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .metric-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #6b7280;
+    margin-top: 0.25rem;
+  }
+
+  .metric-details {
+    padding: 0.75rem 0;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 0.75rem;
+    font-size: 0.875rem;
+    color: #4b5563;
+  }
+
+  .metric-details div {
+    margin: 0.25rem 0;
+  }
+
+  .metric-trend {
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-weight: 600;
+  }
+
+  .metric-trend.success {
+    color: #10b981;
+  }
+
+  /* Deployment Activity */
+  .deployment-activity {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .activity-column {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .activity-column h3 {
+    margin: 0 0 1rem;
+    color: #1f2937;
+  }
+
+  .activity-list {
+    space-y: 0.75rem;
+  }
+
+  .activity-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .activity-item:last-child {
+    border-bottom: none;
+  }
+
+  .status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+  }
+
+  .status-dot.success {
+    background: #10b981;
+  }
+
+  .status-dot.pending {
+    background: #fbbf24;
+  }
+
+  .status-dot.error {
+    background: #ef4444;
+  }
+
+  .activity-details {
+    flex: 1;
+  }
+
+  .activity-details a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .activity-details a:hover {
+    text-decoration: underline;
+  }
+
+  .activity-meta {
+    display: block;
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 0.25rem;
+  }
+
+  /* Validation Checklist */
+  .validation-checklist {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .validation-checklist h3 {
+    margin: 0 0 1rem;
+    color: #1f2937;
+  }
+
+  .checklist {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9375rem;
+    color: #4b5563;
+  }
+
+  .check-item input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  /* Action Buttons */
+  .actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .btn {
+    padding: 0.75rem 2rem;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+  }
+
+  .btn-primary {
+    background: #3b82f6;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #2563eb;
+  }
+
+  .btn-primary:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+  }
+
+  .btn-secondary {
+    background: #fbbf24;
+    color: #1f2937;
+  }
+
+  .btn-secondary:hover {
+    background: #f59e0b;
+  }
+
+  .btn-outline {
+    background: white;
+    color: #3b82f6;
+    border: 2px solid #3b82f6;
+  }
+
+  .btn-outline:hover {
+    background: #3b82f6;
+    color: white;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .dashboard-header {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+
+    .phase-info {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+
+    .phase-meta {
+      justify-content: center;
+    }
+
+    .deployment-activity {
+      grid-template-columns: 1fr;
+    }
+
+    .actions {
+      flex-direction: column;
+    }
+
+    .btn {
+      width: 100%;
+    }
+  }
+</style>

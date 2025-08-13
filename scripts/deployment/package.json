@@ -1,0 +1,45 @@
+{
+  "name": "faq-schema-deployment",
+  "version": "1.0.0",
+  "description": "FAQ Schema Deployment Pipeline for GadgetFix Location Pages",
+  "type": "module",
+  "scripts": {
+    "deploy:phase1": "node get-target-pages.js phase1 | node apply-faq-schema.js --phase=phase1 --deployment-id=$(date +%Y%m%d-%H%M%S)-phase1",
+    "deploy:phase2": "node get-target-pages.js phase2 | node apply-faq-schema.js --phase=phase2 --deployment-id=$(date +%Y%m%d-%H%M%S)-phase2", 
+    "deploy:phase3": "node get-target-pages.js phase3 | node apply-faq-schema.js --phase=phase3 --deployment-id=$(date +%Y%m%d-%H%M%S)-phase3",
+    "validate:schema": "node validate-schema.js",
+    "validate:seo": "node seo-validation.js",
+    "health:check": "node health-checks.js",
+    "backup:create": "node create-backup.js",
+    "rollback": "node rollback.js",
+    "report:generate": "node generate-report.js",
+    "list:backups": "node rollback.js --list-backups",
+    "dry-run:phase1": "node get-target-pages.js phase1 | node apply-faq-schema.js --phase=phase1 --deployment-id=dry-run-phase1 --dry-run",
+    "dry-run:phase2": "node get-target-pages.js phase2 | node apply-faq-schema.js --phase=phase2 --deployment-id=dry-run-phase2 --dry-run",
+    "dry-run:phase3": "node get-target-pages.js phase3 | node apply-faq-schema.js --phase=phase3 --deployment-id=dry-run-phase3 --dry-run",
+    "test:deployment": "npm run dry-run:phase1 && npm run validate:schema && npm run validate:seo",
+    "monitor:deployment": "node monitor-deployment.js",
+    "cleanup:backups": "node create-backup.js --cleanup"
+  },
+  "keywords": [
+    "deployment",
+    "faq-schema",
+    "seo",
+    "astro",
+    "devops",
+    "automation"
+  ],
+  "author": "GadgetFix LLC",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0",
+    "inquirer": "^9.2.12"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
