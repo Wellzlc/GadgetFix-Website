@@ -4,7 +4,7 @@ import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://gadgetfixllc.com',
+  site: 'https://www.gadgetfixllc.com',
   output: 'server',
   adapter: netlify(),
   build: {

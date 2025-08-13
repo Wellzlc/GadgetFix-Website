@@ -28,7 +28,7 @@ Disallow: /wp-includes/
 Crawl-delay: 0
 
 # Sitemap location
-Sitemap: https://gadgetfixllc.com/sitemap.xml
+Sitemap: https://www.gadgetfixllc.com/sitemap.xml
 
 # Google specific
 User-agent: Googlebot
