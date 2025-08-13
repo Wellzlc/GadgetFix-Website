@@ -5,7 +5,6 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
-Disallow: /_astro/
 Disallow: /temp/
 Disallow: /private/
 Disallow: /test-form
@@ -29,6 +28,9 @@ Sitemap: https://www.gadgetfixllc.com/sitemap.xml
 # Google specific
 User-agent: Googlebot
 Allow: /
+Allow: /_assets/
+Allow: /_astro/
+Allow: /_entry/
 Disallow: /admin/
 Disallow: /api/
 Disallow: /*-png/
@@ -42,6 +44,9 @@ Crawl-delay: 0
 # Bing specific  
 User-agent: Bingbot
 Allow: /
+Allow: /_assets/
+Allow: /_astro/
+Allow: /_entry/
 Disallow: /admin/
 Disallow: /api/
 Disallow: /*-png/
@@ -68,8 +73,10 @@ Allow: /mac-troubleshooting/
 Allow: /networking-cabling/
 
 # Allow CSS, JS, and actual image files for proper rendering
-Allow: /assets/
 Allow: /_assets/
+Allow: /_astro/
+Allow: /_entry/
+Allow: /assets/
 Allow: /images/
 Allow: *.css
 Allow: *.js
