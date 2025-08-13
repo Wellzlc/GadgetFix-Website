@@ -5,7 +5,7 @@ import netlify from '@astrojs/netlify';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.gadgetfixllc.com',
-  output: 'hybrid',
+  output: 'server',
   adapter: netlify(),
   build: {
     // Extract CSS to external files for better caching
