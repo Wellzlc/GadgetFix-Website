@@ -36,7 +36,8 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 				</div>
 				
 				<div class="device-screen">
-					<form class="mobile-form" action="https://formsubmit.co/wellz.levi@gmail.com" method="POST">
+					<form class="mobile-form" action="/api/contact/submit" method="POST" data-secure="true">
+						<input type="hidden" name="_csrf" value="" />
 						<input type="hidden" name="_subject" value="New Contact Request from GadgetFix">
 						<input type="hidden" name="_captcha" value="false">
 						<input type="hidden" name="_template" value="table">

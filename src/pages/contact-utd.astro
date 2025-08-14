@@ -41,7 +41,8 @@ import spamProtectionScript from '../scripts/spam-protection.js?raw';
 				</div>
 				
 				<div class="device-screen">
-					<form class="mobile-form" id="contactForm" action="https://formsubmit.co/wellz.levi@gmail.com" method="POST">
+					<form class="mobile-form" id="contactForm" action="/api/contact/submit" method="POST" data-secure="true">
+						<input type="hidden" name="_csrf" value="" />
 						<!-- FormSubmit Configuration -->
 						<input type="hidden" name="_subject" value="UTD STUDENT EMERGENCY - Computer Service Request">
 						<input type="hidden" name="_captcha" value="false">
