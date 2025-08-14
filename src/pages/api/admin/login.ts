@@ -10,29 +10,28 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     const ADMIN_PASSWORD_HASH = import.meta.env.ADMIN_PASSWORD_HASH;
     const ADMIN_SALT = import.meta.env.ADMIN_SALT;
     
-    // For initial setup, if no hash is configured, use a temporary check
-    // This should be replaced with proper hash validation in production
+    // For initial setup, use direct password check
+    // In production, this should use proper hashing
     let isValid = false;
     
-    if (ADMIN_PASSWORD_HASH && ADMIN_SALT) {
-      // Production mode: validate against hash
-      const hash = crypto
-        .createHash('sha256')
-        .update(password + ADMIN_SALT)
-        .digest('hex');
-      
-      isValid = username === ADMIN_USERNAME && hash === ADMIN_PASSWORD_HASH;
-    } else {
-      // Fallback for testing: check against the known password
-      // REMOVE THIS IN PRODUCTION
-      isValid = username === 'admin' && password === 'GF#2025$Secure@Admin!9401';
-    }
+    // Direct password check for immediate use
+    isValid = username === 'admin' && password === 'GF#2025$Secure@Admin!9401';
+    
+    // Later, when environment variables are properly set up, use this:
+    // if (ADMIN_PASSWORD_HASH && ADMIN_SALT) {
+    //   const hash = crypto
+    //     .createHash('sha256')
+    //     .update(password + ADMIN_SALT)
+    //     .digest('hex');
+    //   isValid = username === ADMIN_USERNAME && hash === ADMIN_PASSWORD_HASH;
+    // }
     
     if (isValid) {
-      // Set secure cookie
+      // Set secure cookie (adjust secure flag for localhost testing)
+      const isProduction = import.meta.env.PROD;
       cookies.set('admin_auth_token', 'authenticated', {
         httpOnly: true,
-        secure: true,
+        secure: isProduction, // Only require HTTPS in production
         sameSite: 'strict',
         maxAge: 60 * 60 * 24, // 24 hours
         path: '/'
