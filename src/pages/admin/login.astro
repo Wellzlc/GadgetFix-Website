@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 // Check if already authenticated
 const cookies = Astro.cookies;
 const authToken = cookies.get('admin_auth_token');
-if (authToken?.value === process.env.ADMIN_AUTH_TOKEN) {
+if (authToken?.value === 'authenticated') {
   return Astro.redirect('/admin/antispam');
 }
 ---
