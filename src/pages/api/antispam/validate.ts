@@ -107,7 +107,7 @@ export const POST: APIRoute = async ({ request }) => {
       
       return new Response(JSON.stringify({
         success: false,
-        message: 'Your submission has been blocked. Please contact us directly at (402) 416-6942 if you believe this is an error.',
+        message: 'Your submission has been blocked. Please contact us directly at (469) 430-8607 if you believe this is an error.',
         reason: 'spam_detected'
       }), {
         status: 403,
@@ -153,7 +153,7 @@ export const POST: APIRoute = async ({ request }) => {
     console.error('Form validation error:', error);
     return new Response(JSON.stringify({
       success: false,
-      message: 'An error occurred processing your submission. Please try again or call (402) 416-6942.'
+      message: 'An error occurred processing your submission. Please try again or call (469) 430-8607.'
     }), {
       status: 500,
       headers: {
