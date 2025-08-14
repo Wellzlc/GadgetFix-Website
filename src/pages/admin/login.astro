@@ -1,0 +1,270 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// Check if already authenticated
+const cookies = Astro.cookies;
+const authToken = cookies.get('admin_auth_token');
+if (authToken?.value === process.env.ADMIN_AUTH_TOKEN) {
+  return Astro.redirect('/admin/antispam');
+}
+---
+
+<Layout 
+  title="Admin Login | GadgetFix"
+  description="Secure admin login portal"
+>
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <h1>Admin Portal</h1>
+        <p>Secure authentication required</p>
+      </div>
+      
+      <form id="login-form" class="login-form">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input 
+            type="text" 
+            id="username" 
+            name="username" 
+            required 
+            autocomplete="username"
+            placeholder="Enter username"
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            required 
+            autocomplete="current-password"
+            placeholder="Enter password"
+          />
+        </div>
+        
+        <div id="error-message" class="error-message" style="display: none;"></div>
+        
+        <button type="submit" class="login-button">
+          <span id="button-text">Login</span>
+          <span id="button-spinner" class="spinner" style="display: none;"></span>
+        </button>
+      </form>
+      
+      <div class="security-notice">
+        <p>This is a protected area. All login attempts are logged.</p>
+        <p>IP Address: <span id="client-ip">Recording...</span></p>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 1rem;
+  }
+  
+  .login-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    max-width: 400px;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .login-header {
+    background: #1f2937;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .login-header h1 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+  
+  .login-header p {
+    margin: 0.5rem 0 0;
+    opacity: 0.9;
+    font-size: 0.875rem;
+  }
+  
+  .login-form {
+    padding: 2rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.875rem;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+  
+  .form-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+  
+  .error-message {
+    background: #fef2f2;
+    color: #dc2626;
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    border: 1px solid #fecaca;
+  }
+  
+  .login-button {
+    width: 100%;
+    padding: 0.875rem;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .login-button:hover:not(:disabled) {
+    background: #5a67d8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  }
+  
+  .login-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  
+  .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ffffff40;
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .security-notice {
+    background: #f9fafb;
+    padding: 1.5rem 2rem;
+    border-top: 1px solid #e5e7eb;
+    font-size: 0.75rem;
+    color: #6b7280;
+    text-align: center;
+  }
+  
+  .security-notice p {
+    margin: 0.25rem 0;
+  }
+  
+  #client-ip {
+    font-family: monospace;
+    color: #374151;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get client IP for security logging
+    fetch('https://api.ipify.org?format=json')
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById('client-ip').textContent = data.ip;
+      })
+      .catch(() => {
+        document.getElementById('client-ip').textContent = 'Protected';
+      });
+    
+    // Handle login form submission
+    const form = document.getElementById('login-form');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const errorDiv = document.getElementById('error-message');
+      const buttonText = document.getElementById('button-text');
+      const buttonSpinner = document.getElementById('button-spinner');
+      const submitButton = form.querySelector('button[type="submit"]');
+      
+      // Reset error
+      errorDiv.style.display = 'none';
+      errorDiv.textContent = '';
+      
+      // Show loading state
+      submitButton.disabled = true;
+      buttonText.style.display = 'none';
+      buttonSpinner.style.display = 'inline-block';
+      
+      try {
+        const response = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username, password }),
+          credentials: 'same-origin'
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          // Successful login
+          window.location.href = '/admin/antispam';
+        } else {
+          // Show error
+          errorDiv.textContent = data.error || 'Invalid credentials';
+          errorDiv.style.display = 'block';
+          
+          // Clear password field
+          document.getElementById('password').value = '';
+        }
+      } catch (error) {
+        errorDiv.textContent = 'Connection error. Please try again.';
+        errorDiv.style.display = 'block';
+      } finally {
+        // Reset button state
+        submitButton.disabled = false;
+        buttonText.style.display = 'inline';
+        buttonSpinner.style.display = 'none';
+      }
+    });
+  });
+</script>

@@ -1,0 +1,1477 @@
+{
+  "timestamp": "2025-08-14T02:39:32.535Z",
+  "filesScanned": 157,
+  "score": 0,
+  "summary": {
+    "critical": 13,
+    "high": 33,
+    "medium": 13,
+    "low": 124
+  },
+  "issues": [
+    {
+      "severity": "HIGH",
+      "category": "unsafeHtml",
+      "file": "src\\components\\admin\\SpamGuardDashboard.astro",
+      "line": 863,
+      "match": "innerHTML =",
+      "pattern": "/innerHTML\\s*=/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "unsafeHtml",
+      "file": "src\\components\\admin\\SpamGuardDashboard.astro",
+      "line": 863,
+      "match": "innerHTML =",
+      "pattern": "/innerHTML\\s*=/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "unsafeHtml",
+      "file": "src\\components\\admin\\SpamGuardDashboard.astro",
+      "line": 863,
+      "match": "innerHTML =",
+      "pattern": "/innerHTML\\s*=/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "unsafeHtml",
+      "file": "src\\components\\admin\\SpamGuardDashboard.astro",
+      "line": 863,
+      "match": "innerHTML =",
+      "pattern": "/innerHTML\\s*=/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "unsafeHtml",
+      "file": "src\\components\\admin\\SpamGuardDashboard.astro",
+      "line": 863,
+      "match": "innerHTML =",
+      "pattern": "/innerHTML\\s*=/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\components\\admin\\SpamGuardDashboard.astro",
+      "line": 834,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\components\\admin\\SpamGuardDashboard.astro",
+      "line": 834,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\components\\admin\\SpamGuardDashboard.astro",
+      "line": 834,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\components\\admin\\SpamGuardDashboard.astro",
+      "line": 951,
+      "match": "alert(",
+      "pattern": "/alert\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\components\\admin\\SpamGuardDashboard.astro",
+      "line": 951,
+      "match": "alert(",
+      "pattern": "/alert\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\components\\admin\\SpamGuardDashboard.astro",
+      "line": 951,
+      "match": "alert(",
+      "pattern": "/alert\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\components\\admin\\SpamGuardDashboard.astro",
+      "line": 951,
+      "match": "alert(",
+      "pattern": "/alert\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\components\\admin\\SpamGuardDashboard.astro",
+      "line": 951,
+      "match": "alert(",
+      "pattern": "/alert\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\components\\enhanced\\FAQComplete.astro",
+      "line": 83,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\components\\enhanced\\FAQComplete.astro",
+      "line": 103,
+      "match": "console.debug(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\components\\enhanced\\FAQInteractive.astro",
+      "line": 158,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\components\\enhanced\\FAQInteractive.astro",
+      "line": 158,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\components\\enhanced\\FAQSchemaEnhanced.astro",
+      "line": 118,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\components\\enhanced\\FAQSchemaEnhanced.astro",
+      "line": 118,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\components\\enhanced\\FAQSchemaEnhanced.astro",
+      "line": 259,
+      "match": "console.debug(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\components\\enhanced\\FAQSchemaEnhanced.astro",
+      "line": 259,
+      "match": "console.debug(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\components\\enhanced\\FAQSchemaEnhanced.astro",
+      "line": 118,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "unsafeHtml",
+      "file": "src\\components\\FAQSchemaEnhanced.astro",
+      "line": 255,
+      "match": "innerHTML =",
+      "pattern": "/innerHTML\\s*=/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\components\\SpamProtectedForm.astro",
+      "line": 257,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "insecureProtocol",
+      "file": "src\\components\\Welcome.astro",
+      "line": 19,
+      "match": "http://",
+      "pattern": "/http:\\/\\/(?!localhost|127\\.0\\.0\\.1)/g"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "insecureProtocol",
+      "file": "src\\components\\Welcome.astro",
+      "line": 19,
+      "match": "http://",
+      "pattern": "/http:\\/\\/(?!localhost|127\\.0\\.0\\.1)/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\lib\\antispam\\config.ts",
+      "line": 115,
+      "match": "admin@gadgetfix.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\lib\\antispam\\config.ts",
+      "line": 231,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\lib\\antispam\\modules\\MLClassifier.ts",
+      "line": 472,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\lib\\antispam\\modules\\MLClassifier.ts",
+      "line": 513,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\lib\\antispam\\modules\\QuarantineManager.ts",
+      "line": 157,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\lib\\antispam\\modules\\QuarantineManager.ts",
+      "line": 218,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\lib\\antispam\\modules\\QuarantineManager.ts",
+      "line": 218,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\lib\\antispam\\modules\\QuarantineManager.ts",
+      "line": 218,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\lib\\antispam\\modules\\RuleEngine.ts",
+      "line": 493,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\lib\\antispam\\modules\\ThreatIntelligence.ts",
+      "line": 451,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\lib\\antispam\\modules\\ThreatIntelligence.ts",
+      "line": 453,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\lib\\antispam\\modules\\ThreatIntelligence.ts",
+      "line": 453,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\lib\\antispam\\SpamGuard.ts",
+      "line": 140,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\middleware\\security.ts",
+      "line": 14,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\middleware\\security.ts",
+      "line": 30,
+      "match": "console.warn(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\middleware\\security.ts",
+      "line": 30,
+      "match": "console.warn(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\admin\\antispam-test.astro",
+      "line": 71,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\admin\\antispam.astro",
+      "line": 106,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\admin\\faq-deployment-dashboard.astro",
+      "line": 254,
+      "match": "alert(",
+      "pattern": "/alert\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\admin\\faq-deployment-dashboard.astro",
+      "line": 254,
+      "match": "alert(",
+      "pattern": "/alert\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\admin\\faq-deployment-dashboard.astro",
+      "line": 254,
+      "match": "alert(",
+      "pattern": "/alert\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\admin\\faq-deployment-dashboard.astro",
+      "line": 254,
+      "match": "alert(",
+      "pattern": "/alert\\s*\\(/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "unsafeHtml",
+      "file": "src\\pages\\admin\\seo-monitor.astro",
+      "line": 318,
+      "match": "innerHTML =",
+      "pattern": "/innerHTML\\s*=/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "unsafeHtml",
+      "file": "src\\pages\\admin\\seo-monitor.astro",
+      "line": 318,
+      "match": "innerHTML =",
+      "pattern": "/innerHTML\\s*=/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "unsafeHtml",
+      "file": "src\\pages\\admin\\seo-monitor.astro",
+      "line": 318,
+      "match": "innerHTML =",
+      "pattern": "/innerHTML\\s*=/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\admin\\seo-monitor.astro",
+      "line": 415,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\admin\\seo-monitor.astro",
+      "line": 413,
+      "match": "alert(",
+      "pattern": "/alert\\s*\\(/g"
+    },
+    {
+      "severity": "CRITICAL",
+      "category": "hardcodedPasswords",
+      "file": "src\\pages\\api\\admin\\login.ts",
+      "line": 61,
+      "match": "password:', tempToken);\n      console.warn(",
+      "pattern": "/password\\s*[=:]\\s*[\"'][^\"']{4,}/gi"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\admin\\login.ts",
+      "line": 61,
+      "match": "console.warn(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\admin\\login.ts",
+      "line": 61,
+      "match": "console.warn(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\admin\\login.ts",
+      "line": 99,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\admin\\login.ts",
+      "line": 61,
+      "match": "console.warn(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\admin\\login.ts",
+      "line": 126,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\admin\\logout.ts",
+      "line": 14,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\antispam\\feedback.ts",
+      "line": 37,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\antispam\\feedback.ts",
+      "line": 48,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\antispam\\feedback.ts",
+      "line": 48,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\api\\antispam\\validate.ts",
+      "line": 16,
+      "match": "wellz.levi@gmail.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\antispam\\validate.ts",
+      "line": 22,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\antispam\\validate.ts",
+      "line": 22,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\antispam\\validate.ts",
+      "line": 22,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\antispam\\validate.ts",
+      "line": 22,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\antispam\\validate.ts",
+      "line": 22,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\antispam\\validate.ts",
+      "line": 99,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\antispam\\validate.ts",
+      "line": 22,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\antispam\\validate.ts",
+      "line": 22,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\antispam\\validate.ts",
+      "line": 99,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\contact\\submit.ts",
+      "line": 131,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\contact\\submit.ts",
+      "line": 142,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\form-test.js",
+      "line": 10,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\api\\form-test.js",
+      "line": 23,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\contact-computer.astro",
+      "line": 39,
+      "match": "wellz.levi@gmail.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\contact-computer.astro",
+      "line": 39,
+      "match": "wellz.levi@gmail.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "CRITICAL",
+      "category": "dangerousEval",
+      "file": "src\\pages\\contact-computer.astro",
+      "line": 439,
+      "match": "eval(",
+      "pattern": "/eval\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-computer.astro",
+      "line": 453,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-computer.astro",
+      "line": 453,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-computer.astro",
+      "line": 453,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-computer.astro",
+      "line": 453,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-computer.astro",
+      "line": 453,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-computer.astro",
+      "line": 534,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "insecureProtocol",
+      "file": "src\\pages\\contact-computer.astro",
+      "line": 152,
+      "match": "http://",
+      "pattern": "/http:\\/\\/(?!localhost|127\\.0\\.0\\.1)/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\contact-networking.astro",
+      "line": 39,
+      "match": "wellz.levi@gmail.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\contact-networking.astro",
+      "line": 39,
+      "match": "wellz.levi@gmail.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "CRITICAL",
+      "category": "dangerousEval",
+      "file": "src\\pages\\contact-networking.astro",
+      "line": 445,
+      "match": "eval(",
+      "pattern": "/eval\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-networking.astro",
+      "line": 459,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-networking.astro",
+      "line": 459,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-networking.astro",
+      "line": 459,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-networking.astro",
+      "line": 459,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-networking.astro",
+      "line": 459,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-networking.astro",
+      "line": 540,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "insecureProtocol",
+      "file": "src\\pages\\contact-networking.astro",
+      "line": 158,
+      "match": "http://",
+      "pattern": "/http:\\/\\/(?!localhost|127\\.0\\.0\\.1)/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\contact-password-reset.astro",
+      "line": 47,
+      "match": "wellz.levi@gmail.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\contact-password-reset.astro",
+      "line": 47,
+      "match": "wellz.levi@gmail.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "CRITICAL",
+      "category": "dangerousEval",
+      "file": "src\\pages\\contact-password-reset.astro",
+      "line": 627,
+      "match": "eval(",
+      "pattern": "/eval\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-password-reset.astro",
+      "line": 641,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-password-reset.astro",
+      "line": 641,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-password-reset.astro",
+      "line": 641,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-password-reset.astro",
+      "line": 641,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-password-reset.astro",
+      "line": 641,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-password-reset.astro",
+      "line": 722,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "insecureProtocol",
+      "file": "src\\pages\\contact-password-reset.astro",
+      "line": 188,
+      "match": "http://",
+      "pattern": "/http:\\/\\/(?!localhost|127\\.0\\.0\\.1)/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\contact-smu.astro",
+      "line": 44,
+      "match": "wellz.levi@gmail.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\contact-smu.astro",
+      "line": 44,
+      "match": "wellz.levi@gmail.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "CRITICAL",
+      "category": "dangerousEval",
+      "file": "src\\pages\\contact-smu.astro",
+      "line": 532,
+      "match": "eval(",
+      "pattern": "/eval\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-smu.astro",
+      "line": 546,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-smu.astro",
+      "line": 546,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-smu.astro",
+      "line": 546,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-smu.astro",
+      "line": 546,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-smu.astro",
+      "line": 546,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-smu.astro",
+      "line": 627,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\contact-tcu.astro",
+      "line": 44,
+      "match": "wellz.levi@gmail.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\contact-tcu.astro",
+      "line": 44,
+      "match": "wellz.levi@gmail.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "CRITICAL",
+      "category": "dangerousEval",
+      "file": "src\\pages\\contact-tcu.astro",
+      "line": 532,
+      "match": "eval(",
+      "pattern": "/eval\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-tcu.astro",
+      "line": 546,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-tcu.astro",
+      "line": 546,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-tcu.astro",
+      "line": 546,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-tcu.astro",
+      "line": 546,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-tcu.astro",
+      "line": 546,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-tcu.astro",
+      "line": 627,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\contact-uta.astro",
+      "line": 44,
+      "match": "wellz.levi@gmail.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\contact-uta.astro",
+      "line": 44,
+      "match": "wellz.levi@gmail.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "CRITICAL",
+      "category": "dangerousEval",
+      "file": "src\\pages\\contact-uta.astro",
+      "line": 532,
+      "match": "eval(",
+      "pattern": "/eval\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-uta.astro",
+      "line": 546,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-uta.astro",
+      "line": 546,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-uta.astro",
+      "line": 546,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-uta.astro",
+      "line": 546,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-uta.astro",
+      "line": 546,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-uta.astro",
+      "line": 627,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\contact-utd.astro",
+      "line": 44,
+      "match": "wellz.levi@gmail.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\contact-utd.astro",
+      "line": 44,
+      "match": "wellz.levi@gmail.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "CRITICAL",
+      "category": "dangerousEval",
+      "file": "src\\pages\\contact-utd.astro",
+      "line": 532,
+      "match": "eval(",
+      "pattern": "/eval\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-utd.astro",
+      "line": 546,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-utd.astro",
+      "line": 546,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-utd.astro",
+      "line": 546,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-utd.astro",
+      "line": 546,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-utd.astro",
+      "line": 546,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact-utd.astro",
+      "line": 627,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\contact.astro",
+      "line": 39,
+      "match": "wellz.levi@gmail.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\contact.astro",
+      "line": 39,
+      "match": "wellz.levi@gmail.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "CRITICAL",
+      "category": "dangerousEval",
+      "file": "src\\pages\\contact.astro",
+      "line": 417,
+      "match": "eval(",
+      "pattern": "/eval\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact.astro",
+      "line": 431,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact.astro",
+      "line": 431,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact.astro",
+      "line": 431,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact.astro",
+      "line": 431,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact.astro",
+      "line": 431,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\contact.astro",
+      "line": 508,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "insecureProtocol",
+      "file": "src\\pages\\contact.astro",
+      "line": 98,
+      "match": "http://",
+      "pattern": "/http:\\/\\/(?!localhost|127\\.0\\.0\\.1)/g"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "insecureProtocol",
+      "file": "src\\pages\\emergency-computer-service.astro",
+      "line": 236,
+      "match": "http://",
+      "pattern": "/http:\\/\\/(?!localhost|127\\.0\\.0\\.1)/g"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "insecureProtocol",
+      "file": "src\\pages\\emergency-computer-service.astro",
+      "line": 236,
+      "match": "http://",
+      "pattern": "/http:\\/\\/(?!localhost|127\\.0\\.0\\.1)/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\example-enhanced-location.astro",
+      "line": 300,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "insecureProtocol",
+      "file": "src\\pages\\password-reset-service.astro",
+      "line": 879,
+      "match": "http://",
+      "pattern": "/http:\\/\\/(?!localhost|127\\.0\\.0\\.1)/g"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "insecureProtocol",
+      "file": "src\\pages\\password-reset-service.astro",
+      "line": 879,
+      "match": "http://",
+      "pattern": "/http:\\/\\/(?!localhost|127\\.0\\.0\\.1)/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\smu-computer-emergency.astro",
+      "line": 753,
+      "match": "wellz.levi@gmail.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "CRITICAL",
+      "category": "dangerousEval",
+      "file": "src\\pages\\smu-computer-emergency.astro",
+      "line": 693,
+      "match": "eval(",
+      "pattern": "/eval\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\smu-computer-emergency.astro",
+      "line": 707,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\smu-computer-emergency.astro",
+      "line": 775,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\tcu-computer-emergency.astro",
+      "line": 753,
+      "match": "wellz.levi@gmail.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "CRITICAL",
+      "category": "dangerousEval",
+      "file": "src\\pages\\tcu-computer-emergency.astro",
+      "line": 693,
+      "match": "eval(",
+      "pattern": "/eval\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\tcu-computer-emergency.astro",
+      "line": 707,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\tcu-computer-emergency.astro",
+      "line": 775,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\test-form.astro",
+      "line": 18,
+      "match": "test@example.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\uta-computer-emergency.astro",
+      "line": 753,
+      "match": "wellz.levi@gmail.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "CRITICAL",
+      "category": "dangerousEval",
+      "file": "src\\pages\\uta-computer-emergency.astro",
+      "line": 693,
+      "match": "eval(",
+      "pattern": "/eval\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\uta-computer-emergency.astro",
+      "line": 707,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\uta-computer-emergency.astro",
+      "line": 775,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "exposedEmails",
+      "file": "src\\pages\\utd-computer-emergency.astro",
+      "line": 753,
+      "match": "wellz.levi@gmail.com",
+      "pattern": "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g"
+    },
+    {
+      "severity": "CRITICAL",
+      "category": "dangerousEval",
+      "file": "src\\pages\\utd-computer-emergency.astro",
+      "line": 693,
+      "match": "eval(",
+      "pattern": "/eval\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\utd-computer-emergency.astro",
+      "line": 707,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\pages\\utd-computer-emergency.astro",
+      "line": 775,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "insecureProtocol",
+      "file": "src\\pages\\virus-removal-service.astro",
+      "line": 427,
+      "match": "http://",
+      "pattern": "/http:\\/\\/(?!localhost|127\\.0\\.0\\.1)/g"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "insecureProtocol",
+      "file": "src\\pages\\virus-removal-service.astro",
+      "line": 427,
+      "match": "http://",
+      "pattern": "/http:\\/\\/(?!localhost|127\\.0\\.0\\.1)/g"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "insecureProtocol",
+      "file": "src\\pages\\virus-removal-service.astro",
+      "line": 427,
+      "match": "http://",
+      "pattern": "/http:\\/\\/(?!localhost|127\\.0\\.0\\.1)/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\scripts\\performance-monitor.js",
+      "line": 134,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\scripts\\seo-monitoring.js",
+      "line": 31,
+      "match": "console.log(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\scripts\\seo-monitoring.js",
+      "line": 266,
+      "match": "console.warn(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    },
+    {
+      "severity": "HIGH",
+      "category": "unsafeHtml",
+      "file": "src\\scripts\\spam-protection.js",
+      "line": 45,
+      "match": "innerHTML =",
+      "pattern": "/innerHTML\\s*=/g"
+    },
+    {
+      "severity": "LOW",
+      "category": "debugCode",
+      "file": "src\\utils\\faq-utils.ts",
+      "line": 335,
+      "match": "console.error(",
+      "pattern": "/console\\.(log|debug|info|warn|error)\\s*\\(/g"
+    }
+  ]
+}
