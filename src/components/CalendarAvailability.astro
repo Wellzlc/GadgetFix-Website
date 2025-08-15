@@ -1,0 +1,541 @@
+---
+/**
+ * Calendar Availability Component
+ * Displays available appointment slots with security measures
+ */
+
+export interface Props {
+  showFullCalendar?: boolean;
+  maxDaysToShow?: number;
+  theme?: 'light' | 'dark';
+  size?: 'compact' | 'standard' | 'expanded';
+}
+
+const {
+  showFullCalendar = false,
+  maxDaysToShow = 7,
+  theme = 'light',
+  size = 'standard'
+} = Astro.props;
+
+// Generate unique component ID for this instance
+const componentId = `calendar-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div 
+  id={componentId}
+  class={`calendar-availability calendar-${theme} calendar-${size}`}
+  data-max-days={maxDaysToShow}
+  data-show-full={showFullCalendar}
+>
+  <!-- Loading State -->
+  <div class="calendar-loading" id={`${componentId}-loading`}>
+    <div class="loading-spinner"></div>
+    <p>Loading availability...</p>
+  </div>
+
+  <!-- Error State -->
+  <div class="calendar-error hidden" id={`${componentId}-error`}>
+    <div class="error-icon">⚠️</div>
+    <p class="error-message">Unable to load availability</p>
+    <button class="retry-button" onclick="retryCalendarLoad(this)">Try Again</button>
+  </div>
+
+  <!-- Availability Summary (Compact View) -->
+  <div class="availability-summary hidden" id={`${componentId}-summary`}>
+    <div class="summary-header">
+      <h3>Next Available Appointments</h3>
+      <button class="view-full-button" onclick="toggleFullCalendar(this)">
+        View Full Calendar
+      </button>
+    </div>
+    
+    <div class="quick-stats">
+      <div class="stat-item">
+        <span class="stat-label">Today:</span>
+        <span class="stat-value" id={`${componentId}-today-count`}>--</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Tomorrow:</span>
+        <span class="stat-value" id={`${componentId}-tomorrow-count`}>--</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">This Week:</span>
+        <span class="stat-value" id={`${componentId}-week-count`}>--</span>
+      </div>
+    </div>
+
+    <div class="next-available" id={`${componentId}-next-slot`}>
+      <div class="next-slot-content">
+        <h4>Next Available:</h4>
+        <div class="slot-details">
+          <div class="slot-date">--</div>
+          <div class="slot-time">--</div>
+        </div>
+        <button class="book-button" onclick="initiateBooking(this)" disabled>
+          Book This Slot
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full Calendar View -->
+  <div class="full-calendar hidden" id={`${componentId}-calendar`}>
+    <div class="calendar-header">
+      <h3>Available Appointment Times</h3>
+      <div class="calendar-controls">
+        <button class="view-summary-button" onclick="toggleFullCalendar(this)">
+          View Summary
+        </button>
+        <button class="refresh-button" onclick="refreshCalendar(this)">
+          Refresh
+        </button>
+      </div>
+    </div>
+
+    <div class="calendar-legend">
+      <div class="legend-item available">
+        <span class="legend-dot"></span>
+        Available
+      </div>
+      <div class="legend-item booked">
+        <span class="legend-dot"></span>
+        Booked
+      </div>
+      <div class="legend-item past">
+        <span class="legend-dot"></span>
+        Past
+      </div>
+    </div>
+
+    <div class="calendar-grid" id={`${componentId}-grid`}>
+      <!-- Calendar slots will be populated by JavaScript -->
+    </div>
+  </div>
+
+  <!-- Security Notice -->
+  <div class="security-notice">
+    <small>
+      🔒 Secure connection • Rate limited • Bot protected
+    </small>
+  </div>
+</div>
+
+<style>
+  .calendar-availability {
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: system-ui, -apple-system, sans-serif;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+  }
+
+  .calendar-dark {
+    background: #1f2937;
+    border-color: #374151;
+    color: #f9fafb;
+  }
+
+  .calendar-compact {
+    padding: 1rem;
+    max-width: 400px;
+  }
+
+  .calendar-expanded {
+    max-width: 1000px;
+    padding: 2rem;
+  }
+
+  /* Loading State */
+  .calendar-loading {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .loading-spinner {
+    border: 3px solid #f3f4f6;
+    border-top: 3px solid #1e3a8a;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Error State */
+  .calendar-error {
+    text-align: center;
+    padding: 2rem;
+    color: #dc2626;
+  }
+
+  .error-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .retry-button {
+    background: #dc2626;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+
+  .retry-button:hover {
+    background: #b91c1c;
+  }
+
+  /* Summary View */
+  .summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .summary-header h3 {
+    margin: 0;
+    color: #1e3a8a;
+    font-size: 1.25rem;
+  }
+
+  .calendar-dark .summary-header h3 {
+    color: #93c5fd;
+  }
+
+  .view-full-button, .view-summary-button, .refresh-button {
+    background: #1e3a8a;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.875rem;
+  }
+
+  .view-full-button:hover, .view-summary-button:hover, .refresh-button:hover {
+    background: #1e40af;
+  }
+
+  .quick-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+  }
+
+  .calendar-dark .stat-item {
+    background: #374151;
+    border-color: #4b5563;
+  }
+
+  .stat-label {
+    display: block;
+    font-size: 0.875rem;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+  }
+
+  .calendar-dark .stat-label {
+    color: #9ca3af;
+  }
+
+  .stat-value {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #1e3a8a;
+  }
+
+  .calendar-dark .stat-value {
+    color: #93c5fd;
+  }
+
+  .next-available {
+    background: linear-gradient(135deg, #1e3a8a, #3730a3);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .next-available h4 {
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+  }
+
+  .slot-details {
+    margin-bottom: 1rem;
+  }
+
+  .slot-date {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  .slot-time {
+    font-size: 1rem;
+    opacity: 0.9;
+  }
+
+  .book-button {
+    background: #000000;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  .book-button:hover:not(:disabled) {
+    background: #1f2937;
+    transform: translateY(-1px);
+  }
+
+  .book-button:disabled {
+    background: #6b7280;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* Full Calendar View */
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .calendar-header h3 {
+    margin: 0;
+    color: #1e3a8a;
+  }
+
+  .calendar-dark .calendar-header h3 {
+    color: #93c5fd;
+  }
+
+  .calendar-controls {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .calendar-legend {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .legend-item.available .legend-dot {
+    background: #10b981;
+  }
+
+  .legend-item.booked .legend-dot {
+    background: #ef4444;
+  }
+
+  .legend-item.past .legend-dot {
+    background: #6b7280;
+  }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .day-column {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .calendar-dark .day-column {
+    border-color: #374151;
+  }
+
+  .day-header {
+    background: #f8fafc;
+    padding: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    color: #1e3a8a;
+  }
+
+  .calendar-dark .day-header {
+    background: #374151;
+    color: #93c5fd;
+  }
+
+  .time-slot {
+    padding: 0.5rem;
+    border-bottom: 1px solid #f1f5f9;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .calendar-dark .time-slot {
+    border-bottom-color: #4b5563;
+  }
+
+  .time-slot:last-child {
+    border-bottom: none;
+  }
+
+  .time-slot.available:hover {
+    background: #f0fdf4;
+  }
+
+  .calendar-dark .time-slot.available:hover {
+    background: #065f46;
+  }
+
+  .time-slot.available {
+    color: #059669;
+  }
+
+  .time-slot.booked {
+    color: #dc2626;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .time-slot.past {
+    color: #6b7280;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .slot-status {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+
+  .slot-status.available {
+    background: #d1fae5;
+    color: #065f46;
+  }
+
+  .slot-status.booked {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+
+  .slot-status.past {
+    background: #f3f4f6;
+    color: #4b5563;
+  }
+
+  .calendar-dark .slot-status.available {
+    background: #065f46;
+    color: #d1fae5;
+  }
+
+  .calendar-dark .slot-status.booked {
+    background: #991b1b;
+    color: #fee2e2;
+  }
+
+  .calendar-dark .slot-status.past {
+    background: #4b5563;
+    color: #f3f4f6;
+  }
+
+  /* Security Notice */
+  .security-notice {
+    text-align: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e7eb;
+    color: #6b7280;
+  }
+
+  .calendar-dark .security-notice {
+    border-top-color: #374151;
+    color: #9ca3af;
+  }
+
+  /* Utility Classes */
+  .hidden {
+    display: none !important;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .calendar-availability {
+      padding: 1rem;
+      margin: 0 1rem;
+    }
+
+    .summary-header {
+      flex-direction: column;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .calendar-header {
+      flex-direction: column;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .calendar-controls {
+      justify-content: center;
+    }
+
+    .quick-stats {
+      grid-template-columns: 1fr;
+    }
+
+    .calendar-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .calendar-legend {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
+</style>
+
+<script src="/src/scripts/calendar-availability-optimized.js" defer></script>

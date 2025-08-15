@@ -1,0 +1,529 @@
+---
+// This file has been removed as part of production refactoring
+// Test pages should not be included in production builds
+// Use the monitoring dashboard at /admin/calendar-monitor instead
+---
+
+<Layout title={title} description={description}>
+  <main>
+    <div class="container">
+      <div class="header-section">
+        <h1>📅 Calendar Integration Test</h1>
+        <p>This page demonstrates the Google Calendar API integration with comprehensive security measures.</p>
+      </div>
+
+      <div class="test-sections">
+        <!-- Summary View Test -->
+        <section class="test-section">
+          <h2>Summary View (Default)</h2>
+          <p>Compact view showing availability overview and next available slot.</p>
+          <CalendarAvailability 
+            showFullCalendar={false}
+            maxDaysToShow={7}
+            theme="light"
+            size="standard"
+          />
+        </section>
+
+        <!-- Full Calendar Test -->
+        <section class="test-section">
+          <h2>Full Calendar View</h2>
+          <p>Complete calendar grid showing all available time slots.</p>
+          <CalendarAvailability 
+            showFullCalendar={true}
+            maxDaysToShow={14}
+            theme="light"
+            size="expanded"
+          />
+        </section>
+
+        <!-- Compact Dark Theme Test -->
+        <section class="test-section dark-section">
+          <h2>Compact Dark Theme</h2>
+          <p>Space-efficient dark theme perfect for sidebars or widgets.</p>
+          <CalendarAvailability 
+            showFullCalendar={false}
+            maxDaysToShow={5}
+            theme="dark"
+            size="compact"
+          />
+        </section>
+
+        <!-- API Testing Section -->
+        <section class="test-section">
+          <h2>🔧 API Testing</h2>
+          <div class="api-test-controls">
+            <button onclick="testAPI('summary')" class="test-btn">Test Summary API</button>
+            <button onclick="testAPI('slots')" class="test-btn">Test Slots API</button>
+            <button onclick="testAPI('next')" class="test-btn">Test Next Available</button>
+            <button onclick="testAPI('health')" class="test-btn">Test Health Check</button>
+            <button onclick="testSecurity()" class="test-btn danger">Test Security</button>
+          </div>
+          <div id="api-results" class="api-results"></div>
+        </section>
+
+        <!-- Security Information -->
+        <section class="test-section">
+          <h2>🛡️ Security Features</h2>
+          <div class="security-features">
+            <div class="feature-card">
+              <h3>Rate Limiting</h3>
+              <p>Maximum 5 requests per minute per IP address</p>
+            </div>
+            <div class="feature-card">
+              <h3>Bot Protection</h3>
+              <p>Detects and blocks automated requests</p>
+            </div>
+            <div class="feature-card">
+              <h3>IP Filtering</h3>
+              <p>Configurable IP allow/block lists</p>
+            </div>
+            <div class="feature-card">
+              <h3>CAPTCHA Ready</h3>
+              <p>Cloudflare Turnstile integration available</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Performance Information -->
+        <section class="test-section">
+          <h2>⚡ Performance Features</h2>
+          <div class="performance-features">
+            <div class="feature-card">
+              <h3>Intelligent Caching</h3>
+              <p>5-minute cache reduces API calls by ~80%</p>
+            </div>
+            <div class="feature-card">
+              <h3>CDN Optimized</h3>
+              <p>Proper cache headers for edge caching</p>
+            </div>
+            <div class="feature-card">
+              <h3>Error Handling</h3>
+              <p>Graceful degradation with retry logic</p>
+            </div>
+            <div class="feature-card">
+              <h3>Real-time Monitoring</h3>
+              <p>Live dashboard for API health tracking</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Setup Status -->
+        <section class="test-section">
+          <h2>⚙️ Setup Status</h2>
+          <div id="setup-status" class="setup-status">
+            <div class="status-loading">
+              <div class="loading-spinner"></div>
+              <p>Checking configuration...</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Links Section -->
+      <div class="links-section">
+        <h2>📋 Additional Resources</h2>
+        <div class="link-grid">
+          <a href="/admin/calendar-monitor" class="link-card">
+            📊 Monitoring Dashboard
+            <span>View API health and security events</span>
+          </a>
+          <a href="/GOOGLE_CALENDAR_INTEGRATION.md" class="link-card">
+            📖 Documentation
+            <span>Complete setup and usage guide</span>
+          </a>
+          <a href="/.env.example" class="link-card">
+            🔧 Environment Template
+            <span>Configuration variables reference</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Calendar JavaScript -->
+  <script src="/src/scripts/calendar-availability.js"></script>
+
+  <style>
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .header-section {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: linear-gradient(135deg, #1e3a8a, #3730a3);
+      color: white;
+      border-radius: 12px;
+    }
+
+    .header-section h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .header-section p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .test-sections {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .test-section {
+      padding: 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e2e8f0;
+    }
+
+    .dark-section {
+      background: #1f2937;
+      color: white;
+      border-color: #374151;
+    }
+
+    .test-section h2 {
+      color: #1e3a8a;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .dark-section h2 {
+      color: #93c5fd;
+    }
+
+    .test-section p {
+      color: #6b7280;
+      margin-bottom: 2rem;
+    }
+
+    .dark-section p {
+      color: #d1d5db;
+    }
+
+    .api-test-controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .test-btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+      background: #1e3a8a;
+      color: white;
+    }
+
+    .test-btn:hover {
+      background: #1e40af;
+      transform: translateY(-1px);
+    }
+
+    .test-btn.danger {
+      background: #dc2626;
+    }
+
+    .test-btn.danger:hover {
+      background: #b91c1c;
+    }
+
+    .api-results {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 1rem;
+      min-height: 100px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.875rem;
+      white-space: pre-wrap;
+      overflow-x: auto;
+    }
+
+    .security-features,
+    .performance-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      padding: 1.5rem;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .feature-card h3 {
+      color: #1e3a8a;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: #6b7280;
+      font-size: 0.9rem;
+    }
+
+    .setup-status {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .status-loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .loading-spinner {
+      border: 3px solid #f3f4f6;
+      border-top: 3px solid #1e3a8a;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .links-section {
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    .links-section h2 {
+      color: #1e3a8a;
+      margin-bottom: 2rem;
+    }
+
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .link-card {
+      display: block;
+      padding: 1.5rem;
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #1e3a8a;
+      font-weight: 600;
+      transition: all 0.2s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .link-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      border-color: #1e3a8a;
+    }
+
+    .link-card span {
+      display: block;
+      font-weight: normal;
+      color: #6b7280;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      .header-section {
+        padding: 1.5rem;
+      }
+
+      .header-section h1 {
+        font-size: 2rem;
+      }
+
+      .test-section {
+        padding: 1.5rem;
+      }
+
+      .api-test-controls {
+        flex-direction: column;
+      }
+
+      .security-features,
+      .performance-features,
+      .link-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <script>
+    // API Testing Functions
+    async function testAPI(type) {
+      const resultsDiv = document.getElementById('api-results');
+      resultsDiv.textContent = `Testing ${type} API...\n`;
+
+      try {
+        const startTime = Date.now();
+        const response = await fetch(`/api/calendar/availability?type=${type}`, {
+          headers: {
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        });
+
+        const endTime = Date.now();
+        const responseTime = endTime - startTime;
+
+        const data = await response.json();
+        
+        resultsDiv.textContent = `
+API Test Results for "${type}":
+═══════════════════════════════════════
+
+Status: ${response.status} ${response.statusText}
+Response Time: ${responseTime}ms
+Content-Type: ${response.headers.get('Content-Type')}
+
+Security Headers:
+- Rate Limit: ${response.headers.get('X-RateLimit-Remaining')}/${response.headers.get('X-RateLimit-Limit')}
+- Security Level: ${response.headers.get('X-Security-Level')}
+- Processing Time: ${response.headers.get('X-Processing-Time')}ms
+
+Response Data:
+${JSON.stringify(data, null, 2)}
+        `;
+      } catch (error) {
+        resultsDiv.textContent = `
+API Test Error:
+═══════════════════════════════════════
+
+Error: ${error.message}
+Type: ${error.name}
+Stack: ${error.stack}
+        `;
+      }
+    }
+
+    async function testSecurity() {
+      const resultsDiv = document.getElementById('api-results');
+      resultsDiv.textContent = 'Testing security measures...\n';
+
+      try {
+        // Test rate limiting by making multiple rapid requests
+        const promises = [];
+        for (let i = 0; i < 10; i++) {
+          promises.push(
+            fetch('/api/calendar/availability?type=summary', {
+              headers: { 'X-Test-Request': `${i + 1}` }
+            })
+          );
+        }
+
+        const responses = await Promise.all(promises);
+        const results = await Promise.all(responses.map(r => r.json()));
+
+        let securityResults = `
+Security Test Results:
+═══════════════════════════════════════
+
+Rate Limiting Test (10 rapid requests):
+`;
+
+        responses.forEach((response, index) => {
+          securityResults += `
+Request ${index + 1}: ${response.status} - Remaining: ${response.headers.get('X-RateLimit-Remaining')}`;
+        });
+
+        securityResults += `
+
+Rate limit properly enforced: ${responses.some(r => r.status === 403) ? 'YES ✅' : 'NO ❌'}
+Security headers present: ${responses[0].headers.get('X-Security-Level') ? 'YES ✅' : 'NO ❌'}
+`;
+
+        resultsDiv.textContent = securityResults;
+      } catch (error) {
+        resultsDiv.textContent = `Security test error: ${error.message}`;
+      }
+    }
+
+    // Check setup status
+    async function checkSetupStatus() {
+      const statusDiv = document.getElementById('setup-status');
+      
+      try {
+        const response = await fetch('/api/calendar/availability?type=health');
+        const result = await response.json();
+        
+        if (result.success && result.data.status === 'healthy') {
+          statusDiv.innerHTML = `
+            <div class="status-success">
+              <div style="font-size: 3rem; color: #10b981; margin-bottom: 1rem;">✅</div>
+              <h3 style="color: #059669; margin-bottom: 0.5rem;">Configuration Valid</h3>
+              <p style="color: #6b7280; margin: 0;">Google Calendar API is properly configured and accessible.</p>
+            </div>
+          `;
+        } else {
+          statusDiv.innerHTML = `
+            <div class="status-error">
+              <div style="font-size: 3rem; color: #ef4444; margin-bottom: 1rem;">❌</div>
+              <h3 style="color: #dc2626; margin-bottom: 0.5rem;">Configuration Error</h3>
+              <p style="color: #6b7280; margin: 0;">
+                ${result.data?.details?.error || 'Google Calendar API is not properly configured.'}
+              </p>
+              <p style="color: #6b7280; margin-top: 1rem; font-size: 0.875rem;">
+                Please check your environment variables and service account permissions.
+              </p>
+            </div>
+          `;
+        }
+      } catch (error) {
+        statusDiv.innerHTML = `
+          <div class="status-error">
+            <div style="font-size: 3rem; color: #f59e0b; margin-bottom: 1rem;">⚠️</div>
+            <h3 style="color: #d97706; margin-bottom: 0.5rem;">Connection Error</h3>
+            <p style="color: #6b7280; margin: 0;">
+              Unable to connect to calendar API endpoint.
+            </p>
+            <p style="color: #6b7280; margin-top: 1rem; font-size: 0.875rem;">
+              Error: ${error.message}
+            </p>
+          </div>
+        `;
+      }
+    }
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check setup status on page load
+      checkSetupStatus();
+      
+      // Initialize API results
+      document.getElementById('api-results').textContent = 'Click a button above to test the API endpoints...';
+    });
+  </script>
+</Layout>

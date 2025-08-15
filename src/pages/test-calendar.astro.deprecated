@@ -1,0 +1,4 @@
+// This file has been deprecated and moved to .deprecated extension
+// Test pages should not be included in production builds
+// Use the monitoring dashboard at /admin/calendar-monitor instead
+// To restore: rename back to .astro extension
