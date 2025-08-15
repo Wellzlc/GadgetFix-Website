@@ -1,257 +1,274 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// Blog data structure for maintainability
+const categories = [
+  {
+    id: 'computer-tips',
+    title: 'Computer Tips',
+    description: 'DIY maintenance tips and when to seek professional help',
+    articleCount: 12,
+    icon: 'wrench',
+    href: '/blog/computer-tips'
+  },
+  {
+    id: 'security',
+    title: 'Security Protection',
+    description: 'How to protect your computer from viruses and malware',
+    articleCount: 8,
+    icon: 'shield',
+    href: '/blog/security'
+  },
+  {
+    id: 'tech-trends',
+    title: 'Tech Trends',
+    description: 'Latest software trends and computer innovations',
+    articleCount: 6,
+    icon: 'trending',
+    href: '/blog/tech-trends'
+  },
+  {
+    id: 'troubleshooting',
+    title: 'Troubleshooting',
+    description: 'Common computer problems and their solutions',
+    articleCount: 10,
+    icon: 'search',
+    href: '/blog/troubleshooting'
+  }
+];
+
+const featuredArticle = {
+  title: 'Complete Guide to Computer Security in Dallas-Fort Worth',
+  excerpt: 'Living in Dallas-Fort Worth means staying vigilant against cyber threats. Learn how to protect your computer from viruses, secure your data, and maintain peak performance in the digital age.',
+  publishDate: 'March 15, 2024',
+  readTime: '8 min read',
+  href: '/blog/computer-security-guide',
+  category: 'Security Protection'
+};
+
+const recentArticles = [
+  {
+    id: 1,
+    category: 'Troubleshooting',
+    title: 'What to Do When Your Computer Gets a Virus',
+    excerpt: 'Quick steps to take immediately after virus infection to protect your data and system.',
+    publishDate: 'March 10, 2024',
+    readTime: '6 min read',
+    href: '/blog/virus-removal-steps',
+    icon: 'virus'
+  },
+  {
+    id: 2,
+    category: 'Security Protection',
+    title: 'Signs Your Computer Needs Optimization',
+    excerpt: 'Learn to recognize the warning signs of a slow computer and understand when it\'s time for professional optimization.',
+    publishDate: 'March 8, 2024',
+    readTime: '5 min read',
+    href: '/blog/optimization-signs',
+    icon: 'speed'
+  },
+  {
+    id: 3,
+    category: 'Computer Tips',
+    title: 'WiFi Troubleshooting Guide for Home Users',
+    excerpt: 'Simple troubleshooting steps to fix common WiFi issues before calling for professional help.',
+    publishDate: 'March 5, 2024',
+    readTime: '4 min read',
+    href: '/blog/wifi-troubleshooting',
+    icon: 'wifi'
+  },
+  {
+    id: 4,
+    category: 'Tech Trends',
+    title: '2024 Best Antivirus Software Comparison',
+    excerpt: 'Comprehensive comparison of top antivirus programs for Windows and Mac computers.',
+    publishDate: 'March 1, 2024',
+    readTime: '7 min read',
+    href: '/blog/best-antivirus-2024',
+    icon: 'shield'
+  },
+  {
+    id: 5,
+    category: 'Security Protection',
+    title: 'Password Manager Guide for Dallas Businesses',
+    excerpt: 'How to choose and implement the right password manager for your business security needs.',
+    publishDate: 'February 28, 2024',
+    readTime: '6 min read',
+    href: '/blog/password-manager-guide',
+    icon: 'lock'
+  },
+  {
+    id: 6,
+    category: 'Computer Tips',
+    title: 'Data Backup Before Computer Service',
+    excerpt: 'Essential steps to protect your data before getting professional computer service.',
+    publishDate: 'February 25, 2024',
+    readTime: '5 min read',
+    href: '/blog/data-backup-guide',
+    icon: 'backup'
+  }
+];
+
+const expertTips = [
+  {
+    title: 'Keep Software Updated',
+    description: 'Regular updates protect against security vulnerabilities and improve performance. Enable automatic updates for critical security patches.',
+    icon: 'update'
+  },
+  {
+    title: 'Use Strong Passwords',
+    description: 'Create unique, complex passwords for each account. Use a password manager to store them securely.',
+    icon: 'lock'
+  },
+  {
+    title: 'Regular Backups',
+    description: 'Back up important data weekly to cloud storage or external drives. Follow the 3-2-1 backup rule.',
+    icon: 'backup'
+  },
+  {
+    title: 'Monitor Performance',
+    description: 'Watch for slowdowns, crashes, or unusual behavior. These may indicate malware or hardware issues.',
+    icon: 'monitor'
+  }
+];
+
+// Helper function to get icon SVG
+function getIconSVG(iconType: string) {
+  const icons = {
+    wrench: `<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>`,
+    shield: `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>`,
+    trending: `<path d="M3 3v5h5"/><path d="m18 18-5-5"/><path d="M21 21v-5h-5"/><path d="m6 6 5 5"/>`,
+    search: `<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><circle cx="11" cy="11" r="3"/>`,
+    virus: `<path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>`,
+    speed: `<rect x="1" y="6" width="18" height="10" rx="2" ry="2"/><line x1="22" y1="12" x2="19" y2="12"/>`,
+    wifi: `<path d="m15 2 3 3.3a1 1 0 0 1 0 1.4L15 10"/><path d="M9 22l-3-3.3a1 1 0 0 1 0-1.4L9 14"/><path d="M20 14h-2"/><path d="M20 10h-2"/><path d="M7 10H4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h3"/>`,
+    lock: `<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>`,
+    backup: `<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/>`,
+    update: `<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/>`,
+    monitor: `<rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>`
+  };
+  return icons[iconType] || icons.shield;
+}
 ---
 
 <Layout 
 	title="Computer Service Blog & Tips | Dallas Fort Worth | GadgetFix"
 	description="Expert tips for computer maintenance, virus removal guides, and technology news for Dallas Fort Worth residents. Learn how to keep your computer running smoothly."
-	keywords="computer tips dallas, virus removal fort worth, password reset guide, computer troubleshooting"
+	keywords="computer tips dallas, virus removal fort worth, password reset guide, computer troubleshooting, technology blog dfw"
 >
 	<!-- Hero Section -->
-	<section class="hero">
+	<section class="hero" aria-label="Blog hero">
 		<div class="container">
 			<div class="hero-content">
 				<h1 class="hero-title">Computer Service Blog</h1>
-				<p class="hero-subtitle">Expert tips, computer care guides, and insights from Dallas-Fort Worth's trusted software service specialists</p>
+				<p class="hero-subtitle">Expert tips, troubleshooting guides, and technology insights from Dallas Fort Worth's trusted computer service specialists</p>
 			</div>
 		</div>
 	</section>
 
 	<!-- Featured Article -->
-	<section class="featured-article">
+	<section class="featured-article" aria-label="Featured article">
 		<div class="container">
-			<div class="featured-content">
+			<article class="featured-content">
 				<div class="featured-image">
 					<div class="image-placeholder">
-						<div class="placeholder-icon">
-							<svg role="img" aria-label="Featured article icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-								<rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
-								<line x1="12" y1="18" x2="12.01" y2="18"/>
-							</svg>
-						</div>
+						<svg class="placeholder-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+							<line x1="12" y1="18" x2="12.01" y2="18"/>
+						</svg>
 						<p>Featured Article</p>
 					</div>
 				</div>
 				<div class="featured-text">
-					<span class="featured-tag">Featured Article</span>
-					<h2>Complete Guide to Computer Security in Dallas-Fort Worth</h2>
-					<p class="featured-excerpt">Living in Dallas-Fort Worth means staying vigilant against cyber threats. Learn how to protect your computer from viruses, secure your data, and maintain peak performance in the digital age.</p>
+					<span class="featured-tag">{featuredArticle.category}</span>
+					<h2>
+						<a href={featuredArticle.href} class="featured-link">
+							{featuredArticle.title}
+						</a>
+					</h2>
+					<p class="featured-excerpt">{featuredArticle.excerpt}</p>
 					<div class="article-meta">
-						<span class="publish-date">Published: March 15, 2024</span>
-						<span class="read-time">• 8 min read</span>
+						<time datetime="2024-03-15">Published: {featuredArticle.publishDate}</time>
+						<span class="read-time">• {featuredArticle.readTime}</span>
 					</div>
-					<a href="#" class="btn btn-primary">Read Full Article</a>
+					<a href={featuredArticle.href} class="btn btn-primary">Read Full Article</a>
 				</div>
-			</div>
+			</article>
 		</div>
 	</section>
 
 	<!-- Blog Categories -->
-	<section class="blog-categories">
+	<section class="blog-categories" aria-label="Blog categories">
 		<div class="container">
 			<h2 class="section-title">Browse by Category</h2>
-			<div class="categories-grid">
-				<div class="category-card">
-					<div class="category-icon">
-						<svg role="img" aria-label="Repair tips icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-						</svg>
-					</div>
-					<h3>Computer Tips</h3>
-					<p>DIY maintenance tips and when to seek professional help</p>
-					<span class="article-count">12 Articles</span>
-				</div>
-				<div class="category-card">
-					<div class="category-icon">
-						<svg role="img" aria-label="Device protection icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-							<path d="m9 12 2 2 4-4"/>
-						</svg>
-					</div>
-					<h3>Security Protection</h3>
-					<p>How to protect your computer from viruses and malware</p>
-					<span class="article-count">8 Articles</span>
-				</div>
-				<div class="category-card">
-					<div class="category-icon">
-						<svg role="img" aria-label="Tech trends icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<path d="M3 3v5h5"/>
-							<path d="m18 18-5-5"/>
-							<path d="M21 21v-5h-5"/>
-							<path d="m6 6 5 5"/>
-						</svg>
-					</div>
-					<h3>Tech Trends</h3>
-					<p>Latest software trends and computer innovations</p>
-					<span class="article-count">6 Articles</span>
-				</div>
-				<div class="category-card">
-					<div class="category-icon">
-						<svg role="img" aria-label="Troubleshooting icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<circle cx="11" cy="11" r="8"/>
-							<path d="m21 21-4.35-4.35"/>
-							<circle cx="11" cy="11" r="3"/>
-						</svg>
-					</div>
-					<h3>Troubleshooting</h3>
-					<p>Common computer problems and their solutions</p>
-					<span class="article-count">10 Articles</span>
-				</div>
+			<div class="categories-grid" role="list">
+				{categories.map((category) => (
+					<a href={category.href} class="category-card" role="listitem">
+						<div class="category-icon">
+							<svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<Fragment set:html={getIconSVG(category.icon)} />
+							</svg>
+						</div>
+						<h3>{category.title}</h3>
+						<p>{category.description}</p>
+						<span class="article-count">{category.articleCount} Articles</span>
+					</a>
+				))}
 			</div>
 		</div>
 	</section>
 
 	<!-- Recent Articles -->
-	<section class="recent-articles">
+	<section class="recent-articles" aria-label="Recent articles">
 		<div class="container">
 			<h2 class="section-title">Recent Articles</h2>
 			<div class="articles-grid">
-				<article class="article-card">
-					<div class="article-image">
-						<div class="image-placeholder">
-							<div class="placeholder-icon">
-								<svg role="img" aria-label="Water damage article icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-									<path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
-								</svg>
+				{recentArticles.map((article) => (
+					<article class="article-card">
+						<a href={article.href} class="article-link">
+							<div class="article-image">
+								<div class="image-placeholder">
+									<svg class="placeholder-icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+										<Fragment set:html={getIconSVG(article.icon)} />
+									</svg>
+								</div>
 							</div>
-						</div>
-					</div>
-					<div class="article-content">
-						<span class="article-category">Troubleshooting</span>
-						<h3>What to Do When Your Computer Gets a Virus</h3>
-						<p>Quick steps to take immediately after virus infection to protect your data and system. Learn what works and what myths to avoid. Need professional help? Contact <a href="/emergency-computer-service" style="color: #0066cc; text-decoration: none;">emergency computer services</a> in Dallas Fort Worth.</p>
-						<div class="article-meta">
-							<span class="publish-date">March 10, 2024</span>
-							<span class="read-time">• 6 min read</span>
-						</div>
-					</div>
-				</article>
-
-				<article class="article-card">
-					<div class="article-image">
-						<div class="image-placeholder">
-							<div class="placeholder-icon">
-								<svg role="img" aria-label="Battery replacement article icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-									<rect x="1" y="6" width="18" height="10" rx="2" ry="2"/>
-									<line x1="22" y1="12" x2="19" y2="12"/>
-								</svg>
+							<div class="article-content">
+								<span class="article-category">{article.category}</span>
+								<h3>{article.title}</h3>
+								<p>{article.excerpt}</p>
+								<div class="article-meta">
+									<time datetime={article.publishDate}>{article.publishDate}</time>
+									<span class="read-time">• {article.readTime}</span>
+								</div>
 							</div>
-						</div>
-					</div>
-					<div class="article-content">
-						<span class="article-category">Security Protection</span>
-						<h3>Signs Your Computer Is Running Slow and Needs Optimization</h3>
-						<p>Learn to recognize the warning signs of a slow computer and understand when it's time for professional optimization. Get <a href="/password-reset-service" style="color: #0066cc; text-decoration: none;">password reset</a> or <a href="/computer-optimization" style="color: #0066cc; text-decoration: none;">optimization</a> services in DFW.</p>
-						<div class="article-meta">
-							<span class="publish-date">March 8, 2024</span>
-							<span class="read-time">• 5 min read</span>
-						</div>
-					</div>
-				</article>
-
-				<article class="article-card">
-					<div class="article-image">
-						<div class="image-placeholder">
-							<div class="placeholder-icon">
-								<svg role="img" aria-label="Charging port article icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-									<path d="m15 2 3 3.3a1 1 0 0 1 0 1.4L15 10"/>
-									<path d="M9 22l-3-3.3a1 1 0 0 1 0-1.4L9 14"/>
-									<path d="M20 14h-2"/>
-									<path d="M20 10h-2"/>
-									<path d="M7 10H4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h3"/>
-								</svg>
-							</div>
-						</div>
-					</div>
-					<div class="article-content">
-						<span class="article-category">Computer Tips</span>
-						<h3>WiFi Not Working? Here's What to Check First</h3>
-						<p>Before seeking professional services, try these simple troubleshooting steps to fix common WiFi issues at home. Need professional help? Contact our <a href="/services" style="color: #0066cc; text-decoration: none;">computer services</a> in Dallas Fort Worth.</p>
-						<div class="article-meta">
-							<span class="publish-date">March 5, 2024</span>
-							<span class="read-time">• 4 min read</span>
-						</div>
-					</div>
-				</article>
-
-				<article class="article-card">
-					<div class="article-image">
-						<div class="image-placeholder">
-							<div class="placeholder-icon">
-								<svg role="img" aria-label="Smartphone guide article icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-									<rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
-									<line x1="12" y1="18" x2="12.01" y2="18"/>
-								</svg>
-							</div>
-						</div>
-					</div>
-					<div class="article-content">
-						<span class="article-category">Tech Trends</span>
-						<h3>2024's Best Antivirus Software: A Comprehensive Guide</h3>
-						<p>Discover which antivirus programs offer the best protection for Windows and Mac computers and why comprehensive security matters.</p>
-						<div class="article-meta">
-							<span class="publish-date">March 1, 2024</span>
-							<span class="read-time">• 7 min read</span>
-						</div>
-					</div>
-				</article>
-
-				<article class="article-card">
-					<div class="article-image">
-						<div class="image-placeholder">
-							<div class="placeholder-icon">
-								<svg role="img" aria-label="Screen protector article icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-									<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-									<rect x="8" y="8" width="8" height="10" rx="1"/>
-								</svg>
-							</div>
-						</div>
-					</div>
-					<div class="article-content">
-						<span class="article-category">Security Protection</span>
-						<h3>Best Password Managers for Dallas Businesses</h3>
-						<p>How to choose the right password manager for your business needs and protect your sensitive data from cyber threats. Get professional <a href="/virus-removal-service" style="color: #0066cc; text-decoration: none;">virus removal</a> services in DFW.</p>
-						<div class="article-meta">
-							<span class="publish-date">February 28, 2024</span>
-							<span class="read-time">• 6 min read</span>
-						</div>
-					</div>
-				</article>
-
-				<article class="article-card">
-					<div class="article-image">
-						<div class="image-placeholder">
-							<div class="placeholder-icon">
-								<svg role="img" aria-label="Data backup article icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-									<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-									<polyline points="7,10 12,15 17,10"/>
-									<line x1="12" y1="15" x2="12" y2="3"/>
-								</svg>
-							</div>
-						</div>
-					</div>
-					<div class="article-content">
-						<span class="article-category">Computer Tips</span>
-						<h3>How to Backup Your Data Before Computer Service</h3>
-						<p>Essential steps to protect your personal data before getting computer service. Complete guide to backing up files, documents, and programs.</p>
-						<div class="article-meta">
-							<span class="publish-date">February 25, 2024</span>
-							<span class="read-time">• 5 min read</span>
-						</div>
-					</div>
-				</article>
+						</a>
+					</article>
+				))}
+			</div>
+			
+			<!-- Load More Button -->
+			<div class="load-more-container">
+				<a href="/blog/all-articles" class="btn btn-secondary">View All Articles</a>
 			</div>
 		</div>
 	</section>
 
 	<!-- Newsletter Signup -->
-	<section class="newsletter">
+	<section class="newsletter" aria-label="Newsletter signup">
 		<div class="container">
 			<div class="newsletter-content">
-				<h2>Stay Updated with Repair Tips</h2>
-				<p>Get the latest device care tips, repair insights, and exclusive offers delivered to your inbox monthly.</p>
-				<form class="newsletter-form">
-					<input type="email" placeholder="Enter your email address" class="email-input" required>
+				<h2>Stay Updated with Computer Tips</h2>
+				<p>Get the latest computer maintenance tips, security alerts, and exclusive offers delivered to your inbox monthly.</p>
+				<form class="newsletter-form" action="/api/newsletter" method="POST">
+					<input 
+						type="email" 
+						name="email"
+						placeholder="Enter your email address" 
+						class="email-input" 
+						required
+						aria-label="Email address"
+					>
 					<button type="submit" class="btn btn-primary">Subscribe</button>
 				</form>
 				<p class="newsletter-note">We respect your privacy. Unsubscribe at any time.</p>
@@ -260,66 +277,60 @@ import Layout from '../layouts/Layout.astro';
 	</section>
 
 	<!-- Expert Tips Section -->
-	<section class="expert-tips">
+	<section class="expert-tips" aria-label="Expert tips">
 		<div class="container">
 			<h2 class="section-title">Quick Expert Tips</h2>
 			<div class="tips-grid">
-				<div class="tip-card">
-					<div class="tip-icon">
-						<svg role="img" aria-label="Temperature management icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/>
-						</svg>
+				{expertTips.map((tip) => (
+					<div class="tip-card">
+						<div class="tip-icon">
+							<svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<Fragment set:html={getIconSVG(tip.icon)} />
+							</svg>
+						</div>
+						<h3>{tip.title}</h3>
+						<p>{tip.description}</p>
 					</div>
-					<h3>Temperature Management</h3>
-					<p>Avoid leaving devices in hot cars during Dallas summers. Extreme heat can permanently damage batteries and screens.</p>
-				</div>
-				<div class="tip-card">
-					<div class="tip-icon">
-						<svg role="img" aria-label="Regular updates icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
-							<path d="M21 3v5h-5"/>
-							<path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
-							<path d="M8 16H3v5"/>
-						</svg>
-					</div>
-					<h3>Regular Updates</h3>
-					<p>Keep your device software updated for better security, performance, and compatibility with apps and accessories.</p>
-				</div>
-				<div class="tip-card">
-					<div class="tip-icon">
-						<svg role="img" aria-label="Clean regularly icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<circle cx="11" cy="11" r="8"/>
-							<circle cx="11" cy="11" r="3"/>
-							<path d="m21 21-4.35-4.35"/>
-						</svg>
-					</div>
-					<h3>Clean Regularly</h3>
-					<p>Use microfiber cloths to clean screens and ports. Avoid harsh chemicals that can damage protective coatings.</p>
-				</div>
-				<div class="tip-card">
-					<div class="tip-icon">
-						<svg role="img" aria-label="Proper charging icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<rect x="1" y="6" width="18" height="10" rx="2" ry="2"/>
-							<line x1="22" y1="12" x2="19" y2="12"/>
-							<path d="M6 12h6"/>
-						</svg>
-					</div>
-					<h3>Proper Charging</h3>
-					<p>Use quality chargers and avoid overcharging. Charge between 20-80% for optimal battery longevity.</p>
-				</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- Related Services CTA -->
+	<section class="services-cta" aria-label="Related services">
+		<div class="container">
+			<h2 class="section-title">Professional Computer Services</h2>
+			<p class="services-intro">Need help implementing these tips? Our certified technicians are ready to assist.</p>
+			<div class="services-grid">
+				<a href="/virus-removal-service" class="service-card">
+					<h3>Virus Removal</h3>
+					<p>Complete malware elimination with data protection</p>
+				</a>
+				<a href="/password-reset-service" class="service-card">
+					<h3>Password Reset</h3>
+					<p>Regain access to locked accounts and systems</p>
+				</a>
+				<a href="/computer-optimization" class="service-card">
+					<h3>PC Optimization</h3>
+					<p>Speed up slow computers and improve performance</p>
+				</a>
+				<a href="/emergency-computer-service" class="service-card">
+					<h3>Emergency Service</h3>
+					<p>Same-day assistance for critical computer issues</p>
+				</a>
 			</div>
 		</div>
 	</section>
 
 	<!-- CTA Section -->
-	<section class="blog-cta">
+	<section class="blog-cta" aria-label="Call to action">
 		<div class="container">
 			<div class="cta-content">
-				<h2>Need Professional Repair Service?</h2>
-				<p>While DIY tips are helpful, some repairs require professional expertise. Contact GadgetFix LLC for reliable, warrantied repairs.</p>
+				<h2>Need Professional Computer Service?</h2>
+				<p>While DIY tips are helpful, some issues require professional expertise. Contact GadgetFix for reliable, guaranteed computer services.</p>
 				<div class="cta-buttons">
 					<a href="tel:+14694308607" class="btn btn-primary btn-large">Call (469) 430-8607</a>
-					<a href="/contact" class="btn btn-secondary btn-large">Schedule Repair</a>
+					<a href="/contact" class="btn btn-secondary btn-large">Schedule Service</a>
 				</div>
 			</div>
 		</div>
@@ -330,21 +341,52 @@ import Layout from '../layouts/Layout.astro';
 	{
 	  "@context": "https://schema.org",
 	  "@type": "Blog",
-	  "name": "GadgetFix Repair Blog",
-	  "description": "Device repair tips and guides for Dallas Fort Worth",
+	  "name": "GadgetFix Computer Service Blog",
+	  "description": "Computer service tips and guides for Dallas Fort Worth",
+	  "url": "https://gadgetfixllc.com/blog",
 	  "publisher": {
 	    "@type": "Organization",
 	    "name": "GadgetFix LLC",
-	    "telephone": "+14694308607"
-	  }
+	    "telephone": "+14694308607",
+	    "address": {
+	      "@type": "PostalAddress",
+	      "addressLocality": "Dallas",
+	      "addressRegion": "TX",
+	      "addressCountry": "US"
+	    }
+	  },
+	  "blogPost": [
+	    {
+	      "@type": "BlogPosting",
+	      "headline": "Complete Guide to Computer Security in Dallas-Fort Worth",
+	      "datePublished": "2024-03-15",
+	      "author": {
+	        "@type": "Organization",
+	        "name": "GadgetFix LLC"
+	      }
+	    }
+	  ]
 	}
 	</script>
 </Layout>
 
 <style>
-	/* Hero */
+	/* Base Variables */
+	:root {
+		--color-primary: #1e3a8a;
+		--color-primary-dark: #004499;
+		--color-accent: #0066cc;
+		--color-text: #333333;
+		--color-text-light: #666666;
+		--color-bg-light: #f8f9fa;
+		--color-bg-accent: #e6f2ff;
+		--border-radius: 1rem;
+		--transition: all 0.3s ease;
+	}
+
+	/* Hero Section */
 	.hero {
-		background: #1e3a8a;
+		background: var(--color-primary);
 		color: white;
 		padding: 4rem 0 6rem;
 		text-align: center;
@@ -352,7 +394,7 @@ import Layout from '../layouts/Layout.astro';
 
 	.hero-title {
 		font-family: var(--font-heading);
-		font-size: 4rem;
+		font-size: clamp(2.5rem, 5vw, 4rem);
 		font-weight: 400;
 		margin-bottom: 1.5rem;
 		text-transform: uppercase;
@@ -361,58 +403,71 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.hero-subtitle {
-		font-size: 1.25rem;
-		margin-bottom: 2.5rem;
-		max-width: 600px;
-		margin-left: auto;
-		margin-right: auto;
-		opacity: 0.9;
+		font-size: clamp(1rem, 2vw, 1.25rem);
+		max-width: 700px;
+		margin: 0 auto;
+		opacity: 0.95;
 		line-height: 1.6;
 	}
 
 	/* Featured Article */
 	.featured-article {
-		padding: 6rem 0;
-		background: #f8f9fa;
+		padding: 5rem 0;
+		background: var(--color-bg-light);
 	}
 
 	.featured-content {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 4rem;
+		grid-template-columns: 1fr 1.5fr;
+		gap: 3rem;
 		align-items: center;
 	}
 
 	.featured-image .image-placeholder {
-		background: #e6f2ff;
-		border: 2px solid #0066cc;
-		border-radius: 1rem;
-		padding: 4rem 2rem;
+		background: var(--color-bg-accent);
+		border: 2px solid var(--color-accent);
+		border-radius: var(--border-radius);
+		padding: 3rem;
 		text-align: center;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 	}
 
-	.placeholder-icon svg {
-		color: #0066cc;
+	.placeholder-icon {
+		color: var(--color-accent);
 		margin-bottom: 1rem;
 	}
 
 	.featured-tag {
-		background: #0066cc;
+		background: var(--color-accent);
 		color: white;
-		padding: 0.5rem 1rem;
+		padding: 0.4rem 1rem;
 		border-radius: 0.5rem;
-		font-size: 0.9rem;
+		font-size: 0.85rem;
 		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 0.5px;
+		display: inline-block;
+	}
+
+	.featured-link {
+		color: var(--color-primary-dark);
+		text-decoration: none;
+		transition: var(--transition);
+	}
+
+	.featured-link:hover {
+		color: var(--color-accent);
 	}
 
 	.featured-text h2 {
 		font-family: var(--font-heading);
-		font-size: 2.5rem;
+		font-size: clamp(1.75rem, 3vw, 2.5rem);
 		font-weight: 400;
-		color: #004499;
-		margin: 1.5rem 0 1rem;
+		margin: 1rem 0;
 		line-height: 1.3;
 		text-transform: uppercase;
 		letter-spacing: 1px;
@@ -420,21 +475,24 @@ import Layout from '../layouts/Layout.astro';
 
 	.featured-excerpt {
 		font-size: 1.1rem;
-		color: #666666;
+		color: var(--color-text-light);
 		line-height: 1.7;
 		margin-bottom: 1.5rem;
 	}
 
 	.article-meta {
-		color: #666666;
+		color: var(--color-text-light);
 		font-size: 0.9rem;
 		margin-bottom: 2rem;
+		display: flex;
+		gap: 0.5rem;
+		align-items: center;
 	}
 
-	/* Blog Categories */
+	/* Categories Grid */
 	.blog-categories {
-		padding: 6rem 0;
-		background: #ffffff;
+		padding: 5rem 0;
+		background: white;
 	}
 
 	.categories-grid {
@@ -447,91 +505,93 @@ import Layout from '../layouts/Layout.astro';
 	.category-card {
 		background: white;
 		padding: 2rem;
-		border-radius: 1rem;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+		border-radius: var(--border-radius);
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 		text-align: center;
-		transition: transform 0.3s ease, box-shadow 0.3s ease;
-		cursor: pointer;
-		border: 2px solid #e6f2ff;
+		transition: var(--transition);
+		text-decoration: none;
+		color: inherit;
+		border: 2px solid transparent;
+		display: block;
 	}
 
 	.category-card:hover {
-		transform: translateY(-4px);
+		transform: translateY(-5px);
 		box-shadow: 0 8px 25px rgba(0, 102, 204, 0.15);
-		border-color: #0066cc;
+		border-color: var(--color-accent);
 	}
 
 	.category-icon svg {
-		color: #0066cc;
+		color: var(--color-accent);
 		margin-bottom: 1rem;
 	}
 
 	.category-card h3 {
 		font-family: var(--font-heading);
-		font-size: 1.6rem;
+		font-size: 1.5rem;
 		font-weight: 400;
-		color: #004499;
+		color: var(--color-primary-dark);
 		margin-bottom: 0.75rem;
 		text-transform: uppercase;
 		letter-spacing: 0.5px;
-		line-height: 1.3;
 	}
 
 	.category-card p {
-		color: #666666;
+		color: var(--color-text-light);
 		line-height: 1.6;
 		margin-bottom: 1rem;
 	}
 
 	.article-count {
 		display: inline-block;
-		background: #e6f2ff;
-		color: #0066cc;
+		background: var(--color-bg-accent);
+		color: var(--color-accent);
 		padding: 0.25rem 0.75rem;
 		border-radius: 0.5rem;
-		font-size: 0.9rem;
+		font-size: 0.85rem;
 		font-weight: 600;
 	}
 
-	/* Recent Articles */
+	/* Recent Articles Grid */
 	.recent-articles {
-		padding: 6rem 0;
-		background: #f8f9fa;
+		padding: 5rem 0;
+		background: var(--color-bg-light);
 	}
 
 	.articles-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 		gap: 2rem;
 		margin-top: 3rem;
 	}
 
 	.article-card {
 		background: white;
-		border-radius: 1rem;
+		border-radius: var(--border-radius);
 		overflow: hidden;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-		transition: transform 0.3s ease, box-shadow 0.3s ease;
-		cursor: pointer;
-		border: 2px solid #e6f2ff;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+		transition: var(--transition);
+		height: 100%;
+	}
+
+	.article-link {
+		text-decoration: none;
+		color: inherit;
+		display: block;
+		height: 100%;
 	}
 
 	.article-card:hover {
-		transform: translateY(-4px);
+		transform: translateY(-5px);
 		box-shadow: 0 8px 25px rgba(0, 102, 204, 0.15);
-		border-color: #0066cc;
 	}
 
 	.article-image {
 		height: 200px;
-		background: #e6f2ff;
+		background: var(--color-bg-accent);
 		display: flex;
 		align-items: center;
 		justify-content: center;
-	}
-
-	.article-image .placeholder-icon svg {
-		color: #0066cc;
 	}
 
 	.article-content {
@@ -539,21 +599,22 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.article-category {
-		background: #e6f2ff;
-		color: #0066cc;
+		background: var(--color-bg-accent);
+		color: var(--color-accent);
 		padding: 0.25rem 0.75rem;
 		border-radius: 0.5rem;
-		font-size: 0.85rem;
+		font-size: 0.8rem;
 		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 0.5px;
+		display: inline-block;
 	}
 
 	.article-card h3 {
 		font-family: var(--font-heading);
-		font-size: 1.4rem;
+		font-size: 1.3rem;
 		font-weight: 400;
-		color: #004499;
+		color: var(--color-primary-dark);
 		margin: 1rem 0 0.75rem;
 		line-height: 1.4;
 		text-transform: uppercase;
@@ -561,39 +622,40 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.article-card p {
-		color: #666666;
+		color: var(--color-text-light);
 		line-height: 1.6;
 		margin-bottom: 1rem;
 	}
 
-	.article-card .article-meta {
-		font-size: 0.85rem;
-		color: #666666;
+	.load-more-container {
+		text-align: center;
+		margin-top: 3rem;
 	}
 
-	/* Newsletter */
+	/* Newsletter Section */
 	.newsletter {
 		padding: 4rem 0;
-		background: #0066cc;
+		background: var(--color-accent);
 		color: white;
 		text-align: center;
 	}
 
 	.newsletter-content h2 {
 		font-family: var(--font-heading);
-		font-size: 3rem;
+		font-size: clamp(2rem, 4vw, 3rem);
 		font-weight: 400;
 		margin-bottom: 1rem;
 		text-transform: uppercase;
 		letter-spacing: 1.5px;
-		line-height: 1.2;
 	}
 
 	.newsletter-content > p {
-		font-size: 1.25rem;
+		font-size: 1.2rem;
 		margin-bottom: 2.5rem;
-		opacity: 0.9;
-		line-height: 1.6;
+		opacity: 0.95;
+		max-width: 600px;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	.newsletter-form {
@@ -613,18 +675,18 @@ import Layout from '../layouts/Layout.astro';
 
 	.email-input:focus {
 		outline: none;
-		box-shadow: 0 0 0 2px white;
+		box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
 	}
 
 	.newsletter-note {
 		font-size: 0.9rem;
-		opacity: 0.7;
+		opacity: 0.8;
 	}
 
 	/* Expert Tips */
 	.expert-tips {
-		padding: 6rem 0;
-		background: #ffffff;
+		padding: 5rem 0;
+		background: white;
 	}
 
 	.tips-grid {
@@ -635,63 +697,120 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.tip-card {
-		background: #f8f9fa;
+		background: var(--color-bg-light);
 		padding: 2rem;
-		border-radius: 1rem;
+		border-radius: var(--border-radius);
 		text-align: center;
-		border: 2px solid #e6f2ff;
-		transition: all 0.3s ease;
+		border: 2px solid transparent;
+		transition: var(--transition);
 	}
 
 	.tip-card:hover {
-		border-color: #0066cc;
-		transform: translateY(-2px);
+		border-color: var(--color-accent);
+		transform: translateY(-3px);
+		box-shadow: 0 5px 15px rgba(0, 102, 204, 0.1);
 	}
 
 	.tip-icon svg {
-		color: #0066cc;
+		color: var(--color-accent);
 		margin-bottom: 1rem;
 	}
 
 	.tip-card h3 {
 		font-family: var(--font-heading);
-		font-size: 1.4rem;
+		font-size: 1.3rem;
 		font-weight: 400;
-		color: #004499;
+		color: var(--color-primary-dark);
 		margin-bottom: 1rem;
 		text-transform: uppercase;
 		letter-spacing: 0.5px;
-		line-height: 1.3;
 	}
 
 	.tip-card p {
-		color: #666666;
+		color: var(--color-text-light);
 		line-height: 1.6;
+	}
+
+	/* Services CTA */
+	.services-cta {
+		padding: 5rem 0;
+		background: var(--color-bg-light);
+	}
+
+	.services-intro {
+		text-align: center;
+		font-size: 1.2rem;
+		color: var(--color-text-light);
+		margin-bottom: 3rem;
+		max-width: 700px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.services-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 2rem;
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+
+	.service-card {
+		background: white;
+		padding: 2rem;
+		border-radius: var(--border-radius);
+		text-align: center;
+		text-decoration: none;
+		color: inherit;
+		transition: var(--transition);
+		border: 2px solid transparent;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+	}
+
+	.service-card:hover {
+		border-color: var(--color-accent);
+		transform: translateY(-3px);
+		box-shadow: 0 5px 20px rgba(0, 102, 204, 0.15);
+	}
+
+	.service-card h3 {
+		font-family: var(--font-heading);
+		font-size: 1.3rem;
+		color: var(--color-primary-dark);
+		margin-bottom: 0.5rem;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+
+	.service-card p {
+		color: var(--color-text-light);
+		line-height: 1.5;
 	}
 
 	/* Blog CTA */
 	.blog-cta {
-		padding: 6rem 0;
-		background: #004499;
+		padding: 5rem 0;
+		background: var(--color-primary-dark);
 		color: white;
 		text-align: center;
 	}
 
 	.cta-content h2 {
 		font-family: var(--font-heading);
-		font-size: 3rem;
+		font-size: clamp(2rem, 4vw, 3rem);
 		font-weight: 400;
 		margin-bottom: 1rem;
 		text-transform: uppercase;
 		letter-spacing: 1.5px;
-		line-height: 1.2;
 	}
 
 	.cta-content p {
-		font-size: 1.25rem;
+		font-size: 1.2rem;
 		margin-bottom: 2.5rem;
-		opacity: 0.9;
-		line-height: 1.6;
+		opacity: 0.95;
+		max-width: 700px;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	.cta-buttons {
@@ -704,25 +823,27 @@ import Layout from '../layouts/Layout.astro';
 	/* Button Styles */
 	.btn {
 		display: inline-block;
-		padding: 1rem 2rem;
+		padding: 0.75rem 2rem;
 		border-radius: 5px;
-		font-weight: bold;
+		font-weight: 600;
 		text-transform: uppercase;
 		text-decoration: none;
-		transition: all 0.3s ease;
+		transition: var(--transition);
 		letter-spacing: 0.5px;
 		border: 2px solid transparent;
+		cursor: pointer;
 	}
 
 	.btn-primary {
-		background: #0066cc;
+		background: #000000;
 		color: white;
-		border-color: #0066cc;
+		border-color: #000000;
 	}
 
 	.btn-primary:hover {
-		background: #004499;
-		border-color: #004499;
+		background: #333333;
+		border-color: #333333;
+		transform: translateY(-2px);
 	}
 
 	.btn-secondary {
@@ -733,29 +854,29 @@ import Layout from '../layouts/Layout.astro';
 
 	.btn-secondary:hover {
 		background: white;
-		color: #004499;
+		color: var(--color-primary-dark);
+	}
+
+	.btn-large {
+		padding: 1rem 2.5rem;
+		font-size: 1.1rem;
 	}
 
 	/* Shared Styles */
 	.section-title {
 		font-family: var(--font-heading);
-		font-size: 3rem;
+		font-size: clamp(2rem, 4vw, 3rem);
 		font-weight: 400;
 		text-align: center;
-		margin-bottom: 3rem;
-		color: #004499;
+		margin-bottom: 1rem;
+		color: var(--color-primary-dark);
 		text-transform: uppercase;
 		letter-spacing: 1.5px;
 		line-height: 1.2;
 	}
 
-	.btn-large {
-		padding: 1rem 2rem;
-		font-size: 1.1rem;
-	}
-
 	.image-placeholder p {
-		color: #666666;
+		color: var(--color-text-light);
 		font-weight: 500;
 		margin: 0;
 	}
@@ -766,25 +887,18 @@ import Layout from '../layouts/Layout.astro';
 			padding: 3rem 0 4rem;
 		}
 
-		.hero-title {
-			font-size: 2.2rem;
-		}
-
-		.hero-subtitle {
-			font-size: 1.1rem;
-		}
-
 		.featured-content {
 			grid-template-columns: 1fr;
 			gap: 2rem;
 		}
 
-		.featured-text h2 {
-			font-size: 1.75rem;
+		.featured-image {
+			max-width: 400px;
+			margin: 0 auto;
 		}
 
 		.categories-grid {
-			grid-template-columns: repeat(2, 1fr);
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 		}
 
 		.articles-grid {
@@ -796,7 +910,11 @@ import Layout from '../layouts/Layout.astro';
 		}
 
 		.tips-grid {
-			grid-template-columns: repeat(2, 1fr);
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		}
+
+		.services-grid {
+			grid-template-columns: 1fr;
 		}
 
 		.cta-buttons {
@@ -804,18 +922,15 @@ import Layout from '../layouts/Layout.astro';
 			align-items: center;
 		}
 
-		.section-title {
-			font-size: 2.2rem;
+		.btn-large {
+			width: 100%;
+			max-width: 300px;
 		}
 	}
 
 	@media (max-width: 480px) {
-		.hero {
-			padding: 3rem 0;
-		}
-
 		.hero-title {
-			font-size: 2.2rem;
+			font-size: 2rem;
 		}
 
 		.categories-grid,
@@ -826,19 +941,11 @@ import Layout from '../layouts/Layout.astro';
 		.article-content,
 		.tip-card,
 		.category-card {
-			padding: 1.5rem;
+			padding: 1.25rem;
 		}
 
-		.cta-content h2 {
-			font-size: 2rem;
-		}
-
-		.featured-text h2 {
-			font-size: 1.5rem;
-		}
-
-		.newsletter-content h2 {
-			font-size: 2.2rem;
+		.section-title {
+			font-size: 1.75rem;
 		}
 	}
 </style>
