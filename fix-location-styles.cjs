@@ -1,0 +1,543 @@
+const fs = require('fs');
+const path = require('path');
+
+// Function to extract city data from existing file
+function extractCityData(content) {
+  const cityNameMatch = content.match(/const cityName = "([^"]+)"/);
+  const countyNameMatch = content.match(/const countyName = "([^"]+)"/);
+  const populationMatch = content.match(/const population = "([^"]+)"/);
+  const neighborhoodsMatch = content.match(/const neighborhoods = "([^"]+)"/);
+  const landmarksMatch = content.match(/const landmarks = "([^"]*)"/) || ['', ''];
+  
+  if (!cityNameMatch || !countyNameMatch) {
+    return null;
+  }
+  
+  return {
+    cityName: cityNameMatch[1],
+    countyName: countyNameMatch[1],
+    population: populationMatch ? populationMatch[1] : '50,000',
+    neighborhoods: neighborhoodsMatch ? neighborhoodsMatch[1] : 'Various neighborhoods',
+    landmarks: landmarksMatch[1]
+  };
+}
+
+// Template with fixed styles using !important to override any external CSS
+const getTemplate = (cityData) => `---
+import Layout from '../../../layouts/Layout.astro';
+import FAQSchema from '../../../components/FAQSchema.astro';
+
+// Define city-specific data
+const cityName = "${cityData.cityName}";
+const countyName = "${cityData.countyName}";
+const population = "${cityData.population}";
+const neighborhoods = "${cityData.neighborhoods}";
+const landmarks = "${cityData.landmarks}";
+
+// FAQ data for ${cityData.cityName}
+const faqData = [
+  {
+    question: "What computer services do you offer in [location]?",
+    answer: "We provide comprehensive computer services in [location] including virus removal, password reset, computer optimization, software installation, and emergency troubleshooting for both Windows and Mac computers."
+  },
+  {
+    question: "How quickly can you arrive for computer service in [location]?",
+    answer: "We typically arrive within 30 minutes for computer service calls in [location]. Our mobile technicians know the area well and can quickly reach all neighborhoods throughout [location]."
+  },
+  {
+    question: "Do you service both Windows and Mac computers in [location]?",
+    answer: "Yes, our [location] technicians are certified to work on both Windows PCs and Mac computers. We handle all operating system issues, software problems, and optimization needs for both platforms."
+  },
+  {
+    question: "What areas of [location] do you serve?",
+    answer: "We provide mobile computer service throughout [location] and surrounding neighborhoods. Our technicians are familiar with all areas and can reach you quickly wherever you are."
+  },
+  {
+    question: "How much does computer service cost in [location]?",
+    answer: "Our [location] computer service pricing is competitive and transparent. We provide upfront quotes with no hidden fees. Contact us at (469) 430-8607 for specific pricing based on your computer issue."
+  },
+  {
+    question: "Do you offer emergency computer service in [location]?",
+    answer: "Yes, we offer same-day emergency computer service throughout [location]. Whether you have a critical work presentation or urgent deadline, we prioritize emergency calls with rapid response times."
+  },
+  {
+    question: "Can you remove viruses from my computer in [location]?",
+    answer: "Absolutely! Virus removal is one of our most requested services in [location]. We thoroughly scan, remove malware, and install protection to prevent future infections on your computer."
+  },
+  {
+    question: "Do you provide computer service for businesses in [location]?",
+    answer: "Yes, we serve many [location] businesses and offer corporate accounts with priority service and volume discounts. We understand the importance of minimal downtime for business operations."
+  }
+];
+---
+
+<Layout 
+  title={\`Computer Service \${cityName}, TX | Mobile Service | GadgetFix LLC\`}
+  description={\`Professional computer service in \${cityName}, Texas. Virus removal, password reset, optimization. We come to you! Same-day service, 90-day warranty. Call (469) 430-8607\`}
+  keywords={\`computer service \${cityName.toLowerCase()}, computer service \${cityName.toLowerCase()} tx, password reset \${cityName.toLowerCase()}, mobile repair \${cityName.toLowerCase()}, windows troubleshooting \${cityName.toLowerCase()}, mac troubleshooting \${cityName.toLowerCase()}, computer repair \${cityName.toLowerCase()}, virus removal \${cityName.toLowerCase()}, password reset \${cityName.toLowerCase()}\`}
+>
+  <main>
+    <!-- Hero Section -->
+    <section class="location-hero">
+      <div class="container">
+        <h1 class="location-hero-title">Computer Service in {cityName}, Texas</h1>
+        <p class="location-hero-subtitle">Professional Mobile Computer Service - We Come to You</p>
+        <div class="location-hero-buttons">
+          <a href="tel:4694308607" class="location-btn-primary">CALL NOW: (469) 430-8607</a>
+          <a href="/contact" class="location-btn-secondary">SCHEDULE SERVICE</a>
+        </div>
+        <p class="location-service-note">Serving {cityName} and surrounding areas • 7 days a week</p>
+      </div>
+    </section>
+
+    <!-- Local Service Info -->
+    <section class="location-local-info">
+      <div class="container">
+        <h2>Mobile Repair Service in {cityName}</h2>
+        <p>GadgetFix LLC provides professional mobile computer service throughout {cityName}, {countyName}. ${cityData.cityName === 'Garland' ? 'Garland residents trust our affordable, reliable computer service and virus removal.' : ''} 
+        With a population of {population}, {cityName} residents rely on their devices daily. When your 
+        computer has issues, we bring the service to you - whether you're at home, work, or your favorite 
+        coffee shop.</p>
+        <p>We serve all {cityName} neighborhoods including {neighborhoods}.</p>
+      </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="location-services-section">
+      <div class="container">
+        <h2>Our {cityName} Computer Services</h2>
+        <div class="location-services-grid">
+          <a href="/computer-optimization" class="location-service-card-link">
+            <div class="location-service-card">
+              <div class="location-service-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                  <line x1="8" y1="21" x2="16" y2="21"/>
+                  <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+              </div>
+              <h3>Computer Optimization</h3>
+              <p>Speed up slow computers, remove bloatware, and optimize performance in {cityName}.</p>
+            </div>
+          </a>
+          <a href="/virus-removal-service" class="location-service-card-link">
+            <div class="location-service-card">
+              <div class="location-service-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 12l2 2 4-4"/>
+                </svg>
+              </div>
+              <h3>Virus Removal</h3>
+              <p>Remove malware, viruses, and spyware from computers in {cityName}.</p>
+            </div>
+          </a>
+          <a href="/password-reset-service" class="location-service-card-link">
+            <div class="location-service-card">
+              <div class="location-service-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </div>
+              <h3>Password Reset</h3>
+              <p>Recover forgotten passwords and reset Windows/Mac login credentials in {cityName}.</p>
+            </div>
+          </a>
+          <a href="/emergency-computer-service" class="location-service-card-link">
+            <div class="location-service-card">
+              <div class="location-service-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="m9 12 2 2 4-4"/>
+                </svg>
+              </div>
+              <h3>Emergency Computer Service</h3>
+              <p>Same-day emergency computer service available in {cityName}.</p>
+            </div>
+          </a>
+          <a href="/windows-troubleshooting-dfw" class="location-service-card-link">
+            <div class="location-service-card">
+              <div class="location-service-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                  <line x1="8" y1="21" x2="16" y2="21"/>
+                  <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+              </div>
+              <h3>Windows Troubleshooting</h3>
+              <p>Professional Windows password reset, virus removal & PC repair in {cityName}.</p>
+            </div>
+          </a>
+          <a href="/mac-troubleshooting-dfw" class="location-service-card-link">
+            <div class="location-service-card">
+              <div class="location-service-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                  <line x1="8" y1="21" x2="16" y2="21"/>
+                  <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+              </div>
+              <h3>Mac Troubleshooting</h3>
+              <p>Expert Mac password reset, optimization & Apple computer repair in {cityName}.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="location-why-choose">
+      <div class="container">
+        <h2>Why {cityName} Chooses GadgetFix</h2>
+        <div class="location-features-grid">
+          <div class="location-feature">
+            <h3>We Come to You</h3>
+            <p>Mobile service anywhere in {cityName} - home, office, or public location</p>
+          </div>
+          <div class="location-feature">
+            <h3>Fast Response</h3>
+            <p>30-minute average arrival time in {cityName}</p>
+          </div>
+          <div class="location-feature">
+            <h3>90-Day Warranty</h3>
+            <p>All repairs backed by comprehensive parts and labor warranty</p>
+          </div>
+          <div class="location-feature">
+            <h3>Fair Pricing</h3>
+            <p>Competitive rates with no hidden fees for {cityName} residents</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Service Areas -->
+    <section class="location-service-areas">
+      <div class="container">
+        <h2>Areas We Serve in {cityName}</h2>
+        <p>Our mobile technicians cover all of {cityName} including:</p>
+        <div class="location-areas-list">
+          <p>{neighborhoods}</p>
+        </div>
+        <p>We also serve nearby cities in {countyName}. No matter where you are in the {cityName} area, 
+        we can reach you quickly with professional repair service.</p>
+      </div>
+    </section>
+
+    <!-- FAQ Section with Schema -->
+    <section class="location-faq-section-wrapper">
+      <div class="container">
+        <FAQSchema faqs={faqData} location={cityName} />
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="location-city-cta">
+      <div class="container">
+        <h2>Get Your Device Fixed Today in {cityName}</h2>
+        <p>Don't let computer problems disrupt your day. Professional mobile computer service at your location.</p>
+        <div class="location-cta-buttons">
+          <a href="tel:4694308607" class="location-btn-primary">CALL NOW: (469) 430-8607</a>
+        </div>
+        <p class="location-hours">Open 7 Days • Monday-Sunday 8:00 AM - 6:00 PM</p>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+/* Hero Section - Using unique class names to avoid conflicts */
+.location-hero {
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #1e40af 100%) !important;
+  background-size: 200% 200% !important;
+  animation: locationGradientShift 8s ease infinite !important;
+  color: white !important;
+  padding: 5rem 0 !important;
+  text-align: center !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+@keyframes locationGradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.location-hero-title {
+  font-size: 3.5rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 1rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  color: white !important;
+}
+
+.location-hero-subtitle {
+  font-size: 1.3rem !important;
+  margin-bottom: 2rem !important;
+  opacity: 0.95 !important;
+  color: white !important;
+}
+
+.location-hero-buttons {
+  display: flex !important;
+  gap: 1rem !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.location-btn-primary, .location-btn-secondary {
+  background: #000000 !important;
+  color: white !important;
+  border: 2px solid #000000 !important;
+  border-radius: 50px !important;
+  padding: 1rem 2rem !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  text-decoration: none !important;
+  transition: all 0.3s ease !important;
+  display: inline-block !important;
+}
+
+.location-btn-primary:hover, .location-btn-secondary:hover {
+  background: #333333 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
+}
+
+.location-service-note {
+  opacity: 0.9 !important;
+  color: white !important;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Sections */
+section {
+  padding: 4rem 0;
+}
+
+.location-local-info {
+  background: #ffffff !important;
+}
+
+.location-services-section {
+  background: #f8f9fa !important;
+}
+
+.location-why-choose {
+  background: #ffffff !important;
+}
+
+.location-service-areas {
+  background: #f8f9fa !important;
+}
+
+.location-faq-section-wrapper {
+  background: #ffffff !important;
+}
+
+.location-city-cta {
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #1e40af 100%) !important;
+  background-size: 200% 200% !important;
+  animation: locationGradientShift 8s ease infinite !important;
+  color: white !important;
+  text-align: center !important;
+}
+
+/* Typography */
+h2 {
+  color: #1e3a8a;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+h3 {
+  color: #2563EB;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+p {
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.location-local-info p {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* Service Grid */
+.location-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.location-service-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.location-service-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  height: 100%;
+  border: 2px solid transparent;
+}
+
+.location-service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  border-color: #2563eb;
+}
+
+.location-service-icon {
+  color: #2563EB;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* Features Grid */
+.location-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.location-feature {
+  background: #f9fafb;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  border-left: 4px solid #2563EB;
+}
+
+/* Areas List */
+.location-areas-list {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  margin: 2rem 0;
+  text-align: center;
+}
+
+/* CTA Section */
+.location-city-cta h2 {
+  color: white !important;
+}
+
+.location-city-cta p {
+  color: white !important;
+}
+
+.location-cta-buttons {
+  margin: 2rem 0;
+}
+
+.location-hours {
+  opacity: 0.95;
+  color: white !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .location-hero-title {
+    font-size: 2.5rem !important;
+  }
+  
+  .location-hero-subtitle {
+    font-size: 1.1rem !important;
+  }
+  
+  .location-hero-buttons {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  
+  .location-btn-primary, .location-btn-secondary {
+    width: 100% !important;
+    max-width: 300px !important;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+  
+  .location-services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>`;
+
+// Process files
+const locationsDir = path.join(__dirname, 'src', 'pages', 'locations');
+
+function processFile(filePath) {
+  const fileName = path.basename(filePath, '.astro');
+  
+  // Skip index files, test files, and fixed files
+  if (fileName === 'index' || fileName.includes('test') || fileName.includes('-fixed')) {
+    return false;
+  }
+  
+  console.log(`Processing ${fileName}...`);
+  
+  // Read existing file to extract city data
+  const content = fs.readFileSync(filePath, 'utf-8');
+  const cityData = extractCityData(content);
+  
+  if (!cityData) {
+    console.log(`  Could not extract city data from ${fileName}, skipping...`);
+    return false;
+  }
+  
+  const newContent = getTemplate(cityData);
+  fs.writeFileSync(filePath, newContent);
+  return true;
+}
+
+// Find all astro files
+function getAllFiles(dir, files = []) {
+  const items = fs.readdirSync(dir);
+  for (const item of items) {
+    const fullPath = path.join(dir, item);
+    if (fs.statSync(fullPath).isDirectory()) {
+      getAllFiles(fullPath, files);
+    } else if (item.endsWith('.astro')) {
+      files.push(fullPath);
+    }
+  }
+  return files;
+}
+
+const files = getAllFiles(locationsDir);
+let processedCount = 0;
+
+for (const file of files) {
+  if (processFile(file)) {
+    processedCount++;
+  }
+}
+
+console.log(`\nProcessed ${processedCount} location files successfully!`);
+console.log('All location pages now have properly styled hero sections with blue gradient backgrounds.');

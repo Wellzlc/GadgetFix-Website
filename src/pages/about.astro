@@ -1,5 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import WhyItem from '../components/WhyItem.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import ScrollAnimator from '../components/ScrollAnimator.astro';
 ---
 
 <Layout 
@@ -7,28 +11,26 @@ import Layout from '../layouts/Layout.astro';
 	description="Professional mobile computer service in DFW. Certified technicians, 90-day warranty, 500+ repairs. We come to you 7 days/week. Call (469) 430-8607"
 	keywords="about GadgetFix, mobile computer service experts Dallas, Fort Worth computer service, certified technicians DFW, professional computer service, service company Dallas"
 >
+	
 	<!-- Hero Section -->
-	<section class="about-hero">
-		<div class="container">
-			<div class="hero-content">
-				<h1>About GadgetFix</h1>
-				<p class="hero-subtitle">Professional mobile computer service experts serving the Dallas-Fort Worth Metroplex with certified technicians and unmatched service quality</p>
-			</div>
-		</div>
-	</section>
+	<HeroSection 
+		title="About GadgetFix"
+		subtitle="Professional mobile computer service experts serving the Dallas-Fort Worth Metroplex with certified technicians and unmatched service quality"
+		showCTA={false}
+	/>
 
 	<!-- Company Story -->
-	<section class="company-story">
+	<section class="company-story section-gradient">
 		<div class="container">
-			<div class="story-content">
+			<div class="story-content animate-on-scroll">
 				<div class="story-text">
-					<h2>Our Story</h2>
+					<h2 class="gradient-text">Our Story</h2>
 					
 					<p>We understand that computers are essential to your daily life. When your computer has issues, you need them resolved quickly and correctly. Our certified technicians use proven troubleshooting techniques and software tools to restore your computer to perfect working condition. With over 500 successful service calls completed, we have built our reputation on reliability, transparency, and exceptional customer service.</p>
 					
 					<p>Every service comes with a comprehensive 90-day guarantee because we stand behind our work. Our commitment is simple: provide the highest quality computer service with the convenience of coming directly to you, whether you're at home, work, or anywhere else in the DFW Metroplex.</p>
 				</div>
-				<div class="story-image">
+				<div class="story-image animate-on-scroll">
 					<img 
 						src="/images/jeshoots-com-sMKUYIasyDM-unsplash.jpg" 
 						alt="Expert technicians at work repairing electronic devices"
@@ -45,10 +47,10 @@ import Layout from '../layouts/Layout.astro';
 	<!-- Values & Principles -->
 	<section class="values">
 		<div class="container">
-			<h2 class="section-title">Why Choose Mobile Computer Service</h2>
+			<h2 class="section-title gradient-text animate-on-scroll">Why Choose Mobile Computer Service</h2>
 			<div class="values-grid">
-				<div class="value-card">
-					<div class="value-icon">
+				<div class="enhanced-card animate-on-scroll">
+					<div class="icon-container">
 						<svg role="img" aria-label="Convenience icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 							<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
 							<circle cx="12" cy="10" r="3"/>
@@ -57,8 +59,8 @@ import Layout from '../layouts/Layout.astro';
 					<h3>We Come to You</h3>
 					<p>No need to travel to a computer shop. Our mobile technicians arrive at your location with all necessary tools and software.</p>
 				</div>
-				<div class="value-card">
-					<div class="value-icon">
+				<div class="enhanced-card animate-on-scroll">
+					<div class="icon-container">
 						<svg role="img" aria-label="Speed icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 							<circle cx="12" cy="12" r="10"/>
 							<polyline points="12,6 12,12 16,14"/>
@@ -67,8 +69,8 @@ import Layout from '../layouts/Layout.astro';
 					<h3>Same-Day Service</h3>
 					<p>Most services completed within 30 minutes to 2 hours. We understand your computer is essential to your daily routine.</p>
 				</div>
-				<div class="value-card">
-					<div class="value-icon">
+				<div class="enhanced-card animate-on-scroll">
+					<div class="icon-container">
 						<svg role="img" aria-label="Quality icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 							<polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
 						</svg>
@@ -76,8 +78,8 @@ import Layout from '../layouts/Layout.astro';
 					<h3>Quality Service</h3>
 					<p>We use professional software tools and proven methods that ensure thorough problem resolution and lasting fixes.</p>
 				</div>
-				<div class="value-card">
-					<div class="value-icon">
+				<div class="enhanced-card animate-on-scroll">
+					<div class="icon-container">
 						<svg role="img" aria-label="Warranty icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 							<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
 							<path d="m9 12 2 2 4-4"/>
@@ -91,10 +93,10 @@ import Layout from '../layouts/Layout.astro';
 	</section>
 
 	<!-- Team & Expertise -->
-	<section class="team-expertise">
+	<section class="team-expertise section-gradient">
 		<div class="container">
-			<h2 class="section-title">Our Expertise</h2>
-			<div class="expertise-content">
+			<h2 class="section-title gradient-text animate-on-scroll">Our Expertise</h2>
+			<div class="expertise-content animate-on-scroll">
 				<div class="expertise-text">
 					<h3>Certified Professional Technicians</h3>
 					<p>Our team consists of certified computer service specialists with extensive experience in software troubleshooting. Each technician undergoes continuous training to stay current with the latest technologies and service techniques.</p>
@@ -153,35 +155,35 @@ import Layout from '../layouts/Layout.astro';
 				<div class="expertise-stats">
 					<h3>Our Track Record</h3>
 					<div class="stats-grid">
-						<div class="stat-card">
+						<div class="stat-card animate-on-scroll">
 							<div class="stat-number">500+</div>
 							<div class="stat-label">Devices Repaired</div>
 						</div>
-						<div class="stat-card">
+						<div class="stat-card animate-on-scroll">
 							<div class="stat-number">90 Day</div>
 							<div class="stat-label">Warranty</div>
 						</div>
-						<div class="stat-card">
+						<div class="stat-card animate-on-scroll">
 							<div class="stat-number">7 Days</div>
 							<div class="stat-label">Per Week Service</div>
 						</div>
-						<div class="stat-card">
+						<div class="stat-card animate-on-scroll">
 							<div class="stat-number">30 Min</div>
 							<div class="stat-label">Average Response</div>
 						</div>
-						<div class="stat-card">
+						<div class="stat-card animate-on-scroll">
 							<div class="stat-number">4.8★</div>
 							<div class="stat-label">Customer Rating</div>
 						</div>
-						<div class="stat-card">
+						<div class="stat-card animate-on-scroll">
 							<div class="stat-number">100%</div>
 							<div class="stat-label">Mobile Service</div>
 						</div>
-						<div class="stat-card">
+						<div class="stat-card animate-on-scroll">
 							<div class="stat-number">24/7</div>
 							<div class="stat-label">Emergency Support</div>
 						</div>
-						<div class="stat-card">
+						<div class="stat-card animate-on-scroll">
 							<div class="stat-number">7</div>
 							<div class="stat-label">Counties Covered</div>
 						</div>
@@ -278,18 +280,12 @@ import Layout from '../layouts/Layout.astro';
 	</section>
 
 	<!-- Call to Action -->
-	<section class="about-cta">
-		<div class="container">
-			<div class="cta-content">
-				<h2>Ready to Experience Mobile Computer Service?</h2>
-				<p>Join thousands of satisfied customers who trust GadgetFix LLC for their computer service needs.</p>
-				<div class="cta-buttons">
-					<a href="tel:+14694308607" class="btn btn-primary btn-large">Call (469) 430-8607</a>
-					<a href="/contact" class="btn btn-secondary btn-large">Schedule Service</a>
-				</div>
-			</div>
-		</div>
-	</section>
+	<FinalCTA 
+		title="Ready to Experience Mobile Computer Service?"
+		subtitle="Join thousands of satisfied customers who trust GadgetFix LLC for their computer service needs."
+		primaryBtn={{ text: 'Call (469) 430-8607', href: 'tel:+14694308607' }}
+		secondaryBtn={{ text: 'Schedule Service', href: '/contact' }}
+	/>
 
 	<!-- Schema Markup for AboutPage -->
 	<script type="application/ld+json">
@@ -359,13 +355,204 @@ import Layout from '../layouts/Layout.astro';
 	  }
 	}
 	</script>
+
+	<!-- Scroll Animator -->
+	<ScrollAnimator />
 </Layout>
 
 <style>
+	/* Enhanced Design System */
+	.hero-gradient {
+		background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #1e40af 100%);
+		background-size: 200% 200%;
+		animation: gradientShift 8s ease infinite;
+		position: relative;
+		overflow: hidden;
+		color: white;
+		padding: 5rem 0;
+		text-align: center;
+	}
+
+	@keyframes gradientShift {
+		0% { background-position: 0% 50%; }
+		50% { background-position: 100% 50%; }
+		100% { background-position: 0% 50%; }
+	}
+
+	.wave-bottom::before {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 100px;
+		background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,133.3C672,139,768,181,864,181.3C960,181,1056,139,1152,117.3C1248,96,1344,96,1392,96L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") no-repeat;
+		background-size: cover;
+		animation: wave 10s linear infinite;
+	}
+
+	@keyframes wave {
+		0% { transform: translateX(0); }
+		100% { transform: translateX(-50%); }
+	}
+
+	.hero-title {
+		font-family: var(--font-heading);
+		font-size: 4rem;
+		font-weight: 700;
+		margin-bottom: 1rem;
+		text-transform: uppercase;
+		letter-spacing: 3px;
+		line-height: 1.2;
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+		animation: titleGlow 3s ease-in-out infinite;
+	}
+
+	@keyframes titleGlow {
+		0%, 100% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); }
+		50% { text-shadow: 2px 2px 20px rgba(255, 255, 255, 0.3); }
+	}
+
+	.hero-subtitle {
+		font-size: 1.3rem;
+		opacity: 0.95;
+		max-width: 700px;
+		margin: 0 auto;
+		line-height: 1.7;
+	}
+
+	/* Enhanced Cards */
+	.enhanced-card {
+		background: linear-gradient(145deg, #ffffff, #f8f9fa);
+		padding: 2.5rem;
+		border-radius: 20px;
+		border: 1px solid rgba(30, 58, 138, 0.1);
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+		transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.enhanced-card::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 4px;
+		background: linear-gradient(90deg, #1e3a8a, #2563eb);
+		transform: scaleX(0);
+		transition: transform 0.4s ease;
+		transform-origin: left;
+	}
+
+	.enhanced-card:hover {
+		transform: translateY(-8px) scale(1.02);
+		box-shadow: 0 20px 50px rgba(30, 58, 138, 0.2);
+		border-color: transparent;
+		background: linear-gradient(145deg, #ffffff, #e8f0ff);
+	}
+
+	.enhanced-card:hover::before {
+		transform: scaleX(1);
+	}
+
+	/* Gradient Text */
+	.gradient-text {
+		background: linear-gradient(135deg, #1e3a8a, #2563eb);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		font-weight: 600;
+	}
+
+	/* Icon Containers */
+	.icon-container {
+		width: 80px;
+		height: 80px;
+		background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(37, 99, 235, 0.1));
+		border-radius: 20px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.6s ease;
+		position: relative;
+		margin: 0 auto 1rem;
+	}
+
+	.icon-container::after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		border-radius: 20px;
+		background: radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, transparent 70%);
+		animation: pulse 2s infinite;
+		z-index: -1;
+	}
+
+	@keyframes pulse {
+		0% {
+			transform: scale(0.95);
+			opacity: 1;
+		}
+		70% {
+			transform: scale(1.15);
+			opacity: 0;
+		}
+		100% {
+			transform: scale(1.15);
+			opacity: 0;
+		}
+	}
+
+	.enhanced-card:hover .icon-container {
+		transform: rotateY(360deg) scale(1.1);
+		background: linear-gradient(135deg, #1e3a8a, #2563eb);
+	}
+
+	.enhanced-card:hover .icon-container svg {
+		color: white;
+	}
+
+	/* Section Gradient */
+	.section-gradient {
+		background: linear-gradient(180deg, #ffffff 0%, #f0f4ff 50%, #ffffff 100%);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.section-gradient::before {
+		content: '';
+		position: absolute;
+		width: 150%;
+		height: 150%;
+		top: -25%;
+		left: -25%;
+		background: radial-gradient(circle at center, rgba(37, 99, 235, 0.05) 0%, transparent 50%);
+		animation: float 20s ease-in-out infinite;
+	}
+
+	@keyframes float {
+		0%, 100% { transform: translate(0, 0) rotate(0deg); }
+		33% { transform: translate(30px, -30px) rotate(120deg); }
+		66% { transform: translate(-20px, 20px) rotate(240deg); }
+	}
+
+	/* Scroll Animations */
+	.animate-on-scroll {
+		opacity: 0;
+		transform: translateY(30px);
+		transition: opacity 0.6s ease, transform 0.6s ease;
+	}
+
+	.animate-on-scroll.visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
 	/* About Hero */
 	.about-hero {
-		background: #1e3a8a;
-		color: white;
 		padding: 4rem 0;
 		text-align: center;
 	}
@@ -378,14 +565,6 @@ import Layout from '../layouts/Layout.astro';
 		text-transform: uppercase;
 		letter-spacing: 2px;
 		line-height: 1.2;
-	}
-
-	.hero-subtitle {
-		font-size: 1.25rem;
-		opacity: 0.9;
-		max-width: 600px;
-		margin: 0 auto;
-		line-height: 1.6;
 	}
 
 	/* Company Story */
@@ -609,23 +788,55 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.stat-card {
-		background: #2563EB;
+		background: linear-gradient(135deg, #1e3a8a, #2563eb);
 		color: white;
 		padding: 2rem;
-		border-radius: 1rem;
+		border-radius: 20px;
 		text-align: center;
+		transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		box-shadow: 0 10px 30px rgba(30, 58, 138, 0.2);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.stat-card::before {
+		content: '';
+		position: absolute;
+		top: -50%;
+		left: -50%;
+		width: 200%;
+		height: 200%;
+		background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+		animation: rotate 10s linear infinite;
+	}
+
+	@keyframes rotate {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	}
+
+	.stat-card:hover {
+		transform: translateY(-10px) scale(1.05);
+		box-shadow: 0 20px 50px rgba(30, 58, 138, 0.3);
 	}
 
 	.stat-number {
-		font-size: 2.5rem;
+		font-size: 2.8rem;
 		font-weight: 800;
 		margin-bottom: 0.5rem;
 		font-family: var(--font-heading);
+		position: relative;
+		z-index: 1;
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 	}
 
 	.stat-label {
-		font-size: 0.95rem;
-		opacity: 0.9;
+		font-size: 1rem;
+		opacity: 0.95;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		position: relative;
+		z-index: 1;
 	}
 
 	/* Service Area */
@@ -833,7 +1044,54 @@ import Layout from '../layouts/Layout.astro';
 		flex-wrap: wrap;
 	}
 
-	/* Button Styles */
+	/* Enhanced Buttons */
+	.btn-enhanced {
+		border-radius: 50px;
+		padding: 1.2rem 2.5rem;
+		font-size: 1.1rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		text-decoration: none;
+		display: inline-block;
+		position: relative;
+		overflow: hidden;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+	}
+
+	.btn-enhanced::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+		transition: left 0.5s ease;
+	}
+
+	.btn-enhanced:hover {
+		transform: translateY(-5px) scale(1.05);
+		box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+	}
+
+	.btn-enhanced:hover::before {
+		left: 100%;
+	}
+
+	.btn-black {
+		background: #000000;
+		color: white;
+		border: 3px solid #000000;
+	}
+
+	.btn-black:hover {
+		background: #1a1a1a;
+		border-color: #333333;
+	}
+
+	/* Legacy button styles for compatibility */
 	.btn, .btn-primary, .btn-secondary {
 		display: inline-block;
 		background: #000000;
@@ -848,7 +1106,6 @@ import Layout from '../layouts/Layout.astro';
 		letter-spacing: 1px;
 		transition: all 0.3s ease;
 	}
-
 
 	.btn:hover, .btn-primary:hover, .btn-secondary:hover {
 		background: #333333;

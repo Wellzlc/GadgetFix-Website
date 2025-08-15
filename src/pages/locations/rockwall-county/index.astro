@@ -7,407 +7,432 @@ const cities = ["Rockwall", "Heath", "Fate", "Royse City", "McLendon-Chisholm"];
 ---
 
 <Layout 
-  title={`Computer Service ${countyName} TX | All Cities | GadgetFix`}
-  description={`Mobile computer service service throughout ${countyName}. We serve all cities with same-day service. Call (469) 430-8607`}
+	title={`Computer Service ${countyName} TX | All Cities | GadgetFix`}
+	description={`Mobile computer service service throughout ${countyName}. We serve all cities with same-day service. Call (469) 430-8607`}
 >
-  <main>
-    <!-- Hero Section - SAME AS HOMEPAGE -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <h1 class="hero-title">{countyName} computer service</h1>
-          <p class="hero-subtitle">Select Your City for Mobile computer service Service</p>
-          
-          <div class="hero-cta">
-            <a href="tel:4694308607" class="btn btn-primary btn-large">CALL NOW FOR SERVICE</a>
-          </div>
-        </div>
-      </div>
-    </section>
+	<main>
+		<!-- Hero Section -->
+		<section class="hero">
+			<div class="container">
+				<div class="hero-content">
+					<h1 class="hero-title">{countyName} Computer Service</h1>
+					<p class="hero-subtitle">Select Your City for Mobile Computer Service</p>
+					
+					<div class="hero-cta">
+						<a href="tel:+14694308607" class="btn btn-primary btn-large">CALL NOW FOR SERVICE</a>
+						<a href="/contact" class="btn btn-secondary btn-large">SCHEDULE SERVICE</a>
+					</div>
+				</div>
+			</div>
+		</section>
 
-    <!-- Cities Grid - CLEAN LIKE HOMEPAGE SERVICES -->
-    <section class="cities-section">
-      <div class="container">
-        <h2 class="section-title">Select Your City in {countyName}</h2>
-        
-        <div class="cities-grid">
-          {cities.map(city => (
-            <a href={`/locations/rockwall-county/${city.toLowerCase().replace(' ', '-')}`} class="city-card">
-              <h3>{city}</h3>
-              <p>Mobile repair service</p>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
+		<!-- Cities Grid - CLEAN LIKE HOMEPAGE SERVICES -->
+		<section class="cities-section">
+			<div class="container">
+				<h2 class="section-title">Select Your City in {countyName}</h2>
+				
+				<div class="cities-grid">
+					{cities.map(city => (
+						<a href={`/locations/rockwall-county/${city.toLowerCase().replace(' ', '-')}`} class="city-card-link">
+							<div class="city-card">
+								<h3>{city}</h3>
+								<p>Mobile computer service</p>
+							</div>
+						</a>
+					))}
+				</div>
+			</div>
+		</section>
 
-    <!-- Service Info - CLEAN PROFESSIONAL -->
-    <section class="info-section">
-      <div class="container">
-        <h2 class="section-title">Mobile Service Throughout {countyName}</h2>
-        <p>GadgetFix provides professional computer service across all of {countyName}. Our mobile technicians come directly to your location for convenient, fast service. All repairs backed by our 90-day warranty.</p>
-        
-        <div class="service-features">
-          <div class="feature">
-            <h3>Same Day Service</h3>
-            <p>Fast response throughout {countyName}</p>
-          </div>
-          <div class="feature">
-            <h3>We Come to You</h3>
-            <p>Mobile service at your location</p>
-          </div>
-          <div class="feature">
-            <h3>90-Day Warranty</h3>
-            <p>All repairs guaranteed</p>
-          </div>
-        </div>
-      </div>
-    </section>
+		<!-- Service Info - CLEAN PROFESSIONAL -->
+		<section class="info-section">
+			<div class="container">
+				<h2 class="section-title">Mobile Service Throughout {countyName}</h2>
+				<p class="section-subtitle">GadgetFix provides professional computer service across all of {countyName}. Our mobile technicians come directly to your location for convenient, fast service.</p>
+				
+				<div class="service-features">
+					<div class="feature">
+						<h3>Same Day Service</h3>
+						<p>Fast response throughout {countyName}</p>
+					</div>
+					<div class="feature">
+						<h3>We Come to You</h3>
+						<p>Mobile service at your location</p>
+					</div>
+					<div class="feature">
+						<h3>Professional Service</h3>
+						<p>Certified technicians</p>
+					</div>
+				</div>
+			</div>
+		</section>
 
-    <!-- CTA Section - SAME AS HOMEPAGE -->
-    <section class="final-cta">
-      <div class="container">
-        <div class="cta-content">
-          <h2>READY FOR computer service?</h2>
-          <p>Professional mobile service throughout {countyName}</p>
-          <div class="cta-buttons">
-            <a href="tel:4694308607" class="btn btn-primary btn-large">CALL NOW FOR SERVICE</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+		<!-- CTA Section - SAME AS HOMEPAGE -->
+		<section class="final-cta">
+			<div class="container">
+				<div class="cta-content">
+					<h2>Ready for Computer Service?</h2>
+					<p>Professional mobile service throughout {countyName}</p>
+					<div class="cta-buttons">
+						<a href="tel:+14694308607" class="btn btn-primary btn-large">CALL NOW FOR SERVICE</a>
+						<a href="/contact" class="btn btn-secondary btn-large">SCHEDULE SERVICE</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
 </Layout>
 
 <style>
-/* USE ONLY HOMEPAGE STYLES - NO NEW CSS */
-/* Hero Section */
+/* Animation keyframes */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Hero Section - Match Homepage */
 .hero {
-  background: #1e3a8a;
-  color: white;
-  padding: 4rem 0 6rem;
-  text-align: center;
+	background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #1e40af 100%);
+	background-size: 200% 200%;
+	animation: gradientShift 8s ease infinite;
+	color: white;
+	padding: 4rem 0 6rem;
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+}
+
+.hero-content {
+	position: relative;
+	z-index: 2;
 }
 
 .hero-title {
-  font-family: var(--font-heading);
-  font-size: 4rem;
-  font-weight: 400;
-  margin-bottom: 1.5rem;
-  line-height: 1.1;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+	font-family: var(--font-heading);
+	font-size: 4rem;
+	font-weight: 400;
+	margin-bottom: 1.5rem;
+	line-height: 1.1;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	color: white;
+	text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .hero-subtitle {
-  font-size: 1.25rem;
-  margin-bottom: 2.5rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  opacity: 0.9;
-  line-height: 1.6;
+	font-size: 1.25rem;
+	margin-bottom: 2.5rem;
+	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	opacity: 0.95;
+	line-height: 1.6;
+	color: white;
 }
 
 .hero-cta {
-  margin-bottom: 3rem;
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+	flex-wrap: wrap;
 }
 
-.hero .btn-primary,
-.hero .btn-secondary {
-  background: #000000;
-  color: white;
-  border: 2px solid #000000;
-  border-radius: 100px;
-  text-decoration: none;
+.btn-primary,
+.btn-secondary {
+	padding: 1rem 2rem;
+	border-radius: 100px;
+	text-decoration: none;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	transition: all 0.3s ease;
+	display: inline-block;
 }
 
-.hero .btn-primary:hover,
-.hero .btn-secondary:hover {
-  background: #333333;
-  border-color: #333333;
+.btn-primary {
+	background: #000000;
+	color: white;
+	border: 2px solid #000000;
+}
+
+.btn-primary:hover {
+	background: #333333;
+	border-color: #333333;
+	transform: translateY(-2px);
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn-secondary {
+	background: #000000;
+	color: white;
+	border: 2px solid #000000;
+}
+
+.btn-secondary:hover {
+	background: #333333;
+	border-color: #333333;
+	transform: translateY(-2px);
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .btn-large {
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
+	padding: 1rem 2rem;
+	font-size: 1.1rem;
 }
 
-/* Section Styles */
+/* Sections */
+.cities-section,
+.info-section {
+	padding: 5rem 0;
+	background: #f8fafc;
+}
+
 .section-title {
-  font-family: var(--font-heading);
-  font-size: 3rem;
-  font-weight: 400;
-  text-align: center;
-  margin-bottom: 1rem;
-  color: var(--color-dark);
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  line-height: 1.2;
+	font-family: var(--font-heading);
+	font-size: 3rem;
+	font-weight: 400;
+	text-align: center;
+	margin-bottom: 1rem;
+	color: var(--color-dark);
+	text-transform: uppercase;
+	letter-spacing: 1.5px;
+	line-height: 1.2;
 }
 
-.cities-section {
-  padding: 6rem 0;
-  background: white;
+.section-subtitle {
+	text-align: center;
+	font-size: 1.25rem;
+	color: #6b7280;
+	margin-bottom: 3rem;
+	max-width: 700px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
+/* Cities Grid - Match Location Cards */
 .cities-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 2rem;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.city-card-link {
+	text-decoration: none;
+	display: block;
 }
 
 .city-card {
-  background: #f8f9fa;
-  padding: 1.5rem;
-  border-radius: 8px;
-  text-decoration: none;
-  color: inherit;
-  text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
-  border: 1px solid #e0e0e0;
+	background: white;
+	border: 2px solid #e5e7eb;
+	border-radius: 1rem;
+	padding: 2rem;
+	transition: all 0.3s ease;
+	position: relative;
+	overflow: hidden;
+	height: 100%;
+	cursor: pointer;
+	text-align: center;
 }
 
 .city-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-  background: #fff;
+	transform: translateY(-8px);
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+	border-color: #0066cc;
 }
 
 .city-card h3 {
-  color: #0066cc;
-  margin-bottom: 0.5rem;
+	font-family: var(--font-heading);
+	font-size: 1.5rem;
+	font-weight: 600;
+	color: #1e3a8a;
+	margin-bottom: 0.5rem;
+	text-transform: uppercase;
+	letter-spacing: 1px;
 }
 
 .city-card p {
-  color: #666;
-  font-size: 0.9rem;
+	color: #6b7280;
+	font-size: 0.95rem;
+	margin: 0;
 }
 
-.info-section {
-  padding: 6rem 0;
-  background: #f9fafb;
-  text-align: center;
-}
-
-.info-section p {
-  text-align: center;
-  font-size: 1.25rem;
-  color: #6b7280;
-  margin-bottom: 3rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
+/* Service Features */
 .service-features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 3rem;
+	margin-top: 3rem;
+	max-width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .feature {
-  text-align: center;
+	text-align: center;
+	padding: 2rem 1rem;
+	background: white;
+	border-radius: 1rem;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 .feature h3 {
-  color: #0066cc;
-  margin-bottom: 0.5rem;
-  font-family: var(--font-heading);
-  font-size: 24px;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+	color: #1e3a8a;
+	margin-bottom: 1rem;
+	font-family: var(--font-heading);
+	font-size: 1.5rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 1px;
 }
 
 .feature p {
-  color: #6b7280;
-  line-height: 1.6;
-  font-size: 16px;
+	color: #6b7280;
+	line-height: 1.6;
+	margin: 0;
 }
 
-/* Final Call to Action */
+/* Final CTA Section */
 .final-cta {
-  padding: 80px 0;
-  background: #1e3a8a;
-  text-align: center;
+	padding: 5rem 0;
+	background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #1e40af 100%);
+	background-size: 200% 200%;
+	animation: gradientShift 8s ease infinite;
+	text-align: center;
 }
 
 .final-cta .cta-content {
-  max-width: 800px;
-  margin: 0 auto;
+	max-width: 800px;
+	margin: 0 auto;
 }
 
 .final-cta h2 {
-  font-family: var(--font-heading);
-  font-size: 48px;
-  font-weight: 400;
-  color: white;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  line-height: 1.2;
+	font-family: var(--font-heading);
+	font-size: 3rem;
+	font-weight: 400;
+	color: white;
+	margin-bottom: 1rem;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	line-height: 1.2;
 }
 
 .final-cta p {
-  font-size: 20px;
-  color: white;
-  margin-bottom: 3rem;
-  line-height: 1.5;
-  opacity: 0.9;
+	font-size: 1.25rem;
+	color: white;
+	margin-bottom: 2.5rem;
+	line-height: 1.5;
+	opacity: 0.95;
 }
 
 .final-cta .cta-buttons {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+	flex-wrap: wrap;
 }
 
-.final-cta .btn {
-  border-radius: 100px;
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
-  min-width: 220px;
+.final-cta .btn-secondary {
+	background: #000000;
+	color: white;
+	border: 2px solid #000000;
 }
 
-.final-cta .btn:hover {
-  transform: translateY(-2px);
-}
-
-.final-cta .btn-primary {
-  background: #000000;
-  color: white;
-  border: 2px solid #000000;
-}
-
-.final-cta .btn-primary:hover {
-  background: #333333;
-  border-color: #333333;
+.final-cta .btn-secondary:hover {
+	background: #333333;
+	border-color: #333333;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .hero-title {
-    font-size: 2.8rem;
-  }
+	.hero {
+		padding: 3rem 0 4rem;
+	}
 
-  .hero-subtitle {
-    font-size: 1.1rem;
-  }
+	.hero-title {
+		font-size: 2.5rem;
+	}
 
-  .section-title {
-    font-size: 2.2rem;
-  }
+	.hero-subtitle {
+		font-size: 1.1rem;
+		padding: 0 1rem;
+	}
 
-  .hero-cta {
-    flex-direction: column;
-    align-items: center;
-  }
+	.hero-cta {
+		flex-direction: column;
+		align-items: center;
+	}
 
-  .cities-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
+	.btn-primary,
+	.btn-secondary {
+		width: 90%;
+		max-width: 300px;
+	}
 
-  .city-card {
-    padding: 1rem;
-  }
+	.section-title {
+		font-size: 2.2rem;
+	}
 
-  .service-features {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
+	.section-subtitle {
+		font-size: 1.1rem;
+		padding: 0 1rem;
+	}
 
-  .feature h3 {
-    font-size: 20px;
-  }
+	.cities-grid {
+		grid-template-columns: 1fr;
+		padding: 0 1rem;
+	}
 
-  .feature p {
-    font-size: 14px;
-  }
+	.service-features {
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
 
-  .final-cta {
-    padding: 60px 0;
-  }
+	.final-cta h2 {
+		font-size: 2.2rem;
+	}
 
-  .final-cta h2 {
-    font-size: 36px;
-  }
+	.final-cta p {
+		font-size: 1.1rem;
+		padding: 0 1rem;
+	}
 
-  .final-cta p {
-    font-size: 18px;
-  }
-
-  .final-cta .cta-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .final-cta .btn {
-    width: 100%;
-    max-width: 280px;
-  }
+	.final-cta .cta-buttons {
+		flex-direction: column;
+		align-items: center;
+	}
 }
 
 @media (max-width: 480px) {
-  .hero {
-    padding: 3rem 0 4rem;
-  }
+	.hero {
+		padding: 3rem 0;
+	}
 
-  .hero-title {
-    font-size: 2.2rem;
-  }
+	.hero-title {
+		font-size: 2rem;
+	}
 
-  .cities-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
+	.cities-section,
+	.info-section {
+		padding: 3rem 0;
+	}
 
-  .city-card {
-    padding: 1rem;
-  }
+	.city-card {
+		padding: 1.5rem;
+	}
 
-  .service-features {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
+	.city-card h3 {
+		font-size: 1.25rem;
+	}
 
-  .feature h3 {
-    font-size: 18px;
-  }
+	.final-cta {
+		padding: 3rem 0;
+	}
 
-  .feature p {
-    font-size: 14px;
-  }
-
-  .final-cta {
-    padding: 40px 0;
-  }
-
-  .final-cta h2 {
-    font-size: 28px;
-  }
-
-  .final-cta p {
-    font-size: 16px;
-  }
-
-  .final-cta .btn {
-    padding: 14px 24px;
-    font-size: 14px;
-  }
+	.final-cta h2 {
+		font-size: 1.8rem;
+	}
 }
 </style>

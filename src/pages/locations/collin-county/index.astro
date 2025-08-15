@@ -11,15 +11,16 @@ const cities = ["McKinney", "Frisco", "Allen", "Wylie", "Murphy", "Lucas", "Fair
 	description={`Mobile computer service service throughout ${countyName}. We serve all cities with same-day service. Call (469) 430-8607`}
 >
 	<main>
-		<!-- Hero Section - SAME AS HOMEPAGE -->
+		<!-- Hero Section -->
 		<section class="hero">
 			<div class="container">
 				<div class="hero-content">
-					<h1 class="hero-title">{countyName} computer service</h1>
-					<p class="hero-subtitle">Select Your City for Mobile computer service Service</p>
+					<h1 class="hero-title">{countyName} Computer Service</h1>
+					<p class="hero-subtitle">Select Your City for Mobile Computer Service</p>
 					
 					<div class="hero-cta">
 						<a href="tel:+14694308607" class="btn btn-primary btn-large">CALL NOW FOR SERVICE</a>
+						<a href="/contact" class="btn btn-secondary btn-large">SCHEDULE SERVICE</a>
 					</div>
 				</div>
 			</div>
@@ -32,9 +33,11 @@ const cities = ["McKinney", "Frisco", "Allen", "Wylie", "Murphy", "Lucas", "Fair
 				
 				<div class="cities-grid">
 					{cities.map(city => (
-						<a href={`/locations/collin-county/${city.toLowerCase().replace(' ', '-')}`} class="city-card">
-							<h3>{city}</h3>
-							<p>Mobile repair service</p>
+						<a href={`/locations/collin-county/${city.toLowerCase().replace(' ', '-')}`} class="city-card-link">
+							<div class="city-card">
+								<h3>{city}</h3>
+								<p>Mobile computer service</p>
+							</div>
 						</a>
 					))}
 				</div>
@@ -45,7 +48,7 @@ const cities = ["McKinney", "Frisco", "Allen", "Wylie", "Murphy", "Lucas", "Fair
 		<section class="info-section">
 			<div class="container">
 				<h2 class="section-title">Mobile Service Throughout {countyName}</h2>
-				<p>GadgetFix provides professional computer service across all of {countyName}. Our mobile technicians come directly to your location for convenient, fast service. All repairs backed by our 90-day warranty.</p>
+				<p class="section-subtitle">GadgetFix provides professional computer service across all of {countyName}. Our mobile technicians come directly to your location for convenient, fast service.</p>
 				
 				<div class="service-features">
 					<div class="feature">
@@ -57,8 +60,8 @@ const cities = ["McKinney", "Frisco", "Allen", "Wylie", "Murphy", "Lucas", "Fair
 						<p>Mobile service at your location</p>
 					</div>
 					<div class="feature">
-						<h3>90-Day Warranty</h3>
-						<p>All repairs guaranteed</p>
+						<h3>Professional Service</h3>
+						<p>Certified technicians</p>
 					</div>
 				</div>
 			</div>
@@ -68,10 +71,11 @@ const cities = ["McKinney", "Frisco", "Allen", "Wylie", "Murphy", "Lucas", "Fair
 		<section class="final-cta">
 			<div class="container">
 				<div class="cta-content">
-					<h2>READY FOR computer service?</h2>
+					<h2>Ready for Computer Service?</h2>
 					<p>Professional mobile service throughout {countyName}</p>
 					<div class="cta-buttons">
 						<a href="tel:+14694308607" class="btn btn-primary btn-large">CALL NOW FOR SERVICE</a>
+						<a href="/contact" class="btn btn-secondary btn-large">SCHEDULE SERVICE</a>
 					</div>
 				</div>
 			</div>
@@ -80,301 +84,355 @@ const cities = ["McKinney", "Frisco", "Allen", "Wylie", "Murphy", "Lucas", "Fair
 </Layout>
 
 <style>
-	/* Hero - EXACT HOMEPAGE STYLING */
+/* Animation keyframes */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Hero Section - Match Homepage */
+.hero {
+	background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #1e40af 100%);
+	background-size: 200% 200%;
+	animation: gradientShift 8s ease infinite;
+	color: white;
+	padding: 4rem 0 6rem;
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+}
+
+.hero-content {
+	position: relative;
+	z-index: 2;
+}
+
+.hero-title {
+	font-family: var(--font-heading);
+	font-size: 4rem;
+	font-weight: 400;
+	margin-bottom: 1.5rem;
+	line-height: 1.1;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	color: white;
+	text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+	font-size: 1.25rem;
+	margin-bottom: 2.5rem;
+	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	opacity: 0.95;
+	line-height: 1.6;
+	color: white;
+}
+
+.hero-cta {
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary {
+	padding: 1rem 2rem;
+	border-radius: 100px;
+	text-decoration: none;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	transition: all 0.3s ease;
+	display: inline-block;
+}
+
+.btn-primary {
+	background: #000000;
+	color: white;
+	border: 2px solid #000000;
+}
+
+.btn-primary:hover {
+	background: #333333;
+	border-color: #333333;
+	transform: translateY(-2px);
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn-secondary {
+	background: #000000;
+	color: white;
+	border: 2px solid #000000;
+}
+
+.btn-secondary:hover {
+	background: #333333;
+	border-color: #333333;
+	transform: translateY(-2px);
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn-large {
+	padding: 1rem 2rem;
+	font-size: 1.1rem;
+}
+
+/* Sections */
+.cities-section,
+.info-section {
+	padding: 5rem 0;
+	background: #f8fafc;
+}
+
+.section-title {
+	font-family: var(--font-heading);
+	font-size: 3rem;
+	font-weight: 400;
+	text-align: center;
+	margin-bottom: 1rem;
+	color: var(--color-dark);
+	text-transform: uppercase;
+	letter-spacing: 1.5px;
+	line-height: 1.2;
+}
+
+.section-subtitle {
+	text-align: center;
+	font-size: 1.25rem;
+	color: #6b7280;
+	margin-bottom: 3rem;
+	max-width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Cities Grid - Match Location Cards */
+.cities-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 2rem;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.city-card-link {
+	text-decoration: none;
+	display: block;
+}
+
+.city-card {
+	background: white;
+	border: 2px solid #e5e7eb;
+	border-radius: 1rem;
+	padding: 2rem;
+	transition: all 0.3s ease;
+	position: relative;
+	overflow: hidden;
+	height: 100%;
+	cursor: pointer;
+	text-align: center;
+}
+
+.city-card:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+	border-color: #0066cc;
+}
+
+.city-card h3 {
+	font-family: var(--font-heading);
+	font-size: 1.5rem;
+	font-weight: 600;
+	color: #1e3a8a;
+	margin-bottom: 0.5rem;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.city-card p {
+	color: #6b7280;
+	font-size: 0.95rem;
+	margin: 0;
+}
+
+/* Service Features */
+.service-features {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 3rem;
+	margin-top: 3rem;
+	max-width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.feature {
+	text-align: center;
+	padding: 2rem 1rem;
+	background: white;
+	border-radius: 1rem;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.feature h3 {
+	color: #1e3a8a;
+	margin-bottom: 1rem;
+	font-family: var(--font-heading);
+	font-size: 1.5rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.feature p {
+	color: #6b7280;
+	line-height: 1.6;
+	margin: 0;
+}
+
+/* Final CTA Section */
+.final-cta {
+	padding: 5rem 0;
+	background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #1e40af 100%);
+	background-size: 200% 200%;
+	animation: gradientShift 8s ease infinite;
+	text-align: center;
+}
+
+.final-cta .cta-content {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.final-cta h2 {
+	font-family: var(--font-heading);
+	font-size: 3rem;
+	font-weight: 400;
+	color: white;
+	margin-bottom: 1rem;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	line-height: 1.2;
+}
+
+.final-cta p {
+	font-size: 1.25rem;
+	color: white;
+	margin-bottom: 2.5rem;
+	line-height: 1.5;
+	opacity: 0.95;
+}
+
+.final-cta .cta-buttons {
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.final-cta .btn-secondary {
+	background: #000000;
+	color: white;
+	border: 2px solid #000000;
+}
+
+.final-cta .btn-secondary:hover {
+	background: #333333;
+	border-color: #333333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
 	.hero {
-		background: #1e3a8a;
-		color: white;
-		padding: 4rem 0 6rem;
-		text-align: center;
+		padding: 3rem 0 4rem;
 	}
 
 	.hero-title {
-		font-family: var(--font-heading);
-		font-size: 4rem;
-		font-weight: 400;
-		margin-bottom: 1.5rem;
-		line-height: 1.1;
-		text-transform: uppercase;
-		letter-spacing: 2px;
+		font-size: 2.5rem;
 	}
 
 	.hero-subtitle {
-		font-size: 1.25rem;
-		margin-bottom: 2.5rem;
-		max-width: 600px;
-		margin-left: auto;
-		margin-right: auto;
-		opacity: 0.9;
-		line-height: 1.6;
+		font-size: 1.1rem;
+		padding: 0 1rem;
 	}
 
 	.hero-cta {
-		margin-bottom: 3rem;
-		display: flex;
-		gap: 1rem;
-		justify-content: center;
-		flex-wrap: wrap;
+		flex-direction: column;
+		align-items: center;
 	}
 
-	.hero .btn-primary,
-	.hero .btn-secondary {
-		background: #000000;
-		color: white;
-		border: 2px solid #000000;
-		border-radius: 100px;
-		text-decoration: none;
-	}
-
-	.hero .btn-primary:hover,
-	.hero .btn-secondary:hover {
-		background: #333333;
-		border-color: #333333;
-	}
-
-	.btn-large {
-		padding: 1rem 2rem;
-		font-size: 1.1rem;
-	}
-
-	/* Sections - HOMEPAGE STYLING */
-	.cities-section,
-	.info-section {
-		padding: 6rem 0;
+	.btn-primary,
+	.btn-secondary {
+		width: 90%;
+		max-width: 300px;
 	}
 
 	.section-title {
-		font-family: var(--font-heading);
-		font-size: 2.5rem;
-		font-weight: 400;
-		text-align: center;
-		margin-bottom: 2rem;
-		color: var(--color-dark);
-		text-transform: uppercase;
-		letter-spacing: 1px;
+		font-size: 2.2rem;
 	}
 
-	/* Cities Grid - CLEAN DESIGN */
+	.section-subtitle {
+		font-size: 1.1rem;
+		padding: 0 1rem;
+	}
+
 	.cities-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		gap: 1.5rem;
-		margin-top: 2rem;
+		grid-template-columns: 1fr;
+		padding: 0 1rem;
 	}
 
-	.city-card {
-		background: #f8f9fa;
-		padding: 1.5rem;
-		border-radius: 8px;
-		text-decoration: none;
-		color: inherit;
-		text-align: center;
-		transition: transform 0.3s, box-shadow 0.3s;
-		border: 1px solid #e0e0e0;
-	}
-
-	.city-card:hover {
-		transform: translateY(-5px);
-		box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-		background: #fff;
-	}
-
-	.city-card h3 {
-		color: #0066cc;
-		margin-bottom: 0.5rem;
-		font-family: var(--font-heading);
-		font-size: 1.2rem;
-		font-weight: 400;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-	}
-
-	.city-card p {
-		color: #666;
-		font-size: 0.9rem;
-		margin: 0;
-	}
-
-	/* Service Features */
 	.service-features {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		grid-template-columns: 1fr;
 		gap: 2rem;
-		margin-top: 3rem;
-	}
-
-	.feature {
-		text-align: center;
-		padding: 2rem 1rem;
-	}
-
-	.feature h3 {
-		color: #0066cc;
-		margin-bottom: 0.5rem;
-		font-family: var(--font-heading);
-		font-size: 1.3rem;
-		font-weight: 400;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-	}
-
-	.feature p {
-		color: #666;
-		line-height: 1.6;
-		margin: 0;
-	}
-
-	/* Final Call to Action - EXACT HOMEPAGE STYLING */
-	.final-cta {
-		padding: 80px 0;
-		background: #1e3a8a;
-		text-align: center;
-	}
-
-	.final-cta .cta-content {
-		max-width: 800px;
-		margin: 0 auto;
 	}
 
 	.final-cta h2 {
-		font-family: var(--font-heading);
-		font-size: 48px;
-		font-weight: 400;
-		color: white;
-		margin-bottom: 1rem;
-		text-transform: uppercase;
-		letter-spacing: 2px;
-		line-height: 1.2;
+		font-size: 2.2rem;
 	}
 
 	.final-cta p {
-		font-size: 20px;
-		color: white;
-		margin-bottom: 3rem;
-		line-height: 1.5;
-		opacity: 0.9;
+		font-size: 1.1rem;
+		padding: 0 1rem;
 	}
 
 	.final-cta .cta-buttons {
-		display: flex;
-		gap: 20px;
-		justify-content: center;
-		flex-wrap: wrap;
+		flex-direction: column;
+		align-items: center;
+	}
+}
+
+@media (max-width: 480px) {
+	.hero {
+		padding: 3rem 0;
 	}
 
-	.final-cta .btn {
-		border-radius: 100px;
-		padding: 1rem 2rem;
-		font-size: 1.1rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		transition: all 0.3s ease;
-		text-decoration: none;
-		display: inline-block;
-		min-width: 220px;
+	.hero-title {
+		font-size: 2rem;
 	}
 
-	.final-cta .btn:hover {
-		transform: translateY(-2px);
+	.cities-section,
+	.info-section {
+		padding: 3rem 0;
 	}
 
-	.final-cta .btn-primary {
-		background: #000000;
-		color: white;
-		border: 2px solid #000000;
+	.city-card {
+		padding: 1.5rem;
 	}
 
-	.final-cta .btn-primary:hover {
-		background: #333333;
-		border-color: #333333;
+	.city-card h3 {
+		font-size: 1.25rem;
 	}
 
-	/* Responsive Design - HOMEPAGE BREAKPOINTS */
-	@media (max-width: 768px) {
-		.hero {
-			padding: 3rem 0 4rem;
-		}
-
-		.hero-title {
-			font-size: 2.2rem;
-		}
-
-		.hero-subtitle {
-			font-size: 1.1rem;
-		}
-
-		.hero-cta {
-			flex-direction: column;
-			align-items: center;
-		}
-
-		.section-title {
-			font-size: 2rem;
-		}
-
-		.cities-grid {
-			grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-			gap: 1rem;
-		}
-
-		.service-features {
-			grid-template-columns: 1fr;
-			gap: 1.5rem;
-		}
-
-		.final-cta h2 {
-			font-size: 36px;
-		}
-
-		.final-cta p {
-			font-size: 18px;
-		}
-
-		.final-cta .cta-buttons {
-			flex-direction: column;
-			align-items: center;
-		}
-
-		.final-cta .btn {
-			width: 100%;
-			max-width: 280px;
-		}
+	.final-cta {
+		padding: 3rem 0;
 	}
 
-	@media (max-width: 480px) {
-		.hero {
-			padding: 3rem 0;
-		}
-
-		.hero-title {
-			font-size: 1.8rem;
-		}
-
-		.cities-section,
-		.info-section {
-			padding: 4rem 0;
-		}
-
-		.final-cta {
-			padding: 40px 0;
-		}
-
-		.final-cta h2 {
-			font-size: 28px;
-		}
-
-		.final-cta p {
-			font-size: 16px;
-		}
-
-		.final-cta .btn {
-			padding: 14px 24px;
-			font-size: 14px;
-		}
-
-		.city-card,
-		.feature {
-			padding: 1rem;
-		}
+	.final-cta h2 {
+		font-size: 1.8rem;
 	}
+}
 </style>

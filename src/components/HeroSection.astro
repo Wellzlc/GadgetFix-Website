@@ -1,0 +1,195 @@
+---
+export interface Props {
+  title: string;
+  subtitle?: string;
+  showCTA?: boolean;
+  ctaPrimary?: {
+    text: string;
+    href: string;
+  };
+  ctaSecondary?: {
+    text: string;
+    href: string;
+  };
+  className?: string;
+}
+
+const { 
+  title, 
+  subtitle, 
+  showCTA = false,
+  ctaPrimary = { text: 'CALL NOW FOR SERVICE', href: 'tel:+14694308607' },
+  ctaSecondary = { text: 'SCHEDULE SERVICE', href: '/contact' },
+  className = ''
+} = Astro.props;
+---
+
+<section class={`hero hero-gradient wave-bottom ${className}`}>
+  <div class="container">
+    <div class="hero-content animate-on-scroll">
+      <h1 class="hero-title">{title}</h1>
+      {subtitle && <p class="hero-subtitle" set:html={subtitle}></p>}
+      {showCTA && (
+        <div class="hero-cta hero-buttons">
+          <a href={ctaPrimary.href} class="btn btn-primary btn-enhanced btn-black btn-large" aria-label={ctaPrimary.text}>
+            <span itemprop="telephone">{ctaPrimary.text}</span>
+          </a>
+          <a href={ctaSecondary.href} class="btn btn-secondary btn-enhanced btn-black btn-large" aria-label={ctaSecondary.text}>
+            {ctaSecondary.text}
+          </a>
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Hero animation initialization
+  document.addEventListener('DOMContentLoaded', () => {
+    const heroElements = document.querySelectorAll('.hero-title, .hero-subtitle, .hero-cta');
+    heroElements.forEach((el, index) => {
+      const element = el as HTMLElement;
+      element.style.opacity = '0';
+      element.style.transform = 'translateY(20px)';
+      element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      
+      setTimeout(() => {
+        element.style.opacity = '1';
+        element.style.transform = 'translateY(0)';
+      }, 300 + (index * 200));
+    });
+  });
+</script>
+
+<style>
+/* Hero Section Styles */
+.hero, .hero-gradient {
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #1e40af 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+  color: white;
+  padding: 4rem 0 6rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.wave-bottom::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,133.3C672,139,768,181,864,181.3C960,181,1056,139,1152,117.3C1248,96,1344,96,1392,96L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") no-repeat;
+  background-size: cover;
+  animation: wave 10s linear infinite;
+}
+
+@keyframes wave {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  line-height: 1.1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  animation: titleGlow 3s ease-in-out infinite;
+  color: white;
+}
+
+@keyframes titleGlow {
+  0%, 100% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); }
+  50% { text-shadow: 2px 2px 20px rgba(255, 255, 255, 0.3); }
+}
+
+.hero-subtitle {
+  font-size: 1.3rem;
+  opacity: 0.95;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+  color: white;
+}
+
+.hero-buttons, .hero-cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.btn-enhanced, .btn-black, .btn-primary, .btn-secondary {
+  background: #000000;
+  color: white;
+  border: 3px solid #000000;
+  border-radius: 50px;
+  padding: 1.2rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.btn-enhanced:hover, .btn-black:hover, .btn-primary:hover, .btn-secondary:hover {
+  background: #1a1a1a;
+  border-color: #333333;
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn-enhanced {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+</style>

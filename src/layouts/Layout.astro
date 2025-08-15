@@ -473,10 +473,16 @@ const {
 	</body>
 </html>
 
-<!-- Load non-critical styles asynchronously -->
+<!-- Temporarily disabled external CSS to fix location pages -->
+<!-- 
 <link rel="preload" href="/css/layout.css" as="style">
 <link rel="stylesheet" href="/css/layout.css" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="/css/layout.css"></noscript>
+
+<link rel="preload" href="/styles/unified-design-system.css" as="style">
+<link rel="stylesheet" href="/styles/unified-design-system.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="/styles/unified-design-system.css"></noscript>
+-->
 
 <style>
 	/* Critical inline styles moved to external CSS file */
@@ -625,10 +631,36 @@ const {
 
 	/* Footer */
 	.footer {
-		background: #111827;
+		background: linear-gradient(135deg, #111827 0%, #1e293b 50%, #111827 100%);
+		background-size: 200% 200%;
+		animation: footerGradient 10s ease infinite;
 		color: white;
 		margin-top: 0;
 		padding: 4rem 0 2rem;
+		position: relative;
+		overflow: hidden;
+	}
+
+	@keyframes footerGradient {
+		0% { background-position: 0% 50%; }
+		50% { background-position: 100% 50%; }
+		100% { background-position: 0% 50%; }
+	}
+
+	.footer::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 1px;
+		background: linear-gradient(90deg, transparent, #2563eb, transparent);
+		animation: footerShine 3s linear infinite;
+	}
+
+	@keyframes footerShine {
+		0% { transform: translateX(-100%); }
+		100% { transform: translateX(100%); }
 	}
 
 	.footer-grid {
@@ -747,11 +779,28 @@ const {
 		font-size: 0.95rem;
 		transition: all 0.3s ease;
 		display: inline-block;
+		position: relative;
+		padding-left: 10px;
+	}
+
+	.footer-links a::before {
+		content: '→';
+		position: absolute;
+		left: 0;
+		opacity: 0;
+		transition: opacity 0.3s ease, transform 0.3s ease;
+		transform: translateX(-5px);
 	}
 
 	.footer-links a:hover {
 		color: white;
-		transform: translateX(3px);
+		transform: translateX(8px);
+		text-shadow: 0 0 10px rgba(37, 99, 235, 0.3);
+	}
+
+	.footer-links a:hover::before {
+		opacity: 1;
+		transform: translateX(0);
 	}
 
 	.footer-link-all {

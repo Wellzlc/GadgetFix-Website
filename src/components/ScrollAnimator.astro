@@ -1,0 +1,50 @@
+---
+// This component initializes scroll animations for elements with .animate-on-scroll class
+---
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Select all elements to animate
+    const animateElements = document.querySelectorAll(
+      '.service-card, .why-item, .cities-region, .section-title, .section-subtitle, ' +
+      '.map-title, .map-subtitle, .final-cta h2, .final-cta p, .final-cta .btn, ' +
+      '.animate-on-scroll'
+    );
+    
+    // Add initial hidden state
+    animateElements.forEach(el => {
+      const element = el as HTMLElement;
+      if (!element.classList.contains('hero-title') && 
+          !element.classList.contains('hero-subtitle') && 
+          !element.classList.contains('hero-cta')) {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(30px)';
+        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      }
+    });
+    
+    // Create intersection observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          // Add staggered delay based on index within viewport
+          setTimeout(() => {
+            const target = entry.target as HTMLElement;
+            target.style.opacity = '1';
+            target.style.transform = 'translateY(0)';
+            target.classList.add('visible');
+          }, index * 50); // 50ms delay between elements
+          
+          // Stop observing after animation
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1, // Trigger when 10% visible
+      rootMargin: '0px 0px -50px 0px' // Start animation slightly before fully in view
+    });
+    
+    // Start observing all elements
+    animateElements.forEach(el => observer.observe(el));
+  });
+</script>

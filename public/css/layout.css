@@ -25,12 +25,7 @@ img[loading="lazy"].loaded {
 }
 
 /* Optimize background images */
-.hero-section, .hero {
-  background-size: cover;
-  background-position: center;
-  will-change: transform;
-  contain: layout style paint;
-}
+/* Removed hero-section styles that were conflicting with location pages */
 
 /* Preload critical images */
 link[rel="preload"][as="image"] {

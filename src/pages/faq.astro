@@ -7,18 +7,25 @@ import Layout from '../layouts/Layout.astro';
   description="Answers to common questions about computer services in Dallas Fort Worth. Service times, security, service areas, and more. Mobile service available."
   keywords="computer service questions, virus removal time, password reset service, mobile computer service dallas"
 >
-  <main class="faq-page">
+  <section class="faq-hero hero-gradient wave-bottom">
     <div class="container">
-      <h1>Frequently Asked Questions - Computer Service Dallas Fort Worth</h1>
-      
-      <div class="faq-intro">
+      <div class="hero-content animate-on-scroll">
+        <h1 class="hero-title">Frequently Asked Questions</h1>
+        <p class="hero-subtitle">Computer Service Dallas Fort Worth</p>
+      </div>
+    </div>
+  </section>
+
+  <main class="faq-page section-gradient">
+    <div class="container">      
+      <div class="faq-intro animate-on-scroll">
         <p>Get answers to common questions about our mobile computer services in the Dallas-Fort Worth area. 
-        Can't find your answer? Call us at <a href="tel:4694308607">(469) 430-8607</a>.</p>
+        Can't find your answer? Call us at <a href="tel:4694308607" class="phone-link">(469) 430-8607</a>.</p>
       </div>
       
       <div class="faq-grid">
         <!-- Service FAQs -->
-        <section class="faq-section">
+        <section class="faq-section animate-on-scroll">
           <div class="section-header">
             <div class="section-icon">
               <svg role="img" aria-label="Service and repair icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -28,36 +35,36 @@ import Layout from '../layouts/Layout.astro';
             <h2>Service & Repair Questions</h2>
           </div>
           
-          <div class="faq-item">
-            <h3>How long does virus removal take?</h3>
+          <div class="faq-item enhanced-card animate-on-scroll">
+            <h3 class="gradient-text">How long does virus removal take?</h3>
             <p>Most <a href="/virus-removal-service" style="color: #2563EB; text-decoration: underline;">virus removals</a> take 30-60 minutes. <a href="/password-reset-service" style="color: #2563EB; text-decoration: underline;">Password resets</a> typically take 15-30 minutes, 
             <a href="/computer-optimization" style="color: #2563EB; text-decoration: underline;">computer optimization</a> takes 30-45 minutes, and full system cleanups take 45-60 minutes. We complete services 
             on-site while you wait, whether at your home, office, or preferred location in DFW.</p>
           </div>
           
-          <div class="faq-item">
-            <h3>Do you come to my location?</h3>
+          <div class="faq-item enhanced-card animate-on-scroll">
+            <h3 class="gradient-text">Do you come to my location?</h3>
             <p>Yes! We're a 100% mobile service covering all of Dallas-Fort Worth. We come to your home, 
             office, coffee shop, or any safe public location. Our service area includes <a href="/locations/dallas-county/dallas" style="color: #2563EB; text-decoration: underline;">Dallas</a>, <a href="/locations/tarrant-county/fort-worth" style="color: #2563EB; text-decoration: underline;">Fort Worth</a>, <a href="/locations/dallas-county/plano" style="color: #2563EB; text-decoration: underline;">Plano</a>, 
             <a href="/locations/collin-county/frisco" style="color: #2563EB; text-decoration: underline;">Frisco</a>, <a href="/locations/dallas-county/irving" style="color: #2563EB; text-decoration: underline;">Irving</a>, <a href="/locations/tarrant-county/arlington" style="color: #2563EB; text-decoration: underline;">Arlington</a>, and surrounding cities within a 30-mile radius.</p>
           </div>
           
-          <div class="faq-item">
-            <h3>What areas do you serve?</h3>
+          <div class="faq-item enhanced-card animate-on-scroll">
+            <h3 class="gradient-text">What areas do you serve?</h3>
             <p>We serve the entire Dallas-Fort Worth metroplex including: <a href="/locations/dallas-county" style="color: #2563EB; text-decoration: underline;">Dallas County</a> (Dallas, Richardson, Garland), 
             <a href="/locations/tarrant-county" style="color: #2563EB; text-decoration: underline;">Tarrant County</a> (Fort Worth, Arlington, Grand Prairie), <a href="/locations/collin-county" style="color: #2563EB; text-decoration: underline;">Collin County</a> (Plano, Frisco, McKinney, Allen), 
             and <a href="/locations/denton-county" style="color: #2563EB; text-decoration: underline;">Denton County</a> (Denton, Lewisville, Flower Mound). Typical arrival time is 30 minutes.</p>
           </div>
           
-          <div class="faq-item">
-            <h3>Do you fix all computer problems?</h3>
+          <div class="faq-item enhanced-card animate-on-scroll">
+            <h3 class="gradient-text">Do you fix all computer problems?</h3>
             <p>Yes, we fix all software-related computer issues including viruses, malware, slow performance, 
             password problems, software installation, and network issues. We specialize in Windows and Mac computers. 
             We serve <a href="/emergency-computer-service" style="color: #2563EB; text-decoration: underline;">emergency computer service</a> cases throughout Dallas-Fort Worth.</p>
           </div>
           
-          <div class="faq-item">
-            <h3>Do you provide estimates?</h3>
+          <div class="faq-item enhanced-card animate-on-scroll">
+            <h3 class="gradient-text">Do you provide estimates?</h3>
             <p>Yes, we provide professional diagnostics and transparent estimates for all computer issues. If your computer won't start or has unknown problems, 
             we'll diagnose it and provide a clear service quote. You only pay if you approve the service. Call us for an instant quote over the phone.</p>
           </div>
@@ -246,35 +253,166 @@ import Layout from '../layouts/Layout.astro';
   </main>
 </Layout>
 
+<!-- Scroll Animations -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+    
+    animatedElements.forEach(element => {
+      observer.observe(element);
+    });
+  });
+</script>
+
 <style>
+/* Enhanced Design System */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes wave {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes titleGlow {
+  0%, 100% { text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); }
+  50% { text-shadow: 2px 2px 20px rgba(255, 255, 255, 0.3); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(30px, -30px) rotate(120deg); }
+  66% { transform: translate(-20px, 20px) rotate(240deg); }
+}
+
+/* Hero Section */
+.faq-hero {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-gradient {
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #1e40af 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+  color: white;
+}
+
+.wave-bottom::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,133.3C672,139,768,181,864,181.3C960,181,1056,139,1152,117.3C1248,96,1344,96,1392,96L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") no-repeat;
+  background-size: cover;
+  animation: wave 10s linear infinite;
+}
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  animation: titleGlow 3s ease-in-out infinite;
+}
+
+.hero-subtitle {
+  font-size: 1.3rem;
+  opacity: 0.95;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Section Background */
+.section-gradient {
+  background: linear-gradient(180deg, #ffffff 0%, #f0f4ff 50%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.section-gradient::before {
+  content: '';
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  top: -25%;
+  left: -25%;
+  background: radial-gradient(circle at center, rgba(37, 99, 235, 0.05) 0%, transparent 50%);
+  animation: float 20s ease-in-out infinite;
+}
+
+/* Scroll Animations */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .faq-page {
-  padding: 2rem 0;
+  padding: 4rem 0;
+  position: relative;
+  z-index: 1;
 }
 
 .container {
   max-width: 1000px;
   margin: 0 auto;
   padding: 0 1rem;
-}
-
-h1 {
-  color: #1e3a8a;
-  text-align: center;
-  margin-bottom: 1rem;
-  font-family: var(--font-heading);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  position: relative;
+  z-index: 2;
 }
 
 .faq-intro {
   text-align: center;
   margin-bottom: 3rem;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  color: #333;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.faq-intro a {
-  color: #2563EB;
+.phone-link {
+  color: white;
+  background: linear-gradient(135deg, #2563eb, #1e3a8a);
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+  text-decoration: none;
   font-weight: bold;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.phone-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
 }
 
 .faq-section {
@@ -304,6 +442,52 @@ h1 {
   font-weight: 400;
 }
 
+/* Enhanced Cards */
+.enhanced-card {
+  background: linear-gradient(145deg, #ffffff, #f8f9fa);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  border-radius: 20px;
+  border: 1px solid rgba(30, 58, 138, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.enhanced-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #1e3a8a, #2563eb);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+  transform-origin: left;
+}
+
+.enhanced-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(30, 58, 138, 0.2);
+  border-color: transparent;
+  background: linear-gradient(145deg, #ffffff, #e8f0ff);
+}
+
+.enhanced-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+}
+
 .faq-item {
   margin-bottom: 2rem;
   padding: 1.5rem;
@@ -320,14 +504,18 @@ h1 {
 
 .faq-item h3 {
   color: #1e3a8a;
-  margin-bottom: 0.75rem;
-  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
   font-weight: 600;
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .faq-item p {
   line-height: 1.8;
   color: #333;
+  font-size: 1.05rem;
 }
 
 .faq-item a {

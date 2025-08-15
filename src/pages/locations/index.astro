@@ -28,96 +28,61 @@ import Layout from '../../layouts/Layout.astro';
 			<p class="section-subtitle">Click on any county below to see specific cities and service details</p>
 			
 			<div class="locations-grid">
-				<div class="location-card">
-					<div class="card-content">
+				<a href="/locations/dallas-county" class="location-card-link">
+					<div class="location-card">
 						<h3>Dallas County</h3>
 						<p>Serving Dallas, Plano, Irving, Garland, Mesquite, Richardson, Carrollton and surrounding communities</p>
 						<div class="city-count">12+ Cities</div>
 					</div>
-					<a href="/locations/dallas-county" class="card-link">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<polyline points="9,18 15,12 9,6"></polyline>
-						</svg>
-					</a>
-				</div>
+				</a>
 
-				<div class="location-card">
-					<div class="card-content">
+				<a href="/locations/tarrant-county" class="location-card-link">
+					<div class="location-card">
 						<h3>Tarrant County</h3>
 						<p>Serving Fort Worth, Arlington, Grand Prairie, Euless, Bedford, Hurst, Grapevine and more</p>
 						<div class="city-count">12+ Cities</div>
 					</div>
-					<a href="/locations/tarrant-county" class="card-link">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<polyline points="9,18 15,12 9,6"></polyline>
-						</svg>
-					</a>
-				</div>
+				</a>
 
-				<div class="location-card">
-					<div class="card-content">
+				<a href="/locations/collin-county" class="location-card-link">
+					<div class="location-card">
 						<h3>Collin County</h3>
 						<p>Serving McKinney, Frisco, Allen, Wylie, Murphy, Lucas, Fairview and surrounding areas</p>
 						<div class="city-count">8+ Cities</div>
 					</div>
-					<a href="/locations/collin-county" class="card-link">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<polyline points="9,18 15,12 9,6"></polyline>
-						</svg>
-					</a>
-				</div>
+				</a>
 
-				<div class="location-card">
-					<div class="card-content">
+				<a href="/locations/denton-county" class="location-card-link">
+					<div class="location-card">
 						<h3>Denton County</h3>
 						<p>Serving Denton, Lewisville, Flower Mound, Coppell, The Colony, Little Elm and more</p>
 						<div class="city-count">7+ Cities</div>
 					</div>
-					<a href="/locations/denton-county" class="card-link">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<polyline points="9,18 15,12 9,6"></polyline>
-						</svg>
-					</a>
-				</div>
+				</a>
 
-				<div class="location-card">
-					<div class="card-content">
+				<a href="/locations/rockwall-county" class="location-card-link">
+					<div class="location-card">
 						<h3>Rockwall County</h3>
 						<p>Serving Rockwall, Heath, Fate, Royse City, McLendon-Chisholm and surrounding areas</p>
 						<div class="city-count">5+ Cities</div>
 					</div>
-					<a href="/locations/rockwall-county" class="card-link">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<polyline points="9,18 15,12 9,6"></polyline>
-						</svg>
-					</a>
-				</div>
+				</a>
 
-				<div class="location-card">
-					<div class="card-content">
+				<a href="/locations/kaufman-county" class="location-card-link">
+					<div class="location-card">
 						<h3>Kaufman County</h3>
 						<p>Serving Terrell, Forney and surrounding communities in Kaufman County</p>
 						<div class="city-count">2+ Cities</div>
 					</div>
-					<a href="/locations/kaufman-county" class="card-link">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<polyline points="9,18 15,12 9,6"></polyline>
-						</svg>
-					</a>
-				</div>
+				</a>
 
-				<div class="location-card">
-					<div class="card-content">
+				<a href="/locations/ellis-county" class="location-card-link">
+					<div class="location-card">
 						<h3>Ellis County</h3>
 						<p>Serving Waxahachie, Red Oak, Midlothian and surrounding Ellis County areas</p>
 						<div class="city-count">3+ Cities</div>
 					</div>
-					<a href="/locations/ellis-county" class="card-link">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<polyline points="9,18 15,12 9,6"></polyline>
-						</svg>
-					</a>
-				</div>
+				</a>
 			</div>
 		</div>
 	</section>
@@ -125,75 +90,122 @@ import Layout from '../../layouts/Layout.astro';
 </Layout>
 
 <style>
-	/* Hero */
-	.hero {
-		background: #1e3a8a;
-		color: white;
-		padding: 4rem 0 6rem;
-		text-align: center;
-	}
+/* Animation keyframes */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-	.hero-title {
-		font-family: var(--font-heading);
-		font-size: 4rem;
-		font-weight: 400;
-		margin-bottom: 1.5rem;
-		line-height: 1.1;
-		text-transform: uppercase;
-		letter-spacing: 2px;
-	}
+/* Hero Section - Match Homepage */
+.hero {
+	background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #1e40af 100%);
+	background-size: 200% 200%;
+	animation: gradientShift 8s ease infinite;
+	color: white;
+	padding: 4rem 0 6rem;
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+}
 
-	.hero-subtitle {
-		font-size: 1.25rem;
-		margin-bottom: 2.5rem;
-		max-width: 600px;
-		margin-left: auto;
-		margin-right: auto;
-		opacity: 0.9;
-		line-height: 1.6;
-	}
+.hero-content {
+	position: relative;
+	z-index: 2;
+}
 
-	.hero-cta {
-		margin-bottom: 3rem;
-		display: flex;
-		gap: 1rem;
-		justify-content: center;
-		flex-wrap: wrap;
-	}
+.hero-title {
+	font-family: var(--font-heading);
+	font-size: 4rem;
+	font-weight: 400;
+	margin-bottom: 1.5rem;
+	line-height: 1.1;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	color: white;
+	text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
 
-	.hero .btn-primary,
-	.hero .btn-secondary {
-		background: #000000;
-		color: white;
-		border: 2px solid #000000;
-		border-radius: 100px;
-		text-decoration: none;
-	}
+.hero-subtitle {
+	font-size: 1.25rem;
+	margin-bottom: 2.5rem;
+	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	opacity: 0.95;
+	line-height: 1.6;
+	color: white;
+}
 
-	.hero .btn-primary:hover,
-	.hero .btn-secondary:hover {
-		background: #333333;
-		border-color: #333333;
-	}
+.hero-cta {
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+	flex-wrap: wrap;
+}
 
-	/* Locations Section */
+.btn-primary,
+.btn-secondary {
+	padding: 1rem 2rem;
+	border-radius: 100px;
+	text-decoration: none;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	transition: all 0.3s ease;
+	display: inline-block;
+}
+
+.btn-primary {
+	background: #000000;
+	color: white;
+	border: 2px solid #000000;
+}
+
+.btn-primary:hover {
+	background: #333333;
+	border-color: #333333;
+	transform: translateY(-2px);
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn-secondary {
+	background: transparent;
+	color: white;
+	border: 2px solid white;
+}
+
+.btn-secondary:hover {
+	background: white;
+	color: #1e3a8a;
+	transform: translateY(-2px);
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn-large {
+	padding: 1rem 2rem;
+	font-size: 1.1rem;
+}
+
+
+
+	/* Locations Section - Match Homepage Services */
 	.locations-section {
-		padding: 6rem 0;
+		padding: 5rem 0;
+		background: #f8fafc;
 	}
 
 	.locations-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		gap: 2rem;
-		max-width: 1000px;
+		max-width: 1200px;
 		margin: 0 auto;
 	}
 
-	/* Center the last card if it's alone in its row */
-	.location-card:last-child:nth-child(odd) {
-		grid-column: 1 / -1;
-		max-width: 500px;
-		margin: 0 auto;
+	.location-card-link {
+		text-decoration: none;
+		display: block;
 	}
 
 	.location-card {
@@ -201,69 +213,46 @@ import Layout from '../../layouts/Layout.astro';
 		border: 2px solid #e5e7eb;
 		border-radius: 1rem;
 		padding: 2rem;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
 		transition: all 0.3s ease;
 		position: relative;
 		overflow: hidden;
+		height: 100%;
+		cursor: pointer;
 	}
 
 	.location-card:hover {
-		transform: translateY(-4px);
-		box-shadow: 0 10px 25px rgba(0, 102, 204, 0.15);
+		transform: translateY(-8px);
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 		border-color: #0066cc;
-	}
-
-	.card-content {
-		flex: 1;
 	}
 
 	.location-card h3 {
 		font-family: var(--font-heading);
-		font-size: 2rem;
-		font-weight: 400;
-		color: var(--color-dark);
+		font-size: 1.5rem;
+		font-weight: 600;
+		color: #1e3a8a;
 		margin-bottom: 1rem;
 		text-transform: uppercase;
 		letter-spacing: 1px;
-		line-height: 1.3;
 	}
 
 	.location-card p {
 		color: #6b7280;
 		line-height: 1.6;
 		margin-bottom: 1rem;
+		font-size: 0.95rem;
 	}
 
 	.city-count {
-		background: #e6f2ff;
-		color: #0066cc;
+		background: linear-gradient(135deg, #1e3a8a, #2563eb);
+		color: white;
 		padding: 0.5rem 1rem;
 		border-radius: 100px;
-		font-size: 0.9rem;
+		font-size: 0.85rem;
 		font-weight: 600;
 		display: inline-block;
-	}
-
-	.card-link {
-		color: #0066cc;
-		transition: all 0.3s ease;
-		padding: 1rem;
-		border-radius: 50%;
-		background: #f8fafc;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		text-decoration: none;
-		flex-shrink: 0;
-		margin-left: 1rem;
-	}
-
-	.card-link:hover {
-		background: #0066cc;
-		color: white;
-		transform: translateX(4px);
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
 	}
 
 	/* Shared Styles */
@@ -301,11 +290,12 @@ import Layout from '../../layouts/Layout.astro';
 		}
 
 		.hero-title {
-			font-size: 2.2rem;
+			font-size: 2.5rem;
 		}
 
 		.hero-subtitle {
 			font-size: 1.1rem;
+			padding: 0 1rem;
 		}
 
 		.hero-cta {
@@ -313,18 +303,15 @@ import Layout from '../../layouts/Layout.astro';
 			align-items: center;
 		}
 
+		.btn-primary,
+		.btn-secondary {
+			width: 90%;
+			max-width: 300px;
+		}
+
 		.locations-grid {
 			grid-template-columns: 1fr;
-		}
-
-		.location-card {
-			flex-direction: column;
-			text-align: center;
-		}
-
-		.card-link {
-			margin-left: 0;
-			margin-top: 1rem;
+			padding: 0 1rem;
 		}
 
 		.section-title {
@@ -333,6 +320,7 @@ import Layout from '../../layouts/Layout.astro';
 
 		.section-subtitle {
 			font-size: 1.1rem;
+			padding: 0 1rem;
 		}
 	}
 
@@ -342,16 +330,19 @@ import Layout from '../../layouts/Layout.astro';
 		}
 
 		.hero-title {
-			font-size: 2.2rem;
+			font-size: 2rem;
 		}
 
 		.locations-section {
-			padding: 4rem 0;
+			padding: 3rem 0;
 		}
 
 		.location-card {
 			padding: 1.5rem;
 		}
 
+		.location-card h3 {
+			font-size: 1.25rem;
+		}
 	}
 </style>

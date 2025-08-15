@@ -18,7 +18,8 @@
     "test:ci": "npm run test:unit && npm run test:integration && npm run test:performance && npm run test:e2e"
   },
   "dependencies": {
-    "@astrojs/netlify": "^6.5.6",
+    "@astrojs/netlify": "^6.5.7",
+    "@astrojs/underscore-redirects": "^1.0.0",
     "astro": "^5.12.9",
     "googleapis": "^144.0.0",
     "node-cache": "^5.1.2",

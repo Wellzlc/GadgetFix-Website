@@ -4,6 +4,10 @@ import FAQSchema from '../../../components/FAQSchema.astro';
 
 // Define city-specific data
 const cityName = "McKinney";
+const countyName = "Collin County";
+const population = "210,000";
+const neighborhoods = "Historic Downtown, Adriatica Village, Craig Ranch, Stonebridge Ranch";
+const landmarks = "";
 
 // FAQ data for McKinney
 const faqData = [
@@ -43,67 +47,44 @@ const faqData = [
 ---
 
 <Layout 
-	title="Mobile Computer Service McKinney TX | iPhone Samsung Screen Repair Historic Square"
-	description="Professional mobile electronics repair in McKinney Texas. iPhone screen repair, password reset, tablet repair. We come to you in McKinney - Historic Square, Craig Ranch & all neighborhoods."
-	keywords="mobile computer service McKinney TX, icomputer service McKinney, Samsung screen repair McKinney, tablet repair Historic Square, electronics repair Craig Ranch, computer service Stonebridge Ranch, computer service McKinney TX, windows troubleshooting mckinney, mac troubleshooting mckinney, computer repair mckinney, virus removal mckinney, password reset mckinney"
+  title={`Computer Service ${cityName}, TX | Mobile Service | GadgetFix LLC`}
+  description={`Professional computer service in ${cityName}, Texas. Virus removal, password reset, optimization. We come to you! Same-day service, 90-day warranty. Call (469) 430-8607`}
+  keywords={`computer service ${cityName.toLowerCase()}, computer service ${cityName.toLowerCase()} tx, password reset ${cityName.toLowerCase()}, mobile repair ${cityName.toLowerCase()}, windows troubleshooting ${cityName.toLowerCase()}, mac troubleshooting ${cityName.toLowerCase()}, computer repair ${cityName.toLowerCase()}, virus removal ${cityName.toLowerCase()}, password reset ${cityName.toLowerCase()}`}
 >
-	<!-- Hero Section -->
-	<section class="city-hero">
-		<div class="container">
-			<div class="hero-content">
-				<h1>Mobile Computer Service McKinney TX | iPhone Samsung Screen Repair</h1>
-				<p class="hero-subtitle">Expert mobile computer services throughout McKinney - from the Historic Downtown Square to Craig Ranch and all master-planned communities</p>
-				<div class="hero-cta">
-					<a href="tel:+14694308607" class="btn btn-primary btn-large">Call (469) 430-8607</a>
-					<a href="/contact" class="btn btn-secondary btn-large">Schedule Service</a>
-				</div>
-			</div>
-		</div>
-	</section>
+  <main>
+    <!-- Hero Section -->
+    <section class="location-hero">
+      <div class="container">
+        <h1 class="location-hero-title">Computer Service in {cityName}, Texas</h1>
+        <p class="location-hero-subtitle">Professional Mobile Computer Service - We Come to You</p>
+        <div class="location-hero-buttons">
+          <a href="tel:4694308607" class="location-btn-primary">CALL NOW: (469) 430-8607</a>
+          <a href="/contact" class="location-btn-secondary">SCHEDULE SERVICE</a>
+        </div>
+        <p class="location-service-note">Serving {cityName} and surrounding areas • 7 days a week</p>
+      </div>
+    </section>
 
-	<!-- McKinney Areas Served -->
-	<section class="areas-served">
-		<div class="container">
-			<h2 class="section-title">McKinney Areas We Serve</h2>
-			<p class="section-subtitle">Mobile electronics repair throughout all McKinney neighborhoods and developments</p>
-			
-			<div class="areas-grid">
-				<div class="area-card">
-					<h3>Historic Downtown Square</h3>
-					<p>Historic courthouse square, shops, restaurants, local businesses, and all downtown McKinney commercial areas</p>
-				</div>
-				<div class="area-card">
-					<h3>Craig Ranch</h3>
-					<p>Master-planned community, Golf Club, retail areas, and all Craig Ranch residential neighborhoods</p>
-				</div>
-				<div class="area-card">
-					<h3>Stonebridge Ranch</h3>
-					<p>Established community, country club, residential areas, and all Stonebridge Ranch neighborhoods</p>
-				</div>
-				<div class="area-card">
-					<h3>Adriatica Village</h3>
-					<p>Mediterranean-style development, retail, dining, and all Adriatica community areas</p>
-				</div>
-				<div class="area-card">
-					<h3>East McKinney</h3>
-					<p>Newer developments, residential neighborhoods, and all eastern McKinney community areas</p>
-				</div>
-				<div class="area-card">
-					<h3>West McKinney</h3>
-					<p>Established neighborhoods, residential areas, and all western McKinney communities</p>
-				</div>
-			</div>
-		</div>
-	</section>
+    <!-- Local Service Info -->
+    <section class="location-local-info">
+      <div class="container">
+        <h2>Mobile Repair Service in {cityName}</h2>
+        <p>GadgetFix LLC provides professional mobile computer service throughout {cityName}, {countyName}.  
+        With a population of {population}, {cityName} residents rely on their devices daily. When your 
+        computer has issues, we bring the service to you - whether you're at home, work, or your favorite 
+        coffee shop.</p>
+        <p>We serve all {cityName} neighborhoods including {neighborhoods}.</p>
+      </div>
+    </section>
 
-	<!-- Services in McKinney -->
-	<section class="mckinney-services">
-		<div class="container">
-			<h2 class="section-title">Our McKinney Mobile Repair Services</h2>
-			        <div class="services-grid">
-          <a href="/computer-optimization" class="service-card-link">
-            <div class="service-card">
-              <div class="service-icon">
+    <!-- Services Grid -->
+    <section class="location-services-section">
+      <div class="container">
+        <h2>Our {cityName} Computer Services</h2>
+        <div class="location-services-grid">
+          <a href="/computer-optimization" class="location-service-card-link">
+            <div class="location-service-card">
+              <div class="location-service-icon">
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
                   <line x1="8" y1="21" x2="16" y2="21"/>
@@ -114,24 +95,20 @@ const faqData = [
               <p>Speed up slow computers, remove bloatware, and optimize performance in {cityName}.</p>
             </div>
           </a>
-          <a href="/virus-removal-service" class="service-card-link">
-            <div class="service-card">
-              <div class="service-icon">
+          <a href="/virus-removal-service" class="location-service-card-link">
+            <div class="location-service-card">
+              <div class="location-service-icon">
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M9 12l2 2 4-4"/>
-                  <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"/>
-                  <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"/>
-                  <path d="M12 3c0 1-1 3-3 3s-3-2-3-3 1-3 3-3 3 2 3 3"/>
-                  <path d="M12 21c0-1 1-3 3-3s3 2 3 3-1 3-3 3-3-2-3-3"/>
                 </svg>
               </div>
               <h3>Virus Removal</h3>
               <p>Remove malware, viruses, and spyware from computers in {cityName}.</p>
             </div>
           </a>
-          <a href="/password-reset-service" class="service-card-link">
-            <div class="service-card">
-              <div class="service-icon">
+          <a href="/password-reset-service" class="location-service-card-link">
+            <div class="location-service-card">
+              <div class="location-service-icon">
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                   <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
@@ -141,22 +118,21 @@ const faqData = [
               <p>Recover forgotten passwords and reset Windows/Mac login credentials in {cityName}.</p>
             </div>
           </a>
-          <a href="/emergency-computer-service" class="service-card-link">
-            <div class="service-card">
-              <div class="service-icon">
+          <a href="/emergency-computer-service" class="location-service-card-link">
+            <div class="location-service-card">
+              <div class="location-service-icon">
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <circle cx="12" cy="12" r="10"/>
                   <path d="m9 12 2 2 4-4"/>
-                  <circle cx="18" cy="8" r="3"/>
                 </svg>
               </div>
               <h3>Emergency Computer Service</h3>
               <p>Same-day emergency computer service available in {cityName}.</p>
             </div>
           </a>
-          <a href="/windows-troubleshooting-dfw" class="service-card-link">
-            <div class="service-card">
-              <div class="service-icon">
+          <a href="/windows-troubleshooting-dfw" class="location-service-card-link">
+            <div class="location-service-card">
+              <div class="location-service-icon">
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
                   <line x1="8" y1="21" x2="16" y2="21"/>
@@ -164,12 +140,12 @@ const faqData = [
                 </svg>
               </div>
               <h3>Windows Troubleshooting</h3>
-              <p>Professional Windows password reset, virus removal & PC repair in McKinney.</p>
+              <p>Professional Windows password reset, virus removal & PC repair in {cityName}.</p>
             </div>
           </a>
-          <a href="/mac-troubleshooting-dfw" class="service-card-link">
-            <div class="service-card">
-              <div class="service-icon">
+          <a href="/mac-troubleshooting-dfw" class="location-service-card-link">
+            <div class="location-service-card">
+              <div class="location-service-icon">
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
                   <line x1="8" y1="21" x2="16" y2="21"/>
@@ -177,806 +153,313 @@ const faqData = [
                 </svg>
               </div>
               <h3>Mac Troubleshooting</h3>
-              <p>Expert Mac password reset, optimization & Apple computer repair in McKinney.</p>
+              <p>Expert Mac password reset, optimization & Apple computer repair in {cityName}.</p>
             </div>
           </a>
         </div>
       </div>
     </section>
-		</div>
-	</section>
 
-	<!-- Why Choose Us in McKinney -->
-	<section class="why-mckinney">
-		<div class="container">
-			<h2 class="section-title">Why McKinney Chooses GadgetFix</h2>
-			<div class="reasons-grid">
-				<div class="reason-item">
-					<div class="reason-icon">🏛️</div>
-					<h3>Historic Square Specialist</h3>
-					<p>Supporting McKinney's charming downtown businesses and Historic Square community with convenient repair service.</p>
-				</div>
-				<div class="reason-item">
-					<div class="reason-icon">🏘️</div>
-					<h3>Master-Planned Community Expert</h3>
-					<p>Understanding the needs of Craig Ranch, Stonebridge Ranch, and other premium McKinney developments.</p>
-				</div>
-				<div class="reason-item">
-					<div class="reason-icon">👨‍👩‍👧‍👦</div>
-					<h3>Family-Focused Service</h3>
-					<p>Tailored service for McKinney's family-oriented communities with flexible scheduling and reliable repairs.</p>
-				</div>
-				<div class="reason-item">
-					<div class="reason-icon">⚡</div>
-					<h3>Fast McKinney Response</h3>
-					<p>Efficient service coverage from Historic Downtown to Craig Ranch and all McKinney neighborhoods.</p>
-				</div>
-			</div>
-		</div>
-	</section>
+    <!-- Why Choose Section -->
+    <section class="location-why-choose">
+      <div class="container">
+        <h2>Why {cityName} Chooses GadgetFix</h2>
+        <div class="location-features-grid">
+          <div class="location-feature">
+            <h3>We Come to You</h3>
+            <p>Mobile service anywhere in {cityName} - home, office, or public location</p>
+          </div>
+          <div class="location-feature">
+            <h3>Fast Response</h3>
+            <p>30-minute average arrival time in {cityName}</p>
+          </div>
+          <div class="location-feature">
+            <h3>90-Day Warranty</h3>
+            <p>All repairs backed by comprehensive parts and labor warranty</p>
+          </div>
+          <div class="location-feature">
+            <h3>Fair Pricing</h3>
+            <p>Competitive rates with no hidden fees for {cityName} residents</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-	<!-- McKinney Local Content -->
-	<section class="mckinney-content">
-		<div class="container">
-			<h2 class="section-title">McKinney Mobile Computer Service Experts</h2>
-			<div class="content-grid">
-				<div class="content-text">
-					<h3>Serving McKinney's Unique Character</h3>
-					<p>As McKinney's premier mobile electronics repair service, GadgetFix appreciates the unique charm of this award-winning city. From the historic character of the downtown square to the modern luxury of Craig Ranch, we provide computer service services that match McKinney's high standards and family-friendly atmosphere.</p>
-					
-					<p>Our McKinney service network covers the entire city, from the quaint shops around the courthouse square to the upscale neighborhoods of Stonebridge Ranch. We understand McKinney's community values, family focus, and commitment to quality - principles that guide our repair services throughout this exceptional city.</p>
+    <!-- Service Areas -->
+    <section class="location-service-areas">
+      <div class="container">
+        <h2>Areas We Serve in {cityName}</h2>
+        <p>Our mobile technicians cover all of {cityName} including:</p>
+        <div class="location-areas-list">
+          <p>{neighborhoods}</p>
+        </div>
+        <p>We also serve nearby cities in {countyName}. No matter where you are in the {cityName} area, 
+        we can reach you quickly with professional repair service.</p>
+      </div>
+    </section>
 
-					<h4>McKinney Service Guarantees</h4>
-					<ul>
-						<li>✓ Same-day service available throughout McKinney</li>
-						<li>✓ Premium service for master-planned communities</li>
-						<li>✓ Historic Square area business support</li>
-						<li>✓ Family-friendly scheduling and service</li>
-						<li>✓ Warranty on all repairs with local McKinney support</li>
-					</ul>
-				</div>
-				<div class="content-stats">
-					<div class="stat-box">
-						<div class="stat-number">45+</div>
-						<div class="stat-label">McKinney Neighborhoods</div>
-					</div>
-					<div class="stat-box">
-						<div class="stat-number">850+</div>
-						<div class="stat-label">Happy McKinney Customers</div>
-					</div>
-					<div class="stat-box">
-						<div class="stat-number">18min</div>
-						<div class="stat-label">Average McKinney Response</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+    <!-- FAQ Section with Schema -->
+    <section class="location-faq-section-wrapper">
+      <div class="container">
+        <FAQSchema faqs={faqData} location={cityName} />
+      </div>
+    </section>
 
-	<!-- McKinney Communities -->
-	<section class="mckinney-communities">
-		<div class="container">
-			<h2 class="section-title">McKinney Community Service</h2>
-			<div class="communities-grid">
-				<div class="community-card">
-					<h3>🏛️ Historic Downtown</h3>
-					<p>Courthouse square, antique shops, restaurants, local businesses, and all Historic McKinney areas.</p>
-				</div>
-				<div class="community-card">
-					<h3>🏌️ Craig Ranch</h3>
-					<p>Golf course community, luxury homes, retail areas, and all Craig Ranch master-planned developments.</p>
-				</div>
-				<div class="community-card">
-					<h3>🏰 Stonebridge Ranch</h3>
-					<p>Country club community, established neighborhoods, and all Stonebridge Ranch residential areas.</p>
-				</div>
-				<div class="community-card">
-					<h3>🏛️ Adriatica Village</h3>
-					<p>Mediterranean-inspired development, unique architecture, and all Adriatica community areas.</p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- McKinney Landmarks -->
-	<section class="mckinney-landmarks">
-		<div class="container">
-			<h2 class="section-title">Service Near McKinney Landmarks</h2>
-			<div class="landmarks-grid">
-				<div class="landmark-card">
-					<h3>🏛️ Historic Courthouse Square</h3>
-					<p>Collin County courthouse, historic buildings, shops, restaurants, and all downtown McKinney businesses.</p>
-				</div>
-				<div class="landmark-card">
-					<h3>🏌️ TPC Craig Ranch</h3>
-					<p>PGA Tour venue, golf facilities, and all Craig Ranch Golf Club and community areas.</p>
-				</div>
-				<div class="landmark-card">
-					<h3>🎭 McKinney Performing Arts Center</h3>
-					<p>Cultural venue, performances, events, and all McKinney arts and entertainment facilities.</p>
-				</div>
-				<div class="landmark-card">
-					<h3>🌳 Towne Lake Recreation Area</h3>
-					<p>Park facilities, recreational areas, and all Towne Lake community and activity areas.</p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Call to Action -->
-	<section class="mckinney-cta">
-		<div class="container">
-			<div class="cta-content">
-				<h2>Ready for McKinney's Premier Mobile Repair?</h2>
-				<p>Get professional electronics repair anywhere in McKinney today</p>
-				<div class="cta-buttons">
-					<a href="tel:+14694308607" class="btn btn-primary btn-large">Call (469) 430-8607</a>
-					<a href="/contact" class="btn btn-secondary btn-large">Schedule McKinney Service</a>
-				</div>
-			</div>
-		</div>
-	</section>
-
-<!-- Local Business Schema for Mckinney -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": "https://gadgetfixllc.com/#mckinney",
-  "name": "GadgetFix LLC - Mckinney",
-  "alternateName": "GadgetFix Mobile computer service Mckinney",
-  "description": "Professional mobile computer service in Mckinney, TX. We come to you! Virus removal, password reset, optimization with 90-day warranty.",
-  "url": "https://gadgetfixllc.com/locations/collin-county/mckinney",
-  "telephone": "+1-469-430-8607",
-  "priceRange": "$",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Mckinney",
-    "addressRegion": "TX",
-    "addressCountry": "US"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 33.1795,
-    "longitude": -96.493
-  },
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      "opens": "08:00",
-      "closes": "18:00"
-    }
-  ],
-  "areaServed": {
-    "@type": "City",
-    "name": "Mckinney",
-    "containedInPlace": {
-      "@type": "AdministrativeArea",
-      "name": "Collin County",
-      "containedInPlace": {
-        "@type": "State",
-        "name": "Texas"
-      }
-    }
-  },
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Mobile computer service Services",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Computer Optimization",
-          "description": "Professional Computer optimization service in Mckinney"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Virus Removal",
-          "description": "Computer virus removal service in Mckinney"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Password Reset",
-          "description": "Computer password reset service in Mckinney"
-        }
-      }
-    ]
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "reviewCount": "127",
-    "bestRating": "5",
-    "worstRating": "1"
-  },
-  "review": [
-    {
-      "@type": "Review",
-      "itemReviewed": "GadgetFix LLC - Mckinney",
-      "reviewRating": {
-        "@type": "Rating",
-        "ratingValue": "5",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "author": {
-        "@type": "Person",
-        "name": "Local Customer"
-      },
-      "datePublished": "2024-01-15",
-      "reviewBody": "Excellent mobile computer service in Mckinney. They came to my location and fixed my computer quickly. Highly recommend!",
-      "publisher": {
-        "@type": "Organization",
-        "name": "GadgetFix LLC"
-      }
-    }
-  ]
-}
-</script>
-
-<!-- FAQ Section with Schema -->
-<section class="faq-section-wrapper">
-  <div class="container">
-    <FAQSchema faqs={faqData} location={cityName} />
-  </div>
-</section>
-
+    <!-- CTA Section -->
+    <section class="location-city-cta">
+      <div class="container">
+        <h2>Get Your Device Fixed Today in {cityName}</h2>
+        <p>Don't let computer problems disrupt your day. Professional mobile computer service at your location.</p>
+        <div class="location-cta-buttons">
+          <a href="tel:4694308607" class="location-btn-primary">CALL NOW: (469) 430-8607</a>
+        </div>
+        <p class="location-hours">Open 7 Days • Monday-Sunday 8:00 AM - 6:00 PM</p>
+      </div>
+    </section>
+  </main>
 </Layout>
 
 <style>
-	/* FAQ Section Styling */
-	.faq-section-wrapper {
-		padding: 3rem 0;
-		background: #ffffff;
-	}
+/* Hero Section - Using unique class names to avoid conflicts */
+.location-hero {
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #1e40af 100%) !important;
+  background-size: 200% 200% !important;
+  animation: locationGradientShift 8s ease infinite !important;
+  color: white !important;
+  padding: 5rem 0 !important;
+  text-align: center !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
 
-	/* City Hero */
-	.city-hero {
-		background: #1e3a8a;
-		color: white;
-		padding: 5rem 0;
-		text-align: center;
-	}
+@keyframes locationGradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-	.city-hero h1 {
-		font-family: var(--font-heading);
-		font-size: 3.2rem;
-		font-weight: 400;
-		margin-bottom: 1.5rem;
-		text-transform: uppercase;
-		letter-spacing: 1.5px;
-		line-height: 1.1;
-	}
+.location-hero-title {
+  font-size: 3.5rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 1rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  color: white !important;
+}
 
-	.hero-subtitle {
-		font-size: 1.3rem;
-		margin-bottom: 2.5rem;
-		max-width: 750px;
-		margin-left: auto;
-		margin-right: auto;
-		opacity: 0.95;
-		line-height: 1.6;
-	}
+.location-hero-subtitle {
+  font-size: 1.3rem !important;
+  margin-bottom: 2rem !important;
+  opacity: 0.95 !important;
+  color: white !important;
+}
 
-	.hero-cta {
-		display: flex;
-		gap: 1rem;
-		justify-content: center;
-		flex-wrap: wrap;
-	}
+.location-hero-buttons {
+  display: flex !important;
+  gap: 1rem !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  margin-bottom: 1.5rem !important;
+}
 
-	/* Areas Served */
-	.areas-served {
-		padding: 6rem 0;
-		background: #f9fafb;
-	}
+.location-btn-primary, .location-btn-secondary {
+  background: #000000 !important;
+  color: white !important;
+  border: 2px solid #000000 !important;
+  border-radius: 50px !important;
+  padding: 1rem 2rem !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  text-decoration: none !important;
+  transition: all 0.3s ease !important;
+  display: inline-block !important;
+}
 
-	.areas-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-		gap: 1.5rem;
-		max-width: 1200px;
-		margin: 0 auto;
-	}
+.location-btn-primary:hover, .location-btn-secondary:hover {
+  background: #333333 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
+}
 
-	.area-card {
-		background: white;
-		padding: 2rem;
-		border-radius: 1rem;
-		border-left: 4px solid #2563EB;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-		transition: all 0.3s ease;
-	}
+.location-service-note {
+  opacity: 0.9 !important;
+  color: white !important;
+}
 
-	.area-card:hover {
-		transform: translateY(-3px);
-		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-	}
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
 
-	.area-card h3 {
-		font-family: var(--font-heading);
-		font-size: 1.6rem;
-		font-weight: 400;
-		color: var(--color-dark);
-		margin-bottom: 1rem;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		line-height: 1.3;
-	}
+/* Sections */
+section {
+  padding: 4rem 0;
+}
 
-	.area-card p {
-		color: #6b7280;
-		line-height: 1.6;
-	}
+.location-local-info {
+  background: #ffffff !important;
+}
 
-	/* McKinney Services */
-	.mckinney-services {
-		padding: 6rem 0;
-	}
+.location-services-section {
+  background: #f8f9fa !important;
+}
 
-	.services-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-		gap: 2rem;
-		max-width: 1000px;
-		margin: 0 auto;
-	}
+.location-why-choose {
+  background: #ffffff !important;
+}
 
-	.services-grid, .features-grid {
+.location-service-areas {
+  background: #f8f9fa !important;
+}
+
+.location-faq-section-wrapper {
+  background: #ffffff !important;
+}
+
+.location-city-cta {
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #1e40af 100%) !important;
+  background-size: 200% 200% !important;
+  animation: locationGradientShift 8s ease infinite !important;
+  color: white !important;
+  text-align: center !important;
+}
+
+/* Typography */
+h2 {
+  color: #1e3a8a;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+h3 {
+  color: #2563EB;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+p {
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.location-local-info p {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* Service Grid */
+.location-services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
 }
 
-.service-card-link {
-  text-decoration: none !important;
+.location-service-card-link {
+  text-decoration: none;
   color: inherit;
-  display: block;
-  transition: all 0.3s ease;
 }
 
-.service-card-link:hover {
-  transform: translateY(-3px);
-  text-decoration: none !important;
-}
-
-.service-card-link * {
-  text-decoration: none !important;
-}
-
-.service-card, .feature {
-  background: #f9fafb;
+.location-service-card {
+  background: white;
   padding: 2rem;
-  border-radius: 1rem;
-  border-left: 4px solid #2563EB;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  text-align: center;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
   transition: all 0.3s ease;
   height: 100%;
+  border: 2px solid transparent;
 }
 
-.service-card-link:hover .service-card {
-  background: #f3f4f6;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+.location-service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  border-color: #2563eb;
 }
 
-.service-icon {
+.location-service-icon {
   color: #2563EB;
   margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
 }
 
-.service-card h3 {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 400;
-  color: var(--color-dark);
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  line-height: 1.3;
+/* Features Grid */
+.location-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
 }
 
-.service-card p {
-  color: #6b7280;
-  line-height: 1.6;
-  margin: 0;
+.location-feature {
+  background: #f9fafb;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  border-left: 4px solid #2563EB;
 }
 
-	.service-item:hover {
-		transform: translateY(-3px);
-		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-	}
+/* Areas List */
+.location-areas-list {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  margin: 2rem 0;
+  text-align: center;
+}
 
-	.service-icon {
-		font-size: 3rem;
-		margin-bottom: 1.5rem;
-	}
+/* CTA Section */
+.location-city-cta h2 {
+  color: white !important;
+}
 
-	.service-item h3 {
-		font-family: var(--font-heading);
-		font-size: 1.5rem;
-		font-weight: 400;
-		color: var(--color-dark);
-		margin-bottom: 1rem;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		line-height: 1.3;
-	}
+.location-city-cta p {
+  color: white !important;
+}
 
-	.service-item p {
-		color: #6b7280;
-		line-height: 1.6;
-	}
+.location-cta-buttons {
+  margin: 2rem 0;
+}
 
-	/* Why McKinney */
-	.why-mckinney {
-		padding: 6rem 0;
-		background: #f9fafb;
-	}
+.location-hours {
+  opacity: 0.95;
+  color: white !important;
+}
 
-	.reasons-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-		gap: 2rem;
-		max-width: 1000px;
-		margin: 0 auto;
-	}
-
-	.reason-item {
-		background: white;
-		padding: 2rem;
-		border-radius: 1rem;
-		text-align: center;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-		transition: all 0.3s ease;
-	}
-
-	.reason-item:hover {
-		transform: translateY(-4px);
-		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-	}
-
-	.reason-icon {
-		font-size: 3rem;
-		margin-bottom: 1.5rem;
-	}
-
-	.reason-item h3 {
-		font-family: var(--font-heading);
-		font-size: 1.4rem;
-		font-weight: 400;
-		color: var(--color-dark);
-		margin-bottom: 1rem;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		line-height: 1.3;
-	}
-
-	.reason-item p {
-		color: #6b7280;
-		line-height: 1.6;
-	}
-
-	/* McKinney Content */
-	.mckinney-content {
-		padding: 6rem 0;
-	}
-
-	.content-grid {
-		display: grid;
-		grid-template-columns: 2fr 1fr;
-		gap: 4rem;
-		align-items: start;
-	}
-
-	.content-text h3 {
-		font-family: var(--font-heading);
-		font-size: 2rem;
-		font-weight: 400;
-		color: var(--color-dark);
-		margin-bottom: 1.5rem;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		line-height: 1.3;
-	}
-
-	.content-text h4 {
-		font-family: var(--font-heading);
-		font-size: 1.5rem;
-		font-weight: 400;
-		color: var(--color-dark);
-		margin: 2rem 0 1rem;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		line-height: 1.3;
-	}
-
-	.content-text p {
-		color: #6b7280;
-		line-height: 1.7;
-		margin-bottom: 1.5rem;
-		font-size: 1.05rem;
-	}
-
-	.content-text ul {
-		list-style: none;
-		padding: 0;
-	}
-
-	.content-text li {
-		color: #6b7280;
-		line-height: 1.7;
-		margin-bottom: 0.5rem;
-		font-size: 1.05rem;
-	}
-
-	.content-stats {
-		display: flex;
-		flex-direction: column;
-		gap: 1.5rem;
-	}
-
-	.stat-box {
-		background: linear-gradient(135deg, #2563EB 0%, #2563EB 100%);
-		color: white;
-		padding: 2rem;
-		border-radius: 1rem;
-		text-align: center;
-	}
-
-	.stat-number {
-		font-family: var(--font-heading);
-		font-size: 2.5rem;
-		font-weight: 400;
-		margin-bottom: 0.5rem;
-		line-height: 1;
-	}
-
-	.stat-label {
-		font-size: 0.95rem;
-		opacity: 0.9;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-	}
-
-	/* McKinney Communities */
-	.mckinney-communities {
-		padding: 6rem 0;
-		background: #f9fafb;
-	}
-
-	.communities-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-		gap: 2rem;
-		max-width: 1000px;
-		margin: 0 auto;
-	}
-
-	.community-card {
-		background: white;
-		padding: 2rem;
-		border-radius: 1rem;
-		border-left: 4px solid #2563EB;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-		transition: all 0.3s ease;
-	}
-
-	.community-card:hover {
-		transform: translateY(-3px);
-		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-	}
-
-	.community-card h3 {
-		font-family: var(--font-heading);
-		font-size: 1.4rem;
-		font-weight: 400;
-		color: var(--color-dark);
-		margin-bottom: 1rem;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		line-height: 1.3;
-	}
-
-	.community-card p {
-		color: #6b7280;
-		line-height: 1.6;
-	}
-
-	/* McKinney Landmarks */
-	.mckinney-landmarks {
-		padding: 6rem 0;
-	}
-
-	.landmarks-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-		gap: 2rem;
-		max-width: 1000px;
-		margin: 0 auto;
-	}
-
-	.landmark-card {
-		background: #f9fafb;
-		padding: 2rem;
-		border-radius: 1rem;
-		border-left: 4px solid #2563EB;
-		transition: all 0.3s ease;
-	}
-
-	.landmark-card:hover {
-		transform: translateY(-3px);
-		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-		background: white;
-	}
-
-	.landmark-card h3 {
-		font-family: var(--font-heading);
-		font-size: 1.4rem;
-		font-weight: 400;
-		color: var(--color-dark);
-		margin-bottom: 1rem;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		line-height: 1.3;
-	}
-
-	.landmark-card p {
-		color: #6b7280;
-		line-height: 1.6;
-	}
-
-	/* McKinney CTA */
-	.mckinney-cta {
-		padding: 6rem 0;
-		background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-		color: white;
-		text-align: center;
-	}
-
-	.cta-content h2 {
-		font-family: var(--font-heading);
-		font-size: 3rem;
-		font-weight: 400;
-		margin-bottom: 1rem;
-		text-transform: uppercase;
-		letter-spacing: 1.5px;
-		line-height: 1.2;
-	}
-
-	.cta-content p {
-		font-size: 1.25rem;
-		margin-bottom: 2.5rem;
-		opacity: 0.9;
-	}
-
-	.cta-buttons {
-		display: flex;
-		gap: 1rem;
-		justify-content: center;
-		flex-wrap: wrap;
-	}
-
-	/* Shared Styles */
-	.section-title {
-		font-family: var(--font-heading);
-		font-size: 2.8rem;
-		font-weight: 400;
-		text-align: center;
-		margin-bottom: 1rem;
-		color: var(--color-dark);
-		text-transform: uppercase;
-		letter-spacing: 1.5px;
-		line-height: 1.2;
-	}
-
-	.section-subtitle {
-		text-align: center;
-		font-size: 1.25rem;
-		color: #6b7280;
-		margin-bottom: 3rem;
-		max-width: 600px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.btn-large {
-		padding: 1rem 2rem;
-		font-size: 1.1rem;
-	}
-
-	/* Responsive Design */
-	@media (max-width: 768px) {
-		.city-hero h1 {
-			font-size: 2.2rem;
-		}
-
-		.hero-subtitle {
-			font-size: 1.1rem;
-		}
-
-		.hero-cta {
-			flex-direction: column;
-			align-items: center;
-		}
-
-		.areas-grid,
-		.services-grid,
-		.reasons-grid,
-		.communities-grid,
-		.landmarks-grid {
-			grid-template-columns: 1fr;
-		}
-
-		.content-grid {
-			grid-template-columns: 1fr;
-			gap: 2rem;
-		}
-
-		.content-stats {
-			flex-direction: row;
-			justify-content: space-around;
-		}
-
-		.cta-buttons {
-			flex-direction: column;
-			align-items: center;
-		}
-
-		.section-title {
-			font-size: 2.2rem;
-		}
-
-		.section-subtitle {
-			font-size: 1.1rem;
-		}
-	}
-
-	@media (max-width: 480px) {
-		.city-hero {
-			padding: 4rem 0;
-		}
-
-		.city-hero h1 {
-			font-size: 1.8rem;
-		}
-
-		.areas-served,
-		.mckinney-services,
-		.why-mckinney,
-		.mckinney-content,
-		.mckinney-communities,
-		.mckinney-landmarks,
-		.mckinney-cta {
-			padding: 4rem 0;
-		}
-
-		.area-card,
-		.service-item,
-		.reason-item,
-		.stat-box,
-		.community-card,
-		.landmark-card {
-			padding: 1.5rem;
-		}
-
-		.content-stats {
-			flex-direction: column;
-		}
-
-		.cta-content h2 {
-			font-size: 2.2rem;
-		}
-	}
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .location-hero-title {
+    font-size: 2.5rem !important;
+  }
+  
+  .location-hero-subtitle {
+    font-size: 1.1rem !important;
+  }
+  
+  .location-hero-buttons {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  
+  .location-btn-primary, .location-btn-secondary {
+    width: 100% !important;
+    max-width: 300px !important;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+  
+  .location-services-grid {
+    grid-template-columns: 1fr;
+  }
+}
 </style>

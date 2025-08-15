@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import ScrollAnimator from '../components/ScrollAnimator.astro';
 ---
 
 <Layout 
@@ -8,18 +11,11 @@ import Layout from '../layouts/Layout.astro';
 	keywords="computer software services dallas, virus removal fort worth, password reset service, slow computer fix, wifi troubleshooting"
 >
 	<!-- Hero Section -->
-	<section class="services-hero">
-		<div class="container">
-			<div class="hero-content">
-				<h1>Professional Computer Software Services</h1>
-				<p>Expert software troubleshooting and computer optimization throughout the Dallas-Fort Worth Metroplex. No hardware repairs - just fast software solutions at your location.</p>
-				<div class="hero-cta">
-					<a href="tel:+14694308607" class="btn btn-primary btn-large">CALL NOW FOR SERVICE</a>
-					<a href="/contact" class="btn btn-secondary btn-large">SCHEDULE SERVICE</a>
-				</div>
-			</div>
-		</div>
-	</section>
+	<HeroSection 
+		title="Professional Computer Software Services"
+		subtitle="Expert software troubleshooting and computer optimization throughout the Dallas-Fort Worth Metroplex. No hardware repairs - just fast software solutions at your location."
+		showCTA={true}
+	/>
 
 	<!-- Service Categories -->
 	<section class="service-categories">
@@ -615,29 +611,10 @@ import Layout from '../layouts/Layout.astro';
 	</section>
 
 	<!-- Final Call to Action -->
-	<section class="final-cta">
-		<div class="container">
-			<div class="cta-content">
-				<div class="cta-icon">
-					<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-						<rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
-						<line x1="12" y1="18" x2="12.01" y2="18"/>
-						<path d="M10 14l2-2 2 2"/>
-						<path d="M12 12V8"/>
-						<circle cx="18" cy="8" r="3"/>
-						<path d="M18 8l1.5-1.5"/>
-						<path d="M18 8l-1.5-1.5"/>
-					</svg>
-				</div>
-				<h2>READY FOR FAST, RELIABLE COMPUTER SERVICE?</h2>
-				<p>Contact GadgetFix LLC Today!</p>
-				<div class="cta-buttons">
-					<a href="tel:+14694308607" class="btn btn-primary btn-large">CALL NOW FOR SERVICE</a>
-					<a href="/contact" class="btn btn-secondary btn-large">REQUEST ON-SITE SERVICE</a>
-				</div>
-			</div>
-		</div>
-	</section>
+	<FinalCTA 
+		title="READY FOR FAST, RELIABLE COMPUTER SERVICE?"
+		subtitle="Contact GadgetFix LLC Today!"
+	/>
 
 	<!-- Schema Markup for Services -->
 	<script type="application/ld+json">
@@ -713,35 +690,68 @@ import Layout from '../layouts/Layout.astro';
 	    }
 	  ]
 	}
+	
 	</script>
+
+	<!-- Scroll Animator -->
+	<ScrollAnimator />
 </Layout>
 
 <style>
 	/* Services Hero */
 	.services-hero {
-		background: #1e3a8a;
+		background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #1e40af 100%);
+		background-size: 200% 200%;
+		animation: gradientShift 8s ease infinite;
 		color: white;
-		padding: 4rem 0;
+		padding: 4rem 0 6rem;
 		text-align: center;
+		position: relative;
+		overflow: hidden;
+	}
+	
+	@keyframes gradientShift {
+		0% { background-position: 0% 50%; }
+		50% { background-position: 100% 50%; }
+		100% { background-position: 0% 50%; }
+	}
+	
+	.services-hero::before {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 100px;
+		background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,133.3C672,139,768,181,864,181.3C960,181,1056,139,1152,117.3C1248,96,1344,96,1392,96L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") no-repeat;
+		background-size: cover;
+		animation: wave 10s linear infinite;
+	}
+	
+	@keyframes wave {
+		0% { transform: translateX(0); }
+		100% { transform: translateX(-50%); }
 	}
 
 	.services-hero h1 {
 		font-family: var(--font-heading);
 		font-size: 3.5rem;
-		font-weight: 400;
+		font-weight: 600;
 		margin-bottom: 1rem;
 		line-height: 1.2;
 		text-transform: uppercase;
 		letter-spacing: 2px;
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 	}
 
 	.services-hero p {
 		font-size: 1.25rem;
-		margin-bottom: 2rem;
-		max-width: 600px;
+		margin-bottom: 2.5rem;
+		max-width: 700px;
 		margin-left: auto;
 		margin-right: auto;
-		opacity: 0.9;
+		opacity: 0.95;
+		line-height: 1.6;
 	}
 
 	.hero-cta {
@@ -782,25 +792,48 @@ import Layout from '../layouts/Layout.astro';
 	.category-header {
 		display: flex;
 		align-items: center;
-		gap: 1.5rem;
+		gap: 2rem;
 		margin-bottom: 3rem;
-		padding-bottom: 1.5rem;
-		border-bottom: 2px solid #e5e7eb;
+		padding: 2rem;
+		background: linear-gradient(145deg, #ffffff, #f3f4f6);
+		border-radius: 20px;
+		box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+		border-left: 4px solid #2563eb;
+		transition: all 0.3s ease;
+	}
+	
+	.category-header:hover {
+		transform: translateX(5px);
+		box-shadow: 0 8px 30px rgba(30, 58, 138, 0.1);
 	}
 
 	.category-icon {
+		width: 80px;
+		height: 80px;
+		background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(37, 99, 235, 0.1));
+		border-radius: 20px;
 		color: #2563EB;
 		flex-shrink: 0;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		transition: all 0.3s ease;
+	}
+	
+	.category-header:hover .category-icon {
+		transform: rotateY(180deg);
+		background: linear-gradient(135deg, #1e3a8a, #2563eb);
+		color: white;
 	}
 
 	.category-info h3 {
 		font-family: var(--font-heading);
-		font-size: 2.2rem;
-		font-weight: 400;
-		color: var(--color-dark);
+		font-size: 2rem;
+		font-weight: 600;
+		background: linear-gradient(135deg, #1e3a8a, #2563eb);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
 		margin-bottom: 0.5rem;
 		text-transform: uppercase;
 		letter-spacing: 1px;
@@ -835,97 +868,252 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.service-detail {
-		background: #f9fafb;
-		padding: 2rem;
-		border-radius: 1rem;
-		border-left: 4px solid #2563EB;
-		transition: all 0.3s ease;
+		background: linear-gradient(145deg, #ffffff, #f8f9fa);
+		padding: 2.5rem;
+		border-radius: 20px;
+		border: 1px solid rgba(30, 58, 138, 0.1);
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+		transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		position: relative;
+		overflow: hidden;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.service-detail::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 4px;
+		background: linear-gradient(90deg, #1e3a8a, #2563eb);
+		transform: scaleX(0);
+		transition: transform 0.4s ease;
+		transform-origin: left;
 	}
 
 	.service-detail-link:hover .service-detail {
-		background: #f3f4f6;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		transform: translateY(-8px) scale(1.02);
+		box-shadow: 0 20px 50px rgba(30, 58, 138, 0.2);
+		border-color: transparent;
+		background: linear-gradient(145deg, #ffffff, #e8f0ff);
+	}
+	
+	.service-detail-link:hover .service-detail::before {
+		transform: scaleX(1);
 	}
 
 	.service-detail h4 {
 		font-family: var(--font-heading);
-		font-size: 1.7rem;
-		font-weight: 400;
-		color: var(--color-dark);
+		font-size: 1.5rem;
+		font-weight: 600;
+		background: linear-gradient(135deg, #1e3a8a, #2563eb);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
 		margin-bottom: 1rem;
 		text-transform: uppercase;
 		letter-spacing: 0.5px;
 		line-height: 1.3;
+		transition: all 0.3s ease;
+	}
+	
+	.service-detail-link:hover .service-detail h4 {
+		letter-spacing: 1px;
+		transform: scale(1.02);
 	}
 
 	.service-detail p {
-		color: #6b7280;
-		line-height: 1.6;
+		color: #4b5563;
+		line-height: 1.7;
 		margin-bottom: 1.5rem;
+		flex-grow: 1;
+		transition: color 0.3s ease;
+	}
+	
+	.service-detail-link:hover .service-detail p {
+		color: #1f2937;
 	}
 
 	.service-features {
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
+		gap: 0.75rem;
+		padding-top: 1rem;
+		border-top: 1px solid rgba(30, 58, 138, 0.1);
 	}
 
 	.feature {
-		font-size: 0.9rem;
+		font-size: 0.95rem;
 		color: #059669;
-		font-weight: 500;
+		font-weight: 600;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		transition: all 0.3s ease;
+	}
+	
+	.service-detail-link:hover .feature {
+		transform: translateX(5px);
+		color: #047857;
 	}
 
 	/* Service Process */
 	.service-process {
 		padding: 6rem 0;
-		background: #f9fafb;
+		background: linear-gradient(180deg, #f9fafb 0%, #ffffff 50%, #f9fafb 100%);
+		position: relative;
+		overflow: hidden;
+	}
+	
+	.service-process::before {
+		content: '';
+		position: absolute;
+		top: -50%;
+		left: -50%;
+		width: 200%;
+		height: 200%;
+		background: radial-gradient(circle, rgba(30, 58, 138, 0.03) 0%, transparent 70%);
+		animation: rotate 30s linear infinite;
+	}
+	
+	@keyframes rotate {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
 	}
 
 	.process-steps {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		gap: 2rem;
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+		gap: 3rem;
+		position: relative;
+		z-index: 1;
 	}
 
 	.process-step {
 		text-align: center;
-		padding: 2rem 1rem;
+		padding: 2.5rem 1.5rem;
+		background: white;
+		border-radius: 20px;
+		box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+		transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		position: relative;
+		overflow: hidden;
+	}
+	
+	.process-step::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(135deg, rgba(30, 58, 138, 0.05) 0%, transparent 100%);
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+	
+	.process-step:hover {
+		transform: translateY(-8px) scale(1.02);
+		box-shadow: 0 15px 50px rgba(30, 58, 138, 0.15);
+	}
+	
+	.process-step:hover::before {
+		opacity: 1;
 	}
 
 	.step-number {
-		width: 60px;
-		height: 60px;
-		background: #2563EB;
+		width: 70px;
+		height: 70px;
+		background: linear-gradient(135deg, #1e3a8a, #2563eb);
 		color: white;
-		border-radius: 50%;
+		border-radius: 20px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-size: 1.5rem;
+		font-size: 1.8rem;
 		font-weight: 700;
-		margin: 0 auto 1.5rem;
+		margin: 0 auto 2rem;
+		transition: all 0.6s ease;
+		box-shadow: 0 4px 15px rgba(30, 58, 138, 0.2);
+		position: relative;
+	}
+	
+	.step-number::after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		border-radius: 20px;
+		border: 2px solid rgba(37, 99, 235, 0.3);
+		animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+	}
+	
+	.process-step:hover .step-number {
+		transform: rotateY(360deg) scale(1.1);
+		background: linear-gradient(135deg, #2563eb, #1e3a8a);
+		box-shadow: 0 8px 25px rgba(30, 58, 138, 0.3);
 	}
 
 	.process-step h3 {
 		font-family: var(--font-heading);
-		font-size: 1.5rem;
-		font-weight: 400;
-		color: var(--color-dark);
+		font-size: 1.4rem;
+		font-weight: 600;
+		background: linear-gradient(135deg, #1e3a8a, #2563eb);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
 		margin-bottom: 1rem;
 		text-transform: uppercase;
 		letter-spacing: 0.5px;
 		line-height: 1.3;
+		transition: all 0.3s ease;
+		position: relative;
+		z-index: 1;
+	}
+	
+	.process-step:hover h3 {
+		letter-spacing: 1px;
+		transform: scale(1.05);
 	}
 
 	.process-step p {
-		color: #6b7280;
-		line-height: 1.6;
+		color: #4b5563;
+		line-height: 1.7;
+		position: relative;
+		z-index: 1;
+		transition: color 0.3s ease;
+	}
+	
+	.process-step:hover p {
+		color: #1f2937;
 	}
 
 	/* Pricing Information */
 	.pricing-info {
 		padding: 6rem 0;
+		background: linear-gradient(180deg, #ffffff 0%, #f0f4ff 50%, #ffffff 100%);
+		position: relative;
+		overflow: hidden;
+	}
+	
+	.pricing-info::before {
+		content: '';
+		position: absolute;
+		width: 150%;
+		height: 150%;
+		top: -25%;
+		left: -25%;
+		background: radial-gradient(circle at center, rgba(37, 99, 235, 0.05) 0%, transparent 50%);
+		animation: float 20s ease-in-out infinite;
+	}
+	
+	@keyframes float {
+		0%, 100% { transform: translate(0, 0) rotate(0deg); }
+		33% { transform: translate(30px, -30px) rotate(120deg); }
+		66% { transform: translate(-20px, 20px) rotate(240deg); }
 	}
 
 	.pricing-features {
@@ -933,33 +1121,111 @@ import Layout from '../layouts/Layout.astro';
 		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		gap: 3rem;
 		margin-bottom: 4rem;
+		position: relative;
+		z-index: 1;
 	}
 
 	.pricing-feature {
 		text-align: center;
+		padding: 3rem 2rem;
+		background: white;
+		border-radius: 24px;
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+		transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		position: relative;
+		overflow: hidden;
+		border: 2px solid transparent;
+	}
+	
+	.pricing-feature::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 4px;
+		background: linear-gradient(90deg, #1e3a8a, #2563eb, #1e3a8a);
+		background-size: 200% 100%;
+		animation: slideGradient 3s ease infinite;
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+	
+	@keyframes slideGradient {
+		0% { background-position: 0% center; }
+		100% { background-position: 200% center; }
+	}
+	
+	.pricing-feature:hover {
+		transform: translateY(-10px) scale(1.02);
+		box-shadow: 0 20px 60px rgba(30, 58, 138, 0.2);
+		border-color: rgba(37, 99, 235, 0.2);
+	}
+	
+	.pricing-feature:hover::before {
+		opacity: 1;
 	}
 
 	.pricing-feature .feature-icon {
+		width: 80px;
+		height: 80px;
+		background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(37, 99, 235, 0.1));
+		border-radius: 20px;
 		color: #2563EB;
-		margin-bottom: 1rem;
+		margin: 0 auto 2rem;
 		display: flex;
+		align-items: center;
 		justify-content: center;
+		transition: all 0.6s ease;
+		position: relative;
+	}
+	
+	.pricing-feature .feature-icon::after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		border-radius: 20px;
+		background: radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, transparent 70%);
+		animation: pulse 2s infinite;
+		z-index: -1;
+	}
+	
+	.pricing-feature:hover .feature-icon {
+		transform: rotateY(360deg) scale(1.1);
+		background: linear-gradient(135deg, #1e3a8a, #2563eb);
+		color: white;
 	}
 
 	.pricing-feature h3 {
 		font-family: var(--font-heading);
-		font-size: 1.6rem;
-		font-weight: 400;
-		color: var(--color-dark);
+		font-size: 1.5rem;
+		font-weight: 600;
+		background: linear-gradient(135deg, #1e3a8a, #2563eb);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
 		margin-bottom: 1rem;
 		text-transform: uppercase;
 		letter-spacing: 0.5px;
 		line-height: 1.3;
+		transition: all 0.3s ease;
+	}
+	
+	.pricing-feature:hover h3 {
+		letter-spacing: 1px;
+		transform: scale(1.05);
 	}
 
 	.pricing-feature p {
-		color: #6b7280;
-		line-height: 1.6;
+		color: #4b5563;
+		line-height: 1.7;
+		font-size: 1.05rem;
+		transition: color 0.3s ease;
+	}
+	
+	.pricing-feature:hover p {
+		color: #1f2937;
 	}
 
 	.pricing-cta {

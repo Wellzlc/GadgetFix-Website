@@ -1,0 +1,51 @@
+---
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  iconSvg?: string;
+  primaryBtn?: {
+    text: string;
+    href: string;
+  };
+  secondaryBtn?: {
+    text: string;
+    href: string;
+  };
+  className?: string;
+}
+
+const { 
+  title = 'NEED URGENT COMPUTER HELP?',
+  subtitle = 'Professional Software Solutions - We Come to You!',
+  iconSvg = `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+    <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+    <line x1="12" y1="18" x2="12.01" y2="18"/>
+    <path d="M10 14l2-2 2 2"/>
+    <path d="M12 12V8"/>
+    <circle cx="18" cy="8" r="3"/>
+    <path d="M18 8l1.5-1.5"/>
+    <path d="M18 8l-1.5-1.5"/>
+  </svg>`,
+  primaryBtn = { text: 'CALL NOW FOR SERVICE', href: 'tel:+14694308607' },
+  secondaryBtn = { text: 'REQUEST ON-SITE SERVICE', href: '/contact' },
+  className = ''
+} = Astro.props;
+---
+
+<section class={`final-cta ${className}`}>
+  <div class="container">
+    <div class="cta-content">
+      <div class="cta-icon" set:html={iconSvg}></div>
+      <h2>{title}</h2>
+      <p>{subtitle}</p>
+      <div class="cta-buttons">
+        <a href={primaryBtn.href} class="btn btn-primary btn-large" aria-label={primaryBtn.text}>
+          <span itemprop="telephone">{primaryBtn.text}</span>
+        </a>
+        <a href={secondaryBtn.href} class="btn btn-secondary btn-large" aria-label={secondaryBtn.text}>
+          {secondaryBtn.text}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

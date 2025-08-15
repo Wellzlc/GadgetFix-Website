@@ -1,0 +1,19 @@
+---
+export interface Props {
+  href: string;
+  iconSvg: string;
+  title: string;
+  description: string;
+  className?: string;
+}
+
+const { href, iconSvg, title, description, className = '' } = Astro.props;
+---
+
+<a href={href} class={`service-card-link ${className}`}>
+  <div class="service-card">
+    <div class="service-icon" set:html={iconSvg}></div>
+    <h3>{title}</h3>
+    <p>{description}</p>
+  </div>
+</a>
