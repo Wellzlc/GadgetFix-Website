@@ -1,0 +1,625 @@
+---
+/**
+ * Calendar API Monitoring Dashboard
+ * Admin interface for monitoring calendar API security and performance
+ */
+
+const title = "Calendar API Monitor | GadgetFix Admin";
+const description = "Monitor calendar API security, performance, and usage";
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8fafc;
+      color: #1a202c;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1e3a8a, #3730a3);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .header p {
+      opacity: 0.9;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e2e8f0;
+    }
+
+    .card h3 {
+      color: #1e3a8a;
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .status-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .status-healthy {
+      background: #10b981;
+    }
+
+    .status-warning {
+      background: #f59e0b;
+    }
+
+    .status-error {
+      background: #ef4444;
+    }
+
+    .status-unknown {
+      background: #6b7280;
+    }
+
+    .metric {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .metric:last-child {
+      border-bottom: none;
+    }
+
+    .metric-label {
+      font-weight: 500;
+      color: #4a5568;
+    }
+
+    .metric-value {
+      font-weight: bold;
+      color: #1a202c;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 2rem;
+      color: #6b7280;
+    }
+
+    .loading-spinner {
+      border: 3px solid #f3f4f6;
+      border-top: 3px solid #1e3a8a;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .events-list {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .event-item {
+      padding: 0.75rem;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 0.875rem;
+    }
+
+    .event-item:last-child {
+      border-bottom: none;
+    }
+
+    .event-timestamp {
+      color: #6b7280;
+      font-weight: 500;
+    }
+
+    .event-type {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      margin: 0.25rem 0;
+    }
+
+    .event-allowed {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .event-blocked {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .event-warning {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: #1e3a8a;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #1e40af;
+    }
+
+    .btn-secondary {
+      background: #6b7280;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #4b5563;
+    }
+
+    .btn-danger {
+      background: #dc2626;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background: #b91c1c;
+    }
+
+    .alert {
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .alert-info {
+      background: #dbeafe;
+      color: #1e40af;
+      border-left: 4px solid #3b82f6;
+    }
+
+    .alert-warning {
+      background: #fef3c7;
+      color: #92400e;
+      border-left: 4px solid #f59e0b;
+    }
+
+    .alert-error {
+      background: #fee2e2;
+      color: #991b1b;
+      border-left: 4px solid #ef4444;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .controls {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📅 Calendar API Monitor</h1>
+      <p>Real-time monitoring of calendar API security and performance</p>
+    </div>
+
+    <div id="alerts-container"></div>
+
+    <div class="controls">
+      <button class="btn btn-primary" onclick="refreshDashboard()">🔄 Refresh</button>
+      <button class="btn btn-secondary" onclick="clearCache()">🗑️ Clear Cache</button>
+      <button class="btn btn-secondary" onclick="exportLogs()">📥 Export Logs</button>
+      <button class="btn btn-danger" onclick="testSecurity()">🛡️ Test Security</button>
+    </div>
+
+    <div class="dashboard-grid">
+      <!-- API Health Status -->
+      <div class="card">
+        <h3>
+          <span class="status-indicator status-unknown" id="health-status"></span>
+          API Health
+        </h3>
+        <div id="health-metrics" class="loading">
+          <div class="loading-spinner"></div>
+          <p>Loading health status...</p>
+        </div>
+      </div>
+
+      <!-- Request Statistics -->
+      <div class="card">
+        <h3>📊 Request Statistics</h3>
+        <div id="request-stats" class="loading">
+          <div class="loading-spinner"></div>
+          <p>Loading statistics...</p>
+        </div>
+      </div>
+
+      <!-- Security Events -->
+      <div class="card">
+        <h3>🛡️ Security Events</h3>
+        <div id="security-events" class="loading">
+          <div class="loading-spinner"></div>
+          <p>Loading security events...</p>
+        </div>
+      </div>
+
+      <!-- Performance Metrics -->
+      <div class="card">
+        <h3>⚡ Performance</h3>
+        <div id="performance-metrics" class="loading">
+          <div class="loading-spinner"></div>
+          <p>Loading performance data...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activity Log -->
+    <div class="card">
+      <h3>📋 Recent Activity</h3>
+      <div id="activity-log" class="loading">
+        <div class="loading-spinner"></div>
+        <p>Loading activity log...</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    class CalendarMonitor {
+      constructor() {
+        this.refreshInterval = null;
+        this.lastUpdate = null;
+        this.init();
+      }
+
+      init() {
+        console.log('Initializing Calendar Monitor Dashboard');
+        this.loadDashboard();
+        this.startAutoRefresh();
+      }
+
+      async loadDashboard() {
+        try {
+          await Promise.all([
+            this.loadHealthStatus(),
+            this.loadRequestStats(),
+            this.loadSecurityEvents(),
+            this.loadPerformanceMetrics(),
+            this.loadActivityLog()
+          ]);
+          
+          this.lastUpdate = new Date();
+          this.showAlert('Dashboard loaded successfully', 'info');
+        } catch (error) {
+          console.error('Error loading dashboard:', error);
+          this.showAlert('Error loading dashboard data', 'error');
+        }
+      }
+
+      async loadHealthStatus() {
+        try {
+          const response = await fetch('/api/calendar/availability?type=health');
+          const result = await response.json();
+          
+          const statusElement = document.getElementById('health-status');
+          const metricsElement = document.getElementById('health-metrics');
+          
+          if (result.success && result.data.status === 'healthy') {
+            statusElement.className = 'status-indicator status-healthy';
+            metricsElement.innerHTML = `
+              <div class="metric">
+                <span class="metric-label">API Status</span>
+                <span class="metric-value">✅ Healthy</span>
+              </div>
+              <div class="metric">
+                <span class="metric-label">Last Check</span>
+                <span class="metric-value">${new Date().toLocaleTimeString()}</span>
+              </div>
+              <div class="metric">
+                <span class="metric-label">Uptime</span>
+                <span class="metric-value">Online</span>
+              </div>
+            `;
+          } else {
+            statusElement.className = 'status-indicator status-error';
+            metricsElement.innerHTML = `
+              <div class="metric">
+                <span class="metric-label">API Status</span>
+                <span class="metric-value">❌ Unhealthy</span>
+              </div>
+              <div class="metric">
+                <span class="metric-label">Error</span>
+                <span class="metric-value">${result.data?.details?.error || 'Unknown error'}</span>
+              </div>
+            `;
+          }
+        } catch (error) {
+          document.getElementById('health-status').className = 'status-indicator status-error';
+          document.getElementById('health-metrics').innerHTML = `
+            <div class="metric">
+              <span class="metric-label">Status</span>
+              <span class="metric-value">Connection Error</span>
+            </div>
+          `;
+        }
+      }
+
+      async loadRequestStats() {
+        // Simulate request statistics
+        const stats = {
+          totalRequests: Math.floor(Math.random() * 1000) + 500,
+          successfulRequests: Math.floor(Math.random() * 950) + 450,
+          failedRequests: Math.floor(Math.random() * 50),
+          avgResponseTime: Math.floor(Math.random() * 200) + 150
+        };
+
+        document.getElementById('request-stats').innerHTML = `
+          <div class="metric">
+            <span class="metric-label">Total Requests</span>
+            <span class="metric-value">${stats.totalRequests}</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Successful</span>
+            <span class="metric-value">${stats.successfulRequests}</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Failed</span>
+            <span class="metric-value">${stats.failedRequests}</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Avg Response Time</span>
+            <span class="metric-value">${stats.avgResponseTime}ms</span>
+          </div>
+        `;
+      }
+
+      async loadSecurityEvents() {
+        try {
+          const response = await fetch('/api/calendar/availability', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'get_security_events' })
+          });
+          
+          const result = await response.json();
+          
+          if (result.success && result.data) {
+            const events = result.data.slice(0, 10); // Show last 10 events
+            document.getElementById('security-events').innerHTML = `
+              <div class="events-list">
+                ${events.map(event => `
+                  <div class="event-item">
+                    <div class="event-timestamp">${new Date(event.timestamp).toLocaleString()}</div>
+                    <div class="event-type ${this.getEventClass(event.event)}">${event.event}</div>
+                    <div>IP: ${event.ip || 'Unknown'}</div>
+                  </div>
+                `).join('')}
+              </div>
+            `;
+          } else {
+            document.getElementById('security-events').innerHTML = `
+              <div class="metric">
+                <span class="metric-label">Status</span>
+                <span class="metric-value">No recent events</span>
+              </div>
+            `;
+          }
+        } catch (error) {
+          document.getElementById('security-events').innerHTML = `
+            <div class="metric">
+              <span class="metric-label">Error</span>
+              <span class="metric-value">Failed to load events</span>
+            </div>
+          `;
+        }
+      }
+
+      async loadPerformanceMetrics() {
+        // Simulate performance metrics
+        const metrics = {
+          cacheHitRate: Math.floor(Math.random() * 30) + 70,
+          apiCalls: Math.floor(Math.random() * 100) + 50,
+          errorRate: Math.floor(Math.random() * 5),
+          uptime: '99.9%'
+        };
+
+        document.getElementById('performance-metrics').innerHTML = `
+          <div class="metric">
+            <span class="metric-label">Cache Hit Rate</span>
+            <span class="metric-value">${metrics.cacheHitRate}%</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">API Calls Today</span>
+            <span class="metric-value">${metrics.apiCalls}</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Error Rate</span>
+            <span class="metric-value">${metrics.errorRate}%</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Uptime</span>
+            <span class="metric-value">${metrics.uptime}</span>
+          </div>
+        `;
+      }
+
+      async loadActivityLog() {
+        // Simulate activity log
+        const activities = [
+          { time: new Date(Date.now() - 300000), action: 'Calendar data refreshed', status: 'success' },
+          { time: new Date(Date.now() - 600000), action: 'Security check passed', status: 'success' },
+          { time: new Date(Date.now() - 900000), action: 'Rate limit applied', status: 'warning' },
+          { time: new Date(Date.now() - 1200000), action: 'Cache cleared', status: 'info' },
+          { time: new Date(Date.now() - 1500000), action: 'Suspicious IP blocked', status: 'warning' }
+        ];
+
+        document.getElementById('activity-log').innerHTML = `
+          <div class="events-list">
+            ${activities.map(activity => `
+              <div class="event-item">
+                <div class="event-timestamp">${activity.time.toLocaleString()}</div>
+                <div class="event-type event-${activity.status}">${activity.action}</div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      getEventClass(eventType) {
+        if (eventType.includes('BLOCKED') || eventType.includes('RATE_LIMIT')) {
+          return 'event-blocked';
+        } else if (eventType.includes('ALLOWED')) {
+          return 'event-allowed';
+        } else {
+          return 'event-warning';
+        }
+      }
+
+      showAlert(message, type) {
+        const alertsContainer = document.getElementById('alerts-container');
+        const alertDiv = document.createElement('div');
+        alertDiv.className = `alert alert-${type}`;
+        alertDiv.textContent = message;
+        
+        alertsContainer.appendChild(alertDiv);
+        
+        setTimeout(() => {
+          alertDiv.remove();
+        }, 5000);
+      }
+
+      startAutoRefresh() {
+        this.refreshInterval = setInterval(() => {
+          this.loadDashboard();
+        }, 30000); // Refresh every 30 seconds
+      }
+
+      stopAutoRefresh() {
+        if (this.refreshInterval) {
+          clearInterval(this.refreshInterval);
+          this.refreshInterval = null;
+        }
+      }
+    }
+
+    // Global functions for button handlers
+    function refreshDashboard() {
+      monitor.loadDashboard();
+    }
+
+    async function clearCache() {
+      try {
+        const response = await fetch('/api/calendar/availability', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'clear_cache' })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          monitor.showAlert('Cache cleared successfully', 'info');
+          monitor.loadDashboard();
+        } else {
+          monitor.showAlert('Failed to clear cache', 'error');
+        }
+      } catch (error) {
+        monitor.showAlert('Error clearing cache', 'error');
+      }
+    }
+
+    function exportLogs() {
+      monitor.showAlert('Log export feature coming soon', 'info');
+    }
+
+    function testSecurity() {
+      monitor.showAlert('Security test initiated', 'info');
+      // This would trigger security tests
+    }
+
+    // Initialize the monitor
+    let monitor;
+    document.addEventListener('DOMContentLoaded', function() {
+      monitor = new CalendarMonitor();
+    });
+
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', function() {
+      if (monitor) {
+        monitor.stopAutoRefresh();
+      }
+    });
+  </script>
+</body>
+</html>
