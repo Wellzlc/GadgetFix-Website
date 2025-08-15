@@ -1,5 +1,7 @@
 import type { APIRoute } from 'astro';
 
+export const prerender = false;
+
 // Rate limiting store
 const submissions = new Map<string, { count: number; lastSubmit: number }>();
 
