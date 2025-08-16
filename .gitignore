@@ -3,6 +3,9 @@ dist/
 # Local Netlify folder
 .netlify
 
+# Vercel build directory - CRITICAL SECURITY
+.vercel/
+
 # Environment variables - CRITICAL SECURITY
 .env
 .env.*
